@@ -1,10 +1,12 @@
 package app.controllers;
 
+import app.views.SceneBuilder;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class ListViewController extends ParentController{
@@ -26,6 +28,10 @@ public class ListViewController extends ParentController{
             }
             _nameListView.setItems(_items);
         }
+    }
 
+    @FXML
+    private void practiceButton() throws IOException {
+        new SceneBuilder(_stage).load("Practice.fxml");
     }
 }
