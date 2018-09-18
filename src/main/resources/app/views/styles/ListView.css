@@ -1,0 +1,4 @@
+._nameListView {
+    -fx-selection-bar:green ;
+    -fx-selection-bar-non-focused: green ;
+}

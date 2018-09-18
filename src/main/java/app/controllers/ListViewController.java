@@ -8,6 +8,8 @@ import javafx.scene.control.ListView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListViewController extends ParentController{
     @FXML
@@ -15,20 +17,31 @@ public class ListViewController extends ParentController{
     @FXML
     private ListView<String> _versionListView;
     private ObservableList<String> _items;
+    private List<String> _selectedList;
 
     public void initialize() {
+        _selectedList = new ArrayList<String>();
         _items = _nameListView.getItems();
-        URL url = this.getClass().getResource("../soundfiles");
-        //checks if there contains files in the directory
-        if (url != null ) {
-            File folder = new File(url.getPath());
-            File[] folderArray = folder.listFiles();
-            for (File file: folderArray) {
-                _items.add(file.toString());
+            File folder = new File("soundfiles");
+            if (folder.exists()) {
+                File[] folderArray = folder.listFiles();
+                for (File file: folderArray) {
+                    _items.add(file.toString());
+                }
+                _nameListView.setItems(_items);
             }
-            _nameListView.setItems(_items);
+    }
+
+    @FXML
+    private void onClick() {
+        String selected = _nameListView.getFocusModel().getFocusedItem();
+        if (_selectedList.contains(selected)) {
+            _selectedList.remove(selected);
+        } else {
+            _selectedList.add(selected);
         }
     }
+
 
     @FXML
     private void practiceButton() throws IOException {
