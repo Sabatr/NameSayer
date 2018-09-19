@@ -1,5 +1,6 @@
 package app.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 /**
@@ -11,10 +12,13 @@ public class ParentController {
     protected Stage _stage;
 
     /**
-     * Retreives the stage so children controllers can modify it.
+     * Retrieves the stage so children controllers can modify it.
      * @param stage
      */
     public void setStage(Stage stage) {
         _stage = stage;
     }
+
+    //Hook method
+    public void getInformation(ObservableList<String> items) {}
 }

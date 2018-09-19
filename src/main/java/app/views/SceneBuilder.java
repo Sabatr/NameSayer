@@ -1,6 +1,9 @@
 package app.views;
 
+import app.controllers.ListViewController;
 import app.controllers.ParentController;
+import app.controllers.PracticeController;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,6 +20,7 @@ import java.io.IOException;
  */
 public class SceneBuilder extends FXMLLoader {
     private Stage _stage;
+    private ObservableList<String> _list;
     //Needs to have the primary stage in order to update it.
     public SceneBuilder(Stage stage) {
         _stage = stage;
@@ -39,12 +43,20 @@ public class SceneBuilder extends FXMLLoader {
         _stage.show();
     }
 
+    public void getList(ObservableList<String> list) {
+        _list = list;
+    }
+
+
+
+
     /**
      * This function allows the controllers to receive the stage
      * @param controller: The current controller of the view
      */
     public void setStage(ParentController controller) {
         controller.setStage(_stage);
+        controller.getInformation(_list);
     }
 
 }

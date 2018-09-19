@@ -2,172 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_16-5-2018_23-34-53_Junyan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_16-5-2018_23-37-41_Chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_12-3-36_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_12-5-59_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_12-7-35_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-13-49_Jiaqiu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-15-7_Zhao.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-23-8_Shen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-24-2_Zhan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-25-56_Zhu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-25-5_Yeting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-26-41_Xiaoran.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-27-14_Ma.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-28-39_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-28-6_Ruozi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-29-11_Hanyu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-29-56_Ying.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-30-38_Kun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-31-7_Wang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-32-54_Yenting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-33-23_Lin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-34-30_Tina.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-43-55_Lam.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_14-43-7_Kachun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_17-15-48_Ian.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_17-20-26_Patricia.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_18-57-1_george.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_17-5-2018_18-57-48_Louis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_11-6-43_maggie.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_11-7-31_Ngo.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_11-8-55_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_11-8-6_Sueyeon.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-10-9_Shields.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-12-37_Saereem.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-13-0_Ahn.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-57-27_Chamara.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-58-21_Kalana.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-59-6_Ratnayake.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-8-46_Isabella.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_12-9-17_Izzy.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_13-0-46_Dylan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_13-1-14_Hall.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_16-7-33_Jesin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_16-8-39_Melvin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_16-8-4_James.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_18-5-2018_16-9-14_Paul.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_2-5-2018_15-23-50_Mason.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_2-5-2018_15-31-49_Shi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_2-5-2018_15-47-27_Jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_21-5-2018_14-10-29_Rajagopal.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_21-5-2018_14-8-47_Beena.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_21-5-2018_14-9-29_Antony.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_21-5-2018_14-9-57_Deepika.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_23-8-2018_20-13-44_sean.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_23-8-2018_20-38-49_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_23-8-2018_20-42-12_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_23-8-2018_21-11-36_Bruce.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_23-8-2018_21-13-35_MacDonald.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_15-52-6_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_15-54-26_Watson.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_15-56-37_Eleanor.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_16-18-3_Francis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_16-2-23_Catherine.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_16-4-11_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_16-5-35_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_16-7-40_Jacinda.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_16-8-10_Ardern.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_20-3-38_hywel.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_27-4-2018_20-7-45_stoakes.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_11-20-3_tang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_11-20-46_yichen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_11-21-35_chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_11-22-50_wei.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_11-23-36_eric.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_9-42-4_Nicholas.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_30-4-2018_9-52-26_Eng.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_4-5-2018_15-56-40_Xuyun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_4-5-2018_16-1-13_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/se206_8-6-2018_1-58-21_word.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/soundfiles/zkon584_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/ListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/ListView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/styles/ListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/styles/ListView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_16-5-2018_23-34-53_Junyan.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_16-5-2018_23-34-53_Junyan.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_16-5-2018_23-37-41_Chen.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_16-5-2018_23-37-41_Chen.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_12-3-36_Li.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_12-3-36_Li.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_12-5-59_Li.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_12-5-59_Li.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_12-7-35_Li.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_12-7-35_Li.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-13-49_Jiaqiu.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-13-49_Jiaqiu.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-15-7_Zhao.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-15-7_Zhao.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-23-8_Shen.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-23-8_Shen.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-24-2_Zhan.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-24-2_Zhan.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-25-56_Zhu.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-25-56_Zhu.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-25-5_Yeting.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-25-5_Yeting.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-26-41_Xiaoran.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-26-41_Xiaoran.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-27-14_Ma.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-27-14_Ma.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-28-39_Zhang.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-28-39_Zhang.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-28-6_Ruozi.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-28-6_Ruozi.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-29-11_Hanyu.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-29-11_Hanyu.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-29-56_Ying.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-29-56_Ying.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-30-38_Kun.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-30-38_Kun.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-31-7_Wang.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-31-7_Wang.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-32-54_Yenting.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-32-54_Yenting.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-33-23_Lin.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-33-23_Lin.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-34-30_Tina.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-34-30_Tina.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-43-55_Lam.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-43-55_Lam.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_14-43-7_Kachun.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_14-43-7_Kachun.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_17-15-48_Ian.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_17-15-48_Ian.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_17-20-26_Patricia.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_17-20-26_Patricia.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_18-57-1_george.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_18-57-1_george.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_17-5-2018_18-57-48_Louis.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_17-5-2018_18-57-48_Louis.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_11-6-43_maggie.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_11-6-43_maggie.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_11-7-31_Ngo.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_11-7-31_Ngo.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_11-8-55_Lee.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_11-8-55_Lee.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_11-8-6_Sueyeon.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_11-8-6_Sueyeon.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-10-9_Shields.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-10-9_Shields.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-12-37_Saereem.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-12-37_Saereem.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-13-0_Ahn.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-13-0_Ahn.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-57-27_Chamara.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-57-27_Chamara.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-58-21_Kalana.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-58-21_Kalana.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-59-6_Ratnayake.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-59-6_Ratnayake.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-8-46_Isabella.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-8-46_Isabella.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_12-9-17_Izzy.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_12-9-17_Izzy.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_13-0-46_Dylan.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_13-0-46_Dylan.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_13-1-14_Hall.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_13-1-14_Hall.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_16-7-33_Jesin.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_16-7-33_Jesin.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_16-8-39_Melvin.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_16-8-39_Melvin.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_16-8-4_James.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_16-8-4_James.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_18-5-2018_16-9-14_Paul.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_18-5-2018_16-9-14_Paul.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_2-5-2018_15-23-50_Mason.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_2-5-2018_15-23-50_Mason.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_2-5-2018_15-31-49_Shi.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_2-5-2018_15-31-49_Shi.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_2-5-2018_15-47-27_Jonathan.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_2-5-2018_15-47-27_Jonathan.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_21-5-2018_14-10-29_Rajagopal.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_21-5-2018_14-10-29_Rajagopal.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_21-5-2018_14-8-47_Beena.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_21-5-2018_14-8-47_Beena.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_21-5-2018_14-9-29_Antony.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_21-5-2018_14-9-29_Antony.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_21-5-2018_14-9-57_Deepika.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_21-5-2018_14-9-57_Deepika.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_23-8-2018_20-13-44_sean.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_23-8-2018_20-13-44_sean.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_23-8-2018_20-38-49_William.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_23-8-2018_20-38-49_William.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_23-8-2018_20-42-12_Lee.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_23-8-2018_20-42-12_Lee.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_23-8-2018_21-11-36_Bruce.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_23-8-2018_21-11-36_Bruce.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_23-8-2018_21-13-35_MacDonald.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_23-8-2018_21-13-35_MacDonald.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_15-52-6_Thorpe.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_15-52-6_Thorpe.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_15-54-26_Watson.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_15-54-26_Watson.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_15-56-37_Eleanor.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_15-56-37_Eleanor.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_16-18-3_Francis.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_16-18-3_Francis.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_16-2-23_Catherine.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_16-2-23_Catherine.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_16-4-11_Thorpe.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_16-4-11_Thorpe.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_16-5-35_William.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_16-5-35_William.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_16-7-40_Jacinda.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_16-7-40_Jacinda.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_16-8-10_Ardern.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_16-8-10_Ardern.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_20-3-38_hywel.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_20-3-38_hywel.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_27-4-2018_20-7-45_stoakes.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_27-4-2018_20-7-45_stoakes.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_11-20-3_tang.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_11-20-3_tang.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_11-20-46_yichen.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_11-20-46_yichen.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_11-21-35_chen.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_11-21-35_chen.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_11-22-50_wei.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_11-22-50_wei.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_11-23-36_eric.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_11-23-36_eric.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_9-42-4_Nicholas.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_9-42-4_Nicholas.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_30-4-2018_9-52-26_Eng.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_30-4-2018_9-52-26_Eng.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_4-5-2018_15-56-40_Xuyun.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_4-5-2018_15-56-40_Xuyun.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_4-5-2018_16-1-13_Zhang.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_4-5-2018_16-1-13_Zhang.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/se206_8-6-2018_1-58-21_word.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/se206_8-6-2018_1-58-21_word.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/soundfiles/zkon584_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/zkon584_2-5-2018_15-26-44_jonathan.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -187,42 +26,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
-              <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#541#542#0" expanded="true" />
-                <element signature="e#569#570#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SceneBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+            <state relative-caret-position="129">
+              <caret line="36" column="34" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#565#566#0" expanded="true" />
                 <element signature="e#595#596#0" expanded="true" />
-                <element signature="e#1444#1445#0" expanded="true" />
-                <element signature="e#1487#1488#0" expanded="true" />
+                <element signature="e#1472#1473#0" expanded="true" />
+                <element signature="e#1500#1501#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParentController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ListViewController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="268">
+              <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParentController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+            <state relative-caret-position="306">
+              <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#274#275#0" expanded="true" />
                 <element signature="e#304#305#0" expanded="true" />
               </folding>
@@ -243,8 +93,8 @@
       <file leaf-file-name="ListView.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="40" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="40" />
+            <state relative-caret-position="17">
+              <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -569,16 +419,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
       </list>
     </option>
   </component>
@@ -779,12 +629,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537177556268</updated>
-      <workItem from="1537177561431" duration="9176000" />
+      <workItem from="1537177561431" duration="26996000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9176000" />
+    <option name="totallyTimeSpent" value="26996000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -792,7 +642,7 @@
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Messages" weight="0.32965517" />
       <window_info anchor="right" id="Palette&#9;" />
       <window_info id="Image Layers" />
       <window_info anchor="right" id="Capture Analysis" />
@@ -800,11 +650,11 @@
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32965517" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32965517" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="Build" weight="0.32965517" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="Gradle" />
@@ -844,15 +694,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="94" selection-start-line="8" selection-start-column="94" selection-end-line="8" selection-end-column="94" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -864,8 +715,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="40" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="40" />
+        <state relative-caret-position="17">
+          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -883,43 +734,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
+        <state relative-caret-position="129">
+          <caret line="36" column="34" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#565#566#0" expanded="true" />
             <element signature="e#595#596#0" expanded="true" />
-            <element signature="e#1444#1445#0" expanded="true" />
-            <element signature="e#1487#1488#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="94" selection-start-line="8" selection-start-column="94" selection-end-line="8" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1472#1473#0" expanded="true" />
+            <element signature="e#1500#1501#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+        <state relative-caret-position="306">
+          <caret line="22" column="59" selection-start-line="22" selection-start-column="59" selection-end-line="22" selection-end-column="59" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#274#275#0" expanded="true" />
             <element signature="e#304#305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="25" column="32" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
