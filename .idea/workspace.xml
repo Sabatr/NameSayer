@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/ParentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/ParentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/ListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/ListView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/SceneBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/SceneBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/styles/ListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/styles/ListView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/styles/Practice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soundfiles/Versions/Li/Li(2).wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -54,8 +38,8 @@
       <file leaf-file-name="ListViewController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="72" column="74" selection-start-line="72" selection-start-column="74" selection-end-line="72" selection-end-column="74" />
+            <state relative-caret-position="-289">
+              <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -627,12 +611,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537177556268</updated>
-      <workItem from="1537177561431" duration="46765000" />
+      <workItem from="1537177561431" duration="47229000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46765000" />
+    <option name="totallyTimeSpent" value="47229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -656,7 +640,7 @@
       <window_info id="Image Layers" />
       <window_info anchor="right" id="Capture Analysis" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32965517" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32965517" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
@@ -795,8 +779,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="74" selection-start-line="72" selection-start-column="74" selection-end-line="72" selection-end-column="74" />
+        <state relative-caret-position="-289">
+          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

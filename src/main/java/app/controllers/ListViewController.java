@@ -26,31 +26,31 @@ public class ListViewController extends ParentController{
     private ListView<String> _nameListView;
 
     private File[] _folderArray;
-    private ObservableList<String> _items;
-    private ObservableList<String> _selectedItems;
+    private ObservableList<String> _allNames;
+    private ObservableList<String> _selectedNames;
     private enum Options {YES,NO,CANCEL}
     private Options _options;
 
     public void initialize() {
-        _selectedItems = FXCollections.observableArrayList();
-         _items = _nameListView.getItems();
+        _selectedNames = FXCollections.observableArrayList();
+         _allNames = _nameListView.getItems();
             File folder = new File("soundfiles");
             if (folder.exists()) {
                 _folderArray = folder.listFiles();
                 for (File file: _folderArray) {
                     //makes sure it is a file, not a directory.
-                  //  System.out.println("File: "+file.toString() +", list: " + _items+", contains: " + _items.contains(file.toString()));
+                  //  System.out.println("File: "+file.toString() +", list: " + _allNames+", contains: " + _allNames.contains(file.toString()));
                     if (file.toString().contains(".")) {
                         String name = convertString(file.toString());
                         //Checks for multiples
-                        // if (!_items.contains(name)) {
-                            _items.add(name);
+                        // if (!_allNames.contains(name)) {
+                            _allNames.add(name);
                       //  }
 
                     }
                 }
-                Collections.sort(_items);
-                _nameListView.setItems(_items);
+                Collections.sort(_allNames);
+                _nameListView.setItems(_allNames);
             }
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -71,33 +71,33 @@ public class ListViewController extends ParentController{
     private void onClick() {
         // String name = _nameListView.getSelectionModel().getSelectedItem();
         //FXCollections was used so that selected items could be modified.
-        _selectedItems = FXCollections.observableArrayList(_nameListView.getSelectionModel().getSelectedItems());
-       // System.out.println(_selectedItems);
+        _selectedNames = FXCollections.observableArrayList(_nameListView.getSelectionModel().getSelectedItems());
+       // System.out.println(_selectedNames);
     }
 
     @FXML
     private void clearSelection() {
-        _selectedItems = FXCollections.observableArrayList();
+        _selectedNames = FXCollections.observableArrayList();
         _nameListView.getSelectionModel().clearSelection();
     }
 
 
     @FXML
     private void practiceButton() throws IOException {
-        if (_selectedItems.size() == 0) {
+        if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {
             alertUserConfirmation();
             if (_options != Options.CANCEL) {
-                System.out.println(_selectedItems);
+                System.out.println(_selectedNames);
                 //Currently it doesn't seem to work.
                 if (_options == Options.YES) {
-                    Collections.shuffle(_selectedItems);
+                    Collections.shuffle(_selectedNames);
                 } else {
-                    Collections.sort(_selectedItems);
+                    Collections.sort(_selectedNames);
                 }
                 SceneBuilder sceneBuilder = new SceneBuilder(_stage);
-                sceneBuilder.getList(_selectedItems);
+                sceneBuilder.getList(_selectedNames);
                 sceneBuilder.load("Practice.fxml");
             }
         }
@@ -137,8 +137,8 @@ public class ListViewController extends ParentController{
     public void setInformation(ObservableList<String> _list) {
         //Reselects the chosen list.
         if (_list.size() != 0) {
-            _selectedItems = _list;
-            for (String name: _selectedItems) {
+            _selectedNames = _list;
+            for (String name: _selectedNames) {
                 _nameListView.getSelectionModel().select(name);
             }
         }
