@@ -20,5 +20,5 @@ public class ParentController {
     }
 
     //Hook method
-    public void getInformation(ObservableList<String> items) {}
+    public void setInformation(ObservableList<String> items) {}
 }
