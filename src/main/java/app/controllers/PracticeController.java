@@ -3,9 +3,11 @@ package app.controllers;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -18,6 +20,8 @@ public class PracticeController extends ParentController {
     private Button _prevButton;
     @FXML
     private Button _nextButton;
+    @FXML
+    private ComboBox _dropdown;
 
     private int _currentPosition;
     private String _currentName;
@@ -44,7 +48,15 @@ public class PracticeController extends ParentController {
     }
 
     @FXML
+    private void playAudio() {
+        System.out.println(_dropdown.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
     public void initialize() {
+        _dropdown.setItems(FXCollections.observableArrayList("One","Two","Three"));
+        //Automatically select the default value.
+        _dropdown.getSelectionModel().selectFirst();
         _currentPosition = 0;
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
@@ -54,19 +66,18 @@ public class PracticeController extends ParentController {
                 if (_practiceList.size() > 1) {
                     //Checks if the value is the first on the list.
                     if (newValue.equals(_practiceList.get(0))) {
-                        _prevButton.setDisable(true);
+                        _prevButton.setVisible(false);
                     } else if (newValue.equals(_practiceList.get(_practiceList.size()-1))){
-                        _nextButton.setDisable(true);
+                        _nextButton.setVisible(false);
                     } else {
                         //Renables button when the position is somewhere in the middle.
-                        _prevButton.setDisable(false);
-                        _nextButton.setDisable(false);
+                        _prevButton.setVisible(true);
+                        _nextButton.setVisible(true);
                     }
                 } else {
-                    _prevButton.setDisable(true);
-                    _nextButton.setDisable(true);
+                    _prevButton.setVisible(false);
+                    _nextButton.setVisible(false);
                 }
-              //  System.out.println(_currentName);
             }
         });
     }

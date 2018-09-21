@@ -5,11 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.ButtonBar.ButtonData;
 
 import java.io.File;
@@ -24,6 +21,7 @@ import java.util.Optional;
 public class ListViewController extends ParentController{
     @FXML
     private ListView<String> _nameListView;
+
 
     private File[] _folderArray;
     private ObservableList<String> _allNames;
