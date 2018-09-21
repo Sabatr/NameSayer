@@ -30,6 +30,23 @@
     -fx-font-family: "Franklin Gothic Heavy";
 }
 
+._selectionButton:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
+            #2c76af,
+            #2c76af,
+            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+}
+
+
+._selectionButton:pressed {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
+            #225c88,
+            #266697,
+            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
+}
+
 ._background {
     -fx-background-color: #0c0060;
 }
@@ -68,4 +85,5 @@
 ._audioButton {
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-background-color: #f0f0f0;
+    -fx-text-fill: #0c0060;
 }

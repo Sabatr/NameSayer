@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/ListView.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ListViewController">
@@ -11,5 +12,6 @@
       <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="45.0" prefHeight="58.0" prefWidth="383.0" styleClass="_nameData" stylesheets="@styles/ListView.css" text="NAME DATABASE" textAlignment="CENTER" />
       <Button fx:id="_practiceButton" layoutX="766.0" layoutY="118.0" mnemonicParsing="false" onAction="#practiceButton" prefHeight="170.0" prefWidth="310.0" styleClass="_button" stylesheets="@styles/ListView.css" text="PRACTICE" />
       <Button layoutX="766.0" layoutY="307.0" mnemonicParsing="false" onAction="#clearSelection" prefHeight="170.0" prefWidth="310.0" styleClass="_button" stylesheets="@styles/ListView.css" text="CLEAR" />
+      <ToggleButton layoutX="758.0" layoutY="571.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="310.0" text="ToggleButton" />
    </children>
 </AnchorPane>

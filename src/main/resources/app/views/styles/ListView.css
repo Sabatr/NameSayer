@@ -71,6 +71,10 @@
             radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
 }
 
+.dialog-pane {
+    -fx-background-color: blue;
+}
+
 
 
 

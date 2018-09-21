@@ -6,11 +6,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class PracticeController extends ParentController {
     private ObservableList<String> _practiceList;
@@ -104,5 +103,22 @@ public class PracticeController extends ParentController {
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName);
+    }
+
+    @FXML
+    private void rate() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ButtonType goodButton = new ButtonType("Good");
+        ButtonType badButton = new ButtonType("Bad");
+        ButtonType cancelButton = new ButtonType("Cancel");
+        alert.getButtonTypes().setAll(goodButton,badButton,cancelButton);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == goodButton){
+            //Do some bash stuff
+        } else if (result.get() == badButton) {
+            //Do some bash stuff
+        } else {
+            //Do nothing
+        }
     }
 }
