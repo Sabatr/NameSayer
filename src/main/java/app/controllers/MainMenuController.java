@@ -48,7 +48,9 @@ public class MainMenuController extends ParentController {
      * Allows the scene to switch to the options menu.
      */
     @FXML
-    private void options() {
-
+    private void options() throws IOException {
+        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
+        builder.getList(_selectedList);
+        builder.load("OptionsView.fxml");
     }
 }

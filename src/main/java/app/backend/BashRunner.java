@@ -10,34 +10,43 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 
+/**
+ * This class runs processes externally
+ */
 public class BashRunner {
 
     public enum CommandType {
-        RECORDAUDIO, PLAYAUDIO
+        RECORDAUDIO, PLAYAUDIO, TESTMIC
     }
 
-    private FSWrapper fsMan;
     private EventHandler<WorkerStateEvent> taskCompletionHandler;
     private Task<?> currentTask;
 
-    public BashRunner(EventHandler<WorkerStateEvent> handler, FSWrapper fsMan) {
+    public BashRunner(EventHandler<WorkerStateEvent> handler) {
         taskCompletionHandler = handler;
-        fsMan = fsMan;
     }
 
     public Task<String> runRecordCommand(Path path) {
-        String cmd = String.format("arecord -f cd -d 5 -q \"%s/audio.wav\"", path.toAbsolutePath().toString());
+        // arecord -f cd -d 5 -q "%s/audio.wav"
+        String cmdString = String.format("ffmpeg-f  alsa-i  hw:0 -t 2 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
 
-        return runCommand(cmd, CommandType.RECORDAUDIO.toString());
+        String[] cmd = { "/bin/bash", "-c", cmdString };
+        return runCommand(CommandType.RECORDAUDIO.toString(), cmd);
+    }
+
+    public Task<String> runMonitorMicCommand() {
+
+        return runCommand(CommandType.TESTMIC.toString(), "");
     }
 
     public Task<String> runPlayAudioCommand(Path path) {
-        String cmd = String.format("ffplay -nodisp -autoexit \"$s/audio.wav\"", path.toAbsolutePath().toString()); // -loglevel quiet
+        String cmdString = String.format("ffplay -nodisp -autoexit \"$s\"", path.toAbsolutePath().toString()); // -loglevel quiet
 
-        return runCommand(cmd, CommandType.PLAYAUDIO.toString());
+        String[] cmd = { "/bin/bash", "-c", cmdString };
+        return runCommand(CommandType.PLAYAUDIO.toString(), cmd);
     }
 
-    private Task<String> runCommand(String cmd, String commandType) {
+    private Task<String> runCommand(String commandType, String... cmd) {
         BashCommand runProcess = new BashCommand(cmd);
 
         runProcess.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, taskCompletionHandler);
@@ -55,9 +64,9 @@ public class BashRunner {
     }
 
     private class BashCommand extends Task<String> {
-        String cmd;
+        String[] cmd;
 
-        public BashCommand(String command) {
+        public BashCommand(String... command) {
             cmd = command;
         }
 
@@ -68,7 +77,7 @@ public class BashRunner {
 
             Process p = null;
             try {
-                p = new ProcessBuilder("/bin/bash", "-c", cmd).start();
+                p = new ProcessBuilder(cmd).start();
             } catch(IOException e) {
                 failure = true;
                 commandOutBuilder.append(e.getMessage());
