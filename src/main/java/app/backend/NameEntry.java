@@ -26,6 +26,10 @@ public class NameEntry implements Comparable<NameEntry> {
     private Version _temporaryVersion;
     private List<Version> _versions = new ArrayList<>();
 
+    public NameEntry(String name) {
+        _name = name;
+    }
+
     /**
      * Adds a version with the default author
      * @see NameEntry#addVersion(String author)

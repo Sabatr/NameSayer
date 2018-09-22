@@ -18,7 +18,7 @@ import java.util.Collections;
  * This class controls the functionality of the list scene.
  *
  */
-public class ListViewController extends ParentController{
+public class ListViewController extends ParentController {
     @FXML
     private ListView<NameEntry> _nameListView;
     @FXML
@@ -26,8 +26,6 @@ public class ListViewController extends ParentController{
     @FXML
     private ToggleButton _randomButton;
 
-    private File[] _folderArray;
-    private ObservableList<NameEntry> _allNames;
     private ObservableList<NameEntry> _selectedNames;
 
     /**
@@ -94,7 +92,7 @@ public class ListViewController extends ParentController{
                 }
                 SceneBuilder sceneBuilder = new SceneBuilder(_allNames, _stage);
                 //Determines if the random button is disabled. So when we switch back views, it's still there.
-                _selectedNames.add(_randomButton.isDisable()+"");
+                _selectedNames.add(new NameEntry(_randomButton.isDisable()+""));
                 sceneBuilder.getList(_selectedNames);
                 sceneBuilder.load("Practice.fxml");
         }
@@ -118,7 +116,7 @@ public class ListViewController extends ParentController{
     @FXML
     private void goBack() throws IOException{
         SceneBuilder builder = new SceneBuilder(_allNames, _stage);
-        _selectedNames.add(_randomButton.isDisable()+"");
+        _selectedNames.add(new NameEntry(_randomButton.isDisable()+""));
         builder.getList(_selectedNames);
         builder.load("MainMenu.fxml");
 
@@ -130,11 +128,12 @@ public class ListViewController extends ParentController{
      * @param _list, the selected values + the state of the sorting at the end.
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> all, ObservableList<String> _list) {
+    public void setInformation(ObservableList<NameEntry> all, ObservableList<NameEntry> _list) {
         super.setInformation(all, _list);
+        _nameListView.setItems(all);
         //determines if the list was sorted or random before.
         if (!_list.isEmpty()) {
-            String randomOrNot = _list.get(_list.size()-1);
+            String randomOrNot = _list.get(_list.size()-1).getName();
             _list.remove(_list.size()-1);
             if (randomOrNot.equals("true")) {
                 onRandom();
@@ -149,6 +148,5 @@ public class ListViewController extends ParentController{
                 _nameListView.getSelectionModel().select(name);
             }
         }
-        _nameListView.setItems(all);
     }
 }

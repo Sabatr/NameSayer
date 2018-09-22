@@ -2,7 +2,6 @@ package app.controllers;
 
 import app.tools.AudioPlayer;
 import app.tools.AudioRecorder;
-import app.backend.FSWrapper;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
@@ -51,9 +50,7 @@ public class PracticeController extends ParentController {
     @FXML
     private HBox _recordHBox;
 
-    private int _currentPosition;
-    private String _currentName;
-    private String _randomOrSort;
+    private NameEntry _randomOrSort;
     private enum Position {FIRST,MIDDLE,LAST,ONLY}
     private Position _namePosition;
 
@@ -69,9 +66,9 @@ public class PracticeController extends ParentController {
                 //If the practice list only contains one value, then both previous and next buttons are disabled.
                 if (_practiceList.size() > 1) {
                     //Checks if the value is the first on the list.
-                    if (newValue.equals(_practiceList.get(0))) {
+                    if (newValue.equals(_practiceList.get(0).getName())) {
                         _namePosition = Position.FIRST;
-                    } else if (newValue.equals(_practiceList.get(_practiceList.size()-1))){
+                    } else if (newValue.equals(_practiceList.get(_practiceList.size()-1).getName())){
                         _namePosition = Position.LAST;
                     } else {
                         //Renables button when the position is somewhere in the middle.
@@ -131,7 +128,7 @@ public class PracticeController extends ParentController {
     private void nextName() {
         _currentPosition++;
         _currentName =_practiceList.get(_currentPosition);
-        _nameDisplayed.setText(_currentName);
+        _nameDisplayed.setText(_currentName.getName());
     }
 
     /**
@@ -141,7 +138,7 @@ public class PracticeController extends ParentController {
     private void prevName() {
         _currentPosition--;
         _currentName = _practiceList.get(_currentPosition);
-        _nameDisplayed.setText(_currentName);
+        _nameDisplayed.setText(_currentName.getName());
     }
 
     /**
@@ -150,7 +147,7 @@ public class PracticeController extends ParentController {
     @FXML
     private void playAudio() {
         //Potentially change this string so that we can determine the version.
-        String playedFile = _currentName;
+        String playedFile = _currentName.getName();
         disableAll();
         //Probably use the progress bar to let the users know the audio is playing.
         //Thread thread = new Thread(new AudioPlayer(_progressBar,_backButton,_recordButton,_rateButton,_listenButton));
@@ -245,14 +242,13 @@ public class PracticeController extends ParentController {
      */
     @Override
     public void setInformation(ObservableList<NameEntry> allitems, ObservableList<NameEntry> items) {
-        super.setInformation(allitems, items);{
-        _randomOrSort = items.get(items.size()-1);
-        items.remove(items.size()-1);
+        super.setInformation(allitems, items);
+        _randomOrSort = items.get(items.size() - 1);
+        items.remove(items.size() - 1);
         _practiceList = items;
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
         updateVersions();
     }
-
 }
