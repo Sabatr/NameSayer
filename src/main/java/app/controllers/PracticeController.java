@@ -1,5 +1,7 @@
 package app.controllers;
 
+import app.backend.FSWrapper;
+import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,7 +14,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class PracticeController extends ParentController {
-    private ObservableList<String> _practiceList;
+    private ObservableList<NameEntry> _practiceList;
     @FXML
     private Label _nameDisplayed;
     @FXML
@@ -23,8 +25,7 @@ public class PracticeController extends ParentController {
     private ComboBox _dropdown;
 
     private int _currentPosition;
-    private String _currentName;
-
+    private NameEntry _currentName;
 
     /**
      * This handles the next name click.
@@ -33,7 +34,7 @@ public class PracticeController extends ParentController {
     private void nextName() {
         _currentPosition++;
         _currentName =_practiceList.get(_currentPosition);
-        _nameDisplayed.setText(_currentName);
+        _nameDisplayed.setText(_currentName.getName());
     }
 
     /**
@@ -43,7 +44,7 @@ public class PracticeController extends ParentController {
     private void prevName() {
         _currentPosition--;
         _currentName = _practiceList.get(_currentPosition);
-        _nameDisplayed.setText(_practiceList.get(_currentPosition));
+        _nameDisplayed.setText(_currentName.getName());
     }
 
     @FXML
@@ -87,7 +88,7 @@ public class PracticeController extends ParentController {
      */
     @FXML
     private void goBack() throws IOException {
-        SceneBuilder builder = new SceneBuilder(_stage);
+        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
         builder.getList(_practiceList);
         builder.load("ListView.fxml");
     }
@@ -98,11 +99,12 @@ public class PracticeController extends ParentController {
      * @param items
      */
     @Override
-    public void setInformation(ObservableList<String> items) {
+    public void setInformation(ObservableList<NameEntry> allitems, ObservableList<NameEntry> items) {
+        super.setInformation(allitems, items);
         _practiceList = items;
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
-        _nameDisplayed.setText(_currentName);
+        _nameDisplayed.setText(_currentName.getName());
     }
 
     @FXML

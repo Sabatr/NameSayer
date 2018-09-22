@@ -20,6 +20,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.*;
 import java.util.*;
 import java.util.List;
@@ -75,12 +76,12 @@ public class FSWrapper {
     /**
      * Construct the FSWrapper.
      */
-    public FSWrapper() {
+    public FSWrapper(URI structure) {
         workingDir = Paths.get("").toAbsolutePath();
-       //  System.out.println("Current working dir: " + workingDir.toString());
-        //workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+//        System.out.println("Current working dir: " + workingDir.toString());
+//        workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
 
-        extractFileStructure();
+        extractFileStructure(structure);
         xpath = XPathFactory.newInstance().newXPath();
 
         if(!Files.exists(rootContentDir)) {
@@ -97,9 +98,8 @@ public class FSWrapper {
      * There will never be a large configuration because we are simply using this as a single template for file storage,
      * not for storing the repeated data itself.
      */
-    private void extractFileStructure() {
+    private void extractFileStructure(URI structureLocation) {
         try {
-            URI structureLocation = this.getClass().getResource("FileSystem.xml").toURI();
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(this.getClass().getResource("FSScheme.xsd")));
             DocumentBuilder builder = dbf.newDocumentBuilder();
@@ -108,8 +108,6 @@ public class FSWrapper {
             throw new RuntimeException("Error parsing FS config", e);
         } catch (IOException e) {
             throw new RuntimeException("Error reading FS config", e);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException("Error fetching FS config", e);
         }
 
         Element rootElement = fsStructure.getDocumentElement();
@@ -120,6 +118,64 @@ public class FSWrapper {
             throw new RuntimeException("No name attribute for root dir in FS config file");
         }
         rootContentDir = workingDir.resolve(rootElement.getAttribute("name"));
+    }
+
+    /**
+     * Copies content from one directory structure to another.
+     */
+    public void copyTo(FSWrapper targetFS) throws IOException {
+        // Determine if the target has all the right types
+        List<Element> thisContent = new ArrayList<>();
+        getAllChildren(fsStructure.getDocumentElement(), thisContent);
+
+        for(Element contentType: thisContent) {
+            if(targetFS.getElementOfType(contentType.getAttribute("type")) == null) {
+                throw new RuntimeException("Can't copy to target directory structure");
+            }
+        }
+
+        // Fetch all the content types at the top level - the content below them will be carried alongside
+        List<Element> topLevelContent = getChildElements(fsStructure.getDocumentElement());
+        List<Pair<String, Path>> allContent = new ArrayList<>();
+        for(Element contentType: topLevelContent) {
+            allContent.addAll(getAllContentOfType(contentType.getAttribute("type")));
+        }
+
+        // Extract the parameters for each content type then add the files to the target fs using the type and parameters
+        for(Pair<String, Path> pathPair: allContent) {
+            Map<Integer, String> parameters = extractParamsForUnit(pathPair.getValue(), getElementOfType(pathPair.getKey()));
+            if(parameters == null) {
+                parameters = new HashMap<>();
+            }
+            String[] parameterList = new String[Collections.max(parameters.keySet())];
+            for(int i = 0; i < parameterList.length; i++) {
+                parameterList[i] = parameters.getOrDefault(i + 1, "");
+            }
+            targetFS.createDirectoryStruct(pathPair.getKey(), parameterList);
+            targetFS.copyFileTo(pathPair.getKey(), pathPair.getValue(), parameterList);
+        }
+    }
+
+    private void copyFileTo(String type, Path from, String[] params) throws IOException {
+        List<Pair<String, Path>> pathList = new ArrayList<>();
+        Path path = workingDir;
+
+        List<Element> parentList = getAccessPathOfType(type);
+        Collections.reverse(parentList);
+        for(Element parent: parentList) {
+            if(parent.hasAttribute("nameFormat")) {
+                String format = parent.getAttribute("nameFormat");
+                path = path.resolve(fillString(format, params));
+            } else if(parent.hasAttribute("name")) {
+                path = path.resolve(parent.getAttribute("name"));
+            }
+            pathList.add(new Pair<>(parent.getAttribute("type"), path));
+        }
+
+        Path toPath = pathList.get(pathList.size() - 1).getValue();
+        if(Files.notExists(toPath)) {
+            Files.copy(from, pathList.get(pathList.size() - 1).getValue());
+        }
     }
 
     /**
@@ -146,6 +202,7 @@ public class FSWrapper {
     public void createDirectoryStruct(String type, String... params) {
         List<Pair<String, Path>> pathList = createPaths(type, params);
 
+
         try {
             for (Pair<String, Path> pathPair: pathList) {
                 Element typeElem = getElementOfType(pathPair.getKey());
@@ -160,7 +217,7 @@ public class FSWrapper {
                     case FILESET:
                         if (Files.notExists(pathPair.getValue()) &&
                                 typeElem.hasAttribute("createNew") &&
-                                typeElem.getAttribute("createNew") == "true") {
+                                typeElem.getAttribute("createNew").equals("true")) {
                             Files.createFile(pathPair.getValue());
                         }
                         break;
@@ -169,8 +226,24 @@ public class FSWrapper {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+       //     throw new RuntimeException(e);
         }
+    }
+
+
+    public Path createFile(String type, String... params) {
+        Path path = workingDir;
+        List<Element> parentList = getAccessPathOfType(type);
+        Collections.reverse(parentList);
+        for(Element parent: parentList) {
+            if(parent.hasAttribute("nameFormat")) {
+                String format = parent.getAttribute("nameFormat");
+                path = path.resolve(fillString(format, params));
+            } else if(parent.hasAttribute("name")) {
+                path = path.resolve(parent.getAttribute("name"));
+            }
+        }
+        return path;
     }
 
     /**
@@ -182,13 +255,18 @@ public class FSWrapper {
      */
     public List<Pair<String, Path>> createPaths(String type, String... params) {
         List<Pair<String, Path>> pathList = new ArrayList<>();
-        Element element = getElementOfType(type);
-        if(element == null) {
-            return null;
-        }
 
-        Path path = workingDir;
-        path = resolveParents(type, pathList, path, params);
+        Path path = rootContentDir;
+        List<Element> parentList = getAccessPathOfType(type);
+        Collections.reverse(parentList);
+        Element element = parentList.get(1);
+        if(element.hasAttribute("nameFormat")) {
+            String format = element.getAttribute("nameFormat");
+            path = path.resolve(fillString(format, params));
+        } else if(element.hasAttribute("name")) {
+            path = path.resolve(element.getAttribute("name"));
+        }
+        pathList.add(new Pair<>(element.getAttribute("type"), path));
 
         Element currentElement = element;
         boolean newElem = true;
@@ -212,7 +290,7 @@ public class FSWrapper {
                 } else if(children.get(i).hasAttribute("name")) {
                     path = path.resolve(children.get(i).getAttribute("name"));
                 }
-                pathList.add(new Pair(currentElement.getAttribute("type"), path));
+                pathList.add(new Pair(children.get(i).getAttribute("type"), path));
                 if(children.get(i).getTagName().equals(DIR) || children.get(i).getTagName().equals(DIRSET)) {
                     newElem = true;
                     indices.push(i + 1);
@@ -224,21 +302,6 @@ public class FSWrapper {
             }
         }
         return pathList;
-    }
-
-    private Path resolveParents(String type, List<Pair<String, Path>> pathList, Path path, String... params) {
-        List<Element> parentList = getAccessPathOfType(type);
-        Collections.reverse(parentList);
-        for(Element parent: parentList) {
-            if(parent.hasAttribute("nameFormat")) {
-                String format = parent.getAttribute("nameFormat");
-                path = path.resolve(fillString(format, params));
-            } else if(parent.hasAttribute("name")) {
-                path = path.resolve(parent.getAttribute("name"));
-            }
-        }
-        pathList.add(new Pair<String, Path>(parentList.get(parentList.size() - 1).getAttribute("type"), path));
-        return path;
     }
 
     private String fillString(String format, String... params) {
@@ -271,7 +334,7 @@ public class FSWrapper {
      * @param params The parameters of the file
      * @return The filePaths of the found content.
      */
-    public List<Path> getFilesByParameter(String type, String... params) throws IOException {
+    public List<Path> getFilesByParameter(String type, String... params) {
         List<Path> pathList = new ArrayList<>();
 
         List<Pair<String, Path>> paths = getContent(type, params);
@@ -292,20 +355,29 @@ public class FSWrapper {
     }
 
     /**
+     * Retrieve the parameters for a file and its parents
+     */
+    public Map<Integer, String> getParamsForFile(Path file, String type) {
+        Element element = getElementOfType(type);
+
+        return extractParamsForUnit(file, element);
+    }
+
+    /**
      * Fetches a list of the filepaths of every content file of a particular type.
      *      * This is a relatively expensive operation so it should only be performed at the start of an application.
      *      * @return A list of content files
      * @param type The content type to fetch, given by the type attribute in the XML
      * @return The filePaths of the found content
      */
-    public List<Pair<String, Path>> getAllContentOfType(String type) throws IOException {
+    public List<Pair<String, Path>> getAllContentOfType(String type) {
         return getContent(type);
     }
 
     /**
      * Reusable method to extract content from the filesystem based on parameters
      */
-    private List<Pair<String, Path>> getContent(String type, String... params) throws IOException {
+    private List<Pair<String, Path>> getContent(String type, String... params) {
         List<Element> parentList = getAccessPathOfType(type);
         Path currentDir = rootContentDir;
         Deque<Integer> indices = new ArrayDeque<>();
@@ -313,7 +385,8 @@ public class FSWrapper {
         boolean newDir = true;
         List<Pair<String, Path>> filePaths = new ArrayList<>();
 
-        while(! (Files.isSameFile(currentDir.getParent(), workingDir) && !newDir)){
+        boolean atTop = false;
+        while(!atTop){
             // If we're in a new directory, set the index to 0, otherwise get the previous one we pushed
             int i;
             if(newDir) {
@@ -363,6 +436,12 @@ public class FSWrapper {
                         }
                     }
                 }
+            }
+            try {
+                atTop = (Files.isSameFile(currentDir.getParent(), workingDir) && !newDir);
+            } catch (IOException e) {
+                e.printStackTrace();
+                atTop = true;
             }
         }
         return filePaths;
@@ -435,6 +514,9 @@ public class FSWrapper {
         the file's parents and ensure they are consistent (The same parameters must have the same values)
      */
     private Map<Integer, String> extractParamsForUnit(Path file, Element element) {
+        if(file == null || element == null) {
+            return null;
+        }
         Path upFile = file;
         HashMap<Integer, String> nameParameters = new HashMap<>();
         List<Element> parentList = getAccessPathOfType(element.getAttribute("type"));
@@ -442,6 +524,7 @@ public class FSWrapper {
         // the first "parent" is the file itself
         for(Element parent: parentList) {
             if(parent.hasAttribute("name")) {
+                if(file.getFileName().toString().equals(""))
                 if (! upFile.getFileName().toString().equals(parent.getAttribute("name"))) {
                     return null;
                 }
@@ -509,15 +592,16 @@ public class FSWrapper {
             if(parIndex == -1) {
                 break;
             }
-            if(fileName.indexOf(separator) != startOfSeparator) {
+            if(!fileName.contains(separator)) {
                 doesNotMatch = true;    // we have detected a discrepancy and this name does not match the format
                 break;
             }
+
             endOfSeparator = startOfSeparator + separator.length(); // actually the character after the separator
-            String parameter = fileName.substring(endOfSeparator, fileName.indexOf(nextSeparator) - 1);
+            String parameter = fileName.substring(endOfSeparator, fileName.indexOf(nextSeparator, endOfSeparator));
 
             result.put(Character.getNumericValue(nameFormat.charAt(parIndex + 1)), parameter);
-            startOfSeparator = fileName.indexOf(nextSeparator);
+            startOfSeparator = fileName.indexOf(nextSeparator, endOfSeparator);
             parIndex = nameFormat.indexOf('%', parIndex+1);
         }
 
@@ -552,7 +636,7 @@ public class FSWrapper {
         try {
             return (Element) xpath.compile("//*[@type='" + type + "']").evaluate(fsStructure, XPathConstants.NODE);
         } catch (XPathExpressionException e) {
-            throw new RuntimeException("Error finding content", e);
+            return null;
         }
     }
 
@@ -567,12 +651,10 @@ public class FSWrapper {
 
     private List<Element> getChildElements(Element element) {
         List<Element> children = new ArrayList<>();
-        for(String tag: ALLTAGS) {
-            NodeList nodes = element.getElementsByTagName(tag);
-            for(int i = 0; i < nodes.getLength(); i++) {
-                if(nodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                    children.add((Element) nodes.item(i));
-                }
+        NodeList nodes = element.getChildNodes();
+        for(int i = 0; i < nodes.getLength(); i++) {
+            if(nodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                children.add((Element) nodes.item(i));
             }
         }
         return children;

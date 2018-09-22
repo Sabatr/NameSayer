@@ -1,5 +1,7 @@
 package app.controllers;
 
+import app.backend.FSWrapper;
+import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,38 +22,38 @@ import java.util.Optional;
  */
 public class ListViewController extends ParentController{
     @FXML
-    private ListView<String> _nameListView;
-
+    private ListView<NameEntry> _nameListView;
 
     private File[] _folderArray;
-    private ObservableList<String> _allNames;
-    private ObservableList<String> _selectedNames;
+    private ObservableList<NameEntry> _allNames;
+    private ObservableList<NameEntry> _selectedNames;
     private enum Options {YES,NO,CANCEL}
     private Options _options;
 
     public void initialize() {
         _selectedNames = FXCollections.observableArrayList();
-         _allNames = _nameListView.getItems();
-            File folder = new File("soundfiles");
-            if (folder.exists()) {
-                _folderArray = folder.listFiles();
-                for (File file: _folderArray) {
-                    //makes sure it is a file, not a directory.
-                  //  System.out.println("File: "+file.toString() +", list: " + _allNames+", contains: " + _allNames.contains(file.toString()));
-                    if (file.toString().contains(".")) {
-                        String name = convertString(file.toString());
-                        //Checks for multiples
-                        // if (!_allNames.contains(name)) {
-                            _allNames.add(name);
-                      //  }
-
-                    }
-                }
-                Collections.sort(_allNames);
-                _nameListView.setItems(_allNames);
-            }
+        _allNames = _nameListView.getItems();
+//            File folder = new File("soundfiles");
+//            if (folder.exists()) {
+//                _folderArray = folder.listFiles();
+//                for (File file: _folderArray) {
+//                    //makes sure it is a file, not a directory.
+//                  //  System.out.println("File: "+file.toString() +", list: " + _allNames+", contains: " + _allNames.contains(file.toString()));
+//                    if (file.toString().contains(".")) {
+//                        String name = convertString(file.toString());
+//                        //Checks for multiples
+//                        // if (!_allNames.contains(name)) {
+//                            _allNames.add(name);
+//                      //  }
+//
+//                    }
+//                }
+//                Collections.sort(_allNames);
+//                _nameListView.setItems(_allNames);
+//            }
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        _nameListView.setCellFactory(param -> new NameCell());
     }
 
     /**
@@ -59,6 +61,7 @@ public class ListViewController extends ParentController{
      * @param fullFileName
      * @return
      */
+    @Deprecated
     private String convertString(String fullFileName) {
         int beginning = fullFileName.lastIndexOf('_');
         int end = fullFileName.lastIndexOf('.');
@@ -94,7 +97,7 @@ public class ListViewController extends ParentController{
                 } else {
                     Collections.sort(_selectedNames);
                 }
-                SceneBuilder sceneBuilder = new SceneBuilder(_stage);
+                SceneBuilder sceneBuilder = new SceneBuilder(_allNames, _stage);
                 sceneBuilder.getList(_selectedNames);
                 sceneBuilder.load("Practice.fxml");
             }
@@ -129,16 +132,16 @@ public class ListViewController extends ParentController{
         alert.showAndWait();
     }
 
-
-
     @Override
-    public void setInformation(ObservableList<String> _list) {
+    public void setInformation(ObservableList<NameEntry> all, ObservableList<NameEntry> _list) {
+        super.setInformation(all, _list);
         //Reselects the chosen list.
         if (_list.size() != 0) {
             _selectedNames = _list;
-            for (String name: _selectedNames) {
+            for (NameEntry name: _selectedNames) {
                 _nameListView.getSelectionModel().select(name);
             }
         }
+        _nameListView.setItems(all);
     }
 }

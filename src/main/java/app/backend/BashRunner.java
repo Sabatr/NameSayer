@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -15,7 +16,7 @@ public class BashRunner {
         RECORDAUDIO, PLAYAUDIO
     }
 
-    private FSManager fsMan;
+    private FSWrapper fsMan;
     private EventHandler<WorkerStateEvent> taskCompletionHandler;
     private Task<?> currentTask;
 
@@ -24,16 +25,14 @@ public class BashRunner {
         fsMan = fsMan;
     }
 
-    public Task<String> runRecordCommand(String name) {
-        String path = fsMan.getPathToCreation(name);
-        String cmd = String.format("arecord -f cd -d 5 -q \"%s/audio.wav\"", path);
+    public Task<String> runRecordCommand(Path path) {
+        String cmd = String.format("arecord -f cd -d 5 -q \"%s/audio.wav\"", path.toAbsolutePath().toString());
 
         return runCommand(cmd, CommandType.RECORDAUDIO.toString());
     }
 
-    public Task<String> runPlayAudioCommand(String name) {
-        String path = fsMan.getPathToCreation(name);
-        String cmd = String.format("ffplay -nodisp -autoexit \"$s/audio.wav\"", path); // -loglevel quiet
+    public Task<String> runPlayAudioCommand(Path path) {
+        String cmd = String.format("ffplay -nodisp -autoexit \"$s/audio.wav\"", path.toAbsolutePath().toString()); // -loglevel quiet
 
         return runCommand(cmd, CommandType.PLAYAUDIO.toString());
     }
