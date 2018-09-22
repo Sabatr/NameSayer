@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+<rootDir name="creations">
+    <dirSet type="creation" nameFormat="%1">
+        <file type="completeCreation" name="creation.mp4" />
+        <file type="creationLog" name="video.log" />
+        <file type="creationAudio" name="audio.wav" />
+        <file type="creationText" name="silent_text.mp4" />
+    </dirSet>
+</rootDir>
