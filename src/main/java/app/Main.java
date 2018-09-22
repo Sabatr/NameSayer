@@ -17,7 +17,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         stage.setResizable(false);
         stage.setTitle("Name Sayer Practice");
-        new SceneBuilder(stage).load("ListView.fxml");
+        new SceneBuilder(stage).load("MainMenu.fxml");
     }
 
     public static void main(String[] args) {

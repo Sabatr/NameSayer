@@ -7,12 +7,10 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Optional;
 
 /**
  * This class controls the functionality of the list scene.
@@ -30,7 +28,6 @@ public class ListViewController extends ParentController{
     private File[] _folderArray;
     private ObservableList<String> _allNames;
     private ObservableList<String> _selectedNames;
-    private enum Options {YES,NO,CANCEL}
 
     public void initialize() {
         _sortedButton.setDisable(true);
@@ -121,6 +118,14 @@ public class ListViewController extends ParentController{
         alert.showAndWait();
     }
 
+    @FXML
+    private void goBack() throws IOException{
+        SceneBuilder builder = new SceneBuilder(_stage);
+        _selectedNames.add(_randomButton.isDisable()+"");
+        builder.getList(_selectedNames);
+        builder.load("MainMenu.fxml");
+
+    }
 
 
     @Override
@@ -141,6 +146,5 @@ public class ListViewController extends ParentController{
                 _nameListView.getSelectionModel().select(name);
             }
         }
-
     }
 }

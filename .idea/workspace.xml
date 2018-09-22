@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/styles/ListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/styles/ListView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/styles/Practice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -25,36 +34,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ListView.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-99">
-              <caret line="28" column="31" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1283#1284#0" expanded="true" />
-                <element signature="e#1319#1320#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ListViewController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1730">
-              <caret line="127" column="13" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
+            <state relative-caret-position="-170">
+              <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainMenu.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="16" selection-start-line="16" selection-end-line="17" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListView.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Practice.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-531">
+              <caret line="69" column="27" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="489">
+              <caret line="86" column="51" selection-start-line="86" selection-start-column="51" selection-end-line="86" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1424#1425#0" expanded="true" />
+                <element signature="e#1507#1508#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,10 +87,12 @@
       <file leaf-file-name="SceneBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="46" column="23" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="23" />
+            <state relative-caret-position="285">
+              <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1519#1520#0" expanded="true" />
+                <element signature="e#1547#1548#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -77,9 +103,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Class" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -382,17 +408,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/RecordView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/app/tools/ProgressTracker.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
       </list>
     </option>
   </component>
@@ -459,6 +489,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
@@ -598,12 +637,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537177556268</updated>
-      <workItem from="1537177561431" duration="85662000" />
+      <workItem from="1537177561431" duration="103089000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85662000" />
+    <option name="totallyTimeSpent" value="103089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -723,34 +762,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/ProgressTracker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="302">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#232#233#0" expanded="true" />
+            <element signature="e#273#274#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="24" />
+        <state relative-caret-position="268">
+          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="176" selection-start-line="5" selection-start-column="158" selection-end-line="5" selection-end-column="176" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="46" column="23" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="23" />
+        <state relative-caret-position="285">
+          <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1519#1520#0" expanded="true" />
+            <element signature="e#1547#1548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -759,23 +816,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1730">
-          <caret line="127" column="13" selection-start-line="127" selection-start-column="13" selection-end-line="127" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="-170">
+          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="87" column="26" selection-start-line="87" selection-start-column="26" selection-end-line="87" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="16" selection-start-line="16" selection-end-line="17" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="31" />
+        <state relative-caret-position="489">
+          <caret line="86" column="51" selection-start-line="86" selection-start-column="51" selection-end-line="86" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1283#1284#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
+            <element signature="e#1424#1425#0" expanded="true" />
+            <element signature="e#1507#1508#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-531">
+          <caret line="69" column="27" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
         </state>
       </provider>
     </entry>

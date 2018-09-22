@@ -25,13 +25,12 @@
     -fx-pref-height: 40px;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-font-size: 20px;
-    -fx-text-fill: #0c0060;
+    -fx-text-fill: #252b6e;
 
 }
 
 ._nameListView  {
     -fx-border-color: grey;
-
 }
 
 ._nameListView .cell.indexed-cell.list-cell:selected {
@@ -39,7 +38,7 @@
 }
 
 ._background {
-    -fx-background-color: #0c0060;
+    -fx-background-color: #252b6e;
 }
 
 
@@ -51,7 +50,9 @@
     -fx-font-weight: bold;
     -fx-font-size: 30px;
     -fx-font-family: "Franklin Gothic Heavy";
-    -fx-text-fill: #0c0060;
+    -fx-text-fill: #252b6e;
+    -fx-border-color: #252b6e;
+    -fx-border-width: 3px;
 }
 
 ._button:hover {
@@ -79,10 +80,12 @@
     -fx-font-weight: bold;
     -fx-font-size: 30px;
     -fx-font-family: "Franklin Gothic Heavy";
-    -fx-text-fill: #0c0060;
+    -fx-text-fill: #252b6e;
     -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #656565 0%, #656565 100%),
                 #656565,
                 black, #f0f0f0;
+    -fx-border-color: #252b6e;
+    -fx-border-width: 3px;
 }
 
 ._sortingButton:hover {
@@ -96,6 +99,11 @@
 ._sortingButton:disabled {
     -fx-background-color: #339ee6;
     -fx-text-fill: white;
+}
+
+._pane {
+    -fx-background-color: #f0f0f0 ;
+    -fx-opacity: 40%;
 }
 
 

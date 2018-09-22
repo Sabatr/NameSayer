@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.tools.ProgressTracker;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,6 +25,8 @@ public class PracticeController extends ParentController {
     private ComboBox _dropdown;
     @FXML
     private Button _rateButton;
+    @FXML
+    private ProgressBar _progressBar;
 
     private int _currentPosition;
     private String _currentName;
@@ -47,7 +50,7 @@ public class PracticeController extends ParentController {
     private void prevName() {
         _currentPosition--;
         _currentName = _practiceList.get(_currentPosition);
-        _nameDisplayed.setText(_practiceList.get(_currentPosition));
+        _nameDisplayed.setText(_currentName);
     }
 
     @FXML
@@ -56,7 +59,15 @@ public class PracticeController extends ParentController {
     }
 
     @FXML
+    private void recordAudio() {
+        _progressBar.setVisible(true);
+        Thread thread = new Thread(new ProgressTracker(_progressBar));
+        thread.start();
+    }
+
+    @FXML
     public void initialize() {
+        _progressBar.setVisible(false);
         _dropdown.setItems(FXCollections.observableArrayList("One","Two","Three"));
         //Automatically select the default value.
         _dropdown.getSelectionModel().selectFirst();
@@ -70,8 +81,10 @@ public class PracticeController extends ParentController {
                     //Checks if the value is the first on the list.
                     if (newValue.equals(_practiceList.get(0))) {
                         _prevButton.setVisible(false);
+                        _nextButton.setVisible(true);
                     } else if (newValue.equals(_practiceList.get(_practiceList.size()-1))){
                         _nextButton.setVisible(false);
+                        _prevButton.setVisible(true);
                     } else {
                         //Renables button when the position is somewhere in the middle.
                         _prevButton.setVisible(true);
