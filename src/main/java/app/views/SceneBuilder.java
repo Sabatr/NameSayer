@@ -1,5 +1,7 @@
 package app.views;
 
+import app.backend.FSWrapper;
+import app.backend.NameEntry;
 import app.controllers.ParentController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.naming.Name;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,10 +23,13 @@ import java.util.ArrayList;
  */
 public class SceneBuilder extends FXMLLoader {
     private Stage _stage;
-    private ObservableList<String> _list;
+    private ObservableList<NameEntry> _allNames;
+    private ObservableList<NameEntry> _list;
+
     //Needs to have the primary stage in order to update it.
-    public SceneBuilder(Stage stage) {
+    public SceneBuilder(ObservableList<NameEntry> all, Stage stage) {
         _list = FXCollections.observableList(new ArrayList<>());
+        _allNames = all;
         _stage = stage;
     }
 
@@ -36,6 +42,7 @@ public class SceneBuilder extends FXMLLoader {
         this.setLocation(this.getClass().getResource(url));
         Parent layout = this.load();
         setStage(getController());
+        ((ParentController) getController()).setInformation(_allNames, _list);
         Scene scene = new Scene(layout);
         //allows the correct style sheet to be applied to the fxml
 //        String css = this.getClass().getResource("styles/"+url.substring(0,url.length()-4)+"css").toExternalForm();
@@ -44,7 +51,7 @@ public class SceneBuilder extends FXMLLoader {
         _stage.show();
     }
 
-    public void getList(ObservableList<String> list) {
+    public void getList(ObservableList<NameEntry> list) {
         _list = list;
     }
 
@@ -54,7 +61,5 @@ public class SceneBuilder extends FXMLLoader {
      */
     public void setStage(ParentController controller) {
         controller.setStage(_stage);
-        controller.setInformation(_list);
     }
-
 }

@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,9 @@ public class MainMenuController extends ParentController {
      * Holds the selected list information.
      * @param _list
      */
-    public void setInformation(ObservableList _list) {
+    @Override
+    public void setInformation(ObservableList<NameEntry> allItems, ObservableList<NameEntry> _list) {
+        super.setInformation(allItems, _list);
         if (!_list.isEmpty()) {
             _selectedList = FXCollections.observableList(_list);
         } else {
@@ -36,7 +39,7 @@ public class MainMenuController extends ParentController {
      */
     @FXML
     private void goToList() throws IOException {
-        SceneBuilder builder = new SceneBuilder(_stage);
+        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
         builder.getList(_selectedList);
         builder.load("ListView.fxml");
     }
@@ -45,7 +48,9 @@ public class MainMenuController extends ParentController {
      * Allows the scene to switch to the options menu.
      */
     @FXML
-    private void options() {
-
+    private void options() throws IOException {
+        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
+        builder.getList(_selectedList);
+        builder.load("OptionsView.fxml");
     }
 }
