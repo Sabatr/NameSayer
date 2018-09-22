@@ -24,11 +24,14 @@ public class ListViewController extends ParentController{
     @FXML
     private ToggleButton _randomButton;
 
-
     private File[] _folderArray;
     private ObservableList<String> _allNames;
     private ObservableList<String> _selectedNames;
 
+    /**
+     * Initially, the sorted button is selected by default.
+     * Also, this selects the files needed to be displayed on the list.
+     */
     public void initialize() {
         _sortedButton.setDisable(true);
         _selectedNames = FXCollections.observableArrayList();
@@ -37,15 +40,9 @@ public class ListViewController extends ParentController{
             if (folder.exists()) {
                 _folderArray = folder.listFiles();
                 for (File file: _folderArray) {
-                    //makes sure it is a file, not a directory.
-                  //  System.out.println("File: "+file.toString() +", list: " + _allNames+", contains: " + _allNames.contains(file.toString()));
                     if (file.toString().contains(".")) {
                         String name = convertString(file.toString());
-                        //Checks for multiples
-                        // if (!_allNames.contains(name)) {
                             _allNames.add(name);
-                      //  }
-
                     }
                 }
                 Collections.sort(_allNames);
@@ -66,32 +63,46 @@ public class ListViewController extends ParentController{
         return fullFileName.substring(beginning+1,end);
     }
 
+    /**
+     * Selects the list through an view list.
+     */
     @FXML
     private void onClick() {
-        // String name = _nameListView.getSelectionModel().getSelectedItem();
         //FXCollections was used so that selected items could be modified.
         _selectedNames = FXCollections.observableArrayList(_nameListView.getSelectionModel().getSelectedItems());
-       // System.out.println(_selectedNames);
     }
 
+    /**
+     * Removes all the selected values (including the current one)
+     */
     @FXML
     private void clearSelection() {
         _selectedNames = FXCollections.observableArrayList();
         _nameListView.getSelectionModel().clearSelection();
     }
 
+    /**
+     * When the user decides to sort, the sort button becomes disabled.
+     */
     @FXML
     private void onSort() {
         _sortedButton.setDisable(true);
         _randomButton.setDisable(false);
     }
 
+    /**
+     * When the user decides to randomize, the random button becomes disabled.
+     */
     @FXML
     private void onRandom() {
         _randomButton.setDisable(true);
         _sortedButton.setDisable(false);
     }
 
+    /**
+     * A listener for the practice button.
+     * @throws IOException
+     */
     @FXML
     private void practiceButton() throws IOException {
         if (_selectedNames.size() == 0) {
@@ -110,6 +121,9 @@ public class ListViewController extends ParentController{
         }
     }
 
+    /**
+     * When nothing is selected, the user is warned through an alert.
+     */
     private void alertNothingSelected() {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
@@ -118,6 +132,10 @@ public class ListViewController extends ParentController{
         alert.showAndWait();
     }
 
+    /**
+     * A listener for the back button.
+     * @throws IOException
+     */
     @FXML
     private void goBack() throws IOException{
         SceneBuilder builder = new SceneBuilder(_stage);
@@ -127,9 +145,14 @@ public class ListViewController extends ParentController{
 
     }
 
-
+    /**
+     * When the information is passed back to the controller,
+     * we keep the previous state of the before the switch.
+     * @param _list, the selected values + the state of the sorting at the end.
+     */
     @Override
     public void setInformation(ObservableList<String> _list) {
+        //determines if the list was sorted or random before.
         if (!_list.isEmpty()) {
             String randomOrNot = _list.get(_list.size()-1);
             _list.remove(_list.size()-1);

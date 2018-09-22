@@ -22,26 +22,45 @@
       <Button fx:id="_nextButton" layoutX="912.0" layoutY="151.0" mnemonicParsing="false" onAction="#nextName" prefHeight="56.0" prefWidth="104.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&gt;" />
       <ComboBox fx:id="_dropdown" layoutX="200.0" layoutY="372.0" prefHeight="12.0" prefWidth="594.0" promptText="Versions" styleClass="_dropdown" stylesheets="@styles/Practice.css" />
       <Pane layoutX="166.0" layoutY="586.0" prefHeight="137.0" prefWidth="762.0" styleClass="_pane" />
-      <HBox alignment="CENTER" layoutX="200.0" layoutY="600.0" prefHeight="107.0" prefWidth="700.0">
+      <HBox fx:id="_recordHBox" alignment="CENTER" layoutX="200.0" layoutY="600.0" prefHeight="107.0" prefWidth="700.0">
          <children>
-            <Button fx:id="_selectionButton" mnemonicParsing="false" onAction="#recordAudio" prefHeight="107.0" prefWidth="232.0" styleClass="_selectionButton" stylesheets="@styles/Practice.css" text="Record">
+            <Button fx:id="_recordButton" mnemonicParsing="false" onAction="#recordAudio" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" stylesheets="@styles/Practice.css" text="Record">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="_selectionButton" mnemonicParsing="false" onAction="#rate" prefHeight="107.0" prefWidth="254.0" styleClass="_selectionButton" text="Rate">
+            <Button fx:id="_rateButton" mnemonicParsing="false" onAction="#rate" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" text="Rate Bad">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="_selectionButton" mnemonicParsing="false" onAction="#goBack" prefHeight="107.0" prefWidth="226.0" styleClass="_selectionButton" text="Back">
+            <Button fx:id="_backButton" mnemonicParsing="false" onAction="#goBack" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" text="Back">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <Button layoutX="805.0" layoutY="372.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="56.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
+      <Button fx:id="_listenButton" layoutX="805.0" layoutY="372.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
       <ProgressBar fx:id="_progressBar" layoutX="197.0" layoutY="487.0" prefHeight="47.0" prefWidth="700.0" progress="0.0" />
+      <HBox fx:id="_confirmationHBox" layoutX="200.0" layoutY="600.0" prefHeight="107.0" prefWidth="700.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#keepRecording" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" text="Keep">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#playBackSelfAudio" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" text="Replay">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#cancelAudioRecording" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" text="Cancel">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

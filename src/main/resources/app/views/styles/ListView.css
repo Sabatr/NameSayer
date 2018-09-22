@@ -96,6 +96,14 @@
             radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
 }
 
+._sortingButton:pressed {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
+            #225c88,
+            #266697,
+            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
+}
+
 ._sortingButton:disabled {
     -fx-background-color: #339ee6;
     -fx-text-fill: white;

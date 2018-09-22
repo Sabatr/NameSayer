@@ -9,12 +9,19 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class holds the functionality of the main menu.
+ */
 public class MainMenuController extends ParentController {
     @FXML
     private Button _databaseButton;
 
     private ObservableList _selectedList;
 
+    /**
+     * Holds the selected list information.
+     * @param _list
+     */
     public void setInformation(ObservableList _list) {
         if (!_list.isEmpty()) {
             _selectedList = FXCollections.observableList(_list);
@@ -23,11 +30,22 @@ public class MainMenuController extends ParentController {
         }
     }
 
-
+    /**
+     * Allows the scene to switch the view list.
+     * @throws IOException
+     */
     @FXML
     private void goToList() throws IOException {
         SceneBuilder builder = new SceneBuilder(_stage);
         builder.getList(_selectedList);
         builder.load("ListView.fxml");
+    }
+
+    /**
+     * Allows the scene to switch to the options menu.
+     */
+    @FXML
+    private void options() {
+
     }
 }
