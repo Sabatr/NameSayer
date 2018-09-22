@@ -1,6 +1,7 @@
 package app.controllers;
 
-import app.tools.ProgressTracker;
+import app.tools.AudioPlayer;
+import app.tools.AudioRecorder;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -72,6 +73,12 @@ public class PracticeController extends ParentController {
         });
     }
 
+    /**
+     * These are the arrow buttons, which changes the names.
+     * When at the beginning of the name, there shouldn't be an option
+     * to go back. Likewise, for at the end. If the selected name is
+     * only for one name, then it shouldn't have any arrows.
+     */
     private void updateChangeButtons() {
         switch (_namePosition) {
             case FIRST:
@@ -93,6 +100,9 @@ public class PracticeController extends ParentController {
         }
     }
 
+    /**
+     * This updates the version dropdown lists.
+     */
     private void updateVersions() {
         _currentName =_practiceList.get(_currentPosition);
         //Gets the versions of the current name
@@ -126,7 +136,14 @@ public class PracticeController extends ParentController {
      */
     @FXML
     private void playAudio() {
-        System.out.println(_dropdown.getSelectionModel().getSelectedItem());
+        //Potentially change this string so that we can determine the version.
+        String playedFile = _currentName;
+        disableAll();
+        //Probably use the progress bar to let the users know the audio is playing.
+        //Thread thread = new Thread(new AudioPlayer(_progressBar,_backButton,_recordButton,_rateButton,_listenButton));
+        Thread thread = new Thread(new AudioPlayer(_progressBar,_listenButton,_recordHBox,_confirmationHBox,playedFile));
+        thread.start();
+        _dropdown.setDisable(false);
     }
 
     /**
@@ -134,18 +151,20 @@ public class PracticeController extends ParentController {
      */
     @FXML
     private void recordAudio() {
-        _progressBar.setVisible(true);
         _nextButton.setVisible(false);
         _prevButton.setVisible(false);
-        _listenButton.setDisable(true);
-        _dropdown.setDisable(true);
-        _backButton.setDisable(true);
-        _recordButton.setDisable(true);
-        _rateButton.setDisable(true);
-        Thread thread = new Thread(new ProgressTracker(_progressBar,_recordHBox,_confirmationHBox,_dropdown,_listenButton));
+        disableAll();
+        //Wasn't sure if there was a better way to do this.
+        Thread thread = new Thread(new AudioRecorder(_progressBar,_recordHBox,_confirmationHBox,_dropdown,_listenButton));
         thread.start();
     }
 
+    private void disableAll() {
+        _listenButton.setDisable(true);
+        _dropdown.setDisable(true);
+        _recordHBox.setDisable(true);
+        _confirmationHBox.setDisable(true);
+    }
     /**
      * Saves the recording, automatically updates the version.
      */
@@ -159,10 +178,11 @@ public class PracticeController extends ParentController {
      * Plays the audio back for the user.
      */
     @FXML
-    private void playBackSelfAudio() {
+    private void playBackAudioOfRecording() {
         //Plays back audio
         //Disables buttons while this happens.
         //Renables after audio is played.
+        playAudio(); //Placeholder: Somehow get the version number.
     }
 
     /**
@@ -178,9 +198,7 @@ public class PracticeController extends ParentController {
     private void enableButtons() {
         _confirmationHBox.setVisible(false);
         _recordHBox.setVisible(true);
-        _rateButton.setDisable(false);
-        _recordButton.setDisable(false);
-        _backButton.setDisable(false);
+        _recordHBox.setDisable(false);
         updateChangeButtons();
     }
 

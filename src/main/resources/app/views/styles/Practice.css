@@ -115,6 +115,10 @@
     -fx-background-color: #acacac;
 }
 
+._audioButton:pressed {
+    -fx-background-color: #7f7f7f;
+}
+
 ._pane {
     -fx-background-color: #f0f0f0;
     -fx-opacity: 40%;
