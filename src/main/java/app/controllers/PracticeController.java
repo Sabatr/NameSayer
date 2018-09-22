@@ -2,6 +2,8 @@ package app.controllers;
 
 import app.tools.AudioPlayer;
 import app.tools.AudioRecorder;
+import app.backend.FSWrapper;
+import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,7 +16,7 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 
 public class PracticeController extends ParentController {
-    private ObservableList<String> _practiceList;
+    private ObservableList<NameEntry> _practiceList;
     @FXML
     private Label _nameDisplayed;
     @FXML
@@ -31,8 +33,19 @@ public class PracticeController extends ParentController {
     private Button _backButton;
     @FXML
     private ComboBox _dropdown;
+
+    private int _currentPosition;
+    private NameEntry _currentName;
+
+    /**
+     * This handles the next name click.
+     */
     @FXML
     private ProgressBar _progressBar;
+
+    /**
+     * This handles the previous name click.
+     */
     @FXML
     private HBox _confirmationHBox;
     @FXML
@@ -209,7 +222,7 @@ public class PracticeController extends ParentController {
      */
     @FXML
     private void goBack() throws IOException {
-        SceneBuilder builder = new SceneBuilder(_stage);
+        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
         _practiceList.add(_randomOrSort);
         builder.getList(_practiceList);
         builder.load("ListView.fxml");
@@ -231,13 +244,14 @@ public class PracticeController extends ParentController {
      * @param items
      */
     @Override
-    public void setInformation(ObservableList<String> items) {
+    public void setInformation(ObservableList<NameEntry> allitems, ObservableList<NameEntry> items) {
+        super.setInformation(allitems, items);{
         _randomOrSort = items.get(items.size()-1);
         items.remove(items.size()-1);
         _practiceList = items;
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
-        _nameDisplayed.setText(_currentName);
+        _nameDisplayed.setText(_currentName.getName());
         updateVersions();
     }
 

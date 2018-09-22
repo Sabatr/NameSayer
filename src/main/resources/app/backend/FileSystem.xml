@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+<rootDir type="root" name="names">
+    <dirSet type="nameEntry" nameFormat="%1">
+        <dir type="versions" name="versions">
+            <fileSet type="soundFile" nameFormat="se206_%2_%3_%1.wav" copy="true" />
+            <file type="rating" name="%2_%3_rating.txt" createNew="true"/>
+        </dir>
+    </dirSet>
+</rootDir>

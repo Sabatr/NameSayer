@@ -1,5 +1,7 @@
 package app.controllers;
 
+import app.backend.FSWrapper;
+import app.backend.NameEntry;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
@@ -10,6 +12,7 @@ import javafx.stage.Stage;
  */
 public class ParentController {
     protected Stage _stage;
+    protected ObservableList<NameEntry> _allNames;
 
     /**
      * Retrieves the stage so children controllers can modify it.
@@ -20,5 +23,7 @@ public class ParentController {
     }
 
     //Hook method
-    public void setInformation(ObservableList<String> items) {}
+    public void setInformation(ObservableList<NameEntry> allItems, ObservableList<NameEntry> items) {
+        _allNames = allItems;
+    }
 }
