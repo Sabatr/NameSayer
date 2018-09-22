@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$Position.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/tools/ProgressTracker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/styles/Practice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/tools/ProgressTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/SceneBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/SceneBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -35,7 +26,7 @@
       <file leaf-file-name="MainMenuController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
+            <state relative-caret-position="421">
               <caret line="44" column="54" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -47,8 +38,8 @@
       <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="184" column="67" selection-start-line="184" selection-start-column="67" selection-end-line="184" selection-end-column="67" />
+            <state relative-caret-position="3158">
+              <caret line="236" column="14" lean-forward="true" selection-start-line="236" selection-start-column="14" selection-end-line="236" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,7 +50,7 @@
       <file leaf-file-name="AudioPlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="348">
               <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -71,8 +62,8 @@
       <file leaf-file-name="AudioRecorder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
+            <state relative-caret-position="370">
+              <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,12 +74,25 @@
       <file leaf-file-name="SceneBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-72">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="782">
+              <caret line="46" column="23" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1519#1520#0" expanded="true" />
                 <element signature="e#1547#1548#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="44" lean-forward="true" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#584#585#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -411,7 +415,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/app/views/RecordView.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
@@ -421,6 +424,7 @@
         <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
       </list>
     </option>
   </component>
@@ -434,9 +438,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="950" />
-    <option name="width" value="980" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="1" />
+    <option name="width" value="1614" />
+    <option name="height" value="867" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -635,12 +640,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537177556268</updated>
-      <workItem from="1537177561431" duration="113475000" />
+      <workItem from="1537177561431" duration="116494000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113475000" />
+    <option name="totallyTimeSpent" value="116494000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -666,7 +671,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.32965517" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15039062" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
       <window_info anchor="right" id="Gradle" />
       <window_info anchor="right" id="Theme Preview" />
@@ -785,16 +790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="44" column="54" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1751">
@@ -809,32 +804,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-72">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1519#1520#0" expanded="true" />
-            <element signature="e#1547#1548#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+        <state relative-caret-position="421">
+          <caret line="44" column="54" selection-start-line="44" selection-start-column="54" selection-end-line="44" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -843,8 +816,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="19" column="46" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
+        <state relative-caret-position="374">
+          <caret line="22" column="44" lean-forward="true" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#584#585#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="23" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1519#1520#0" expanded="true" />
+            <element signature="e#1547#1548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -853,8 +859,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="184" column="67" selection-start-line="184" selection-start-column="67" selection-end-line="184" selection-end-column="67" />
+        <state relative-caret-position="3158">
+          <caret line="236" column="14" lean-forward="true" selection-start-line="236" selection-start-column="14" selection-end-line="236" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
