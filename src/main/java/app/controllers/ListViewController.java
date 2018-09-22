@@ -21,15 +21,19 @@ import java.util.Optional;
 public class ListViewController extends ParentController{
     @FXML
     private ListView<String> _nameListView;
+    @FXML
+    private ToggleButton _sortedButton;
+    @FXML
+    private ToggleButton _randomButton;
 
 
     private File[] _folderArray;
     private ObservableList<String> _allNames;
     private ObservableList<String> _selectedNames;
     private enum Options {YES,NO,CANCEL}
-    private Options _options;
 
     public void initialize() {
+        _sortedButton.setDisable(true);
         _selectedNames = FXCollections.observableArrayList();
          _allNames = _nameListView.getItems();
             File folder = new File("soundfiles");
@@ -79,47 +83,35 @@ public class ListViewController extends ParentController{
         _nameListView.getSelectionModel().clearSelection();
     }
 
+    @FXML
+    private void onSort() {
+        _sortedButton.setDisable(true);
+        _randomButton.setDisable(false);
+    }
+
+    @FXML
+    private void onRandom() {
+        _randomButton.setDisable(true);
+        _sortedButton.setDisable(false);
+    }
 
     @FXML
     private void practiceButton() throws IOException {
         if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {
-            alertUserConfirmation();
-            if (_options != Options.CANCEL) {
-                System.out.println(_selectedNames);
-                //Currently it doesn't seem to work.
-                if (_options == Options.YES) {
-                    Collections.shuffle(_selectedNames);
-                } else {
+                if (_sortedButton.isDisabled()) {
                     Collections.sort(_selectedNames);
+                } else {
+                    Collections.shuffle(_selectedNames);
                 }
                 SceneBuilder sceneBuilder = new SceneBuilder(_stage);
+                //Determines if the random button is disabled. So when we switch back views, it's still there.
+                _selectedNames.add(_randomButton.isDisable()+"");
                 sceneBuilder.getList(_selectedNames);
                 sceneBuilder.load("Practice.fxml");
-            }
         }
     }
-
-    private void alertUserConfirmation() {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Randomize confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText("Do you wish to randomize your list?");
-        ButtonType yesButton = new ButtonType("Yes");
-        ButtonType noButton = new ButtonType("No");
-        ButtonType cancelButton = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-        alert.getButtonTypes().setAll(yesButton,noButton,cancelButton);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == yesButton){
-            _options = Options.YES;
-        } else if (result.get() == noButton) {
-            _options = Options.NO;
-        } else {
-            _options = Options.CANCEL;
-        }
-    }
-
 
     private void alertNothingSelected() {
         Alert alert = new Alert(AlertType.ERROR);
@@ -133,6 +125,15 @@ public class ListViewController extends ParentController{
 
     @Override
     public void setInformation(ObservableList<String> _list) {
+        if (!_list.isEmpty()) {
+            String randomOrNot = _list.get(_list.size()-1);
+            _list.remove(_list.size()-1);
+            if (randomOrNot.equals("true")) {
+                onRandom();
+            } else {
+                onSort();
+            }
+        }
         //Reselects the chosen list.
         if (_list.size() != 0) {
             _selectedNames = _list;
@@ -140,5 +141,6 @@ public class ListViewController extends ParentController{
                 _nameListView.getSelectionModel().select(name);
             }
         }
+
     }
 }
