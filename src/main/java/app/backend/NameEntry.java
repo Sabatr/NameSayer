@@ -2,8 +2,9 @@ package app.backend;
 
 import javafx.util.Pair;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,16 +16,11 @@ import java.util.Map;
  */
 public class NameEntry implements Comparable<NameEntry> {
 
-
-    public enum RATING {
-        GOOD, BAD, NONE;
-
-    }
     private String DEFAULT_AUTHOR = "You";
     private FSWrapper _fsMan;
     private String _name;
     private Version _mainVersion;
-
+    private Path _ratingsFile;
     private Version _temporaryVersion;
     private List<Version> _versions = new ArrayList<>();
     public NameEntry(String name) {
@@ -47,28 +43,47 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     public Path addVersion(String author) {
         LocalDateTime ldt = LocalDateTime.now();
-        String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonth() + "-" + ldt.getYear();
+        String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
         Path resource = _fsMan.createFile("soundFile", _name, formattedDate, formattedTime);
-        String ratingFile = _fsMan.createFile("rating", _name, formattedDate, formattedTime).toString();
 
-        _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource, ratingFile);
+        _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;
     }
+
+    /**
+     * Get temporary version audio
+     */
 
     /**
      * Confirm the adding of the version that was last created.
      */
     public void finaliseLastVersion() {
-        _versions.add(_temporaryVersion);
+        if(_temporaryVersion != null) {
+            _versions.add(_temporaryVersion);
+        }
         _temporaryVersion = null;
+    }
+
+    /**
+     * Deletes the temporary recording and throws away the new information
+     */
+    public void throwAwayNew() {
+        if(_temporaryVersion != null) {
+            try {
+                Files.deleteIfExists(_temporaryVersion._resource);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            _temporaryVersion = null;
+        }
     }
 
     /**
      * Used to add verions already on the filesystem
      */
-    public void addVersionWithAudio(String auth, String date, Path resource, String ratingFile) {
-        _versions.add(new Version(auth, date, resource, ratingFile));
+    public void addVersionWithAudio(String auth, String date, Path resource) {
+        _versions.add(new Version(auth, date, resource));
     }
 
     /**
@@ -110,6 +125,9 @@ public class NameEntry implements Comparable<NameEntry> {
         if(_mainVersion._dateTime.equals(dateAndTime)) {
             return _mainVersion._resource;
         }
+        if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
+            return _temporaryVersion._resource;
+        }
         for(Version ver: _versions) {
             if(ver._dateTime.equals(dateAndTime)) {
                 return ver._resource;
@@ -121,16 +139,67 @@ public class NameEntry implements Comparable<NameEntry> {
     /**
      * Rate the version identified by the given date and time
      * @param dateAndTime the date and time identifying the version
-     * @param rating the {@link NameEntry.RATING} to give the version
+     * @param rating the rating to give the version, out of 10
      */
-    public void rateVersion(String dateAndTime, RATING rating) {
+    public void rateVersion(String dateAndTime, int rating) {
         if(_mainVersion._dateTime.equals(dateAndTime)) {
             _mainVersion.rating = rating;
+            saveRating(dateAndTime, rating);
+        }
+        if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
+            _temporaryVersion.rating = rating;
+            saveRating(dateAndTime, rating);
         }
         for(Version ver: _versions) {
             if(ver._dateTime.equals(dateAndTime)) {
                 ver.rating = rating;
+                saveRating(dateAndTime, rating);
             }
+        }
+    }
+
+    /**
+     * Save the rating to the file
+     */
+    public void saveRating(String dateAndTime, int rating) {
+        List<String> fileContents = new ArrayList<>();
+        int lineNumber = 0;
+        boolean found = false;
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(_ratingsFile.toFile()))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                fileContents.add(line);
+                if(!found && line.contains(dateAndTime)) {
+                    found = true;
+                } else {
+                    lineNumber++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                Files.createFile(_ratingsFile);
+            } catch (IOException e1) {
+                throw new RuntimeException("Error trying to create file for ratings", e1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(found) {
+            fileContents.set(lineNumber, dateAndTime + ": " + rating);
+        } else {
+            fileContents.add(dateAndTime + ": " + rating);
+        }
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(_ratingsFile.toFile()))) {
+            for(String line: fileContents) {
+                writer.write(line + "\n");
+            }
+        } catch (FileNotFoundException e) {
+            return;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -146,19 +215,17 @@ public class NameEntry implements Comparable<NameEntry> {
 
     private class Version {
 
-        public Version(String auth, String date, Path resource, String ratingFile) {
+        Version(String auth, String date, Path resource) {
             _author = auth;
             _dateTime = date;
             _resource = resource;
-            _ratingFile = ratingFile;
-            rating = RATING.NONE;
+            rating = -1;
         }
 
-        public RATING rating;
-        public String _author;
-        public String _dateTime;
-        public Path _resource;
-        public String _ratingFile;
+        int rating;
+        String _author;
+        String _dateTime;
+        Path _resource;
     }
 
     // ********** Extracting names from the filesystem **********
@@ -202,18 +269,20 @@ public class NameEntry implements Comparable<NameEntry> {
                 case "soundFile":
                     parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
                     if(firstVersion) {
-                        _mainVersion = new Version("unknown", parameters.get(2) + "_" + parameters.get(3),
-                                pathPair.getValue(), "");
+                        _mainVersion = new Version(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
+                                pathPair.getValue());
                         firstVersion = false;
                     } else {
-                        addVersionWithAudio("unknown", parameters.get(2) + "_" + parameters.get(3),
-                                pathPair.getValue(), "");
+                        addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
+                                pathPair.getValue());
                     }
                     break;
                 case "nameEntry":
                     parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
                     _name = parameters.get(1);
                     break;
+                case "ratings":
+                    _ratingsFile = pathPair.getValue();
                 default:
                     break;
             }

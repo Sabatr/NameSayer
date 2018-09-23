@@ -1,41 +1,92 @@
 package app.tools;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
 import javafx.concurrent.Task;
-import javafx.scene.control.Button;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.HBox;
 
+
+/**
+ * Parts of this class were taken from https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java
+ */
 public class AudioPlayer extends Task<Void> {
-    private ProgressBar _progressBar;
-    private Button _listenButton;
-    private HBox _recordingBox;
-    private HBox _confirmationHBox;
-    private String _name;
+    private final int BUFFER_SIZE = 128000;
+    private File _soundFile;
+    private AudioInputStream _audioStream;
+    private AudioFormat _audioFormat;
+    private SourceDataLine _sourceLine;
 
-    public AudioPlayer(ProgressBar progressBar, Button listenButton, HBox recordingBox,HBox confirmationHBox,String name) {
-        _progressBar = progressBar;
-        _listenButton = listenButton;
-        _recordingBox = recordingBox;
-        _confirmationHBox = confirmationHBox;
-        _name = name;
+    public AudioPlayer(File soundFile ,ProgressBar progressBar, EventHandler<WorkerStateEvent> handler, String taskTitle) {
+        _soundFile = soundFile;
+        progressBar.progressProperty().bind(this.progressProperty());
+        this.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, handler);
+        this.updateTitle(taskTitle);
     }
+
+    /**
+     * Call {@link AudioPlayer#playSound(File)} on a background thread
+     */
     @Override
     protected Void call() throws Exception {
-        System.out.println("Playing: " + _name);
-        double progress=0.01;
-        while (getProgress() <= 1) {
-            updateProgress(progress, 1);
-            progress+=0.02;
-            Thread.sleep(90);
-        }
+        playSound(_soundFile);
         return null;
     }
 
-    public void done() {
-        _progressBar.setProgress(0);
-        _progressBar.setVisible(false);
-        _listenButton.setDisable(false);
-        _recordingBox.setDisable(false);
-        _confirmationHBox.setDisable(false);
+    /**
+     * This is the main body of code taken from StackExchange.
+     * It manually spoon-feeds the audio to the Java sound system.
+     *
+     * Obviously it is a blocking method, so it gets called on a background thread.
+     * @param resourceToPlay The file to be played
+     */
+    private void playSound(File resourceToPlay) {
+        try {
+            _audioStream = AudioSystem.getAudioInputStream(_soundFile);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        _audioFormat = _audioStream.getFormat();
+
+        DataLine.Info info = new DataLine.Info(SourceDataLine.class, _audioFormat);
+        try {
+            _sourceLine = (SourceDataLine) AudioSystem.getLine(info);
+            _sourceLine.open(_audioFormat);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        _sourceLine.start();
+
+        long totalBytes = 0;
+        int bytesRead = 0;
+        byte[] data = new byte[BUFFER_SIZE];
+        while (bytesRead != -1) {
+            try {
+                bytesRead = _audioStream.read(data, 0, data.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (bytesRead >= 0) {
+                @SuppressWarnings("unused")
+                int nBytesWritten = _sourceLine.write(data, 0, bytesRead);
+                totalBytes += nBytesWritten;
+                updateProgress(totalBytes, _audioStream.getFrameLength());
+            }
+        }
+
+        _sourceLine.drain();
+        _sourceLine.close();
     }
 }
