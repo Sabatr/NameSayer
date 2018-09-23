@@ -1,8 +1,7 @@
 package app.controllers;
 
 import app.backend.BashRunner;
-import app.tools.AudioPlayer;
-import app.tools.AudioRecorder;
+import app.tools.Timer;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.beans.value.ChangeListener;
@@ -14,10 +13,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 
 import java.io.IOException;
-import java.util.Properties;
-import java.util.Set;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
     private ObservableList<NameEntry> _practiceList;
@@ -165,19 +163,21 @@ public class PracticeController extends ParentController implements EventHandler
         disableAll();
 
         BashRunner runner = new BashRunner(this);
-
-
         String os = System.getProperty("os.name").toLowerCase();
-        if(os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0 ) {
-            // WILL NOT WORK ON WINDOWS
-            System.out.println("Running audio playing process");
-            runner.runPlayAudioCommand(_currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()));
-        }
+//        if(os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0 ) {
+//            // WILL NOT WORK ON WINDOWS
+//            System.out.println("Running audio playing process");
+//            runner.runPlayAudioCommand(_currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()));
+//        }
+
+        String audioResource = _currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()).toString();
+        AudioClip clip = new AudioClip(audioResource);
+        clip.play();
 
 //        Thread thread = new Thread(new AudioPlayer(_progressBar,_listenButton,_recordHBox,_confirmationHBox,playedFile));
 //        thread.start();
         _progressBar.setVisible(true);
-        Thread thread = new Thread(new AudioRecorder(_progressBar, this, "PlayAudio"));
+        Thread thread = new Thread(new Timer(_progressBar, this, "PlayAudio"));
         thread.start();
     }
 
@@ -191,7 +191,7 @@ public class PracticeController extends ParentController implements EventHandler
         disableAll();
 
         _progressBar.setVisible(true);
-        Thread thread = new Thread(new AudioRecorder(_progressBar, this, "RecordAudio"));
+        Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio"));
         thread.start();
     }
 
@@ -271,7 +271,6 @@ public class PracticeController extends ParentController implements EventHandler
         _recordHBox.setDisable(false);
         updateChangeButtons();
     }
-
 
     /**
      * A button handler which allows the user to go back to the list view.

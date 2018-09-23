@@ -13,6 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 
 /**
@@ -38,8 +39,6 @@ public class OptionsController extends ParentController implements EventHandler<
     private enum Options {TEST,HELP,ABOUT}
     private Options _optionPicked;
 
-    boolean micToggled;
-
     @FXML
     public void initialize() {
         _optionPicked = Options.TEST;
@@ -53,12 +52,16 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML
     private void toggleMic() {
         if(_micToggled) {
-            _toggleButton.setVisible(false);
             _micToggled = false;
         } else {
-            micToggled = true;
-            BashRunner runner = new BashRunner(this);
-            runner.runMonitorMicCommand();
+            _micToggled = true;
+            if(System.getProperty("os.name").contains("Windows")) {
+                System.out.println("on windows");
+                return;
+            } else {
+                BashRunner runner = new BashRunner(this);
+                runner.runMonitorMicCommand();
+            }
         }
 
     }
@@ -105,26 +108,46 @@ public class OptionsController extends ParentController implements EventHandler<
      */
     @Override
     public void handle(WorkerStateEvent event) {
-        if(!micToggled) {
-             levelIndicator.progressProperty().unbind();
-             levelIndicator.progressProperty().setValue(0);
+        if(!_micToggled) {
+             _levelIndicator.progressProperty().unbind();
+             _levelIndicator.progressProperty().setValue(0);
             return;
         }
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
+            //System.out.println("success");
             if(event.getSource().getTitle().equals(BashRunner.CommandType.TESTMIC.toString())) {
-                event.getSource().getValue();
+                String output = (String) event.getSource().getValue();
+                int foreIndex = output.indexOf("mean_volume") + 13;
+                int aftIndex = output.indexOf("dB", foreIndex);
+                if(!(foreIndex < 0 || aftIndex < 0)) {
+                    double volume;
+                    try {
+                        volume = Double.parseDouble(output.substring(foreIndex, aftIndex - 1));
+                    } catch (NumberFormatException e) {
+                        volume = -90;
+                    }
+                    double progress = (100 + 1.3 * volume) / 100;
+                    _levelIndicator.setProgress(progress);
+                } //else {
+                //    System.out.println(output);
+                //}
 
                 BashRunner runner = new BashRunner(this);
+                runner.runMonitorMicCommand();
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
-            levelIndicator.progressProperty().unbind();
-            levelIndicator.progressProperty().setValue(0);
-            micToggled = false;
+            System.out.println("Failed");
+            _levelIndicator.progressProperty().unbind();
+            _levelIndicator.progressProperty().setValue(0);
+            _micToggled = false;
         }
     }
 
     @FXML
     private void goBack() throws IOException {
+        if(_micToggled) {
+           toggleMic();
+        }
         SceneBuilder builder = new SceneBuilder(_allNames, _stage);
         builder.getList(_selections);
         builder.load("MainMenu.fxml");

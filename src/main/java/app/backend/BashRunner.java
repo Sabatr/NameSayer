@@ -1,10 +1,8 @@
 package app.backend;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -28,7 +26,7 @@ public class BashRunner {
 
     public Task<String> runRecordCommand(Path path) {
         // arecord -f cd -d 5 -q "%s/audio.wav"
-        String cmdString = String.format("ffmpeg -f alsa -i  hw:0 -t 2 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
+        String cmdString = String.format("ffmpeg -f alsa -i  hw:0 -t 5 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
 
         String[] cmd = { "/bin/bash", "-c", cmdString };
         return runCommand(CommandType.RECORDAUDIO.toString(), cmd);
@@ -36,7 +34,8 @@ public class BashRunner {
 
     public Task<String> runMonitorMicCommand() {
 
-        return runCommand(CommandType.TESTMIC.toString(), "");
+        return runCommand(CommandType.TESTMIC.toString(), "/bin/bash", "-c", "ffmpeg -f alsa -i hw:0 -t 0.03 -filter_complex \"volumedetect\" " +
+                "-acodec pcm_s16le -ar 44000 -ac 1 -f null /dev/null");
     }
 
     public Task<String> runPlayAudioCommand(Path path) {
@@ -48,7 +47,7 @@ public class BashRunner {
     }
 
     private Task<String> runCommand(String commandType, String... cmd) {
-        BashCommand runProcess = new BashCommand(cmd);
+        BashCommand runProcess = new BashCommand(Paths.get("").toFile(), cmd);
 
         runProcess.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, taskCompletionHandler);
         runProcess.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED, taskCompletionHandler);
@@ -68,9 +67,11 @@ public class BashRunner {
 
     private class BashCommand extends Task<String> {
         String[] cmd;
+        File dir;
 
-        public BashCommand(String... command) {
+        public BashCommand(File directory, String... command) {
             cmd = command;
+            dir = directory;
         }
 
         @Override
@@ -80,7 +81,9 @@ public class BashRunner {
 
             Process p = null;
             try {
-                p = new ProcessBuilder(cmd).start();
+                ProcessBuilder test = new ProcessBuilder(cmd);
+                test.directory(null);
+                p = test.start();
             } catch(IOException e) {
                 failure = true;
                 commandOutBuilder.append(e.getMessage());
@@ -102,11 +105,11 @@ public class BashRunner {
                 try {
                     if(p.exitValue() == 0) {
                         commandOutBuilder.append(concatOutput(p.getInputStream(), "\n"));
+                        commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
                     } else {
                         failure = true;
                         commandOutBuilder.append(concatOutput(p.getInputStream(),"\n"));
                         commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
-                        System.out.println(commandOutBuilder);
                     }
                 } catch(IOException e) {
                     failure = true;
@@ -122,7 +125,7 @@ public class BashRunner {
 
             updateProgress(20, 20);
             updateValue(commandOutBuilder.toString());
-            System.out.println(commandOutBuilder.toString());
+            //System.out.println(commandOutBuilder.toString());
             return commandOutBuilder.toString();
         }
 
@@ -131,6 +134,7 @@ public class BashRunner {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
                 String str;
                 while( (str = reader.readLine()) != null ) {
+                    //System.out.println("output: " + str);
                     commandOutBuilder.append(str + delimiter);
                 }
             } catch (IOException e) {

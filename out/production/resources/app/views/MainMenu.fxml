@@ -8,7 +8,7 @@
    <children>
       <AnchorPane layoutX="305.0" layoutY="340.0" prefHeight="373.0" prefWidth="482.0" styleClass="_buttonPane" />
       <Button fx:id="_databaseButton" layoutX="409.0" layoutY="400.0" mnemonicParsing="false" onAction="#goToList" prefHeight="93.0" prefWidth="274.0" styleClass="_buttons" text="View Database" />
-      <Label alignment="CENTER" layoutX="152.0" layoutY="57.0" prefHeight="165.0" prefWidth="796.0" styleClass="_title" stylesheets="@styles/MainMenu.css" text="WELCOME TO NAMESAYER" textAlignment="CENTER" />
+      <Label alignment="CENTER" layoutX="7.0" layoutY="57.0" prefHeight="165.0" prefWidth="1083.0" styleClass="_title" stylesheets="@styles/MainMenu.css" text="WELCOME TO NAMESAYER" textAlignment="CENTER" />
       <Button layoutX="409.0" layoutY="551.0" mnemonicParsing="false" onAction="#options" prefHeight="93.0" prefWidth="274.0" styleClass="_buttons" text="Options" />
    </children>
 </AnchorPane>

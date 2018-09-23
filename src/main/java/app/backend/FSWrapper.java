@@ -149,7 +149,7 @@ public class FSWrapper {
                         }
                     }
                 }
-                System.out.println(structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1));
+                //System.out.println(structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1));
                 fsStructure = builder.parse(this.getClass().getResourceAsStream(
                         structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1)));
             } else {

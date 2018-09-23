@@ -5,8 +5,8 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ProgressBar;
 
-public class AudioRecorder extends Task<Void> {
-    public AudioRecorder(ProgressBar progressBar, EventHandler<WorkerStateEvent> handler, String title) {
+public class Timer extends Task<Void> {
+    public Timer(ProgressBar progressBar, EventHandler<WorkerStateEvent> handler, String title) {
         this.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, handler);
         progressBar.progressProperty().bind(this.progressProperty());
         this.updateTitle(title);

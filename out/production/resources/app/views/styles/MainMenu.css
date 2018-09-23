@@ -6,13 +6,14 @@
     -fx-text-fill: #f0f0f0;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-font-size: 60px;
+    -fx-font-weight: bold;
 }
 
 ._buttons {
     -fx-background-color: #e2e2e2;
     -fx-font-weight: bold;
     -fx-text-fill: #252b6e;
-    -fx-font-size: 30px;
+    -fx-font-size: 25px;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-border-color: #252b6e;
     -fx-border-width: 3px;
