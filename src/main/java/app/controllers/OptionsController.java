@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
@@ -21,25 +22,71 @@ import java.io.IOException;
  */
 public class OptionsController extends ParentController implements EventHandler<WorkerStateEvent> {
 
-    ObservableList _selections;
+    private ObservableList _selections;
     @FXML   // a progress bar is used as the visual indicator of microphone level
-    ProgressBar levelIndicator;
+    private ProgressBar _levelIndicator;
     @FXML
-    Button toggleButton;
-    boolean micToggled;
+    private Button _toggleButton;
+    @FXML
+    private Pane _micPane;
+    @FXML
+    private Pane _aboutPane;
+    @FXML
+    private Pane _helpPane;
+    private boolean _micToggled;
+    private enum Options {TEST,HELP,ABOUT}
+    private Options _optionPicked;
 
     @FXML
-    public void initialise() {
-        micToggled = false;
+    public void initialize() {
+        _optionPicked = Options.TEST;
+        loadPanel();
+        _micToggled = false;
     }
 
     @FXML
     private void toggleMic() {
-        if(micToggled) {
-            toggleButton.setVisible(false);
-            micToggled = false;
+        if(_micToggled) {
+            _toggleButton.setVisible(false);
+            _micToggled = false;
         } else {
             BashRunner runner = new BashRunner(this);
+        }
+
+    }
+
+    @FXML
+    private void testButton() {
+        _optionPicked = Options.TEST;
+        loadPanel();
+    }
+
+    @FXML void help() {
+        _optionPicked = Options.HELP;
+        loadPanel();
+    }
+    @FXML void about() {
+        _optionPicked = Options.ABOUT;
+        loadPanel();
+    }
+
+    private void loadPanel() {
+        switch (_optionPicked) {
+            case TEST:
+                _micPane.setVisible(true);
+                _helpPane.setVisible(false);
+                _aboutPane.setVisible(false);
+                break;
+            case HELP:
+                _helpPane.setVisible(true);
+                _micPane.setVisible(false);
+                _aboutPane.setVisible(false);
+                break;
+            case ABOUT:
+                _aboutPane.setVisible(true);
+                _micPane.setVisible(false);
+                _helpPane.setVisible(false);
+                break;
         }
 
     }

@@ -12,15 +12,15 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.PracticeController">
    <children>
-      <Pane layoutX="58.0" layoutY="43.0" prefHeight="411.0" prefWidth="979.0" styleClass="_pane" />
-      <Label fx:id="_nameDisplayed" alignment="CENTER" layoutX="200.0" layoutY="59.0" prefHeight="272.0" prefWidth="700.0" styleClass="_nameDisplayed" stylesheets="@styles/Practice.css" text="Text goes here" textAlignment="CENTER">
+      <Pane layoutX="61.0" layoutY="77.0" prefHeight="411.0" prefWidth="979.0" styleClass="_pane" />
+      <Label fx:id="_nameDisplayed" alignment="CENTER" layoutX="200.0" layoutY="94.0" prefHeight="272.0" prefWidth="700.0" styleClass="_nameDisplayed" stylesheets="@styles/Practice.css" text="Text goes here" textAlignment="CENTER">
          <font>
             <Font size="93.0" />
          </font>
       </Label>
-      <Button fx:id="_prevButton" layoutX="82.0" layoutY="142.0" mnemonicParsing="false" onAction="#prevName" prefHeight="26.0" prefWidth="110.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&lt;" />
-      <Button fx:id="_nextButton" layoutX="912.0" layoutY="151.0" mnemonicParsing="false" onAction="#nextName" prefHeight="56.0" prefWidth="104.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&gt;" />
-      <ComboBox fx:id="_dropdown" layoutX="200.0" layoutY="372.0" prefHeight="12.0" prefWidth="594.0" promptText="Versions" styleClass="_dropdown" stylesheets="@styles/Practice.css" />
+      <Button fx:id="_prevButton" layoutX="82.0" layoutY="177.0" mnemonicParsing="false" onAction="#prevName" prefHeight="26.0" prefWidth="110.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&lt;" />
+      <Button fx:id="_nextButton" layoutX="909.0" layoutY="186.0" mnemonicParsing="false" onAction="#nextName" prefHeight="56.0" prefWidth="104.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&gt;" />
+      <ComboBox fx:id="_dropdown" layoutX="200.0" layoutY="407.0" prefHeight="12.0" prefWidth="594.0" promptText="Versions" styleClass="_dropdown" stylesheets="@styles/Practice.css" />
       <Pane layoutX="166.0" layoutY="586.0" prefHeight="137.0" prefWidth="762.0" styleClass="_pane" />
       <HBox fx:id="_recordHBox" alignment="CENTER" layoutX="200.0" layoutY="600.0" prefHeight="107.0" prefWidth="700.0">
          <children>
@@ -41,8 +41,8 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="_listenButton" layoutX="805.0" layoutY="372.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
-      <ProgressBar fx:id="_progressBar" layoutX="197.0" layoutY="487.0" prefHeight="47.0" prefWidth="700.0" progress="0.0" />
+      <Button fx:id="_listenButton" layoutX="805.0" layoutY="407.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
+      <ProgressBar fx:id="_progressBar" layoutX="197.0" layoutY="506.0" prefHeight="47.0" prefWidth="700.0" progress="0.0" />
       <HBox fx:id="_confirmationHBox" layoutX="200.0" layoutY="600.0" prefHeight="107.0" prefWidth="700.0">
          <children>
             <Button mnemonicParsing="false" onAction="#keepRecording" prefHeight="107.0" prefWidth="240.0" styleClass="_selectionButton" text="Keep">
@@ -62,5 +62,6 @@
             </Button>
          </children>
       </HBox>
+      <Label layoutX="457.0" layoutY="14.0" styleClass="_title" text="PRACTICE" />
    </children>
 </AnchorPane>

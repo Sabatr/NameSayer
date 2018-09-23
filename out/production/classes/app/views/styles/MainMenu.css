@@ -6,6 +6,7 @@
     -fx-text-fill: #f0f0f0;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-font-size: 60px;
+    -fx-font-weight: bold;
 }
 
 ._buttons {
