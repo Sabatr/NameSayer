@@ -12,254 +12,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$Position.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/Assignment3_206-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Assignment3_206-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/app/views/OptionsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/app/views/OptionsView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/app/views/Practice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/app/views/styles/Practice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/jar/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/Assignment3_206.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ahn/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ahn/versions/se206_18-5-2018_12-13-0_Ahn.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Antony/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Antony/versions/se206_21-5-2018_14-9-29_Antony.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ardern/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ardern/versions/se206_27-4-2018_16-8-10_Ardern.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Beena/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Beena/versions/se206_21-5-2018_14-8-47_Beena.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Bruce/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Bruce/versions/se206_23-8-2018_21-11-36_Bruce.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Catherine/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Catherine/versions/se206_27-4-2018_16-2-23_Catherine.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Chamara/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Chamara/versions/se206_18-5-2018_12-57-27_Chamara.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Chen/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Chen/versions/se206_16-5-2018_23-37-41_Chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Chen/versions/se206_30-4-2018_11-21-35_chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Deepika/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Deepika/versions/se206_21-5-2018_14-9-57_Deepika.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Dylan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Dylan/versions/se206_18-5-2018_13-0-46_Dylan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Eleanor/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Eleanor/versions/se206_27-4-2018_15-56-37_Eleanor.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Eng/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Eng/versions/se206_30-4-2018_9-52-26_Eng.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Francis/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Francis/versions/se206_27-4-2018_16-18-3_Francis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Hall/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Hall/versions/se206_18-5-2018_13-1-14_Hall.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Hanyu/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Hanyu/versions/se206_17-5-2018_14-29-11_Hanyu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ian/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ian/versions/se206_17-5-2018_17-15-48_Ian.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Isabella/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Isabella/versions/se206_18-5-2018_12-8-46_Isabella.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Izzy/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Izzy/versions/se206_18-5-2018_12-9-17_Izzy.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Jacinda/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Jacinda/versions/se206_27-4-2018_16-7-40_Jacinda.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/James/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/James/versions/se206_18-5-2018_16-8-4_James.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Jesin/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Jesin/versions/se206_18-5-2018_16-7-33_Jesin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Jiaqiu/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Jiaqiu/versions/se206_17-5-2018_14-13-49_Jiaqiu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Junyan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Junyan/versions/se206_16-5-2018_23-34-53_Junyan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Kachun/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Kachun/versions/se206_17-5-2018_14-43-7_Kachun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Kalana/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Kalana/versions/se206_18-5-2018_12-58-21_Kalana.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Kun/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Kun/versions/se206_17-5-2018_14-30-38_Kun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lam/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lam/versions/se206_17-5-2018_14-43-55_Lam.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lee/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lee/versions/se206_18-5-2018_11-8-55_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lee/versions/se206_23-8-2018_20-42-12_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Li/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Li/versions/se206_17-5-2018_12-3-36_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Li/versions/se206_17-5-2018_12-5-59_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Li/versions/se206_17-5-2018_12-7-35_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lin/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Lin/versions/se206_17-5-2018_14-33-23_Lin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Louis/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Louis/versions/se206_17-5-2018_18-57-48_Louis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ma/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ma/versions/se206_17-5-2018_14-27-14_Ma.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/MacDonald/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/MacDonald/versions/se206_23-8-2018_21-13-35_MacDonald.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Mason/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Mason/versions/se206_2-5-2018_15-23-50_Mason.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Melvin/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Melvin/versions/se206_18-5-2018_16-8-39_Melvin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ngo/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ngo/versions/se206_18-5-2018_11-7-31_Ngo.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Nicholas/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Nicholas/versions/se206_30-4-2018_9-42-4_Nicholas.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Patricia/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Patricia/versions/se206_17-5-2018_17-20-26_Patricia.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Paul/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Paul/versions/se206_18-5-2018_16-9-14_Paul.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Rajagopal/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Rajagopal/versions/se206_21-5-2018_14-10-29_Rajagopal.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ratnayake/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ratnayake/versions/se206_18-5-2018_12-59-6_Ratnayake.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ruozi/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ruozi/versions/se206_17-5-2018_14-28-6_Ruozi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Saereem/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Saereem/versions/se206_18-5-2018_12-12-37_Saereem.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Shen/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Shen/versions/se206_17-5-2018_14-23-8_Shen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Shi/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Shi/versions/se206_2-5-2018_15-31-49_Shi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Shields/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Shields/versions/se206_18-5-2018_12-10-9_Shields.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Sueyeon/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Sueyeon/versions/se206_18-5-2018_11-8-6_Sueyeon.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Thorpe/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Thorpe/versions/se206_27-4-2018_15-52-6_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Thorpe/versions/se206_27-4-2018_16-4-11_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Tina/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Tina/versions/se206_17-5-2018_14-34-30_Tina.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Wang/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Wang/versions/se206_17-5-2018_14-31-7_Wang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Watson/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Watson/versions/se206_27-4-2018_15-54-26_Watson.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/William/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/William/versions/se206_23-8-2018_20-38-49_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/William/versions/se206_27-4-2018_16-5-35_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Xiaoran/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Xiaoran/versions/se206_17-5-2018_14-26-41_Xiaoran.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Xuyun/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Xuyun/versions/se206_4-5-2018_15-56-40_Xuyun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Yenting/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Yenting/versions/se206_17-5-2018_14-32-54_Yenting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Yeting/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Yeting/versions/se206_17-5-2018_14-25-5_Yeting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ying/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Ying/versions/se206_17-5-2018_14-29-56_Ying.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhan/versions/se206_17-5-2018_14-24-2_Zhan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhang/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhang/versions/se206_17-5-2018_14-28-39_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhang/versions/se206_4-5-2018_16-1-13_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhao/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhao/versions/se206_17-5-2018_14-15-7_Zhao.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhu/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/Zhu/versions/se206_17-5-2018_14-25-56_Zhu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/eric/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/eric/versions/se206_30-4-2018_11-23-36_eric.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/george/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/george/versions/se206_17-5-2018_18-57-1_george.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/hywel/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/hywel/versions/se206_27-4-2018_20-3-38_hywel.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/jonathan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/jonathan/versions/se206_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/jonathan/versions/se206_2-5-2018_15-47-27_Jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/maggie/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/maggie/versions/se206_18-5-2018_11-6-43_maggie.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/sean/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/sean/versions/se206_23-8-2018_20-13-44_sean.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/stoakes/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/stoakes/versions/se206_27-4-2018_20-7-45_stoakes.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/tang/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/tang/versions/se206_30-4-2018_11-20-3_tang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/wei/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/wei/versions/se206_30-4-2018_11-22-50_wei.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/word/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/word/versions/se206_8-6-2018_1-58-21_word.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/yichen/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/names/yichen/versions/se206_30-4-2018_11-20-46_yichen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/Versions/Li/_Li(2).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_16-5-2018_23-34-53_Junyan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_16-5-2018_23-37-41_Chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_12-3-36_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_12-5-59_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_12-7-35_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-13-49_Jiaqiu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-15-7_Zhao.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-23-8_Shen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-24-2_Zhan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-25-56_Zhu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-25-5_Yeting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-26-41_Xiaoran.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-27-14_Ma.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-28-39_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-28-6_Ruozi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-29-11_Hanyu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-29-56_Ying.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-30-38_Kun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-31-7_Wang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-32-54_Yenting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-33-23_Lin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-34-30_Tina.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-43-55_Lam.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_14-43-7_Kachun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_17-15-48_Ian.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_17-20-26_Patricia.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_18-57-1_george.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_17-5-2018_18-57-48_Louis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_11-6-43_maggie.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_11-7-31_Ngo.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_11-8-55_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_11-8-6_Sueyeon.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-10-9_Shields.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-12-37_Saereem.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-13-0_Ahn.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-57-27_Chamara.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-58-21_Kalana.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-59-6_Ratnayake.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-8-46_Isabella.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_12-9-17_Izzy.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_13-0-46_Dylan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_13-1-14_Hall.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_16-7-33_Jesin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_16-8-39_Melvin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_16-8-4_James.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_18-5-2018_16-9-14_Paul.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_2-5-2018_15-23-50_Mason.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_2-5-2018_15-31-49_Shi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_2-5-2018_15-47-27_Jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_21-5-2018_14-10-29_Rajagopal.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_21-5-2018_14-8-47_Beena.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_21-5-2018_14-9-29_Antony.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_21-5-2018_14-9-57_Deepika.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_23-8-2018_20-13-44_sean.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_23-8-2018_20-38-49_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_23-8-2018_20-42-12_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_23-8-2018_21-11-36_Bruce.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_23-8-2018_21-13-35_MacDonald.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_15-52-6_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_15-54-26_Watson.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_15-56-37_Eleanor.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_16-18-3_Francis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_16-2-23_Catherine.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_16-4-11_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_16-5-35_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_16-7-40_Jacinda.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_16-8-10_Ardern.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_20-3-38_hywel.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_27-4-2018_20-7-45_stoakes.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_11-20-3_tang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_11-20-46_yichen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_11-21-35_chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_11-22-50_wei.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_11-23-36_eric.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_9-42-4_Nicholas.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_30-4-2018_9-52-26_Eng.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_4-5-2018_15-56-40_Xuyun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_4-5-2018_16-1-13_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Assignment3_206_jar/soundfiles/se206_8-6-2018_1-58-21_word.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/Practice.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/app/views/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/app/views/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/app/views/styles/MainMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/app/views/styles/MainMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -320,20 +79,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Practice.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
+      <file leaf-file-name="OptionsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="135" column="25" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="28" column="32" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="311" column="6" selection-start-line="311" selection-start-column="6" selection-end-line="311" selection-end-column="53" />
+            <state relative-caret-position="1319">
+              <caret line="305" column="43" lean-forward="true" selection-start-line="305" selection-start-column="43" selection-end-line="305" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListView.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1163">
+              <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -692,8 +460,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/app/views/RecordView.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/tools/ProgressTracker.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" />
@@ -710,6 +476,8 @@
         <option value="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
       </list>
     </option>
   </component>
@@ -738,6 +506,17 @@
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
@@ -818,6 +597,16 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -860,7 +649,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.Assignment3_206-1.0-SNAPSHOT.jar">
+  <component name="RunManager" selected="Gradle.Assignment3_206 [jar]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="Assignment3_206_main" />
@@ -980,8 +769,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.Assignment3_206-1.0-SNAPSHOT.jar" />
         <item itemvalue="Gradle.Assignment3_206 [jar]" />
+        <item itemvalue="JAR Application.Assignment3_206-1.0-SNAPSHOT.jar" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.Assignment3_206-1 [clean]" />
         <item itemvalue="JAR Application.Assignment3_206.jar" />
@@ -1000,12 +789,12 @@
       <updated>1537177556268</updated>
       <workItem from="1537177561431" duration="116494000" />
       <workItem from="1537670544731" duration="165000" />
-      <workItem from="1537670778533" duration="11279000" />
+      <workItem from="1537670778533" duration="12428000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128818000" />
+    <option name="totallyTimeSpent" value="129967000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1029,11 +818,11 @@
       <window_info anchor="right" id="Maven Projects" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32997763" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.31448275" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.31448275" />
       <window_info anchor="bottom" id="Terminal" order="13" weight="0.32997763" />
       <window_info id="Capture Tool" order="8" />
       <window_info id="Designer" order="8" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19661458" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19661458" />
       <window_info anchor="bottom" id="Build" order="13" weight="0.32827586" />
       <window_info anchor="right" id="Database" order="11" />
       <window_info anchor="right" id="Gradle" order="11" visible="true" weight="0.1673177" />
@@ -1236,13 +1025,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1344,20 +1126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
@@ -1386,6 +1154,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -1395,8 +1170,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="311" column="6" selection-start-line="311" selection-start-column="6" selection-end-line="311" selection-end-column="53" />
+        <state relative-caret-position="1319">
+          <caret line="305" column="43" lean-forward="true" selection-start-line="305" selection-start-column="43" selection-end-line="305" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1163">
+          <caret line="121" column="21" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
         </state>
       </provider>
     </entry>

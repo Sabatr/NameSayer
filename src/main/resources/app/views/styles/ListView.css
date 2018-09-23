@@ -1,5 +1,5 @@
 ._nameData {
-    -fx-font-size: 40px;
+    -fx-font-size: 30px;
     -fx-font-weight: bold;
     -fx-background-style: transparent;
     -fx-text-fill: #f0f0f0;
@@ -78,7 +78,7 @@
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-effect: dropshadow( gaussian , rgb(0, 0, 0), 4,0,0,1 );
     -fx-font-weight: bold;
-    -fx-font-size: 30px;
+    -fx-font-size: 20px;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-text-fill: #252b6e;
     -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #656565 0%, #656565 100%),
@@ -114,6 +114,36 @@
     -fx-opacity: 40%;
 }
 
+._backButton {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-effect: dropshadow( gaussian , rgb(0, 0, 0), 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-font-family: "Franklin Gothic Heavy";
+    -fx-text-fill: #252b6e;
+    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #656565 0%, #656565 100%),
+    #656565,
+    black, #f0f0f0;
+    -fx-border-color: #252b6e;
+    -fx-border-width: 3px;
+}
+
+._backButton:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
+            #2c76af,
+            #2c76af,
+            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+}
+
+._backButton:pressed {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
+            #225c88,
+            #266697,
+            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
+}
 
 
 

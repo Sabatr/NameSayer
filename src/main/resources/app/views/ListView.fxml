@@ -15,6 +15,6 @@
       <Button layoutX="766.0" layoutY="311.0" mnemonicParsing="false" onAction="#clearSelection" prefHeight="148.0" prefWidth="310.0" styleClass="_button" stylesheets="@styles/ListView.css" text="CLEAR" />
         <ToggleButton fx:id="_randomButton" layoutX="921.0" layoutY="507.0" onAction="#onRandom" prefHeight="106.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Random" />
         <ToggleButton fx:id="_sortedButton" layoutX="766.0" layoutY="507.0" onAction="#onSort" prefHeight="106.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Sort" />
-      <Button layoutX="866.0" layoutY="678.0" mnemonicParsing="false" onAction="#goBack" prefHeight="58.0" prefWidth="110.0" styleClass="_button" text="Back" />
+      <Button layoutX="866.0" layoutY="678.0" mnemonicParsing="false" onAction="#goBack" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Back" />
    </children>
 </AnchorPane>
