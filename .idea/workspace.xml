@@ -7,185 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/OptionsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/OptionsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController$Position.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/controllers/PracticeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/tools/AudioPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/app/tools/AudioPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/app/tools/AudioRecorder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ahn/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ahn/versions/se206_18-5-2018_12-13-0_Ahn.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Antony/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Antony/versions/se206_21-5-2018_14-9-29_Antony.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ardern/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ardern/versions/se206_27-4-2018_16-8-10_Ardern.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Beena/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Beena/versions/se206_21-5-2018_14-8-47_Beena.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Bruce/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Bruce/versions/se206_23-8-2018_21-11-36_Bruce.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Catherine/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Catherine/versions/se206_27-4-2018_16-2-23_Catherine.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Chamara/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Chamara/versions/se206_18-5-2018_12-57-27_Chamara.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Chen/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Chen/versions/se206_16-5-2018_23-37-41_Chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Chen/versions/se206_30-4-2018_11-21-35_chen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Deepika/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Deepika/versions/se206_21-5-2018_14-9-57_Deepika.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Dylan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Dylan/versions/se206_18-5-2018_13-0-46_Dylan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Eleanor/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Eleanor/versions/se206_27-4-2018_15-56-37_Eleanor.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Eng/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Eng/versions/se206_30-4-2018_9-52-26_Eng.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Francis/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Francis/versions/se206_27-4-2018_16-18-3_Francis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Hall/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Hall/versions/se206_18-5-2018_13-1-14_Hall.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Hanyu/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Hanyu/versions/se206_17-5-2018_14-29-11_Hanyu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ian/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ian/versions/se206_17-5-2018_17-15-48_Ian.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Isabella/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Isabella/versions/se206_18-5-2018_12-8-46_Isabella.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Izzy/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Izzy/versions/se206_18-5-2018_12-9-17_Izzy.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Jacinda/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Jacinda/versions/se206_27-4-2018_16-7-40_Jacinda.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/James/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/James/versions/se206_18-5-2018_16-8-4_James.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Jesin/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Jesin/versions/se206_18-5-2018_16-7-33_Jesin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Jiaqiu/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Jiaqiu/versions/se206_17-5-2018_14-13-49_Jiaqiu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Junyan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Junyan/versions/se206_16-5-2018_23-34-53_Junyan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Kachun/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Kachun/versions/se206_17-5-2018_14-43-7_Kachun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Kalana/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Kalana/versions/se206_18-5-2018_12-58-21_Kalana.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Kun/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Kun/versions/se206_17-5-2018_14-30-38_Kun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lam/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lam/versions/se206_17-5-2018_14-43-55_Lam.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lee/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lee/versions/se206_18-5-2018_11-8-55_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lee/versions/se206_23-8-2018_20-42-12_Lee.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Li/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Li/versions/se206_17-5-2018_12-3-36_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Li/versions/se206_17-5-2018_12-5-59_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Li/versions/se206_17-5-2018_12-7-35_Li.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lin/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Lin/versions/se206_17-5-2018_14-33-23_Lin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Louis/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Louis/versions/se206_17-5-2018_18-57-48_Louis.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ma/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ma/versions/se206_17-5-2018_14-27-14_Ma.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/MacDonald/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/MacDonald/versions/se206_23-8-2018_21-13-35_MacDonald.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Mason/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Mason/versions/se206_2-5-2018_15-23-50_Mason.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Melvin/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Melvin/versions/se206_18-5-2018_16-8-39_Melvin.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ngo/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ngo/versions/se206_18-5-2018_11-7-31_Ngo.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Nicholas/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Nicholas/versions/se206_30-4-2018_9-42-4_Nicholas.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Patricia/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Patricia/versions/se206_17-5-2018_17-20-26_Patricia.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Paul/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Paul/versions/se206_18-5-2018_16-9-14_Paul.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Rajagopal/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Rajagopal/versions/se206_21-5-2018_14-10-29_Rajagopal.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ratnayake/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ratnayake/versions/se206_18-5-2018_12-59-6_Ratnayake.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ruozi/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ruozi/versions/se206_17-5-2018_14-28-6_Ruozi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Saereem/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Saereem/versions/se206_18-5-2018_12-12-37_Saereem.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Shen/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Shen/versions/se206_17-5-2018_14-23-8_Shen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Shi/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Shi/versions/se206_2-5-2018_15-31-49_Shi.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Shields/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Shields/versions/se206_18-5-2018_12-10-9_Shields.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Sueyeon/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Sueyeon/versions/se206_18-5-2018_11-8-6_Sueyeon.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Thorpe/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Thorpe/versions/se206_27-4-2018_15-52-6_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Thorpe/versions/se206_27-4-2018_16-4-11_Thorpe.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Tina/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Tina/versions/se206_17-5-2018_14-34-30_Tina.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Wang/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Wang/versions/se206_17-5-2018_14-31-7_Wang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Watson/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Watson/versions/se206_27-4-2018_15-54-26_Watson.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/William/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/William/versions/se206_23-8-2018_20-38-49_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/William/versions/se206_27-4-2018_16-5-35_William.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Xiaoran/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Xiaoran/versions/se206_17-5-2018_14-26-41_Xiaoran.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Xuyun/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Xuyun/versions/se206_4-5-2018_15-56-40_Xuyun.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Yenting/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Yenting/versions/se206_17-5-2018_14-32-54_Yenting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Yeting/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Yeting/versions/se206_17-5-2018_14-25-5_Yeting.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ying/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Ying/versions/se206_17-5-2018_14-29-56_Ying.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhan/versions/se206_17-5-2018_14-24-2_Zhan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhang/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhang/versions/se206_17-5-2018_14-28-39_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhang/versions/se206_4-5-2018_16-1-13_Zhang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhao/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhao/versions/se206_17-5-2018_14-15-7_Zhao.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhu/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/Zhu/versions/se206_17-5-2018_14-25-56_Zhu.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/eric/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/eric/versions/se206_30-4-2018_11-23-36_eric.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/george/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/george/versions/se206_17-5-2018_18-57-1_george.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/hywel/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/hywel/versions/se206_27-4-2018_20-3-38_hywel.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/jonathan/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/jonathan/versions/se206_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" afterPath="$PROJECT_DIR$/soundfiles/zkon584_2-5-2018_15-26-44_jonathan.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/jonathan/versions/se206_2-5-2018_15-47-27_Jonathan.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/maggie/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/maggie/versions/se206_18-5-2018_11-6-43_maggie.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/sean/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/sean/versions/se206_23-8-2018_20-13-44_sean.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/stoakes/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/stoakes/versions/se206_27-4-2018_20-7-45_stoakes.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/tang/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/tang/versions/se206_30-4-2018_11-20-3_tang.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/wei/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/wei/versions/se206_30-4-2018_11-22-50_wei.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/word/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/word/versions/se206_8-6-2018_1-58-21_word.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/yichen/versions/ratings.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/names/yichen/versions/se206_30-4-2018_11-20-46_yichen.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/BashRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/BashRunner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/OptionsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/OptionsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/OptionsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/OptionsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$Position.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/tools/AudioPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/tools/AudioPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/tools/AudioRecorder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soundfiles/Versions/Li/_Li(2).wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soundfiles/se206_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chamara/versions/ratings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/names/Chamara/versions/ratings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chen/versions/ratings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/names/Chen/versions/ratings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Deepika/versions/ratings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/names/Deepika/versions/ratings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kalana/versions/ratings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/names/Kalana/versions/ratings.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/NameCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/NameCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -255,19 +85,29 @@
       <file leaf-file-name="OptionsController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="323">
               <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenuController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
+      <file leaf-file-name="NameCell.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/NameCell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="289">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListViewController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1304">
+              <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1353#1354#0" expanded="true" />
+                <element signature="e#1396#1397#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -276,8 +116,38 @@
       <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="266" column="7" lean-forward="true" selection-start-line="266" selection-start-column="7" selection-end-line="266" selection-end-column="7" />
+            <state relative-caret-position="2741">
+              <caret line="192" column="27" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Slider.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/Slider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="216" selection-start-line="216" selection-end-line="216" />
+              <folding>
+                <element signature="e#6450#6451#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SelectionModel.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/SelectionModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="119" column="38" selection-start-line="119" selection-start-column="38" selection-end-line="119" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComboBox.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/ComboBox.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="350" column="62" selection-start-line="350" selection-start-column="62" selection-end-line="350" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -294,26 +164,12 @@
       <file leaf-file-name="NameEntry.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="46" column="80" lean-forward="true" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="80" />
+            <state relative-caret-position="3163">
+              <caret line="252" column="39" lean-forward="true" selection-start-line="252" selection-start-column="39" selection-end-line="252" selection-end-column="39" />
               <folding>
-                <element signature="e#2652#2653#0" expanded="true" />
-                <element signature="e#2680#2681#0" expanded="true" />
-                <element signature="e#2836#2837#0" expanded="true" />
-                <element signature="e#2864#2865#0" expanded="true" />
-                <element signature="e#2887#2895#0" expanded="true" />
-                <element signature="e#6519#6520#0" expanded="true" />
-                <element signature="e#6571#6572#0" expanded="true" />
+                <element signature="e#8559#8560#0" expanded="true" />
+                <element signature="e#8611#8612#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileSystem.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -334,6 +190,7 @@
       <find>_currentName</find>
       <find>currentPos</find>
       <find>_progressBar.se</find>
+      <find>setCe</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -547,7 +404,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6149221476736" />
+        <entry key="$PROJECT_DIR$" value="6149249255565" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
         <entry key="$PROJECT_DIR$/build.gradle" value="933675735" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="1741342742" />
@@ -676,7 +533,6 @@
         <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/app/backend/JarResources.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
@@ -690,9 +546,10 @@
         <option value="$PROJECT_DIR$/src/main/java/app/tools/Timer.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/NameCell.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
       </list>
     </option>
   </component>
@@ -706,19 +563,16 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1652" />
-    <option name="y" value="42" />
-    <option name="width" value="1615" />
-    <option name="height" value="870" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -808,10 +662,22 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -847,7 +713,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Assignment3_206 [jar]">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="Assignment3_206_main" />
@@ -1018,41 +884,42 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1688" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32865497" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.3277405" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="8" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.36263022" side_tool="true" weight="0.32965517" />
-      <window_info anchor="right" x="0" y="0" width="374" height="826" id="Documentation" order="10" sideWeight="0.50217706" side_tool="true" weight="0.24877751" />
+      <window_info anchor="right" x="0" y="0" width="374" height="826" id="Documentation" order="11" sideWeight="0.50303954" side_tool="true" visible="true" weight="0.19682151" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6373698" weight="0.22930649" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32997763" />
-      <window_info anchor="right" id="Coverage" sideWeight="0.50223714" side_tool="true" visible="true" weight="0.24877751" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6373698" weight="0.22930649" />
       <window_info anchor="bottom" id="Terminal" order="13" weight="0.32997763" />
       <window_info id="Capture Tool" order="8" />
       <window_info id="Designer" order="8" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20110025" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49848023" visible="true" weight="0.20354523" />
       <window_info id="Learn" order="0" />
-      <window_info anchor="right" id="Gradle" order="7" sideWeight="0.49776286" visible="true" weight="0.24877751" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="7" sideWeight="0.4969605" visible="true" weight="0.19682151" />
+      <window_info id="Structure" order="1" sideWeight="0.50151974" side_tool="true" visible="true" weight="0.20354523" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="8" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39932886" />
       <window_info id="Favorites" order="8" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.26398212" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Database" order="9" />
       <window_info anchor="bottom" id="Build" order="13" weight="0.32827586" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32865497" />
+      <window_info anchor="right" id="Coverage" order="10" sideWeight="0.50223714" side_tool="true" visible="true" weight="0.24877751" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Build" order="7" weight="0.32965517" />
@@ -1098,56 +965,30 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
+        <breakpoint type="java-exception">
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="7" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java</url>
-          <line>266</line>
+          <url>file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java</url>
+          <line>315</line>
           <properties />
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java</url>
+          <line>205</line>
+          <properties />
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="10" />
+      <option name="time" value="23" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3122#3149#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/Timer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1177,35 +1018,28 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="38" column="83" selection-start-line="38" selection-start-column="83" selection-end-line="38" selection-end-column="83" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/gradlew">
       <provider selected="true" editor-type-id="text-editor">
@@ -1242,12 +1076,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-187">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1274,20 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1553">
           <caret line="151" selection-start-line="151" selection-end-line="151" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/StartFS.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1101">
-          <caret line="151" column="18" selection-start-line="151" selection-start-column="18" selection-end-line="151" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1355,6 +1175,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="548" lean-forward="true" selection-start-line="548" selection-end-line="548" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/StartFS.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1365,17 +1199,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="541" selection-start-line="541" selection-end-line="541" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/FSScheme.xsd">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3151">
+          <caret line="151" column="18" selection-start-line="151" selection-start-column="18" selection-end-line="151" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1388,38 +1225,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="323">
           <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="46" column="80" lean-forward="true" selection-start-line="46" selection-start-column="80" selection-end-line="46" selection-end-column="80" />
+        <state relative-caret-position="-1304">
+          <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
           <folding>
-            <element signature="e#2652#2653#0" expanded="true" />
-            <element signature="e#2680#2681#0" expanded="true" />
-            <element signature="e#2836#2837#0" expanded="true" />
-            <element signature="e#2864#2865#0" expanded="true" />
-            <element signature="e#2887#2895#0" expanded="true" />
-            <element signature="e#6519#6520#0" expanded="true" />
-            <element signature="e#6571#6572#0" expanded="true" />
+            <element signature="e#1353#1354#0" expanded="true" />
+            <element signature="e#1396#1397#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/NameCell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        <state relative-caret-position="289">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/ComboBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="350" column="62" selection-start-line="350" selection-start-column="62" selection-end-line="350" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/SelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="119" column="38" selection-start-line="119" selection-start-column="38" selection-end-line="119" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/control/Slider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="216" selection-start-line="216" selection-end-line="216" />
+          <folding>
+            <element signature="e#6450#6451#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3163">
+          <caret line="252" column="39" lean-forward="true" selection-start-line="252" selection-start-column="39" selection-end-line="252" selection-end-column="39" />
+          <folding>
+            <element signature="e#8559#8560#0" expanded="true" />
+            <element signature="e#8611#8612#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="266" column="7" lean-forward="true" selection-start-line="266" selection-start-column="7" selection-end-line="266" selection-end-column="7" />
+        <state relative-caret-position="2741">
+          <caret line="192" column="27" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
         </state>
       </provider>
     </entry>

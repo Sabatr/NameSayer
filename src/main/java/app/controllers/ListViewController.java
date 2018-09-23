@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +38,12 @@ public class ListViewController extends ParentController {
         _selectedNames = FXCollections.observableArrayList();
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        _nameListView.setCellFactory(new Callback<ListView<NameEntry>, ListCell<NameEntry>>() {
+            @Override
+            public ListCell<NameEntry> call(ListView<NameEntry> param) {
+                return new NameCell();
+            }
+        });
     }
 
     /**

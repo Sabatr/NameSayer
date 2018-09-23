@@ -175,24 +175,23 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void recordAudio() {
-        _nextButton.setVisible(false);
-        _prevButton.setVisible(false);
-        disableAll();
-
         if(System.getProperty("os.name").contains("Windows")) {
             System.out.println("on windows");
             return;
         } else {
+            _nextButton.setVisible(false);
+            _prevButton.setVisible(false);
+            disableAll();
+
             Path pathToUse = _currentName.addVersion();
             _currentRecording = pathToUse;
             BashRunner runner = new BashRunner(this);
-
             runner.runRecordCommand(pathToUse);
-        }
 
-        _progressBar.setVisible(true);
-        Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio"));
-        thread.start();
+            _progressBar.setVisible(true);
+            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio"));
+            thread.start();
+        }
     }
 
     /**
@@ -297,7 +296,6 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void rate() {
-        //Placeholder for now. Should store the bad audio message in a text file.
         _rateBox.setVisible(true);
         _nextButton.setVisible(false);
         _prevButton.setVisible(false);
@@ -315,7 +313,6 @@ public class PracticeController extends ParentController implements EventHandler
     }
     @FXML
     private void getRating() {
-        //Store this in the .txt file somehow.
         _currentName.rateVersion((String) _dropdown.getSelectionModel().getSelectedItem(), (int) _ratingSlider.getValue());
         _rateBox.setVisible(false);
         _recordHBox.setDisable(false);

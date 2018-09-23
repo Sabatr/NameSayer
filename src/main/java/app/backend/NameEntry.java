@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -161,7 +162,7 @@ public class NameEntry implements Comparable<NameEntry> {
     /**
      * Save the rating to the file
      */
-    public void saveRating(String dateAndTime, int rating) {
+    private void saveRating(String dateAndTime, int rating) {
         List<String> fileContents = new ArrayList<>();
         int lineNumber = 0;
         boolean found = false;
@@ -204,6 +205,69 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
+     * Fetch the rating for a particular version
+     * @return an integer rating out of 10, or -1 if the version has never been rated
+     */
+    public int getRating(String dateAndTime) {
+        for(Version ver: _versions) {
+            if(ver._dateTime.equals(dateAndTime)) {
+                if(ver.rating != -1) {
+                    return ver.rating;
+                } else {
+                    return getRatingFromFile(dateAndTime);
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Get rating from file
+     */
+    private int getRatingFromFile(String dateAndTime) {
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(_ratingsFile.toFile()))) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                if(line.contains(dateAndTime)) {
+                    int rating = Integer.parseInt(line.substring(line.indexOf(": ") + 2));
+                    return rating;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                Files.createFile(_ratingsFile);
+            } catch (IOException e1) {
+                throw new RuntimeException("Error trying to create file for ratings", e1);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public double averageRating() {
+        int sum = 0;
+        int n = 0;
+        if(_mainVersion.rating != 1) {
+            sum += _mainVersion.rating;
+            n++;
+        }
+        for(Version ver: _versions) {
+            int rating = getRating(ver._dateTime);
+            if(rating != 1) {
+                sum += rating;
+                n++;
+            }
+        }
+
+        if(n == 0) {
+            return -1;
+        }
+        return ((double) sum / (double) n);
+    }
+
+    /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised
      * @param o The name entry to compare with
      * @return The result of comparing the names of the NameEntry
@@ -219,7 +283,7 @@ public class NameEntry implements Comparable<NameEntry> {
             _author = auth;
             _dateTime = date;
             _resource = resource;
-            rating = -1;
+            rating = getRatingFromFile(_dateTime);
         }
 
         int rating;
@@ -263,6 +327,8 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     private NameEntry(FSWrapper fsManager, List<Pair<String, Path>> paths) {
         boolean firstVersion = true;
+        List<Pair<String, Path>> revList = paths;
+        Collections.reverse(revList);
         Map<Integer, String> parameters;
         for(Pair<String, Path> pathPair: paths) {
             switch (pathPair.getKey()) {
@@ -281,7 +347,7 @@ public class NameEntry implements Comparable<NameEntry> {
                     parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
                     _name = parameters.get(1);
                     break;
-                case "ratings":
+                case "rating":
                     _ratingsFile = pathPair.getValue();
                 default:
                     break;
