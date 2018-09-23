@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: Assignment3_206-1.0-SNAPSHOT.jar
+Main-Class: app.Main
+

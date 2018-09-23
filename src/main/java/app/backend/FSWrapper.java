@@ -1,8 +1,5 @@
 package app.backend;
 
-import com.sun.org.apache.regexp.internal.CharacterArrayCharacterIterator;
-import com.sun.org.apache.xerces.internal.dom.AttributeMap;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import javafx.util.Pair;
 import org.w3c.dom.*;
 import org.xml.sax.*;
@@ -11,6 +8,8 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -18,10 +17,12 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.*;
+import java.nio.file.spi.FileSystemProvider;
 import java.util.*;
 import java.util.List;
 
@@ -77,9 +78,12 @@ public class FSWrapper {
      * Construct the FSWrapper.
      */
     public FSWrapper(URI structure) {
-        workingDir = Paths.get("").toAbsolutePath();
-//        System.out.println("Current working dir: " + workingDir.toString());
-//        workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+        try {
+            workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            workingDir = Paths.get("").toAbsolutePath();
+        }
 
         extractFileStructure(structure);
         xpath = XPathFactory.newInstance().newXPath();
@@ -93,6 +97,8 @@ public class FSWrapper {
         }
     }
 
+    /****************  Setting up the XML schema  *******************/
+
     /**
      * Fetch the content filesystem configuration and store it in memory as a Document.
      * There will never be a large configuration because we are simply using this as a single template for file storage,
@@ -101,9 +107,51 @@ public class FSWrapper {
     private void extractFileStructure(URI structureLocation) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(this.getClass().getResource("FSScheme.xsd")));
+
+            try {
+                dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).
+                        newSchema(this.getClass().getResource("FSScheme.xsd")));
+            } catch (FileSystemNotFoundException e) {
+                try {
+                    URI schemeLocation = this.getClass().getResource("FSScheme.xsd").toURI();
+                    if(schemeLocation.toString().contains("jar") && "jar".equals(schemeLocation.getScheme())){
+                        for (FileSystemProvider provider: FileSystemProvider.installedProviders()) {
+                            if (provider.getScheme().equalsIgnoreCase("jar")) {
+                                try {
+                                    provider.getFileSystem(schemeLocation);
+                                } catch (FileSystemNotFoundException e1) {
+                                    // in this case we need to initialize it first:
+                                    provider.newFileSystem(schemeLocation, Collections.emptyMap());
+                                }
+                            }
+                        }
+                    }
+                } catch (URISyntaxException e2) {
+                    e.printStackTrace();
+
+                }
+            }
+
             DocumentBuilder builder = dbf.newDocumentBuilder();
-            fsStructure = builder.parse(Paths.get(structureLocation).toFile());
+
+            if(structureLocation.toString().contains("jar") && "jar".equals(structureLocation.getScheme())){
+                for (FileSystemProvider provider: FileSystemProvider.installedProviders()) {
+                    if (provider.getScheme().equalsIgnoreCase("jar")) {
+                        try {
+                            provider.getFileSystem(structureLocation);
+                        } catch (FileSystemNotFoundException e) {
+                            // in this case we need to initialize it first:
+                            provider.newFileSystem(structureLocation, Collections.emptyMap());
+                        }
+                    }
+                }
+                System.out.println(structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1));
+                fsStructure = builder.parse(this.getClass().getResourceAsStream(
+                        structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1)));
+            } else {
+                fsStructure = builder.parse(Paths.get(structureLocation).toFile());
+            }
+
         } catch (SAXException | ParserConfigurationException e) {
             throw new RuntimeException("Error parsing FS config", e);
         } catch (IOException e) {
@@ -119,6 +167,10 @@ public class FSWrapper {
         }
         rootContentDir = workingDir.resolve(rootElement.getAttribute("name"));
     }
+
+    /****************  The code below here is disgusting  *******************/
+    /*        It's just the rest of the code for this class.                */
+
 
     /**
      * Copies content from one directory structure to another.

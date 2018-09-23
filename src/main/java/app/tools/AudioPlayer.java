@@ -22,10 +22,9 @@ public class AudioPlayer extends Task<Void> {
     @Override
     protected Void call() throws Exception {
         System.out.println("Playing: " + _name);
-        _progressBar.setVisible(true);
         double progress=0.01;
-        while (_progressBar.getProgress() <= 1) {
-            _progressBar.setProgress(progress);
+        while (getProgress() <= 1) {
+            updateProgress(progress, 1);
             progress+=0.02;
             Thread.sleep(90);
         }
