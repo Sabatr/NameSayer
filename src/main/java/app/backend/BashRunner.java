@@ -28,7 +28,7 @@ public class BashRunner {
 
     public Task<String> runRecordCommand(Path path) {
         // arecord -f cd -d 5 -q "%s/audio.wav"
-        String cmdString = String.format("ffmpeg-f  alsa-i  hw:0 -t 2 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
+        String cmdString = String.format("ffmpeg -f alsa -i  hw:0 -t 2 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
 
         String[] cmd = { "/bin/bash", "-c", cmdString };
         return runCommand(CommandType.RECORDAUDIO.toString(), cmd);

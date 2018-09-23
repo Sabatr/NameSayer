@@ -123,3 +123,11 @@
     -fx-background-color: #f0f0f0;
     -fx-opacity: 40%;
 }
+
+._title {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-background-style: transparent;
+    -fx-text-fill: #f0f0f0;
+    -fx-font-family: "Century Gothic";
+}
