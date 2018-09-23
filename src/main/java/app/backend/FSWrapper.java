@@ -78,11 +78,15 @@ public class FSWrapper {
      * Construct the FSWrapper.
      */
     public FSWrapper(URI structure) {
-        try {
-            workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        if(!structure.toString().contains("jar")) {
             workingDir = Paths.get("").toAbsolutePath();
+        } else {
+            try {
+                workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+                workingDir = Paths.get("").toAbsolutePath();
+            }
         }
 
         extractFileStructure(structure);
