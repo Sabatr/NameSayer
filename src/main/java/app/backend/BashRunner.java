@@ -40,7 +40,8 @@ public class BashRunner {
     }
 
     public Task<String> runPlayAudioCommand(Path path) {
-        String cmdString = String.format("ffplay -nodisp -autoexit \"$s\"", path.toAbsolutePath().toString()); // -loglevel quiet
+        System.out.println("Playing audio " + path.toAbsolutePath().toString());
+        String cmdString = String.format("ffplay -autoexit \"$s\"", path.toAbsolutePath().toString()); // -loglevel quiet
 
         String[] cmd = { "/bin/bash", "-c", cmdString };
         return runCommand(CommandType.PLAYAUDIO.toString(), cmd);
@@ -53,7 +54,9 @@ public class BashRunner {
         runProcess.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED, taskCompletionHandler);
         runProcess.setTitle(commandType);
         currentTask = runProcess;
-        runProcess.run();
+
+        Thread thread = new Thread(runProcess);
+        thread.start();
         return runProcess;
     }
 
@@ -101,7 +104,9 @@ public class BashRunner {
                         commandOutBuilder.append(concatOutput(p.getInputStream(), "\n"));
                     } else {
                         failure = true;
+                        commandOutBuilder.append(concatOutput(p.getInputStream(),"\n"));
                         commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
+                        System.out.println(commandOutBuilder);
                     }
                 } catch(IOException e) {
                     failure = true;

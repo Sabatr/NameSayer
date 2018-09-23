@@ -37,7 +37,6 @@ public class ListViewController extends ParentController {
         _selectedNames = FXCollections.observableArrayList();
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        _nameListView.setCellFactory(param -> new NameCell());
     }
 
     /**

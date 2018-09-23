@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.backend.BashRunner;
 import app.tools.AudioPlayer;
 import app.tools.AudioRecorder;
 import app.backend.NameEntry;
@@ -8,13 +9,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.util.Properties;
+import java.util.Set;
 
-public class PracticeController extends ParentController {
+public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
     private ObservableList<NameEntry> _practiceList;
     @FXML
     private Label _nameDisplayed;
@@ -51,9 +56,11 @@ public class PracticeController extends ParentController {
     private HBox _recordHBox;
 
     private NameEntry _randomOrSort;
-    private enum Position {FIRST,MIDDLE,LAST,ONLY}
-    private Position _namePosition;
 
+
+
+    private enum Position {FIRST,MIDDLE,LAST,ONLY;}
+    private Position _namePosition;
     @FXML
     public void initialize() {
         _confirmationHBox.setVisible(false);
@@ -116,7 +123,7 @@ public class PracticeController extends ParentController {
     private void updateVersions() {
         _currentName =_practiceList.get(_currentPosition);
         //Gets the versions of the current name
-        _dropdown.setItems(FXCollections.observableArrayList(_currentName,"One","Two","Three")); //Placeholder.
+        _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions())); //Placeholder.
         //Automatically select the default value.
         _dropdown.getSelectionModel().selectFirst();
     }
@@ -149,11 +156,22 @@ public class PracticeController extends ParentController {
         //Potentially change this string so that we can determine the version.
         String playedFile = _currentName.getName();
         disableAll();
-        //Probably use the progress bar to let the users know the audio is playing.
-        //Thread thread = new Thread(new AudioPlayer(_progressBar,_backButton,_recordButton,_rateButton,_listenButton));
-        Thread thread = new Thread(new AudioPlayer(_progressBar,_listenButton,_recordHBox,_confirmationHBox,playedFile));
+
+        BashRunner runner = new BashRunner(this);
+
+
+        String os = System.getProperty("os.name").toLowerCase();
+        if(os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0 || os.indexOf("aix") > 0 ) {
+            // WILL NOT WORK ON WINDOWS
+            System.out.println("Running audio playing process");
+            runner.runPlayAudioCommand(_currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()));
+        }
+
+//        Thread thread = new Thread(new AudioPlayer(_progressBar,_listenButton,_recordHBox,_confirmationHBox,playedFile));
+//        thread.start();
+        _progressBar.setVisible(true);
+        Thread thread = new Thread(new AudioRecorder(_progressBar, this, "PlayAudio"));
         thread.start();
-        _dropdown.setDisable(false);
     }
 
     /**
@@ -164,9 +182,43 @@ public class PracticeController extends ParentController {
         _nextButton.setVisible(false);
         _prevButton.setVisible(false);
         disableAll();
-        //Wasn't sure if there was a better way to do this.
-        Thread thread = new Thread(new AudioRecorder(_progressBar,_recordHBox,_confirmationHBox,_dropdown,_listenButton));
+
+        _progressBar.setVisible(true);
+        Thread thread = new Thread(new AudioRecorder(_progressBar, this, "RecordAudio"));
         thread.start();
+    }
+
+    /**
+     * Handle a change in the state of a Task that has been set to notify this Controller
+     */
+    @Override
+    public void handle(WorkerStateEvent event) {
+        if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED))
+        {
+            if(event.getSource().getTitle().equals("RecordAudio")) {
+                _progressBar.progressProperty().unbind();
+                _progressBar.setProgress(0);
+                _progressBar.setVisible(false);
+                _confirmationHBox.setVisible(true);
+                _confirmationHBox.setDisable(false);
+                _recordHBox.setVisible(false);
+                _recordHBox.setDisable(true);
+                _listenButton.setDisable(false);
+                _dropdown.setDisable(false);
+            } else if(event.getSource().getTitle().equals("PlayAudio")) {
+                _progressBar.progressProperty().unbind();
+                _progressBar.setProgress(0);
+                _progressBar.setVisible(false);
+                _listenButton.setDisable(false);
+                _recordHBox.setDisable(false);
+                _confirmationHBox.setDisable(false);
+                _dropdown.setDisable(false);
+            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
+                System.out.println(event.getSource().getValue());
+            }
+        } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
+            System.out.println(event.getSource().getValue());
+        }
     }
 
     private void disableAll() {
@@ -175,6 +227,7 @@ public class PracticeController extends ParentController {
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
     }
+
     /**
      * Saves the recording, automatically updates the version.
      */

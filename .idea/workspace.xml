@@ -2,10 +2,190 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ahn/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ahn/versions/se206_18-5-2018_12-13-0_Ahn.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Antony/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Antony/versions/se206_21-5-2018_14-9-29_Antony.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ardern/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ardern/versions/se206_27-4-2018_16-8-10_Ardern.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Beena/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Beena/versions/se206_21-5-2018_14-8-47_Beena.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Bruce/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Bruce/versions/se206_23-8-2018_21-11-36_Bruce.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Catherine/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Catherine/versions/se206_27-4-2018_16-2-23_Catherine.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chamara/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chamara/versions/se206_18-5-2018_12-57-27_Chamara.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chen/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chen/versions/se206_16-5-2018_23-37-41_Chen.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Chen/versions/se206_30-4-2018_11-21-35_chen.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Deepika/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Deepika/versions/se206_21-5-2018_14-9-57_Deepika.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Dylan/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Dylan/versions/se206_18-5-2018_13-0-46_Dylan.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Eleanor/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Eleanor/versions/se206_27-4-2018_15-56-37_Eleanor.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Eng/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Eng/versions/se206_30-4-2018_9-52-26_Eng.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Francis/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Francis/versions/se206_27-4-2018_16-18-3_Francis.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Hall/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Hall/versions/se206_18-5-2018_13-1-14_Hall.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Hanyu/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Hanyu/versions/se206_17-5-2018_14-29-11_Hanyu.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ian/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ian/versions/se206_17-5-2018_17-15-48_Ian.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Isabella/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Isabella/versions/se206_18-5-2018_12-8-46_Isabella.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Izzy/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Izzy/versions/se206_18-5-2018_12-9-17_Izzy.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jacinda/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jacinda/versions/se206_27-4-2018_16-7-40_Jacinda.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/James/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/James/versions/se206_18-5-2018_16-8-4_James.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jesin/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jesin/versions/se206_18-5-2018_16-7-33_Jesin.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jiaqiu/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jiaqiu/versions/se206_17-5-2018_14-13-49_Jiaqiu.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jonathan/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Jonathan/versions/se206_2-5-2018_15-47-27_Jonathan.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Junyan/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Junyan/versions/se206_16-5-2018_23-34-53_Junyan.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kachun/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kachun/versions/se206_17-5-2018_14-43-7_Kachun.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kalana/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kalana/versions/se206_18-5-2018_12-58-21_Kalana.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kun/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Kun/versions/se206_17-5-2018_14-30-38_Kun.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lam/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lam/versions/se206_17-5-2018_14-43-55_Lam.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lee/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lee/versions/se206_18-5-2018_11-8-55_Lee.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lee/versions/se206_23-8-2018_20-42-12_Lee.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Li/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Li/versions/se206_17-5-2018_12-3-36_Li.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Li/versions/se206_17-5-2018_12-5-59_Li.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Li/versions/se206_17-5-2018_12-7-35_Li.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lin/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Lin/versions/se206_17-5-2018_14-33-23_Lin.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Louis/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Louis/versions/se206_17-5-2018_18-57-48_Louis.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ma/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ma/versions/se206_17-5-2018_14-27-14_Ma.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/MacDonald/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/MacDonald/versions/se206_23-8-2018_21-13-35_MacDonald.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Mason/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Mason/versions/se206_2-5-2018_15-23-50_Mason.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Melvin/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Melvin/versions/se206_18-5-2018_16-8-39_Melvin.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ngo/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ngo/versions/se206_18-5-2018_11-7-31_Ngo.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Nicholas/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Nicholas/versions/se206_30-4-2018_9-42-4_Nicholas.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Patricia/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Patricia/versions/se206_17-5-2018_17-20-26_Patricia.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Paul/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Paul/versions/se206_18-5-2018_16-9-14_Paul.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Rajagopal/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Rajagopal/versions/se206_21-5-2018_14-10-29_Rajagopal.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ratnayake/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ratnayake/versions/se206_18-5-2018_12-59-6_Ratnayake.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ruozi/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ruozi/versions/se206_17-5-2018_14-28-6_Ruozi.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Saereem/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Saereem/versions/se206_18-5-2018_12-12-37_Saereem.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Shen/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Shen/versions/se206_17-5-2018_14-23-8_Shen.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Shi/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Shi/versions/se206_2-5-2018_15-31-49_Shi.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Shields/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Shields/versions/se206_18-5-2018_12-10-9_Shields.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Sueyeon/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Sueyeon/versions/se206_18-5-2018_11-8-6_Sueyeon.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Thorpe/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Thorpe/versions/se206_27-4-2018_15-52-6_Thorpe.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Thorpe/versions/se206_27-4-2018_16-4-11_Thorpe.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Tina/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Tina/versions/se206_17-5-2018_14-34-30_Tina.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Wang/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Wang/versions/se206_17-5-2018_14-31-7_Wang.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Watson/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Watson/versions/se206_27-4-2018_15-54-26_Watson.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/William/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/William/versions/se206_23-8-2018_20-38-49_William.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/William/versions/se206_27-4-2018_16-5-35_William.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Xiaoran/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Xiaoran/versions/se206_17-5-2018_14-26-41_Xiaoran.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Xuyun/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Xuyun/versions/se206_4-5-2018_15-56-40_Xuyun.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Yenting/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Yenting/versions/se206_17-5-2018_14-32-54_Yenting.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Yeting/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Yeting/versions/se206_17-5-2018_14-25-5_Yeting.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ying/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Ying/versions/se206_17-5-2018_14-29-56_Ying.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhan/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhan/versions/se206_17-5-2018_14-24-2_Zhan.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhang/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhang/versions/se206_17-5-2018_14-28-39_Zhang.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhang/versions/se206_4-5-2018_16-1-13_Zhang.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhao/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhao/versions/se206_17-5-2018_14-15-7_Zhao.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhu/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/Zhu/versions/se206_17-5-2018_14-25-56_Zhu.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/eric/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/eric/versions/se206_30-4-2018_11-23-36_eric.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/george/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/george/versions/se206_17-5-2018_18-57-1_george.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/hywel/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/hywel/versions/se206_27-4-2018_20-3-38_hywel.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/maggie/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/maggie/versions/se206_18-5-2018_11-6-43_maggie.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/sean/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/sean/versions/se206_23-8-2018_20-13-44_sean.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/stoakes/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/stoakes/versions/se206_27-4-2018_20-7-45_stoakes.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/tang/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/tang/versions/se206_30-4-2018_11-20-3_tang.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/wei/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/wei/versions/se206_30-4-2018_11-22-50_wei.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/word/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/word/versions/se206_8-6-2018_1-58-21_word.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/yichen/versions/%2_%3_rating.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/names/yichen/versions/se206_30-4-2018_11-20-46_yichen.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/BashRunner$BashCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/BashRunner$BashCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/BashRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/BashRunner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/FSWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/FSWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/NameEntry$RATING.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/NameEntry$RATING.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/NameEntry$Version.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/NameEntry$Version.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/backend/NameEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/backend/NameEntry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/ListViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$Position.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController$Position.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/controllers/PracticeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/tools/AudioPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/tools/AudioPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/app/tools/AudioRecorder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/tools/AudioRecorder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/app/backend/FileSystem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/app/backend/FileSystem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/app/views/OptionsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/app/views/OptionsView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soundfiles/zkon584_2-5-2018_15-26-44_jonathan.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -22,29 +202,72 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Source Sets" type="e897c970:GradleViewContributor$SourceSetsNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build setup" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="distribution" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Assignment3_206" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="118" column="93" lean-forward="true" selection-start-line="118" selection-start-column="93" selection-end-line="118" selection-end-column="93" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NameEntry.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="979">
-              <caret line="83" column="44" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-                <element signature="e#715#716#0" expanded="true" />
-                <element signature="e#2376#2377#0" expanded="true" />
-                <element signature="e#2428#2429#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="497">
+              <caret line="219" column="61" selection-start-line="219" selection-start-column="61" selection-end-line="219" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -53,25 +276,16 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListViewController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
+      <file leaf-file-name="BashRunner.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="144" selection-start-line="144" selection-end-line="144" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenuController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+            <state relative-caret-position="265">
+              <caret line="108" column="62" selection-start-line="108" selection-start-column="62" selection-end-line="108" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,20 +293,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParentController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java">
+      <file leaf-file-name="SceneBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+            <state relative-caret-position="360">
+              <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SceneBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
+      <file leaf-file-name="NameEntry.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+            <state relative-caret-position="-299">
+              <caret line="169" selection-start-line="169" selection-end-line="169" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,8 +319,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -112,6 +329,7 @@
     <findStrings>
       <find>_currentName</find>
       <find>currentPos</find>
+      <find>_progressBar.se</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,7 +338,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\sabat\.gradle\wrapper\dists\gradle-4.4-bin\bgaq7vklkazwgxox0hdadxbvi\gradle-4.4" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\secre\.gradle\wrapper\dists\gradle-4.4-bin\bgaq7vklkazwgxox0hdadxbvi\gradle-4.4" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -184,6 +402,11 @@
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Runs this project as a JVM application" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="run" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Generates Gradle wrapper files." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="wrapper" />
@@ -199,6 +422,11 @@
                 <option name="name" value="javadoc" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Creates OS specific scripts to run the project as a JVM application." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="startScripts" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Assembles a jar archive containing the main classes." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="jar" />
@@ -209,6 +437,11 @@
                 <option name="name" value="model" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Installs the project as a distribution as-is." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="installDist" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Processes main resources." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processResources" />
@@ -217,6 +450,11 @@
                 <option name="description" value="Displays the tasks runnable from root project 'Assignment3_206'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the main distributions" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleDist" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Initializes a new Gradle build." />
@@ -284,6 +522,16 @@
                 <option name="name" value="buildNeeded" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Bundles the project as a distribution." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="distTar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Bundles the project as a distribution." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="distZip" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Displays the properties of root project 'Assignment3_206'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
@@ -295,9 +543,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6148710263277" />
+        <entry key="$PROJECT_DIR$" value="6149192558353" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="1124233830" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="933675735" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="1741342742" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="1241713613" />
       </map>
@@ -424,13 +672,20 @@
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/tools/ProgressTracker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/app/backend/JarResources.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" />
       </list>
     </option>
   </component>
@@ -443,11 +698,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="1" />
-    <option name="width" value="1614" />
-    <option name="height" value="867" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1752" />
+    <option name="y" value="29" />
+    <option name="width" value="1678" />
+    <option name="height" value="987" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -458,12 +713,24 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="gradle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
@@ -507,24 +774,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -534,12 +783,27 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -549,6 +813,9 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.29770115" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
@@ -569,7 +836,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.Assignment3_206 [jar]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="Assignment3_206_main" />
@@ -583,6 +850,91 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="Assignment3_206 [assembleDist]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assembleDist" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
+    <configuration name="Assignment3_206 [build]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
+    <configuration name="Assignment3_206 [installDist]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="installDist" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
+    <configuration name="Assignment3_206 [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+    </configuration>
+    <configuration name="Assignment3_206 [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -622,9 +974,21 @@
       <properties />
       <listeners />
     </configuration>
+    <list>
+      <item itemvalue="Gradle.Assignment3_206 [jar]" />
+      <item itemvalue="Gradle.Assignment3_206 [build]" />
+      <item itemvalue="Gradle.Assignment3_206 [assembleDist]" />
+      <item itemvalue="Gradle.Assignment3_206 [installDist]" />
+      <item itemvalue="Gradle.Assignment3_206 [run]" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.Assignment3_206 [jar]" />
+        <item itemvalue="Gradle.Assignment3_206 [run]" />
+        <item itemvalue="Gradle.Assignment3_206 [installDist]" />
+        <item itemvalue="Gradle.Assignment3_206 [assembleDist]" />
       </list>
     </recent_temporary>
   </component>
@@ -645,71 +1009,58 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="116494000" />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="1752" y="29" width="1678" height="987" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.28411633" />
-      <window_info anchor="right" id="Palette&#9;" order="9" />
-      <window_info id="Image Layers" order="7" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.36263022" side_tool="true" weight="0.32965517" />
-      <window_info anchor="right" id="Maven Projects" order="10" weight="0.3294621" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" type="SLIDING" visible="true" weight="0.14988814" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.28299776" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.5462329" visible="true" weight="0.20843521" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
-      <window_info id="Learn" order="0" />
-      <window_info anchor="right" id="Gradle" order="6" />
-      <window_info id="Structure" order="2" sideWeight="0.45376712" side_tool="true" weight="0.2383863" />
-      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.29194632" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.32965517" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.36263022" side_tool="true" weight="0.32965517" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15039062" />
-      <window_info id="Learn" order="0" />
-      <window_info id="Favorites" order="8" side_tool="true" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="13" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Palette" order="11" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32865497" />
       <window_info anchor="right" id="Palette&#9;" order="11" />
-      <window_info anchor="right" id="Maven Projects" order="11" />
-      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info id="Image Layers" order="8" />
-      <window_info anchor="right" id="Theme Preview" order="11" />
-      <window_info anchor="right" id="Database" order="11" />
-      <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
       <window_info anchor="right" id="Capture Analysis" order="11" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.36263022" side_tool="true" weight="0.32965517" />
+      <window_info anchor="right" id="Maven Projects" order="11" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.31578946" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.32997763" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.32997763" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info id="Designer" order="8" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15574783" />
+      <window_info anchor="bottom" id="Build" order="13" weight="0.32865497" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32865497" />
+      <window_info id="Learn" order="0" />
+      <window_info anchor="right" id="Gradle" order="11" visible="true" weight="0.20889987" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="8" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" x="0" y="0" width="374" height="826" id="Documentation" order="0" side_tool="true" weight="0.3294621" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info id="UI Designer" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Build" order="13" weight="0.32965517" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32965517" />
-      <window_info anchor="right" id="Gradle" order="11" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info id="Designer" order="8" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="11" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Build" order="7" weight="0.32965517" />
       <window_info id="Designer" order="3" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info id="Image Layers" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.32965517" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6373698" visible="true" weight="0.32885906" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info id="UI Designer" order="5" />
@@ -719,23 +1070,23 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.36263022" side_tool="true" weight="0.32965517" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32965517" />
       <window_info anchor="right" x="0" y="0" width="374" height="826" id="Documentation" order="1" side_tool="true" weight="0.3294621" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="right" id="Gradle" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15039062" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="right" id="Gradle" order="8" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15403423" />
       <window_info id="Learn" order="1" />
-      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32885906" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info anchor="right" id="Theme Preview" order="10" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -747,85 +1098,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="7" />
+        </breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="8" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/com/sun/javafx/runtime/SystemProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/scene/PropertyHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="50" lean-forward="true" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
-          <caret line="28" column="111" lean-forward="true" selection-start-line="28" selection-start-column="111" selection-end-line="28" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="74" lean-forward="true" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="136" column="41" lean-forward="true" selection-start-line="136" selection-start-column="41" selection-end-line="136" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="76" column="24" lean-forward="true" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Intellij Projects/Assignment3_206/src/main/java/app/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/RecordView.fxml" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/collections/FXCollections.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
       <provider selected="true" editor-type-id="text-editor">
@@ -943,23 +1228,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/RecordView.fxml" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/collections/FXCollections.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="176" selection-start-line="5" selection-start-column="158" selection-end-line="5" selection-end-column="176" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
@@ -981,20 +1250,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="23" column="36" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="201">
+          <caret line="103" selection-start-line="103" selection-end-line="103" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        <state relative-caret-position="136">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="43" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1003,72 +1277,266 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ParentController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        <state relative-caret-position="340">
+          <caret line="25" column="98" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="98" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="38" column="83" selection-start-line="38" selection-start-column="83" selection-end-line="38" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/OptionsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/MainMenu.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
+        <state relative-caret-position="175">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
           <folding>
-            <element signature="e#2583#2584#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/ListViewController.java">
+    <entry file="file://$PROJECT_DIR$/gradlew">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="-1376" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/tools/AudioRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#908#909#0" expanded="true" />
+            <element signature="e#940#941#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/Downloads/jarresources.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2788">
+          <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/io/InputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/jre/lib/rt.jar!/sun/nio/fs/WindowsFileSystemProvider.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/JarResources.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/NameEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="979">
-          <caret line="83" column="44" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
+        <state relative-caret-position="-299">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#715#716#0" expanded="true" />
-            <element signature="e#2376#2377#0" expanded="true" />
-            <element signature="e#2428#2429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/nio/file/FileSystems.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="220" selection-start-line="220" selection-end-line="220" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="541" selection-start-line="541" selection-end-line="541" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="145" column="21" lean-forward="true" selection-start-line="145" selection-start-column="21" selection-end-line="145" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#19795#19796#0" expanded="true" />
+            <element signature="e#19834#19835#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="118" column="93" lean-forward="true" selection-start-line="118" selection-start-column="93" selection-end-line="118" selection-end-column="93" />
+        <state relative-caret-position="497">
+          <caret line="219" column="61" selection-start-line="219" selection-start-column="61" selection-end-line="219" selection-end-column="61" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="108" column="62" selection-start-line="108" selection-start-column="62" selection-end-line="108" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="gradleExecuteTaskHistory">
+    <option value="" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.29770115" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.29770115" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.29770115" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Assignment3_206</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.29770115" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Gradle: junit:junit:4.12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.29770115" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
