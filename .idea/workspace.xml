@@ -7,12 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9970df94-cbaa-4249-abe6-4b972321af8a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/app/views/OptionsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/app/views/OptionsView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/OptionsView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -73,17 +71,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BashRunner.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java">
+      <file leaf-file-name="Practice.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="30" column="51" lean-forward="true" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-              <folding>
-                <element signature="e#594#595#0" expanded="true" />
-                <element signature="e#641#642#0" expanded="true" />
-                <element signature="e#2281#2282#0" expanded="true" />
-                <element signature="e#2318#2319#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="194">
+              <caret line="135" column="25" lean-forward="true" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PracticeController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-24">
+              <caret line="316" column="30" selection-start-line="316" selection-start-column="30" selection-end-line="316" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -444,7 +445,6 @@
         <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css" />
         <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/ListView.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
         <option value="$PROJECT_DIR$/src/main/java/app/tools/ProgressTracker.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java" />
@@ -457,9 +457,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/app/backend/FileSystem.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/app/backend/JarResources.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/backend/FSWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/app/backend/BashRunner.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css" />
+        <option value="$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java" />
       </list>
     </option>
   </component>
@@ -492,20 +493,80 @@
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
               <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="Assignment3_206_jar" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3_206" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3_206-1" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -546,7 +607,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.Assignment3_206.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="Assignment3_206_main" />
@@ -680,9 +741,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.Assignment3_206.jar" />
         <item itemvalue="Gradle.Assignment3_206 [jar]" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.Assignment3_206 [run]" />
         <item itemvalue="Gradle.Assignment3_206 [installDist]" />
       </list>
@@ -700,12 +761,12 @@
       <updated>1537177556268</updated>
       <workItem from="1537177561431" duration="116494000" />
       <workItem from="1537670544731" duration="165000" />
-      <workItem from="1537670778533" duration="1989000" />
+      <workItem from="1537670778533" duration="7833000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119528000" />
+    <option name="totallyTimeSpent" value="125372000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -718,6 +779,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="11" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32997763" />
@@ -901,25 +963,10 @@
     </entry>
     <entry file="file://D:/Intellij Projects/Assignment3_206/src/main/java/app/Main.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/RecordView.fxml" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/com/sun/javafx/scene/control/ReadOnlyUnbackedObservableList.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/collections/FXCollections.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="114" column="34" lean-forward="true" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/javafx-src.zip!/javafx/beans/property/StringPropertyBase.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/ListView.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -1004,13 +1051,6 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/nio/file/FileSystems.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_162/src.zip!/java/lang/Integer.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1049,13 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="156" column="25" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/MainMenuController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1082,8 +1115,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/MainMenu.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        <state relative-caret-position="153">
+          <caret line="12" column="34" lean-forward="true" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/Practice.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
@@ -1097,6 +1138,27 @@
             <element signature="e#2281#2282#0" expanded="true" />
             <element signature="e#2318#2319#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/views/SceneBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/app/views/styles/Practice.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="135" column="25" lean-forward="true" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/controllers/PracticeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-24">
+          <caret line="316" column="30" selection-start-line="316" selection-start-column="30" selection-end-line="316" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -1123,7 +1185,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1170,7 +1232,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>Gradle: junit:junit:4.12</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

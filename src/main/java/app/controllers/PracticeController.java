@@ -37,6 +37,11 @@ public class PracticeController extends ParentController implements EventHandler
     private Button _backButton;
     @FXML
     private ComboBox _dropdown;
+    @FXML
+    private HBox _rateBox;
+    @FXML
+    private Slider _ratingSlider;
+
 
     private int _currentPosition;
     private NameEntry _currentName;
@@ -63,6 +68,8 @@ public class PracticeController extends ParentController implements EventHandler
     private Position _namePosition;
     @FXML
     public void initialize() {
+        _rateBox.setVisible(false);
+        setUpSlider();
         _confirmationHBox.setVisible(false);
         _progressBar.setVisible(false);
         _currentPosition = 0;
@@ -245,7 +252,7 @@ public class PracticeController extends ParentController implements EventHandler
         //Plays back audio
         //Disables buttons while this happens.
         //Renables after audio is played.
-        playAudio(); //Placeholder: Somehow get the version number.
+        playAudio(); //Placeholder: Somehow get the current file being made and play that.
     }
 
     /**
@@ -284,7 +291,30 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     private void rate() {
         //Placeholder for now. Should store the bad audio message in a text file.
-        System.out.println("Goes here");
+        _rateBox.setVisible(true);
+        _nextButton.setVisible(false);
+        _prevButton.setVisible(false);
+        disableAll();
+    }
+    private void setUpSlider() {
+        _ratingSlider.setMin(0);
+        _ratingSlider.setMax(10);
+        _ratingSlider.setBlockIncrement(1);
+        _ratingSlider.setShowTickLabels(true);
+        _ratingSlider.setShowTickMarks(true);
+        _ratingSlider.setMajorTickUnit(5);
+        _ratingSlider.setMinorTickCount(4);
+        _ratingSlider.setSnapToTicks(true);
+    }
+    @FXML
+    private void getRating() {
+        //Store this in the .txt file somehow.
+        System.out.println(_ratingSlider.getValue());
+        _rateBox.setVisible(false);
+        _recordHBox.setDisable(false);
+        _dropdown.setDisable(false);
+        _listenButton.setDisable(false);
+        updateChangeButtons();
     }
 
 

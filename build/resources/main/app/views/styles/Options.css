@@ -1,0 +1,62 @@
+._background {
+    -fx-background-color: #252b6e;
+}
+
+._title {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-background-style: transparent;
+    -fx-text-fill: #f0f0f0;
+    -fx-font-family: "Century Gothic";
+}
+
+._backgroundPane {
+    -fx-background-color: #dde2f0;
+    -fx-opacity: 40%;
+}
+
+._contentBackground {
+    -fx-background-color: #f0f0f0;
+    -fx-opacity: 60%;
+}
+
+._optionsPane {
+    -fx-background-color: #f0f0f0;
+    -fx-opacity: 40%;
+}
+
+._buttons {
+    -fx-background-color: #e2e2e2;
+    -fx-font-weight: bold;
+    -fx-text-fill: #252b6e;
+    -fx-font-size: 30px;
+    -fx-font-family: "Franklin Gothic Heavy";
+    -fx-border-color: #252b6e;
+    -fx-border-width: 3px;
+}
+._buttons:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
+            #2c76af,
+            #2c76af,
+            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+}
+
+._buttons:pressed {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
+            #225c88,
+            #266697,
+            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
+}
+
+._textArea {
+    -fx-font-size: 40px;
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+
+._textArea .content {
+    -fx-background-color: rgba(0,0,0,0);
+}
+
