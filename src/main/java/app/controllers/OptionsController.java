@@ -4,6 +4,7 @@ import app.backend.BashRunner;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -37,6 +38,8 @@ public class OptionsController extends ParentController implements EventHandler<
     private enum Options {TEST,HELP,ABOUT}
     private Options _optionPicked;
 
+    boolean micToggled;
+
     @FXML
     public void initialize() {
         _optionPicked = Options.TEST;
@@ -44,13 +47,18 @@ public class OptionsController extends ParentController implements EventHandler<
         _micToggled = false;
     }
 
+    /**
+     * Toggle the chain of BashRunner processes
+     */
     @FXML
     private void toggleMic() {
         if(_micToggled) {
             _toggleButton.setVisible(false);
             _micToggled = false;
         } else {
+            micToggled = true;
             BashRunner runner = new BashRunner(this);
+            runner.runMonitorMicCommand();
         }
 
     }
@@ -91,9 +99,28 @@ public class OptionsController extends ParentController implements EventHandler<
 
     }
 
+    /**
+     * If the toggle button is stll toggled, continue the chain of processes. If not, then
+     * stop the chain.
+     */
     @Override
     public void handle(WorkerStateEvent event) {
+        if(!micToggled) {
+             levelIndicator.progressProperty().unbind();
+             levelIndicator.progressProperty().setValue(0);
+            return;
+        }
+        if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
+            if(event.getSource().getTitle().equals(BashRunner.CommandType.TESTMIC.toString())) {
+                event.getSource().getValue();
 
+                BashRunner runner = new BashRunner(this);
+            }
+        } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
+            levelIndicator.progressProperty().unbind();
+            levelIndicator.progressProperty().setValue(0);
+            micToggled = false;
+        }
     }
 
     @FXML
