@@ -67,7 +67,7 @@
       <HBox fx:id="_rateBox" layoutX="167.0" layoutY="507.0" prefHeight="51.0" prefWidth="841.0">
          <children>
             <Slider fx:id="_ratingSlider" prefHeight="47.0" prefWidth="637.0" styleClass="_slider" />
-            <Button fx:id="_confirmButton" mnemonicParsing="false" onAction="#getRating" prefHeight="45.0" prefWidth="118.0" style="-fx-font-size: 20;" styleClass="_selectionButton" text="Confirm">
+            <Button fx:id="_confirmButton" mnemonicParsing="false" onAction="#getRating" prefHeight="45.0" prefWidth="118.0" style="-fx-font-size: 15;" styleClass="_selectionButton" text="Confirm">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>

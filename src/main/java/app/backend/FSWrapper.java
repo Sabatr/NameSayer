@@ -61,6 +61,7 @@ import java.util.List;
  *  exist within a unit can have the same fileName as the same type of content in other units. Going back to the
  *  creations example, we can have a creation.mp4 for each creation unit.</p>
  *
+ * @author Marc Burgess
  */
 public class FSWrapper {
     protected Path workingDir;
@@ -172,10 +173,6 @@ public class FSWrapper {
         rootContentDir = workingDir.resolve(rootElement.getAttribute("name"));
     }
 
-    /****************  The code below here is disgusting  *******************/
-    /*        It's just the rest of the code for this class.                */
-
-
     /**
      * Copies content from one directory structure to another.
      */
@@ -212,6 +209,10 @@ public class FSWrapper {
         }
     }
 
+    /**
+     * Copy a single file into the filesystem being managed by the FSWrapper that this method is
+     * called on.
+     */
     private void copyFileTo(String type, Path from, String[] params) throws IOException {
         List<Pair<String, Path>> pathList = new ArrayList<>();
         Path path = workingDir;
@@ -286,7 +287,9 @@ public class FSWrapper {
         }
     }
 
-
+    /**
+     * Safely create a file. This creates all the parents if they don't exist.
+     */
     public Path createFile(String type, String... params) {
         Path path = workingDir;
         List<Element> parentList = getAccessPathOfType(type);
@@ -360,6 +363,13 @@ public class FSWrapper {
         return pathList;
     }
 
+    /**
+     *
+     * @param format The format string to use to insert the parameters
+     * @param params The parameters to copy in, in order. If a higher-number parameter is present in the format string
+     *               but not lower numbers, empty strings are inserted in the place of the lower-number parameters.
+     * @return The filled string.
+     */
     private String fillString(String format, String... params) {
         StringBuilder filled = new StringBuilder();
         char[] form = format.toCharArray();
@@ -411,7 +421,8 @@ public class FSWrapper {
     }
 
     /**
-     * Retrieve the parameters for a file and its parents
+     * This public method wraps the private parameter-extraction method, which takes an XML element.
+     * @return The parameters extracted from a file and its parents.
      */
     public Map<Integer, String> getParamsForFile(Path file, String type) {
         Element element = getElementOfType(type);
@@ -674,6 +685,11 @@ public class FSWrapper {
         return doesNotMatch ? null : result;
     }
 
+    /**
+     * Retrieve the template filepath to get to a nested file.
+     * @param type the file type of the
+     * @return A list of XML elements representing the template directories leading to the type
+     */
     private List<Element> getAccessPathOfType(String type) {
         Node currentNode = getElementOfType(type);
         if(currentNode == null) {
@@ -688,6 +704,11 @@ public class FSWrapper {
         return parentList;
     }
 
+    /**
+     * Retrieve the element reprsenting a type in the directory heirarchy
+     * @param type The file type to get
+     * @return The XML element representing the given template type
+     */
     private Element getElementOfType(String type) {
         try {
             return (Element) xpath.compile("//*[@type='" + type + "']").evaluate(fsStructure, XPathConstants.NODE);
@@ -696,7 +717,11 @@ public class FSWrapper {
         }
     }
 
-
+    /**
+     * Get all children that lie under a template directory
+     * @param element The element for which to get the children
+     * @param allChildren A list that will be filled with the children elements (this is a recursive method)
+     */
     private void getAllChildren(Element element, List<Element> allChildren) {
         List<Element> elements = getChildElements(element);
         for(Element e: elements) {

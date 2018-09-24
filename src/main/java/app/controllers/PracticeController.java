@@ -262,6 +262,7 @@ public class PracticeController extends ParentController implements EventHandler
         //Disables buttons while this happens.
         //Renables after audio is played.
 
+        disableAll();
         _progressBar.setVisible(true);
         File audioResource = _currentRecording.toFile();
         AudioPlayer player = new AudioPlayer(audioResource, this, "RAudio");
