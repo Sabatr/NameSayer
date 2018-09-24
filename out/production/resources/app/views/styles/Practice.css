@@ -148,3 +148,36 @@
 ._slider .track {
     -fx-pref-height: 20px;
 }
+
+._confirmButton {
+    -fx-background-color: #f0f0f0;
+    -fx-font-weight: bold;
+    -fx-text-fill: #252b6e;
+    -fx-font-size: 20px;
+    -fx-border-color: #252b6e;
+    -fx-border-width: 3px;
+}
+
+._confirmButton:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
+            #2c76af,
+            #2c76af,
+            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+}
+
+._confirmButton:pressed {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
+            #225c88,
+            #266697,
+            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
+}
+
+._warningLabel {
+    -fx-text-fill: #c51b16;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+
+}
+

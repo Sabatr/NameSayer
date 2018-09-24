@@ -6,7 +6,10 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ProgressBar;
 
 public class Timer extends Task<Void> {
-    public Timer(ProgressBar progressBar, EventHandler<WorkerStateEvent> handler, String title) {
+    private final int _timeInSeconds;
+
+    public Timer(ProgressBar progressBar, EventHandler<WorkerStateEvent> handler, String title, int timeInSeconds) {
+        _timeInSeconds = timeInSeconds;
         this.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, handler);
         progressBar.progressProperty().bind(this.progressProperty());
         this.updateTitle(title);
@@ -20,10 +23,10 @@ public class Timer extends Task<Void> {
     @Override
     protected Void call() {
         int progress;
-        for(progress = 1; progress <= 100; progress++) {
-            updateProgress(progress, 100);
+        for(progress = 1; progress <= _timeInSeconds * 100; progress++) {
+            updateProgress(progress, _timeInSeconds * 100);
             try {
-                Thread.sleep(50);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 if(isCancelled()) {
                     updateMessage("cancelled");

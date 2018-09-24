@@ -13,6 +13,7 @@ import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -36,14 +37,9 @@ public class ListViewController extends ParentController {
     public void initialize() {
         _sortedButton.setDisable(true);
         _selectedNames = FXCollections.observableArrayList();
+
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        _nameListView.setCellFactory(new Callback<ListView<NameEntry>, ListCell<NameEntry>>() {
-            @Override
-            public ListCell<NameEntry> call(ListView<NameEntry> param) {
-                return new NameCell();
-            }
-        });
     }
 
     /**
@@ -137,6 +133,8 @@ public class ListViewController extends ParentController {
     public void setInformation(ObservableList<NameEntry> all, ObservableList<NameEntry> _list) {
         super.setInformation(all, _list);
         _nameListView.setItems(all);
+        //TODO remove this later
+        Collections.sort(_nameListView.getItems());
         //determines if the list was sorted or random before.
         if (!_list.isEmpty()) {
             String randomOrNot = _list.get(_list.size()-1).getName();

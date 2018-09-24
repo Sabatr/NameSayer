@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -41,6 +42,8 @@ public class PracticeController extends ParentController implements EventHandler
     private HBox _rateBox;
     @FXML
     private Slider _ratingSlider;
+    @FXML
+    private Label _warningLabel;
 
 
     private int _currentPosition;
@@ -69,6 +72,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     public void initialize() {
         _rateBox.setVisible(false);
+        _warningLabel.setVisible(false);
         setUpSlider();
         _confirmationHBox.setVisible(false);
         _progressBar.setVisible(false);
@@ -165,9 +169,13 @@ public class PracticeController extends ParentController implements EventHandler
 
         _progressBar.setVisible(true);
         File audioResource = _currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()).toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, _progressBar, this, "PlayAudio");
+        AudioPlayer player = new AudioPlayer(audioResource, this, "PlayAudio");
         Thread thread = new Thread(player);
         thread.start();
+
+        Timer timer = new Timer(_progressBar, this, "PlayAud", 2);
+        Thread thread1 = new Thread(timer);
+        thread1.start();
     }
 
     /**
@@ -189,7 +197,7 @@ public class PracticeController extends ParentController implements EventHandler
             runner.runRecordCommand(pathToUse);
 
             _progressBar.setVisible(true);
-            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio"));
+            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 5));
             thread.start();
         }
     }
@@ -256,9 +264,13 @@ public class PracticeController extends ParentController implements EventHandler
 
         _progressBar.setVisible(true);
         File audioResource = _currentRecording.toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, _progressBar, this, "RecordAudio");
+        AudioPlayer player = new AudioPlayer(audioResource, this, "RAudio");
         Thread thread = new Thread(player);
         thread.start();
+
+        Timer timer = new Timer(_progressBar, this, "RecordAudio", 5);
+        Thread thread1 = new Thread(timer);
+        thread1.start();
     }
 
     /**
@@ -314,11 +326,23 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     private void getRating() {
         _currentName.rateVersion((String) _dropdown.getSelectionModel().getSelectedItem(), (int) _ratingSlider.getValue());
+        dropMenuAction();
         _rateBox.setVisible(false);
         _recordHBox.setDisable(false);
         _dropdown.setDisable(false);
         _listenButton.setDisable(false);
         updateChangeButtons();
+    }
+
+    @FXML
+    private void dropMenuAction() {
+        String date = (String) _dropdown.getSelectionModel().getSelectedItem();
+        int rating = _currentName.getRating(date);
+        if (0 <= rating && rating < 5) {
+            _warningLabel.setVisible(true);
+        } else {
+            _warningLabel.setVisible(false);
+        }
     }
 
 
@@ -337,5 +361,6 @@ public class PracticeController extends ParentController implements EventHandler
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
         updateVersions();
+        dropMenuAction();
     }
 }

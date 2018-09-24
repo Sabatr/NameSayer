@@ -25,9 +25,8 @@ public class AudioPlayer extends Task<Void> {
     private AudioFormat _audioFormat;
     private SourceDataLine _sourceLine;
 
-    public AudioPlayer(File soundFile ,ProgressBar progressBar, EventHandler<WorkerStateEvent> handler, String taskTitle) {
+    public AudioPlayer(File soundFile, EventHandler<WorkerStateEvent> handler, String taskTitle) {
         _soundFile = soundFile;
-        progressBar.progressProperty().bind(this.progressProperty());
         this.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, handler);
         this.updateTitle(taskTitle);
     }
@@ -82,7 +81,6 @@ public class AudioPlayer extends Task<Void> {
                 @SuppressWarnings("unused")
                 int nBytesWritten = _sourceLine.write(data, 0, bytesRead);
                 totalBytes += nBytesWritten;
-                updateProgress(totalBytes, _audioStream.getFrameLength());
             }
         }
 

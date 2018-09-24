@@ -209,6 +209,13 @@ public class NameEntry implements Comparable<NameEntry> {
      * @return an integer rating out of 10, or -1 if the version has never been rated
      */
     public int getRating(String dateAndTime) {
+        if(_mainVersion._dateTime.equals(dateAndTime)) {
+            if(_mainVersion.rating != -1) {
+                return _mainVersion.rating;
+            } else {
+                return getRatingFromFile(dateAndTime);
+            }
+        }
         for(Version ver: _versions) {
             if(ver._dateTime.equals(dateAndTime)) {
                 if(ver.rating != -1) {
