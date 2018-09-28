@@ -24,7 +24,6 @@ import java.nio.file.Path;
  */
 public class OptionsController extends ParentController implements EventHandler<WorkerStateEvent> {
 
-    private ObservableList _selections;
     @FXML   // a progress bar is used as the visual indicator of microphone level
     private ProgressBar _levelIndicator;
     @FXML
@@ -144,18 +143,18 @@ public class OptionsController extends ParentController implements EventHandler<
     }
 
     @FXML
-    private void goBack() throws IOException {
+    private void goBack() {
         if(_micToggled) {
            toggleMic();
         }
-        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
-        builder.getList(_selections);
-        builder.load("MainMenu.fxml");
+        _switcher.switchScene(SceneBuilder.MENU);
     }
 
     @Override
-    public void setInformation(ObservableList<NameEntry> allItems, ObservableList<NameEntry> items) {
-        super.setInformation(allItems, items);
-        _selections = items;
+    public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allItems, ObservableList<NameEntry> items) {
+        super.setInformation(switcher, allItems, items);
     }
+
+    @Override
+    public void switchTo() {}
 }

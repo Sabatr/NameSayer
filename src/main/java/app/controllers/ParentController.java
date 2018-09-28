@@ -19,7 +19,8 @@ public abstract class ParentController {
     /**
      * Initialise the controller with information
      */
-    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+    public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        _switcher = switcher;
         _allNames = allNames;
     }
 

@@ -53,6 +53,7 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
 
     private SceneBuilder(ObservableList<NameEntry> allNames, Stage stage) throws IOException {
         _scenes = new HashMap<>();
+        _controllers = new HashMap<>();
 
         _selectionList = FXCollections.observableArrayList();
         _allNames = allNames;
@@ -87,13 +88,15 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
      */
     private void initScene(String sceneFXML) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource(sceneFXML));
-        ((ParentController) loader.getController()).setInformation(_allNames, _selectionList);
         Parent root = loader.load();
+        ParentController controller = (ParentController) loader.getController();
+        controller.setInformation(this, _allNames, _selectionList);
         Scene scene = new Scene(root);
         //allows the correct style sheet to be applied to the fxml
 //        String css = this.getClass().getResource("styles/"+url.substring(0,url.length()-4)+"css").toExternalForm();
 //        scene.getStylesheets().add(css);
         _scenes.put(sceneFXML, scene);
+        _controllers.put(sceneFXML, controller);
         _stage.setScene(scene);
         _stage.show();
     }

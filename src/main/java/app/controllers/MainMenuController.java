@@ -21,7 +21,9 @@ public class MainMenuController extends ParentController {
      * The main menu does not need to know anything about the app state, so there's no implementation here
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) { }
+    public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        super.setInformation(switcher, allNames, selectedNames);
+    }
 
     // No implementation is needed.
     @Override

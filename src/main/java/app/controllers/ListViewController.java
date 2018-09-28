@@ -95,7 +95,7 @@ public class ListViewController extends ParentController {
         Alert alert = new Alert(AlertType.ERROR);
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(
-                this.getClass().getResource("styles/NoneSelected.css").toExternalForm());
+                SceneBuilder.class.getResource("styles/NoneSelected.css").toExternalForm());
         dialogPane.getStyleClass().add("noSelectDialogue");
         alert.setTitle("Error");
         alert.setHeaderText(null);
@@ -118,9 +118,10 @@ public class ListViewController extends ParentController {
      * @param selectedNames, the selected values + the state of the sorting at the end.
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
-        super.setInformation(allNames, selectedNames);
+    public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        super.setInformation(switcher, allNames, selectedNames);
         _nameListView.setItems(allNames);
+        _selectedNames = selectedNames;
     }
 
     @Override

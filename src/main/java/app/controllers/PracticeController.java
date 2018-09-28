@@ -329,8 +329,8 @@ public class PracticeController extends ParentController implements EventHandler
      * @param selectedNames The selected names
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
-        super.setInformation(allNames, selectedNames);
+    public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        super.setInformation(switcher, allNames, selectedNames);
         _practiceList = selectedNames;
     }
 
