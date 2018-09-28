@@ -1,5 +1,6 @@
 package app.backend;
 
+import app.backend.filesystem.FSWrapper;
 import javafx.util.Pair;
 
 import java.io.*;

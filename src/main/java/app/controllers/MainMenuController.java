@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,43 +15,33 @@ import java.util.ArrayList;
  * This class holds the functionality of the main menu.
  */
 public class MainMenuController extends ParentController {
-    @FXML
-    private Button _databaseButton;
-
-    private ObservableList _selectedList;
+    @FXML private Button _databaseButton;
 
     /**
-     * Holds the selected list information.
-     * @param _list
+     * The main menu does not need to know anything about the app state, so there's no implementation here
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> allItems, ObservableList<NameEntry> _list) {
-        super.setInformation(allItems, _list);
-        if (!_list.isEmpty()) {
-            _selectedList = FXCollections.observableList(_list);
-        } else {
-            _selectedList = FXCollections.observableList(new ArrayList<>());
-        }
-    }
+    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) { }
+
+    // No implementation is needed.
+    @Override
+    public void switchTo() {}
 
     /**
      * Allows the scene to switch the view list.
-     * @throws IOException
      */
     @FXML
-    private void goToList() throws IOException {
-        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
-        builder.getList(_selectedList);
-        builder.load("ListView.fxml");
+    private void goToList() {
+        _switcher.switchScene(SceneBuilder.LISTVIEW);
     }
+
+    // TODO. Chances made: switching scenes is now a single call
 
     /**
      * Allows the scene to switch to the options menu.
      */
     @FXML
-    private void options() throws IOException {
-        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
-        builder.getList(_selectedList);
-        builder.load("OptionsView.fxml");
+    private void options() {
+        _switcher.switchScene(SceneBuilder.OPTIONS);
     }
 }

@@ -1,19 +1,15 @@
 package app.controllers;
 
-import app.backend.FSWrapper;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.util.Callback;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -21,12 +17,9 @@ import java.util.Collections;
  *
  */
 public class ListViewController extends ParentController {
-    @FXML
-    private ListView<NameEntry> _nameListView;
-    @FXML
-    private ToggleButton _sortedButton;
-    @FXML
-    private ToggleButton _randomButton;
+    @FXML private ListView<NameEntry> _nameListView;
+    @FXML private ToggleButton _sortedButton;           // TODO. Suggestion: We _can_ actually have annotations on the same line
+    @FXML private ToggleButton _randomButton;           // TODO.        I don't think it looks too bad - certainly saves lines
 
     private ObservableList<NameEntry> _selectedNames;
 
@@ -36,7 +29,6 @@ public class ListViewController extends ParentController {
      */
     public void initialize() {
         _sortedButton.setDisable(true);
-        _selectedNames = FXCollections.observableArrayList();
 
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -47,8 +39,9 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void onClick() {
-        //FXCollections was used so that selected items could be modified.
-        _selectedNames = FXCollections.observableArrayList(_nameListView.getSelectionModel().getSelectedItems());
+        // TODO. Change made: So that we don't throw away the reference to the list in the SceneBuilder object,
+        // TODO.                we set its items to those of the ListView's selection
+        _selectedNames.setAll(_nameListView.getSelectionModel().getSelectedItems());
     }
 
     /**
@@ -80,23 +73,18 @@ public class ListViewController extends ParentController {
 
     /**
      * A listener for the practice button.
-     * @throws IOException
      */
     @FXML
-    private void practiceButton() throws IOException {
+    private void practiceButton() {
         if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {
-                if (_sortedButton.isDisabled()) {
-                    Collections.sort(_selectedNames);
-                } else {
-                    Collections.shuffle(_selectedNames);
-                }
-                SceneBuilder sceneBuilder = new SceneBuilder(_allNames, _stage);
-                //Determines if the random button is disabled. So when we switch back views, it's still there.
-                _selectedNames.add(new NameEntry(_randomButton.isDisable()+""));
-                sceneBuilder.getList(_selectedNames);
-                sceneBuilder.load("Practice.fxml");
+            if (_sortedButton.isDisabled()) {
+                Collections.sort(_selectedNames);
+            } else {
+                Collections.shuffle(_selectedNames);
+            }
+            _switcher.switchScene(SceneBuilder.PRACTICE);
         }
     }
 
@@ -105,6 +93,10 @@ public class ListViewController extends ParentController {
      */
     private void alertNothingSelected() {
         Alert alert = new Alert(AlertType.ERROR);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                this.getClass().getResource("styles/NoneSelected.css").toExternalForm());
+        dialogPane.getStyleClass().add("noSelectDialogue");
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText("Error: No names selected.");
@@ -113,44 +105,26 @@ public class ListViewController extends ParentController {
 
     /**
      * A listener for the back button.
-     * @throws IOException
      */
     @FXML
-    private void goBack() throws IOException{
-        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
-        _selectedNames.add(new NameEntry(_randomButton.isDisable()+""));
-        builder.getList(_selectedNames);
-        builder.load("MainMenu.fxml");
-
+    private void goBack() {
+        _switcher.switchScene(SceneBuilder.MENU);     // TODO. Changes made: all that's required is a single call
     }
 
     /**
      * When the information is passed back to the controller,
      * we keep the previous state of the before the switch.
-     * @param _list, the selected values + the state of the sorting at the end.
+     * @param allNames The complete list of NameEntries
+     * @param selectedNames, the selected values + the state of the sorting at the end.
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> all, ObservableList<NameEntry> _list) {
-        super.setInformation(all, _list);
-        _nameListView.setItems(all);
-        //TODO remove this later
-        Collections.sort(_nameListView.getItems());
-        //determines if the list was sorted or random before.
-        if (!_list.isEmpty()) {
-            String randomOrNot = _list.get(_list.size()-1).getName();
-            _list.remove(_list.size()-1);
-            if (randomOrNot.equals("true")) {
-                onRandom();
-            } else {
-                onSort();
-            }
-        }
-        //Reselects the chosen list.
-        if (_list.size() != 0) {
-            _selectedNames = _list;
-            for (NameEntry name: _selectedNames) {
-                _nameListView.getSelectionModel().select(name);
-            }
-        }
+    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        super.setInformation(allNames, selectedNames);
+        _nameListView.setItems(allNames);
+    }
+
+    @Override
+    public void switchTo() {
+        Collections.sort(_nameListView.getItems());     // TODO remove this later
     }
 }

@@ -1,8 +1,8 @@
 package app.views;
 
-import app.backend.FSWrapper;
 import app.backend.NameEntry;
 import app.controllers.ParentController;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -10,56 +10,91 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.naming.Name;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * This class allows the scene to be created. This is done by
- * sending the stage to the controller and allowing the controller
- * to recreate the scene.
+ * Singleton class that manages scenes and switching between them.
+ * Scenes are stored as a list.
  *
  * @author Brian Nguyen
  */
-public class SceneBuilder extends FXMLLoader {
+public class SceneBuilder {      //could be renamed SceneSwitcher
     private Stage _stage;
-    private ObservableList<NameEntry> _allNames;
-    private ObservableList<NameEntry> _list;
 
-    //Needs to have the primary stage in order to update it.
-    public SceneBuilder(ObservableList<NameEntry> all, Stage stage) {
-        _list = FXCollections.observableList(new ArrayList<>());
-        _allNames = all;
+    // TODO.
+    private ObservableList<NameEntry> _allNames;
+    private ObservableList<NameEntry> _selectionList;
+
+    public static final String MENU = "MainMenu.fxml";              // TODO. Changes made: added symbolic constants
+    public static final String OPTIONS = "OptionsView.fxml";
+    public static final String LISTVIEW = "ListView.fxml";
+    public static final String PRACTICE = "Practice.fxml";
+    private Map<String, Scene> _scenes;                             // TODO. Changes made: storing scenes in a map
+    private Map<String, ParentController> _controllers;
+
+    private static SceneBuilder inst;
+
+    /**
+     * Fetch the instance of the scenebuilder.
+     * @param allNames The observable list of all {@link NameEntry}s in the application
+     * @param stage The primary stage of the application
+     * @return The single instance of the scenebuilder
+     */
+    public static SceneBuilder inst(ObservableList<NameEntry> allNames, Stage stage) throws IOException {
+        if (inst == null) {
+            inst = new SceneBuilder(allNames, stage);
+        }
+        return inst;
+    }
+
+    // TODO. Changes made: singletonised class
+
+    private SceneBuilder(ObservableList<NameEntry> allNames, Stage stage) throws IOException {
+        _scenes = new HashMap<>();
+
+        _selectionList = FXCollections.observableArrayList();
+        _allNames = allNames;
         _stage = stage;
+        switchScene(MENU);
+    }
+
+    // TODO. Changes made: fetch the scene from the map and notify the controller that its scene is being switched to
+    // TODO.                Otherwise, initialise it.
+    /**
+     * Change the current scene.
+     */
+    public void switchScene(String scene) {
+        if(_scenes.containsKey(scene)) {
+            _stage.setScene(_scenes.get(scene));
+            _controllers.get(scene).switchTo();
+        } else {
+            try {
+                initScene(scene);
+                _controllers.get(scene).switchTo();
+            } catch(IOException e) {
+                e.printStackTrace();
+                // don't switch the scene because the one passed in wasn't valid.
+            }
+        }
     }
 
     /**
-     * This function allows the stage to load a scene.
-     * @param url: The path to the view
-     * @throws IOException
+     * Initialises the scene of a view for the first time.
+     * @param sceneFXML The name of the FXML file for the view
+     * @throws IOException if the FXML file is not found
      */
-    public void load(String url) throws IOException{
-        this.setLocation(this.getClass().getResource(url));
-        Parent layout = this.load();
-        setStage(getController());
-        ((ParentController) getController()).setInformation(_allNames, _list);
-        Scene scene = new Scene(layout);
+    private void initScene(String sceneFXML) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource(sceneFXML));
+        ((ParentController) loader.getController()).setInformation(_allNames, _selectionList);
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
         //allows the correct style sheet to be applied to the fxml
 //        String css = this.getClass().getResource("styles/"+url.substring(0,url.length()-4)+"css").toExternalForm();
 //        scene.getStylesheets().add(css);
+        _scenes.put(sceneFXML, scene);
         _stage.setScene(scene);
         _stage.show();
-    }
-
-    public void getList(ObservableList<NameEntry> list) {
-        _list = list;
-    }
-
-    /**
-     * This function allows the controllers to receive the stage
-     * @param controller: The current controller of the view
-     */
-    public void setStage(ParentController controller) {
-        controller.setStage(_stage);
     }
 }

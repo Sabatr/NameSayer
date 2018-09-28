@@ -1,0 +1,18 @@
+.noSelectDialogue{
+    -fx-background-color: #252b6e;
+}
+.noSelectDialogue > *.button-bar > *.container{
+    -fx-background-color: #a9e200;
+}
+.noSelectDialogue > *.label.content{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.noSelectDialogue:header *.header-panel{
+    -fx-background-color: #a59c31;
+}
+.noSelectDialogue:header *.header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: #292929;
+}

@@ -18,11 +18,12 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException, URISyntaxException {
+    public void start(Stage stage) throws URISyntaxException, IOException {
         stage.setResizable(false);
         stage.setTitle("Name Sayer Practice");
         ArrayList<NameEntry> names = NameEntry.populateNames();
-        new SceneBuilder(FXCollections.observableArrayList(names), stage).load("MainMenu.fxml");
+        SceneBuilder sceneMan = SceneBuilder.inst(FXCollections.observableArrayList(names), stage);
+        sceneMan.switchScene(SceneBuilder.MENU);
     }
 
     public static void main(String[] args) {

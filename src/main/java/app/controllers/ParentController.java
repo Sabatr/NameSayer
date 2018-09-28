@@ -1,7 +1,8 @@
 package app.controllers;
 
-import app.backend.FSWrapper;
 import app.backend.NameEntry;
+import app.views.SceneBuilder;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
@@ -10,20 +11,23 @@ import javafx.stage.Stage;
  *
  * @author Brian Nguyen
  */
-public class ParentController {
-    protected Stage _stage;
-    protected ObservableList<NameEntry> _allNames;
+public abstract class ParentController {
+
+    protected SceneBuilder _switcher;
+    protected ObservableList<NameEntry> _allNames;      // TODO. Changes made: changed field names
 
     /**
-     * Retrieves the stage so children controllers can modify it.
-     * @param stage
+     * Initialise the controller with information
      */
-    public void setStage(Stage stage) {
-        _stage = stage;
+    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        _allNames = allNames;
     }
 
-    //Hook method
-    public void setInformation(ObservableList<NameEntry> allItems, ObservableList<NameEntry> items) {
-        _allNames = allItems;
-    }
+    // TODO Controllers still need to be notified of when they get switched to, so I put this in.
+    /**
+     * Notify a controller that the scene is being switched to.
+     * App state is all set to point at the original as initalised in Main or SceneBuilder, so it does not need to
+     * be passed each time.
+     */
+    public abstract void switchTo();
 }

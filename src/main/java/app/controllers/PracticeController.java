@@ -5,6 +5,8 @@ import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,49 +23,33 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
+
+    @FXML private Label _nameDisplayed;
+    @FXML private Button _prevButton;
+    @FXML private Button _nextButton;
+    @FXML private Button _rateButton;
+    @FXML private Button _listenButton;
+    @FXML private Button _recordButton;
+    @FXML private Button _backButton;
+    @FXML private ComboBox _dropdown;
+    @FXML private HBox _rateBox;
+    @FXML private Slider _ratingSlider;
+    @FXML private Label _warningLabel;
+
     private ObservableList<NameEntry> _practiceList;
-    @FXML
-    private Label _nameDisplayed;
-    @FXML
-    private Button _prevButton;
-    @FXML
-    private Button _nextButton;
-    @FXML
-    private Button _rateButton;
-    @FXML
-    private Button _listenButton;
-    @FXML
-    private Button _recordButton;
-    @FXML
-    private Button _backButton;
-    @FXML
-    private ComboBox _dropdown;
-    @FXML
-    private HBox _rateBox;
-    @FXML
-    private Slider _ratingSlider;
-    @FXML
-    private Label _warningLabel;
-
-
     private int _currentPosition;
     private NameEntry _currentName;
 
     /**
      * This handles the next name click.
      */
-    @FXML
-    private ProgressBar _progressBar;
+    @FXML private ProgressBar _progressBar;
 
     /**
      * This handles the previous name click.
      */
-    @FXML
-    private HBox _confirmationHBox;
-    @FXML
-    private HBox _recordHBox;
-
-    private NameEntry _randomOrSort;
+    @FXML private HBox _confirmationHBox;
+    @FXML private HBox _recordHBox;
 
     private Path _currentRecording;
 
@@ -71,11 +57,7 @@ public class PracticeController extends ParentController implements EventHandler
     private Position _namePosition;
     @FXML
     public void initialize() {
-        _rateBox.setVisible(false);
-        _warningLabel.setVisible(false);
         setUpSlider();
-        _confirmationHBox.setVisible(false);
-        _progressBar.setVisible(false);
         _currentPosition = 0;
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
@@ -185,7 +167,6 @@ public class PracticeController extends ParentController implements EventHandler
     private void recordAudio() {
         if(System.getProperty("os.name").contains("Windows")) {
             System.out.println("on windows");
-            return;
         } else {
             _nextButton.setVisible(false);
             _prevButton.setVisible(false);
@@ -294,14 +275,10 @@ public class PracticeController extends ParentController implements EventHandler
 
     /**
      * A button handler which allows the user to go back to the list view.
-     * @throws IOException
      */
     @FXML
-    private void goBack() throws IOException {
-        SceneBuilder builder = new SceneBuilder(_allNames, _stage);
-        _practiceList.add(_randomOrSort);
-        builder.getList(_practiceList);
-        builder.load("ListView.fxml");
+    private void goBack() {
+        _switcher.switchScene(SceneBuilder.LISTVIEW);
     }
 
     /**
@@ -346,18 +323,27 @@ public class PracticeController extends ParentController implements EventHandler
         }
     }
 
-
     /**
      * Uses the parent hook method to get the information from the list view controller.
      * This is done so the practice view knows the list that is selected from the list view.
-     * @param items
+     * @param selectedNames The selected names
      */
     @Override
-    public void setInformation(ObservableList<NameEntry> allitems, ObservableList<NameEntry> items) {
-        super.setInformation(allitems, items);
-        _randomOrSort = items.get(items.size() - 1);
-        items.remove(items.size() - 1);
-        _practiceList = items;
+    public void setInformation(ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        super.setInformation(allNames, selectedNames);
+        _practiceList = selectedNames;
+    }
+
+    /**
+     * Upon switching to this scene, reset the components
+     */
+    @Override
+    public void switchTo() {
+        _rateBox.setVisible(false);
+        _warningLabel.setVisible(false);
+        _confirmationHBox.setVisible(false);
+        _progressBar.setVisible(false);
+        _currentPosition = 0;
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
