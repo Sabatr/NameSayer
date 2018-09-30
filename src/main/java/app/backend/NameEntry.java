@@ -353,7 +353,26 @@ public class NameEntry implements Comparable<NameEntry> {
                     break;
                 case "nameEntry":
                     parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
-                    _name = parameters.get(1);
+                    StringBuilder formattedName = new StringBuilder();
+                    String name = parameters.get(1);
+                    char[] chars = new char[name.length()];
+                    name.getChars(0, name.length(), chars, 0);
+                    boolean newWord = true;
+
+                    for(char ch: chars) {
+                        if(Character.isAlphabetic(ch)) {
+                            if(newWord) {
+                                formattedName.append(Character.toUpperCase(ch));
+                                newWord = false;
+                            } else {
+                                formattedName.append(ch);
+                            }
+                        } else if(Character.isWhitespace(ch)) {
+                            newWord = true;
+                            formattedName.append(ch);
+                        }
+                    }
+                    _name = formattedName.toString();
                     break;
                 case "rating":
                     _ratingsFile = pathPair.getValue();
