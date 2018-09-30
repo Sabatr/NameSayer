@@ -2,14 +2,9 @@ package app.controllers;
 
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * This class holds the functionality of the main menu.

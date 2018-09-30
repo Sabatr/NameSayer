@@ -31,6 +31,9 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
     public static final String OPTIONS = "OptionsView.fxml";
     public static final String LISTVIEW = "ListView.fxml";
     public static final String PRACTICE = "Practice.fxml";
+    public enum Scenes {
+        MENU
+    }
     private Map<String, Scene> _scenes;                             // TODO. Changes made: storing scenes in a map
     private Map<String, ParentController> _controllers;
 
@@ -61,8 +64,6 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
         switchScene(MENU);
     }
 
-    // TODO. Changes made: fetch the scene from the map and notify the controller that its scene is being switched to
-    // TODO.                Otherwise, initialise it.
     /**
      * Change the current scene.
      */

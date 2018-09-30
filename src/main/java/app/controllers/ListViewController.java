@@ -14,12 +14,11 @@ import java.util.Collections;
 
 /**
  * This class controls the functionality of the list scene.
- *
  */
 public class ListViewController extends ParentController {
     @FXML private ListView<NameEntry> _nameListView;
-    @FXML private ToggleButton _sortedButton;           // TODO. Suggestion: We _can_ actually have annotations on the same line
-    @FXML private ToggleButton _randomButton;           // TODO.        I don't think it looks too bad - certainly saves lines
+    @FXML private ToggleButton _sortedButton;
+    @FXML private ToggleButton _randomButton;
 
     private ObservableList<NameEntry> _selectedNames;
 
@@ -39,8 +38,6 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void onClick() {
-        // TODO. Change made: So that we don't throw away the reference to the list in the SceneBuilder object,
-        // TODO.                we set its items to those of the ListView's selection
         _selectedNames.setAll(_nameListView.getSelectionModel().getSelectedItems());
     }
 
@@ -108,7 +105,7 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void goBack() {
-        _switcher.switchScene(SceneBuilder.MENU);     // TODO. Changes made: all that's required is a single call
+        _switcher.switchScene(SceneBuilder.MENU);
     }
 
     /**
@@ -126,6 +123,6 @@ public class ListViewController extends ParentController {
 
     @Override
     public void switchTo() {
-        Collections.sort(_nameListView.getItems());     // TODO remove this later
+        Collections.sort(_nameListView.getItems());
     }
 }

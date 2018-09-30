@@ -58,7 +58,6 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     public void initialize() {
         setUpSlider();
-        _currentPosition = 0;
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
             @Override

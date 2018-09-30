@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public abstract class ParentController {
 
     protected SceneBuilder _switcher;
-    protected ObservableList<NameEntry> _allNames;      // TODO. Changes made: changed field names
+    protected ObservableList<NameEntry> _allNames;
 
     /**
      * Initialise the controller with information
@@ -24,7 +24,6 @@ public abstract class ParentController {
         _allNames = allNames;
     }
 
-    // TODO Controllers still need to be notified of when they get switched to, so I put this in.
     /**
      * Notify a controller that the scene is being switched to.
      * App state is all set to point at the original as initalised in Main or SceneBuilder, so it does not need to
