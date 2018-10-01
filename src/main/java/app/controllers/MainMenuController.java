@@ -1,10 +1,15 @@
 package app.controllers;
 
 import app.backend.NameEntry;
+import app.tools.FileFinder;
 import app.views.SceneBuilder;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 /**
  * This class holds the functionality of the main menu.
@@ -40,5 +45,11 @@ public class MainMenuController extends ParentController {
     @FXML
     private void options() {
         _switcher.switchScene(SceneBuilder.OPTIONS);
+    }
+
+    @FXML
+    private void importData() {
+      // new FileFinder("sound").choose(_switcher.getStage());
+        new FileFinder("sound").choose(_switcher.getStage());
     }
 }
