@@ -117,7 +117,6 @@ public class PracticeController extends ParentController implements EventHandler
         //Gets the versions of the current name
         _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
         //Automatically select the default value.
-        System.out.println(_dropdown.isEditable());
         _dropdown.getSelectionModel().selectFirst();
     }
 

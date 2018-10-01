@@ -123,21 +123,26 @@ public class ListViewController extends ParentController {
             if (exists) {
                 //Does not need to check if the name is selected if nothing is in the list
                 if (_selectedNames.size() == 0) {
-                    _selectedNames.add(entry);
                     _nameListView.getSelectionModel().select(position);
+                    _selectedNames.add(_nameListView.getSelectionModel().getSelectedItem());
 //                    _nameListView.getSelectionModel().select(entry);
                 } else {
+                    boolean notInSelected = true;
                     //Do not want to repeat selected names.
                     for (NameEntry selectedName : _selectedNames) {
-                        if (entry.compareTo(selectedName) != 0) {
-                            _selectedNames.add(entry);
-                            _nameListView.getSelectionModel().select(position);
+                        if (entry.compareTo(selectedName) == 0) {
+                            notInSelected = false;
                             break;
                         }
                     }
+                    if (notInSelected) {
+                        _nameListView.getSelectionModel().select(position);
+                        _selectedNames.add(_nameListView.getSelectionModel().getSelectedItem());
+                    }
                 }
             }
-            position =0;
+            //Reset for each name
+            position  =0;
             exists = false;
         }
     }

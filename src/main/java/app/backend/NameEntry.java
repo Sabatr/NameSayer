@@ -282,7 +282,8 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     @Override
     public int compareTo(NameEntry o) {
-        return this._name.compareTo(o._name);
+        //UPDATED by Brian, toLowerCase() was added because of case insensitive stuff.
+        return this._name.toLowerCase().compareTo(o._name.toLowerCase());
     }
 
     private class Version {
