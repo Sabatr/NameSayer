@@ -31,9 +31,6 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
     public static final String OPTIONS = "OptionsView.fxml";
     public static final String LISTVIEW = "ListView.fxml";
     public static final String PRACTICE = "Practice.fxml";
-    public enum Scenes {
-        MENU
-    }
     private Map<String, Scene> _scenes;                             // TODO. Changes made: storing scenes in a map
     private Map<String, ParentController> _controllers;
 
@@ -93,12 +90,17 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
         ParentController controller = (ParentController) loader.getController();
         controller.setInformation(this, _allNames, _selectionList);
         Scene scene = new Scene(root);
-        //allows the correct style sheet to be applied to the fxml
-//        String css = this.getClass().getResource("styles/"+url.substring(0,url.length()-4)+"css").toExternalForm();
-//        scene.getStylesheets().add(css);
         _scenes.put(sceneFXML, scene);
         _controllers.put(sceneFXML, controller);
         _stage.setScene(scene);
         _stage.show();
+    }
+
+    /**
+     * Retrieves the stage.
+     * @return
+     */
+    public Stage getStage() {
+        return _stage;
     }
 }
