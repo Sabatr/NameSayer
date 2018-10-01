@@ -200,6 +200,46 @@ public class ListViewController extends ParentController {
     }
 
     /**
+     * Allows the user to import a .txt file containing names they want to practice.
+     */
+    @FXML
+    private void importText() {
+        Boolean exists = false;
+        int position = 0;
+        FileFinder finder = new FileFinder("practice");
+        finder.choose(_switcher.getStage());
+        for (NameEntry entry : finder.getContent()) {
+            //Checks if the name is in the database.
+            for (NameEntry name : _allNames) {
+                if (entry.compareTo(name) == 0) {
+                    exists = true;
+                    break;
+                }
+                position++;
+            }
+            if (exists) {
+                //Does not need to check if the name is selected if nothing is in the list
+                if (_selectedNames.size() == 0) {
+                    _selectedNames.add(entry);
+                    _nameListView.getSelectionModel().select(position);
+//                    _nameListView.getSelectionModel().select(entry);
+                } else {
+                    //Do not want to repeat selected names.
+                    for (NameEntry selectedName : _selectedNames) {
+                        if (entry.compareTo(selectedName) != 0) {
+                            _selectedNames.add(entry);
+                            _nameListView.getSelectionModel().select(position);
+                            break;
+                        }
+                    }
+                }
+            }
+            position =0;
+            exists = false;
+        }
+    }
+
+    /**
      * A listener for the back button.
      */
     @FXML
