@@ -4,13 +4,19 @@ import app.backend.NameEntry;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +38,8 @@ public class ListViewController extends ParentController {
     public void initialize() {
         _sortedButton.setDisable(true);
         _searchBox.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
+        setupSearchBox();
+
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
@@ -103,16 +111,58 @@ public class ListViewController extends ParentController {
         alert.showAndWait();
     }
 
+    private void setupSearchBox() {
+        _searchBox.getEditor().textProperty().addListener(
+                new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        String[] comboText = newValue.split("[ -]+");
+                        ArrayList<String> matchingNames = new ArrayList<>();
+                        for(String word: comboText) {
+                            for (NameEntry name: _allNames) {
+                                if (name.getName().startsWith(word)) {
+                                    matchingNames.add(name.getName());
+                                }
+                            }
+                        }
+                        _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+                        int rowsToDisplay = matchingNames.size() > 10 ? 10 : matchingNames.size();
+                        _searchBox.setVisibleRowCount(rowsToDisplay);
+                        if(!_searchBox.isShowing()) {
+                            _searchBox.show();
+                        }
+                    }
+        });
+    }
+
+    /**
+     * When the user types in the combobox at the top of the screen, this method filters out the names and
+     * shows matching suggestions
+     */
+    @FXML
+    private void onTypeInCombo() {
+
+    }
+
     /**
      * Allows the user to import a .txt file containing names they want to practice.
      */
     @FXML
     private void importText() {
-        Boolean exists = false;
-        int position = 0;
         FileFinder finder = new FileFinder("practice");
         finder.choose(_switcher.getStage());
-        for (NameEntry entry : finder.getContent()) {
+        ObservableList<NameEntry> names = finder.getContent();
+        selectNames(names);
+    }
+
+    /**
+     * Given a list of Names, search for them in the database and select them if they exist.
+     * @param names A list of dummy NameEntry objects (ones with only the name field set).
+     */
+    private void selectNames(ObservableList<NameEntry> names) {
+        Boolean exists = false;
+        int position = 0;
+        for (NameEntry entry : names) {
             //Checks if the name is in the database.
             for (NameEntry name : _allNames) {
                 if (entry.compareTo(name) == 0) {
@@ -146,6 +196,7 @@ public class ListViewController extends ParentController {
             position  =0;
             exists = false;
         }
+        _nameListView.getSelectionModel().getSelectedItems().setAll(_selectedNames);
     }
 
     /**
