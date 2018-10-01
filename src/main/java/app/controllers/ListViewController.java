@@ -21,6 +21,7 @@ public class ListViewController extends ParentController {
     @FXML private ListView<NameEntry> _nameListView;
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
+    @FXML private ComboBox<String> _searchBox;
 
     private ObservableList<NameEntry> _selectedNames;
 
@@ -30,7 +31,7 @@ public class ListViewController extends ParentController {
      */
     public void initialize() {
         _sortedButton.setDisable(true);
-
+        _searchBox.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
