@@ -302,17 +302,28 @@ public class NameEntry implements Comparable<NameEntry> {
 
     // ********** Extracting names from the filesystem **********
 
+    public static void populateNames() throws URISyntaxException {
+        populateNames(null);
+    }
+
     /**
      * Extract names from a filesystem. I will epxlain why this is so complicated later on.
      */
-    public static ArrayList<NameEntry> populateNames() throws URISyntaxException {
-        FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI());
+    public static void populateNames(Path soundfilesFolder) throws URISyntaxException {
+        FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
         FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
         try {
             fsWrapOne.copyTo(fsWrapTwo);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Having populated the names database, get all the names present
+     */
+    public static ArrayList<NameEntry> getNames() throws URISyntaxException {
+        FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
 
         ArrayList<NameEntry> names = new ArrayList<>();
         List<Pair<String, Path>> paths = fsWrapTwo.getAllContentOfType("nameEntry");

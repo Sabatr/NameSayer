@@ -71,10 +71,14 @@ public class FSWrapper {
     private final String FILESET = "fileSet";
     private final String[] ALLTAGS = {DIR, DIRSET, FILE, FILESET};
 
+    public FSWrapper(URI structure) {
+        this(structure, null);
+    }
+
     /**
      * Construct the FSWrapper.
      */
-    public FSWrapper(URI structure) {
+    public FSWrapper(URI structure, Path customContentDir) {
         if(!structure.toString().contains("jar")) {
             workingDir = Paths.get("").toAbsolutePath();
         } else {
@@ -87,6 +91,25 @@ public class FSWrapper {
         }
 
         extractFileStructure(structure);
+
+        Element rootElement = fsStructure.getDocumentElement();
+        if(customContentDir == null) {
+            if (!rootElement.getTagName().equals("rootDir")) {
+                throw new RuntimeException("No rootDir specified in FS config file");
+            }
+            if (!rootElement.hasAttribute("name")) {
+                throw new RuntimeException("No name attribute for root dir in FS config file");
+            }
+            rootContentDir = workingDir.resolve(rootElement.getAttribute("name"));
+        } else {
+            if(!Files.exists(customContentDir)) {
+                throw new RuntimeException("Contentdir doesn't exist");
+            }
+            rootContentDir = customContentDir;
+            workingDir = customContentDir.getParent();
+            fsStructure.getDocumentElement().setAttribute("name", customContentDir.getFileName().toString());
+        }
+        
         xpath = XPathFactory.newInstance().newXPath();
 
         if(!Files.exists(rootContentDir)) {
@@ -158,15 +181,6 @@ public class FSWrapper {
         } catch (IOException e) {
             throw new RuntimeException("Error reading FS config", e);
         }
-
-        Element rootElement = fsStructure.getDocumentElement();
-        if(!rootElement.getTagName().equals("rootDir")) {
-            throw new RuntimeException("No rootDir specified in FS config file");
-        }
-        if(!rootElement.hasAttribute("name")) {
-            throw new RuntimeException("No name attribute for root dir in FS config file");
-        }
-        rootContentDir = workingDir.resolve(rootElement.getAttribute("name"));
     }
 
     /**
