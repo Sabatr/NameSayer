@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.backend.BashRunner;
+import app.backend.CompositeName;
 import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
@@ -145,6 +146,14 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void playAudio() {
+
+        if(_currentName instanceof CompositeName) {
+            Alert lert = new Alert(Alert.AlertType.INFORMATION);
+            lert.setTitle("Feature not ready");
+            lert.setContentText("Still have to implement the playback of full names");
+            lert.showAndWait();
+            return;
+        }
 
         disableAll();
 

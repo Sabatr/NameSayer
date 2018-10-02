@@ -1,0 +1,58 @@
+package app.backend;
+
+import app.backend.filesystem.FSWrapper;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CompositeName extends NameEntry {
+
+    private List<NameEntry> _names;
+    private boolean audioGenerated = false;
+
+    public CompositeName(List<NameEntry> names, String fullname) throws URISyntaxException {
+        super(fullname);
+        _names = names;
+        _fsMan = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
+
+        List<Path> ratingsFilePathElements = _fsMan.getFilesByParameter("compRatings");
+        _ratingsFile = ratingsFilePathElements.get(ratingsFilePathElements.size() - 1);
+
+        LocalDateTime ldt = LocalDateTime.now();
+        String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
+        String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
+        Path pathToAudio = _fsMan.createFile("compositeName", formattedDate, formattedTime, fullname);
+        _mainVersion = new Version("YOU", formattedDate + "_" + formattedTime, pathToAudio);
+    }
+
+    public void concateanteAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
+        List<Path> audioPaths = new ArrayList<>();
+        for(NameEntry name: _names) {
+            audioPaths.add(name.getAudioForVersion(name.getVersions().get(0)));
+        }
+
+        BashRunner br = new BashRunner(handler);
+        br.runConcatCommands(audioPaths, _mainVersion._resource);
+    }
+
+    public Path getAudio() {
+        return _mainVersion._resource;
+    }
+
+    @Override
+    public Path addVersion(String author) {
+        LocalDateTime ldt = LocalDateTime.now();
+        String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
+        String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
+        Path resource = _fsMan.createFile("compositeName", formattedDate, formattedTime, getName());
+
+        _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
+        return resource;
+    };
+}

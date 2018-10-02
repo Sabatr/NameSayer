@@ -19,15 +19,20 @@ import java.util.Map;
 public class NameEntry implements Comparable<NameEntry> {
 
     private String DEFAULT_AUTHOR = "You";
-    private FSWrapper _fsMan;
+    protected FSWrapper _fsMan;
     private String _name;
-    private Version _mainVersion;
-    private Path _ratingsFile;
-    private Version _temporaryVersion;
+    protected Version _mainVersion;
+    protected Path _ratingsFile;
+    protected Version _temporaryVersion;
     private List<Version> _versions = new ArrayList<>();
+
+    /**
+     * Construct a dummy NameEntry with only a name and no associated audio
+     */
     public NameEntry(String name) {
         _name = name;
     }
+
     /**
      * Adds a version with the default author
      * @see NameEntry#addVersion(String author)
@@ -286,7 +291,7 @@ public class NameEntry implements Comparable<NameEntry> {
         return this._name.toLowerCase().compareTo(o._name.toLowerCase());
     }
 
-    private class Version {
+    protected class Version {
 
         Version(String auth, String date, Path resource) {
             _author = auth;
@@ -303,12 +308,15 @@ public class NameEntry implements Comparable<NameEntry> {
 
     // ********** Extracting names from the filesystem **********
 
+    /**
+     * Extract names from the default folder and copy them to the main filesystem
+     */
     public static void populateNames() throws URISyntaxException {
         populateNames(null);
     }
 
     /**
-     * Extract names from a filesystem. I will epxlain why this is so complicated later on.
+     * Extract names from a folder and copy them to the main filesystem
      */
     public static void populateNames(Path soundfilesFolder) throws URISyntaxException {
         FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
@@ -343,7 +351,7 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
-     * Extract a NameEntry from the filesystem. I will epxlain why this is so complicated later on.
+     * Extract a NameEntry from the filesystem
      */
     private NameEntry(FSWrapper fsManager, List<Pair<String, Path>> paths) {
         boolean firstVersion = true;
