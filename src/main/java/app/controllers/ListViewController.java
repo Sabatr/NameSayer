@@ -3,12 +3,8 @@ package app.controllers;
 import app.backend.NameEntry;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
@@ -16,9 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * This class controls the functionality of the list scene.
@@ -112,43 +108,74 @@ public class ListViewController extends ParentController {
     }
 
     private void setupSearchBox() {
-        _searchBox.getEditor().textProperty().addListener(
-                new ChangeListener<String>() {
-                    @Override
-                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                        String[] comboText = newValue.split("[ -]+");
-                        ArrayList<String> matchingNames = new ArrayList<>();
-                        for(String word: comboText) {
-                            for (NameEntry name: _allNames) {
-                                if (name.getName().startsWith(word)) {
-                                    matchingNames.add(name.getName());
-                                }
-                            }
-                        }
-                        _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
-                        int rowsToDisplay = matchingNames.size() > 10 ? 10 : matchingNames.size();
-                        _searchBox.setVisibleRowCount(rowsToDisplay);
-                        if(!_searchBox.isShowing()) {
-                            _searchBox.show();
+        _searchBox.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                String comboText;
+                if(!Character.isAlphabetic(event.getCharacter().codePointAt(0))) {
+                    comboText = _searchBox.getEditor().getText() + event.getCharacter();
+                } else {
+                    comboText = _searchBox.getEditor().getText();
+                }
+                System.out.println(comboText);
+                String[] words = comboText.split("[ -]+");
+                ArrayList<String> matchingNames = new ArrayList<>();
+                for(String word: words) {
+                    for (NameEntry name: _allNames) {
+                        if (name.getName().startsWith(word)) {
+                            matchingNames.add(name.getName());
                         }
                     }
+                }
+                if(words.length > 0) {
+                    _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+                } else {
+                    _searchBox.setItems(FXCollections.observableArrayList());
+                }
+                int rowsToDisplay = matchingNames.size() > 10 ? 10 : matchingNames.size();
+                _searchBox.setVisibleRowCount(rowsToDisplay);
+                _searchBox.getSelectionModel().clearSelection();
+                if(!_searchBox.isShowing()) {
+                    _searchBox.show();
+                }
+            }
         });
-    }
-
-    /**
-     * When the user types in the combobox at the top of the screen, this method filters out the names and
-     * shows matching suggestions
-     */
-    @FXML
-    private void onTypeInCombo() {
-
+//
+//                new ChangeListener<String>() {
+//                    @Override
+//                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                        if(observable.) {
+//                            return;
+//                        }
+//                        String[] comboText = newValue.split("[ -]+");
+//                        ArrayList<String> matchingNames = new ArrayList<>();
+//                        for(String word: comboText) {
+//                            for (NameEntry name: _allNames) {
+//                                if (name.getName().startsWith(word)) {
+//                                    matchingNames.add(name.getName());
+//                                }
+//                            }
+//                        }
+//                        if(comboText.length > 0) {
+//                             _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+//                        } else {
+//                            _searchBox.setItems(FXCollections.observableArrayList());
+//                        }
+//                        int rowsToDisplay = matchingNames.size() > 10 ? 10 : matchingNames.size();
+//                        _searchBox.setVisibleRowCount(rowsToDisplay);
+//                        _searchBox.getSelectionModel().clearSelection();
+//                        if(!_searchBox.isShowing()) {
+//                            _searchBox.show();
+//                        }
+//                    }
+//        });
     }
 
     /**
      * Allows the user to import a .txt file containing names they want to practice.
      */
     @FXML
-    private void importText() {
+    private void importText() throws URISyntaxException {
         FileFinder finder = new FileFinder("practice");
         finder.choose(_switcher.getStage());
         ObservableList<NameEntry> names = finder.getContent();
