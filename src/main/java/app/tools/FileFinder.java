@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 
 /**
@@ -25,7 +26,7 @@ public class FileFinder {
      * Chooses whether to open a directory chooser or txt file chooser
      * @param stage
      */
-    public void choose(Stage stage) {
+    public FileFinder choose(Stage stage) {
         if (_type.equals("sound")) {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("Directory chooser");
@@ -38,26 +39,33 @@ public class FileFinder {
             fileChooser.setTitle("Choose a file");
             _chosenFile = fileChooser.showOpenDialog(stage);
         }
+        return this;
     }
 
     /**
      *
      * @return the content in a txt file. Currently, it separates the spaces and hyphens.
      */
-    public ObservableList<NameEntry> getContent() {
-        ObservableList<NameEntry> list = FXCollections.observableArrayList();
+    public ObservableList<NameEntry> getContent() throws URISyntaxException {
         if (_chosenFile != null) {
-            try {
-                Scanner sc = new Scanner(_chosenFile);
-                while (sc.hasNextLine()) {
-                    for (String name: sc.nextLine().split("[ -]")) {
-                        list.add(new NameEntry(name));
+            if (_type.equals("practice")) {
+                ObservableList<NameEntry> list = FXCollections.observableArrayList();
+                try {
+                    Scanner sc = new Scanner(_chosenFile);
+                    while (sc.hasNextLine()) {
+                        for (String name : sc.nextLine().split("[ -]")) {
+                            list.add(new NameEntry(name));
+                        }
                     }
+                } catch (IOException exception) {
+                    System.exit(1);
                 }
-            } catch (IOException exception) {
-                System.exit(1);
+                return list;
+            } else if (_type.equals("sound")) {
+                NameEntry.populateNames(_chosenFile.toPath());
+                return FXCollections.observableArrayList(NameEntry.getNames());
             }
         }
-        return list;
+        return null;
     }
 }

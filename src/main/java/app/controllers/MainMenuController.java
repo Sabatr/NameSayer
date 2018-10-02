@@ -10,6 +10,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 /**
  * This class holds the functionality of the main menu.
@@ -48,8 +49,21 @@ public class MainMenuController extends ParentController {
     }
 
     @FXML
-    private void importData() {
+    private void importData() throws URISyntaxException {
       // new FileFinder("sound").choose(_switcher.getStage());
-        new FileFinder("sound").choose(_switcher.getStage());
+        FileFinder finder = new FileFinder("sound").choose(_switcher.getStage());
+        ObservableList<NameEntry> names = finder.getContent();
+
+        for(NameEntry name: names) {
+            boolean exists = false;
+            for(NameEntry compareTo: _allNames) {
+                if(name.compareTo(compareTo) == 0) {
+                    exists = true;
+                }
+            }
+            if(!exists) {
+                _allNames.add(name);
+            }
+        }
     }
 }
