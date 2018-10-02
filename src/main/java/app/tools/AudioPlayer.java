@@ -83,7 +83,6 @@ public class AudioPlayer extends Task<Void> {
                 totalBytes += nBytesWritten;
             }
         }
-
         _sourceLine.drain();
         _sourceLine.close();
     }

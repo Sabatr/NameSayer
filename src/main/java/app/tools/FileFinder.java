@@ -66,6 +66,6 @@ public class FileFinder {
                 return FXCollections.observableArrayList(NameEntry.getNames());
             }
         }
-        return null;
+        return FXCollections.observableArrayList();
     }
 }
