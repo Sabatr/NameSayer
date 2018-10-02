@@ -3,12 +3,8 @@ package app.tools;
 import java.io.File;
 import java.io.IOException;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.*;
+
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -38,6 +34,26 @@ public class AudioPlayer extends Task<Void> {
     protected Void call() throws Exception {
         playSound(_soundFile);
         return null;
+    }
+
+    /**
+     * Get the length of the audio in the file belonging to this AudioPlayer
+     */
+    public float getLength() {
+        float durationInSeconds = 0;
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(_soundFile);
+            AudioFormat format = audioInputStream.getFormat();
+            long audioFileLength = _soundFile.length();
+            int frameSize = format.getFrameSize();
+            float frameRate = format.getFrameRate();
+            durationInSeconds = (audioFileLength / (frameSize * frameRate));
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return durationInSeconds;
     }
 
     /**

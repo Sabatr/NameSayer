@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import java.util.List;
 public class CompositeName extends NameEntry {
 
     private List<NameEntry> _names;
-    private boolean audioGenerated = false;
 
     public CompositeName(List<NameEntry> names, String fullname) throws URISyntaxException {
         super(fullname);
@@ -39,6 +39,10 @@ public class CompositeName extends NameEntry {
 
         BashRunner br = new BashRunner(handler);
         br.runConcatCommands(audioPaths, _mainVersion._resource);
+    }
+
+    public boolean hasConcat() {
+        return Files.exists(_mainVersion._resource);
     }
 
     public Path getAudio() {

@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 
 import java.io.File;
 import java.io.IOException;
@@ -145,13 +146,14 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio of the selected audio file.
      */
     @FXML
-    private void playAudio() {
+    private void playAudio() throws IOException {
 
         if(_currentName instanceof CompositeName) {
-            Alert lert = new Alert(Alert.AlertType.INFORMATION);
-            lert.setTitle("Feature not ready");
-            lert.setContentText("Still have to implement the playback of full names");
-            lert.showAndWait();
+            CompositeName cName = (CompositeName) _currentName;
+            System.out.println("testing existence of " + _currentName.getName());
+            if(!cName.hasConcat()) {
+                cName.concateanteAudio(this::handle);
+            }
             return;
         }
 
@@ -160,10 +162,11 @@ public class PracticeController extends ParentController implements EventHandler
         _progressBar.setVisible(true);
         File audioResource = _currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()).toFile();
         AudioPlayer player = new AudioPlayer(audioResource, this, "PlayAudio");
+        float timeInSeconds = player.getLength();
         Thread thread = new Thread(player);
         thread.start();
 
-        Timer timer = new Timer(_progressBar, this, "PlayAud", 2);
+        Timer timer = new Timer(_progressBar, this, "PlayAud", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
     }
@@ -186,7 +189,7 @@ public class PracticeController extends ParentController implements EventHandler
             runner.runRecordCommand(pathToUse);
 
             _progressBar.setVisible(true);
-            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 5));
+            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 3));
             thread.start();
         }
     }
@@ -218,6 +221,12 @@ public class PracticeController extends ParentController implements EventHandler
                 _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
                 System.out.println(event.getSource().getValue());
+            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
+                try {
+                    playAudio();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());
