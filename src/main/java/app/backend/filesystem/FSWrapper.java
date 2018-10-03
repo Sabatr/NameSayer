@@ -414,15 +414,15 @@ public class FSWrapper {
         List<Path> pathList = new ArrayList<>();
 
         List<Pair<String, Path>> paths = getContent(type, params);
-        List<Element> allChildren = new ArrayList<>();
-        getAllChildren(getElementOfType(type), allChildren);
-        if(allChildren.isEmpty()) {
+        List<Element> allParents = getAccessPathOfType(type);
+        if(allParents.isEmpty()) {
+            System.out.println("empty childrenlist");
             return pathList;
         }
 
-        for(Pair<String, Path> pathPair: paths) {
-            for(Element e: allChildren) {
-                if(pathPair.getKey().equals(e.getAttribute(type))) {
+        for(Element e: allParents) {
+             for(Pair<String, Path> pathPair: paths) {
+                if(pathPair.getKey().equals(e.getAttribute("type"))) {
                     pathList.add(pathPair.getValue());
                 }
             }
@@ -601,7 +601,6 @@ public class FSWrapper {
         // the first "parent" is the file itself
         for(Element parent: parentList) {
             if(parent.hasAttribute("name")) {
-                if(file.getFileName().toString().equals(""))
                 if (! upFile.getFileName().toString().equals(parent.getAttribute("name"))) {
                     return null;
                 }

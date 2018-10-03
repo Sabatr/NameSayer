@@ -1,10 +1,12 @@
 package app.controllers;
 
+import app.backend.CompositeName;
 import app.backend.NameEntry;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
@@ -14,7 +16,9 @@ import javafx.scene.input.KeyEvent;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * This class controls the functionality of the list scene.
@@ -26,6 +30,7 @@ public class ListViewController extends ParentController {
     @FXML private ComboBox<String> _searchBox;
 
     private ObservableList<NameEntry> _selectedNames;
+    private List<CompositeName> _addedComposites;
 
     /**
      * Initially, the sorted button is selected by default.
@@ -35,6 +40,7 @@ public class ListViewController extends ParentController {
         _sortedButton.setDisable(true);
         _searchBox.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
         setupSearchBox();
+        _addedComposites = FXCollections.observableArrayList();
 
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -80,6 +86,7 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void practiceButton() {
+        _selectedNames.addAll(_addedComposites);
         if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {
@@ -108,67 +115,94 @@ public class ListViewController extends ParentController {
     }
 
     private void setupSearchBox() {
-        _searchBox.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>() {
+        _searchBox.getEditor().setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                String comboText;
-                if(!Character.isAlphabetic(event.getCharacter().codePointAt(0))) {
-                    comboText = _searchBox.getEditor().getText() + event.getCharacter();
-                } else {
-                    comboText = _searchBox.getEditor().getText();
+                String comboText = _searchBox.getEditor().getText();
+//                System.out.println("update editor: [" + comboText + "]");
+                if(comboText.length() == 0) {
+                    _searchBox.setItems(FXCollections.observableArrayList(new ArrayList<>(0)));
+                    _searchBox.getSelectionModel().clearSelection();
+                    if(_searchBox.isShowing()) {
+                        _searchBox.hide();
+                    }
+                    return;
                 }
-                System.out.println(comboText);
-                String[] words = comboText.split("[ -]+");
-                ArrayList<String> matchingNames = new ArrayList<>();
-                for(String word: words) {
-                    for (NameEntry name: _allNames) {
-                        if (name.getName().startsWith(word)) {
-                            matchingNames.add(name.getName());
-                        }
+
+                String[] words = comboText.split("[ -]");
+                StringBuilder possibleFullName = new StringBuilder();
+
+                if(words.length >= 2) {
+                    String[] wordsLessOne = Arrays.copyOf(words, words.length - 1);
+                    List<NameEntry> nameComponents = matchFullName(wordsLessOne);
+                    for(NameEntry nameComp: nameComponents) {
+                        possibleFullName.append(nameComp.getName() + " ");
                     }
                 }
-                if(words.length > 0) {
-                    _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
-                } else {
-                    _searchBox.setItems(FXCollections.observableArrayList());
+
+                ArrayList<String> matchingNames = new ArrayList<>();
+//                System.out.println("Fullname-1: " + possibleFullName.toString());
+                for(NameEntry name: _allNames) {
+                    if(name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
+                        matchingNames.add(possibleFullName.toString() + name.getName());
+                    }
                 }
-                int rowsToDisplay = matchingNames.size() > 10 ? 10 : matchingNames.size();
-                _searchBox.setVisibleRowCount(rowsToDisplay);
-                _searchBox.getSelectionModel().clearSelection();
+                _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+
+//                System.out.println("Number of names: " + matchingNames.size());
+//                for(String matchingName: matchingNames) {
+//                    System.out.println("\t\t" + matchingName);
+//                }
                 if(!_searchBox.isShowing()) {
                     _searchBox.show();
                 }
             }
         });
-//
-//                new ChangeListener<String>() {
-//                    @Override
-//                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                        if(observable.) {
-//                            return;
-//                        }
-//                        String[] comboText = newValue.split("[ -]+");
-//                        ArrayList<String> matchingNames = new ArrayList<>();
-//                        for(String word: comboText) {
-//                            for (NameEntry name: _allNames) {
-//                                if (name.getName().startsWith(word)) {
-//                                    matchingNames.add(name.getName());
-//                                }
-//                            }
-//                        }
-//                        if(comboText.length > 0) {
-//                             _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
-//                        } else {
-//                            _searchBox.setItems(FXCollections.observableArrayList());
-//                        }
-//                        int rowsToDisplay = matchingNames.size() > 10 ? 10 : matchingNames.size();
-//                        _searchBox.setVisibleRowCount(rowsToDisplay);
-//                        _searchBox.getSelectionModel().clearSelection();
-//                        if(!_searchBox.isShowing()) {
-//                            _searchBox.show();
-//                        }
-//                    }
-//        });
+    }
+
+    /**
+     * Matches a full name to its individual components
+     * @param words An array of words to match as names in the database
+     * @return A List of NameEntrys corresponding to the individual names in the full name
+     */
+    public List<NameEntry> matchFullName(String... words) {
+        boolean aWordDoesntMatch = false;
+        List<NameEntry> nameComponents = new ArrayList<>();
+
+        int i = words[0].isEmpty() ? 1 : 0;
+        for(; i < words.length; i++) {
+            aWordDoesntMatch = true;
+            for(NameEntry name: _allNames) {
+                if(name.getName().equalsIgnoreCase(words[i])) {
+                    aWordDoesntMatch = false;
+                    nameComponents.add(name);
+                    break;
+                }
+            }
+            if(aWordDoesntMatch) {
+                return new ArrayList<>();
+            }
+        }
+        return nameComponents;
+    }
+
+    /**
+     * After the user enters a full name to practice, search for its components and package them
+     */
+    @FXML
+    private void doSearch(ActionEvent event) throws URISyntaxException {
+        if(_searchBox.getValue() == null) {
+            return;
+        }
+
+        String[] words = _searchBox.getValue().split("[ -]");
+        List<NameEntry> nameComponents = matchFullName(words);
+        if(nameComponents.isEmpty()) {
+            return;
+        }
+
+        CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+        _addedComposites.add(fullName);
     }
 
     /**
@@ -182,7 +216,10 @@ public class ListViewController extends ParentController {
         if (!names.isEmpty()) {
             selectNames(names);
         }
-
+        if(names == null) {
+            return;
+        }
+        selectNames(names);
     }
 
     /**

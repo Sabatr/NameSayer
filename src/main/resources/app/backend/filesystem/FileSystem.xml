@@ -1,5 +1,9 @@
 <?xml version = "1.0"?>
 <rootDir type="root" name="names">
+    <dir type="composites" name="composites">
+        <file type="compRatings" name="ratingsOfComps.txt" createNew="true"/>
+        <fileSet type="compositeName" nameFormat="%1_%2_%3.wav"/>
+    </dir>
     <dirSet type="nameEntry" nameFormat="%1">
         <dir type="versions" name="versions">
             <fileSet type="soundFile" nameFormat="%4_%2_%3_%1.wav" copy="true" />

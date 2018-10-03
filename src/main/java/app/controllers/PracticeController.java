@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.backend.BashRunner;
 import app.tools.AchievementsManager;
+import app.backend.CompositeName;
 import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
@@ -14,8 +15,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.AudioClip;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
@@ -130,15 +133,36 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio of the selected audio file.
      */
     @FXML
-    private void playAudio() {
+    private void playAudio() throws IOException {
+        if(_currentName instanceof CompositeName) {
+            CompositeName cName = (CompositeName) _currentName;
+            if(!cName.hasConcat()) {
+                cName.concateanteAudio(this::handle);
+                return;
+            }
+        }
+
         disableAll();
         _progressBar.setVisible(true);
-        File audioResource = _currentName.getAudioForVersion(_dateAndTime).toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, this, "PlayAudio");
+        Path audioResource = _currentName.getAudioForVersion(_dateAndTime);
+        playGenericAudio("PlayAudio", audioResource);
+    }
+
+    /**
+     * Plays the current name's audio.
+     * Used for playing both Database audio and audio the user has just recorded
+     * @param taskTitle The title to pass to the {@link javafx.concurrent.Task} for determining whether or not we were
+     *                  playing recorded audio or database audio
+     * @param audioFilePath The path to the audio file to play
+     */
+    private void playGenericAudio(String taskTitle, Path audioFilePath) {
+        File audioResource = audioFilePath.toFile();
+        AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
+        float timeInSeconds = player.getLength();
         Thread thread = new Thread(player);
         thread.start();
 
-        Timer timer = new Timer(_progressBar, this, "PlayAud", 2);
+        Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
       //  _currentName.getBestAudio(_currentName);
@@ -162,7 +186,7 @@ public class PracticeController extends ParentController implements EventHandler
             runner.runRecordCommand(pathToUse);
 
             _progressBar.setVisible(true);
-            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 5));
+            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 3));
             thread.start();
         }
     }
@@ -194,6 +218,13 @@ public class PracticeController extends ParentController implements EventHandler
                // _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
                 System.out.println(event.getSource().getValue());
+            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
+                System.out.println("playing concatted audio");
+                try {
+                    playAudio();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());
@@ -229,14 +260,9 @@ public class PracticeController extends ParentController implements EventHandler
 
         disableAll();
         _progressBar.setVisible(true);
-        File audioResource = _currentRecording.toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, this, "RAudio");
-        Thread thread = new Thread(player);
-        thread.start();
 
-        Timer timer = new Timer(_progressBar, this, "RecordAudio", 5);
-        Thread thread1 = new Thread(timer);
-        thread1.start();
+        Path audioResource = _currentRecording;
+        playGenericAudio("RecordAudio", audioResource);
     }
 
     /**
