@@ -104,19 +104,6 @@ public class NameEntry implements Comparable<NameEntry> {
         return _name;
     }
 
-    /**
-     * Return a list of versions based on their ID: (at the moment a version's ID is its date)
-     * @return List of version dates
-     */
-    public List<String> getVersions() {
-
-        List<String> dates = new ArrayList<String>();
-        dates.add(_mainVersion._dateTime);
-        for(Version ver: _versions) {
-            dates.add(ver._dateTime);
-        }
-        return dates;
-    }
 
     /**
      * Return the filepath of the audio for the version
@@ -158,6 +145,18 @@ public class NameEntry implements Comparable<NameEntry> {
                 saveRating(dateAndTime, rating);
             }
         }
+    }
+
+    public String getHighestRating() {
+        String dateAndTime = _mainVersion._dateTime;
+        int highestRating = _mainVersion.rating;
+        for (Version version : _versions) {
+            if (version.rating > highestRating) {
+                highestRating = version.rating;
+                dateAndTime = version._dateTime;
+            }
+        }
+        return dateAndTime;
     }
 
     /**
@@ -211,22 +210,14 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     public int getRating(String dateAndTime) {
         if(_mainVersion._dateTime.equals(dateAndTime)) {
-            if(_mainVersion.rating != -1) {
-                return _mainVersion.rating;
-            } else {
-                return getRatingFromFile(dateAndTime);
-            }
+            return _mainVersion.rating;
         }
         for(Version ver: _versions) {
             if(ver._dateTime.equals(dateAndTime)) {
-                if(ver.rating != -1) {
-                    return ver.rating;
-                } else {
-                    return getRatingFromFile(dateAndTime);
-                }
+                return ver.rating;
             }
         }
-        return -1;
+        return 10;
     }
 
     /**
@@ -251,29 +242,10 @@ public class NameEntry implements Comparable<NameEntry> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        //defaults to 10
+        return 10;
     }
-
-    public double averageRating() {
-        int sum = 0;
-        int n = 0;
-        if(_mainVersion.rating != 1) {
-            sum += _mainVersion.rating;
-            n++;
-        }
-        for(Version ver: _versions) {
-            int rating = getRating(ver._dateTime);
-            if(rating != 1) {
-                sum += rating;
-                n++;
-            }
-        }
-
-        if(n == 0) {
-            return -1;
-        }
-        return ((double) sum / (double) n);
-    }
+    
 
     /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised

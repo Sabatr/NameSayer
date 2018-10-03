@@ -5,21 +5,16 @@ import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
@@ -31,7 +26,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML private Button _listenButton;
     @FXML private Button _recordButton;
     @FXML private Button _backButton;
-    @FXML private ComboBox _dropdown;
+    //@FXML private ComboBox _dropdown;
     @FXML private HBox _rateBox;
     @FXML private Slider _ratingSlider;
     @FXML private Label _warningLabel;
@@ -39,6 +34,7 @@ public class PracticeController extends ParentController implements EventHandler
     private ObservableList<NameEntry> _practiceList;
     private int _currentPosition;
     private NameEntry _currentName;
+    private String _dateAndTime;
 
     /**
      * This handles the next name click.
@@ -73,10 +69,11 @@ public class PracticeController extends ParentController implements EventHandler
                         //Renables button when the position is somewhere in the middle.
                         _namePosition = Position.MIDDLE;
                     }
-                    updateVersions();
+                   // updateVersions();
                 } else {
                     _namePosition = Position.ONLY;
                 }
+                _dateAndTime = _currentName.getHighestRating();
                 updateChangeButtons();
             }
         });
@@ -110,17 +107,6 @@ public class PracticeController extends ParentController implements EventHandler
     }
 
     /**
-     * This updates the version dropdown lists.
-     */
-    private void updateVersions() {
-        _currentName =_practiceList.get(_currentPosition);
-        //Gets the versions of the current name
-        _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
-        //Automatically select the default value.
-        _dropdown.getSelectionModel().selectFirst();
-    }
-
-    /**
      * This handles the next name click.
      */
     @FXML
@@ -145,11 +131,9 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void playAudio() {
-
         disableAll();
-
         _progressBar.setVisible(true);
-        File audioResource = _currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()).toFile();
+        File audioResource = _currentName.getAudioForVersion(_dateAndTime).toFile();
         AudioPlayer player = new AudioPlayer(audioResource, this, "PlayAudio");
         Thread thread = new Thread(player);
         thread.start();
@@ -157,6 +141,7 @@ public class PracticeController extends ParentController implements EventHandler
         Timer timer = new Timer(_progressBar, this, "PlayAud", 2);
         Thread thread1 = new Thread(timer);
         thread1.start();
+      //  _currentName.getBestAudio(_currentName);
     }
 
     /**
@@ -169,8 +154,7 @@ public class PracticeController extends ParentController implements EventHandler
         } else {
             _nextButton.setVisible(false);
             _prevButton.setVisible(false);
-            disableAll();
-
+            disableAll();;
             Path pathToUse = _currentName.addVersion();
             _currentRecording = pathToUse;
             BashRunner runner = new BashRunner(this);
@@ -198,7 +182,7 @@ public class PracticeController extends ParentController implements EventHandler
                 _recordHBox.setVisible(false);
                 _recordHBox.setDisable(true);
                 _listenButton.setDisable(false);
-                _dropdown.setDisable(false);
+               // _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals("PlayAudio")) {
                 _progressBar.progressProperty().unbind();
                 _progressBar.setProgress(0);
@@ -206,7 +190,7 @@ public class PracticeController extends ParentController implements EventHandler
                 _listenButton.setDisable(false);
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
-                _dropdown.setDisable(false);
+               // _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
                 System.out.println(event.getSource().getValue());
             }
@@ -217,7 +201,7 @@ public class PracticeController extends ParentController implements EventHandler
 
     private void disableAll() {
         _listenButton.setDisable(true);
-        _dropdown.setDisable(true);
+       // _dropdown.setDisable(true);
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
     }
@@ -229,7 +213,7 @@ public class PracticeController extends ParentController implements EventHandler
     private void keepRecording() {
         //Does stuff to save the audio file.
         _currentName.finaliseLastVersion();
-        _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
+    //    _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
         enableButtons();
     }
 
@@ -301,26 +285,15 @@ public class PracticeController extends ParentController implements EventHandler
         _ratingSlider.setSnapToTicks(true);
     }
     @FXML
-    private void getRating() {
-        _currentName.rateVersion((String) _dropdown.getSelectionModel().getSelectedItem(), (int) _ratingSlider.getValue());
-        dropMenuAction();
+    private void confirmRating() {
+        _currentName.rateVersion(_dateAndTime, (int) _ratingSlider.getValue());
         _rateBox.setVisible(false);
         _recordHBox.setDisable(false);
-        _dropdown.setDisable(false);
         _listenButton.setDisable(false);
+        _dateAndTime = _currentName.getHighestRating();
         updateChangeButtons();
     }
 
-    @FXML
-    private void dropMenuAction() {
-        String date = (String) _dropdown.getSelectionModel().getSelectedItem();
-        int rating = _currentName.getRating(date);
-        if (0 <= rating && rating < 5) {
-            _warningLabel.setVisible(true);
-        } else {
-            _warningLabel.setVisible(false);
-        }
-    }
 
     /**
      * Uses the parent hook method to get the information from the list view controller.
@@ -346,7 +319,7 @@ public class PracticeController extends ParentController implements EventHandler
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
-        updateVersions();
-        dropMenuAction();
+        //Gets the best version for the currentName
+        _dateAndTime = _currentName.getHighestRating();
     }
 }
