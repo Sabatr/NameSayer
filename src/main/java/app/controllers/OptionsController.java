@@ -31,7 +31,7 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML
     private Button _toggleButton;
     @FXML
-    private GridPane _achievementsList;
+    private ScrollPane _achievementsList;
     @FXML
     private Pane _micPane;
     @FXML
@@ -39,7 +39,14 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML
     private Pane _helpPane;
     @FXML
-    private Label _practiceProgress;
+    private ProgressBar _practiceOneProgress;
+    @FXML
+    private Label _practiceOneLabel;
+    @FXML
+    private ProgressBar _practiceTenBar;
+    @FXML
+    private Label _practiceTenLabel;
+
     private boolean _micToggled;
     private enum Options {TEST,HELP,ABOUT,ACHIEVEMENTS}
     private Options _optionPicked;
@@ -49,7 +56,6 @@ public class OptionsController extends ParentController implements EventHandler<
         _optionPicked = Options.TEST;
         loadPanel();
         _micToggled = false;
-        AchievementsManager.getInstance();
     }
 
     /**
@@ -178,6 +184,15 @@ public class OptionsController extends ParentController implements EventHandler<
 
     @Override
     public void switchTo() {
-        _practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
+        updatePracticeProgress();
+
+    }
+
+    private void updatePracticeProgress() {
+        //_practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
+            AchievementsManager.getInstance().updatePracticeProgress(_practiceOneProgress,_practiceOneLabel,"onePractice");
+            AchievementsManager.getInstance().updatePracticeProgress(_practiceTenBar,_practiceTenLabel,"tenPractice");
+
+
     }
 }
