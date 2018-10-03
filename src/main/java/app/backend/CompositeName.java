@@ -31,6 +31,16 @@ public class CompositeName extends NameEntry {
         _mainVersion = new Version("YOU", formattedDate + "_" + formattedTime, pathToAudio);
     }
 
+    public static String fullName(List<NameEntry> nameComponents) {
+        StringBuilder fullNameStr = new StringBuilder();
+        int i;
+        for(i = 0; i < nameComponents.size() - 1; i++) {
+            fullNameStr.append(nameComponents.get(i) + " ");
+        }
+        fullNameStr.append(nameComponents.get(i));
+        return fullNameStr.toString();
+    }
+
     public void concateanteAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {

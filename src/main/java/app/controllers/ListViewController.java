@@ -201,12 +201,7 @@ public class ListViewController extends ParentController {
             return;
         }
 
-        StringBuilder fullNameStr = new StringBuilder();
-        for(NameEntry name: nameComponents) {
-            fullNameStr.append(name + " ");
-        }
-        System.out.println(fullNameStr.toString());
-        CompositeName fullName = new CompositeName(nameComponents, fullNameStr.toString());
+        CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
         _addedComposites.add(fullName);
     }
 
