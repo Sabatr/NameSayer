@@ -245,7 +245,7 @@ public class NameEntry implements Comparable<NameEntry> {
         //defaults to 10
         return 10;
     }
-    
+
 
     /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised

@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.backend.BashRunner;
+import app.tools.AchievementsManager;
 import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
@@ -29,7 +30,6 @@ public class PracticeController extends ParentController implements EventHandler
     //@FXML private ComboBox _dropdown;
     @FXML private HBox _rateBox;
     @FXML private Slider _ratingSlider;
-    @FXML private Label _warningLabel;
 
     private ObservableList<NameEntry> _practiceList;
     private int _currentPosition;
@@ -149,6 +149,7 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void recordAudio() {
+        AchievementsManager.getInstance().increasePracticeAttempts();
         if(System.getProperty("os.name").contains("Windows")) {
             System.out.println("on windows");
         } else {
@@ -312,7 +313,6 @@ public class PracticeController extends ParentController implements EventHandler
     @Override
     public void switchTo() {
         _rateBox.setVisible(false);
-        _warningLabel.setVisible(false);
         _confirmationHBox.setVisible(false);
         _progressBar.setVisible(false);
         _currentPosition = 0;

@@ -59,7 +59,7 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="_listenButton" layoutX="805.0" layoutY="407.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
+      <Button fx:id="_listenButton" layoutX="510.0" layoutY="407.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
       <ProgressBar fx:id="_progressBar" layoutX="197.0" layoutY="506.0" prefHeight="47.0" prefWidth="700.0" progress="0.0" />
       <Label layoutX="457.0" layoutY="14.0" styleClass="_title" text="PRACTICE" />
       <HBox fx:id="_rateBox" layoutX="167.0" layoutY="507.0" prefHeight="51.0" prefWidth="841.0">
@@ -72,6 +72,5 @@
             </Button>
          </children>
       </HBox>
-      <Label fx:id="_warningLabel" layoutX="200.0" layoutY="369.0" prefHeight="45.0" prefWidth="755.0" styleClass="_warningLabel" text="WARNING: The current sound file is rated poorly." />
    </children>
 </AnchorPane>

@@ -2,14 +2,16 @@ package app.controllers;
 
 import app.backend.BashRunner;
 import app.backend.NameEntry;
+import app.tools.AchievementsManager;
 import app.views.SceneBuilder;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -29,13 +31,17 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML
     private Button _toggleButton;
     @FXML
+    private GridPane _achievementsList;
+    @FXML
     private Pane _micPane;
     @FXML
     private Pane _aboutPane;
     @FXML
     private Pane _helpPane;
+    @FXML
+    private Label _practiceProgress;
     private boolean _micToggled;
-    private enum Options {TEST,HELP,ABOUT}
+    private enum Options {TEST,HELP,ABOUT,ACHIEVEMENTS}
     private Options _optionPicked;
 
     @FXML
@@ -43,6 +49,7 @@ public class OptionsController extends ParentController implements EventHandler<
         _optionPicked = Options.TEST;
         loadPanel();
         _micToggled = false;
+        AchievementsManager.getInstance();
     }
 
     /**
@@ -71,12 +78,17 @@ public class OptionsController extends ParentController implements EventHandler<
         loadPanel();
     }
 
-    @FXML void help() {
+    @FXML private void help() {
         _optionPicked = Options.HELP;
         loadPanel();
     }
-    @FXML void about() {
+    @FXML private void about() {
         _optionPicked = Options.ABOUT;
+        loadPanel();
+    }
+
+    @FXML private void achievements() {
+        _optionPicked = Options.ACHIEVEMENTS;
         loadPanel();
     }
 
@@ -86,17 +98,26 @@ public class OptionsController extends ParentController implements EventHandler<
                 _micPane.setVisible(true);
                 _helpPane.setVisible(false);
                 _aboutPane.setVisible(false);
+                _achievementsList.setVisible(false);
                 break;
             case HELP:
                 _helpPane.setVisible(true);
                 _micPane.setVisible(false);
                 _aboutPane.setVisible(false);
+                _achievementsList.setVisible(false);
                 break;
             case ABOUT:
                 _aboutPane.setVisible(true);
                 _micPane.setVisible(false);
                 _helpPane.setVisible(false);
+                _achievementsList.setVisible(false);
                 break;
+            case ACHIEVEMENTS:
+                _achievementsList.setVisible(true);
+                _aboutPane.setVisible(false);
+                _micPane.setVisible(false);
+                _helpPane.setVisible(false);
+
         }
 
     }
@@ -156,5 +177,7 @@ public class OptionsController extends ParentController implements EventHandler<
     }
 
     @Override
-    public void switchTo() {}
+    public void switchTo() {
+        _practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
+    }
 }
