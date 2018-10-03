@@ -147,26 +147,37 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void playAudio() throws IOException {
-
         if(_currentName instanceof CompositeName) {
             CompositeName cName = (CompositeName) _currentName;
-            System.out.println("testing existence of " + _currentName.getName());
             if(!cName.hasConcat()) {
                 cName.concateanteAudio(this::handle);
+                return;
             }
-            return;
         }
 
         disableAll();
-
         _progressBar.setVisible(true);
-        File audioResource = _currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()).toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, this, "PlayAudio");
+
+        String currentVersionDate = (String) _dropdown.getSelectionModel().getSelectedItem();
+        Path audioResource = _currentName.getAudioForVersion(currentVersionDate);
+        playGenericAudio("PlayAudio", audioResource);
+    }
+
+    /**
+     * Plays the current name's audio.
+     * Used for playing both Database audio and audio the user has just recorded
+     * @param taskTitle The title to pass to the {@link javafx.concurrent.Task} for determining whether or not we were
+     *                  playing recorded audio or database audio
+     * @param audioFilePath The path to the audio file to play
+     */
+    private void playGenericAudio(String taskTitle, Path audioFilePath) {
+        File audioResource = audioFilePath.toFile();
+        AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
         float timeInSeconds = player.getLength();
         Thread thread = new Thread(player);
         thread.start();
 
-        Timer timer = new Timer(_progressBar, this, "PlayAud", timeInSeconds);
+        Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
     }
@@ -222,6 +233,7 @@ public class PracticeController extends ParentController implements EventHandler
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
                 System.out.println(event.getSource().getValue());
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
+                System.out.println("playing concatted audio");
                 try {
                     playAudio();
                 } catch (IOException e) {
@@ -262,14 +274,9 @@ public class PracticeController extends ParentController implements EventHandler
 
         disableAll();
         _progressBar.setVisible(true);
-        File audioResource = _currentRecording.toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, this, "RAudio");
-        Thread thread = new Thread(player);
-        thread.start();
 
-        Timer timer = new Timer(_progressBar, this, "RecordAudio", 5);
-        Thread thread1 = new Thread(timer);
-        thread1.start();
+        Path audioResource = _currentRecording;
+        playGenericAudio("RecordAudio", audioResource);
     }
 
     /**

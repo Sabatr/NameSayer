@@ -213,6 +213,9 @@ public class ListViewController extends ParentController {
         FileFinder finder = new FileFinder("practice");
         finder.choose(_switcher.getStage());
         ObservableList<NameEntry> names = finder.getContent();
+        if(names == null) {
+            return;
+        }
         selectNames(names);
     }
 
