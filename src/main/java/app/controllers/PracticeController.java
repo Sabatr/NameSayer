@@ -329,6 +329,7 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @Override
     public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
+        System.out.println("Gets called");
         super.setInformation(switcher, allNames, selectedNames);
         _practiceList = selectedNames;
     }

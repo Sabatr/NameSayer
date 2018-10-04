@@ -192,7 +192,5 @@ public class OptionsController extends ParentController implements EventHandler<
         //_practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
             AchievementsManager.getInstance().updatePracticeProgress(_practiceOneProgress,_practiceOneLabel,"onePractice");
             AchievementsManager.getInstance().updatePracticeProgress(_practiceTenBar,_practiceTenLabel,"tenPractice");
-
-
     }
 }

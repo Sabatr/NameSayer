@@ -52,6 +52,7 @@ public class ListViewController extends ParentController {
     @FXML
     private void onClick() {
         _selectedNames.setAll(_nameListView.getSelectionModel().getSelectedItems());
+        System.out.println(_selectedNames);
     }
 
     /**
@@ -59,7 +60,9 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void clearSelection() {
-        _selectedNames = FXCollections.observableArrayList();
+        _addedComposites = new ArrayList<>();
+        _searchBox.setItems(FXCollections.observableArrayList());
+        _selectedNames.clear();;
         _nameListView.getSelectionModel().clearSelection();
     }
 
@@ -196,6 +199,7 @@ public class ListViewController extends ParentController {
         }
 
         String[] words = _searchBox.getValue().split("[ -]");
+
         List<NameEntry> nameComponents = matchFullName(words);
         if(nameComponents.isEmpty()) {
             return;
