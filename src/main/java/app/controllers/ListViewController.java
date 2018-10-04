@@ -54,6 +54,11 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void onClick() {
+        for (NameEntry entry: _selectedNames) {
+            if (entry.compareTo(_nameListView.getSelectionModel().getSelectedItem()) == 0) {
+                return;
+            }
+        }
         updateSelectedList(_nameListView.getSelectionModel().getSelectedItems());
     }
 
@@ -88,6 +93,7 @@ public class ListViewController extends ParentController {
 
     private void updateSelectedList(ObservableList toBeAdded) {
         _selectedNames.addAll(toBeAdded);
+        Collections.sort(_selectedNames);
         _selectListView.setItems(_selectedNames);
     }
 
@@ -96,7 +102,6 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void practiceButton() {
-      //  _selectedNames.addAll(_addedComposites);
         if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {

@@ -82,6 +82,7 @@ public class PracticeController extends ParentController implements EventHandler
         });
     }
 
+
     /**
      * These are the arrow buttons, which changes the names.
      * When at the beginning of the name, there shouldn't be an option
@@ -179,7 +180,7 @@ public class PracticeController extends ParentController implements EventHandler
         } else {
             _nextButton.setVisible(false);
             _prevButton.setVisible(false);
-            disableAll();;
+            disableAll();
             Path pathToUse = _currentName.addVersion();
             _currentRecording = pathToUse;
             BashRunner runner = new BashRunner(this);
@@ -329,8 +330,6 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @Override
     public void setInformation(SceneBuilder switcher, ObservableList<NameEntry> allNames, ObservableList<NameEntry> selectedNames) {
-        System.out.println(selectedNames);
-        System.out.println("Gets called");
         super.setInformation(switcher, allNames, selectedNames);
         _practiceList = selectedNames;
     }
@@ -347,6 +346,10 @@ public class PracticeController extends ParentController implements EventHandler
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
+        if (_practiceList.size() > 1) {
+            _namePosition = Position.FIRST;
+            updateChangeButtons();
+        }
         //Gets the best version for the currentName
         _dateAndTime = _currentName.getHighestRating();
     }

@@ -1,1 +1,2 @@
-file 'D:\Projects\206\Assignment3_206\names\Antony\versions\_21-5-2018_14-9-29_Antony.wav'
+file 'D:\Projects\206\Assignment3_206\names\A\versions\_21-5-2018_14-9-29_A.wav'
+file 'D:\Projects\206\Assignment3_206\names\A\versions\_21-5-2018_14-9-29_A.wav'
