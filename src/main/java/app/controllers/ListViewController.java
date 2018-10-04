@@ -97,6 +97,19 @@ public class ListViewController extends ParentController {
         _selectListView.setItems(_selectedNames);
     }
 
+    @FXML
+    private void clearSelected() {
+        if (_selectListView.getSelectionModel().getSelectedItem() != null) {
+            for (NameEntry entry : _selectedNames) {
+                if (entry.compareTo(_selectListView.getSelectionModel().getSelectedItem()) == 0) {
+                    _selectedNames.remove(entry);
+                    _selectListView.setItems(_selectedNames);
+                    return;
+                }
+            }
+        }
+    }
+
     /**
      * A listener for the practice button.
      */

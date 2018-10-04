@@ -234,7 +234,6 @@ public class PracticeController extends ParentController implements EventHandler
 
     private void disableAll() {
         _listenButton.setDisable(true);
-       // _dropdown.setDisable(true);
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
     }
@@ -246,7 +245,6 @@ public class PracticeController extends ParentController implements EventHandler
     private void keepRecording() {
         //Does stuff to save the audio file.
         _currentName.finaliseLastVersion();
-    //    _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
         enableButtons();
     }
 
