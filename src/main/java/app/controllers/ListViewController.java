@@ -28,15 +28,17 @@ public class ListViewController extends ParentController {
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
     @FXML private ComboBox<String> _searchBox;
+    @FXML private ListView<NameEntry> _selectListView;
 
     private ObservableList<NameEntry> _selectedNames;
-    private List<CompositeName> _addedComposites;
+    private ObservableList<CompositeName> _addedComposites;
 
     /**
      * Initially, the sorted button is selected by default.
      * Also, this selects the files needed to be displayed on the list.
      */
     public void initialize() {
+        _selectedNames = FXCollections.observableArrayList();
         _sortedButton.setDisable(true);
         _searchBox.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
         setupSearchBox();
@@ -51,7 +53,7 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void onClick() {
-        _selectedNames.setAll(_nameListView.getSelectionModel().getSelectedItems());
+        updateSelectedList(_nameListView.getSelectionModel().getSelectedItems());
     }
 
     /**
@@ -59,9 +61,9 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void clearSelection() {
-        _addedComposites = new ArrayList<>();
+        _addedComposites.clear();
         _searchBox.setItems(FXCollections.observableArrayList());
-        _selectedNames.clear();;
+        _selectedNames.clear();
         _nameListView.getSelectionModel().clearSelection();
     }
 
@@ -83,12 +85,17 @@ public class ListViewController extends ParentController {
         _sortedButton.setDisable(false);
     }
 
+    private void updateSelectedList(ObservableList toBeAdded) {
+        _selectedNames.addAll(toBeAdded);
+        _selectListView.setItems(_selectedNames);
+    }
+
     /**
      * A listener for the practice button.
      */
     @FXML
     private void practiceButton() {
-        _selectedNames.addAll(_addedComposites);
+      //  _selectedNames.addAll(_addedComposites);
         if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {
@@ -167,9 +174,9 @@ public class ListViewController extends ParentController {
      * @param words An array of words to match as names in the database
      * @return A List of NameEntrys corresponding to the individual names in the full name
      */
-    public List<NameEntry> matchFullName(String... words) {
+    public ObservableList<NameEntry> matchFullName(String... words) {
         boolean aWordDoesntMatch = false;
-        List<NameEntry> nameComponents = new ArrayList<>();
+        ObservableList<NameEntry> nameComponents = FXCollections.observableArrayList();
 
         int i = words[0].isEmpty() ? 1 : 0;
         for(; i < words.length; i++) {
@@ -182,7 +189,7 @@ public class ListViewController extends ParentController {
                 }
             }
             if(aWordDoesntMatch) {
-                return new ArrayList<>();
+                return FXCollections.observableArrayList();
             }
         }
         return nameComponents;
@@ -199,13 +206,14 @@ public class ListViewController extends ParentController {
 
         String[] words = _searchBox.getValue().split("[ -]");
 
-        List<NameEntry> nameComponents = matchFullName(words);
+        ObservableList<NameEntry> nameComponents = matchFullName(words);
         if(nameComponents.isEmpty()) {
             return;
         }
 
         CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
         _addedComposites.add(fullName);
+        updateSelectedList(_addedComposites);
     }
 
     /**
@@ -228,24 +236,33 @@ public class ListViewController extends ParentController {
     /**
      * Given a list of Names, search for them in the database and select them if they exist.
      * @param names A list of dummy NameEntry objects (ones with only the name field set).
+     * Sorry for ugly code :p
      */
     private void selectNames(ObservableList<NameEntry> names) {
         Boolean exists = false;
-        int position = 0;
+        ObservableList<NameEntry> foundItems = FXCollections.observableArrayList();
+        int numberOfPartsInNames = 0;
         for (NameEntry entry : names) {
+            String[] splitNames = entry.toString().split("[ -]");
             //Checks if the name is in the database.
-            for (NameEntry name : _allNames) {
-                if (entry.compareTo(name) == 0) {
-                    exists = true;
-                    break;
+            for (String part: splitNames) {
+                NameEntry temp = new NameEntry(part);
+                for (NameEntry name : _allNames) {
+                    if (temp.compareTo(name) == 0) {
+                        foundItems.add(name);
+                        numberOfPartsInNames++;
+                        break;
+                    }
                 }
-                position++;
+            }
+            if (numberOfPartsInNames == splitNames.length) {
+                exists = true;
             }
             if (exists) {
                 //Does not need to check if the name is selected if nothing is in the list
                 if (_selectedNames.size() == 0) {
-                    _nameListView.getSelectionModel().select(position);
-                    _selectedNames.add(_nameListView.getSelectionModel().getSelectedItem());
+                    //_nameListView.getSelectionModel().select(position);
+                    importHelper(splitNames,foundItems);
 //                    _nameListView.getSelectionModel().select(entry);
                 } else {
                     boolean notInSelected = true;
@@ -257,18 +274,33 @@ public class ListViewController extends ParentController {
                         }
                     }
                     if (notInSelected) {
-                        _nameListView.getSelectionModel().select(position);
-                        _selectedNames.add(_nameListView.getSelectionModel().getSelectedItem());
+                       // _nameListView.getSelectionModel().select(position);
+                        importHelper(splitNames,foundItems);
                     }
                 }
             }
             //Reset for each name
-            position  =0;
+            foundItems.clear();
+            numberOfPartsInNames = 0;
             exists = false;
         }
-        _nameListView.getSelectionModel().getSelectedItems().setAll(_selectedNames);
+        //_nameListView.getSelectionModel().getSelectedItems().addAll(_selectedNames);
     }
 
+    private void importHelper(String[] splitNames,ObservableList foundItems) {
+        if (splitNames.length > 1 ) {
+            try {
+                CompositeName fullName = new CompositeName(foundItems, CompositeName.fullName(foundItems));
+                _addedComposites.add(fullName);
+                updateSelectedList(_addedComposites);
+                _addedComposites.clear();
+            } catch (URISyntaxException exc){
+            }
+        } else {
+            _selectedNames.addAll(foundItems);
+            _selectListView.setItems(_selectedNames);
+        }
+    }
     /**
      * A listener for the back button.
      */

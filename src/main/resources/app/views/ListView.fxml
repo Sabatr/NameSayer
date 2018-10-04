@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/ListView.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ListViewController">
    <children>
       <AnchorPane layoutX="759.0" layoutY="110.0" prefHeight="642.0" prefWidth="324.0" styleClass="_pane" />
-      <ListView fx:id="_nameListView" layoutX="34.0" layoutY="118.0" onMouseClicked="#onClick" prefHeight="634.0" prefWidth="701.0" styleClass="_nameListView" stylesheets="@styles/ListView.css" />
+      <ListView fx:id="_nameListView" layoutX="28.0" layoutY="118.0" onMouseClicked="#onClick" prefHeight="634.0" prefWidth="355.0" styleClass="_nameListView" stylesheets="@styles/ListView.css" />
       <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="45.0" prefHeight="58.0" prefWidth="383.0" styleClass="_nameData" stylesheets="@styles/ListView.css" text="NAMES" textAlignment="CENTER" />
       <Button fx:id="_practiceButton" layoutX="766.0" layoutY="122.0" mnemonicParsing="false" onAction="#practiceButton" prefHeight="148.0" prefWidth="310.0" styleClass="_button" stylesheets="@styles/ListView.css" text="PRACTICE" />
       <Button layoutX="766.0" layoutY="311.0" mnemonicParsing="false" onAction="#clearSelection" prefHeight="148.0" prefWidth="310.0" styleClass="_button" stylesheets="@styles/ListView.css" text="CLEAR" />
@@ -19,5 +19,6 @@
       <Button layoutX="962.0" layoutY="678.0" mnemonicParsing="false" onAction="#goBack" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Back" />
       <Button layoutX="768.0" layoutY="678.0" mnemonicParsing="false" onAction="#importText" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Import" />
       <ComboBox fx:id="_searchBox" editable="true" layoutX="170.0" layoutY="45.0" onAction="#doSearch" prefHeight="40.0" prefWidth="490.0" promptText="Combine names..." />
+      <ListView fx:id="_selectListView" layoutX="396.0" layoutY="118.0" prefHeight="634.0" prefWidth="355.0" styleClass="_nameListView" stylesheets="@styles/ListView.css" />
    </children>
 </AnchorPane>

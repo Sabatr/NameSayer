@@ -51,11 +51,12 @@ public class FileFinder {
             if (_type.equals("practice")) {
                 ObservableList<NameEntry> list = FXCollections.observableArrayList();
                 try {
-                    Scanner sc = new Scanner(_chosenFile);
-                    while (sc.hasNextLine()) {
-                        for (String name : sc.nextLine().split("[ -]")) {
-                            list.add(new NameEntry(name));
-                        }
+                    Scanner scanner = new Scanner(_chosenFile);
+                    while (scanner.hasNextLine()) {
+                       // for (String name : sc.nextLine().split("[ -]")) {
+                        //System.out.println(scanner.nextLine());
+                            list.add(new NameEntry(scanner.nextLine()));
+                      //  }
                     }
                 } catch (IOException exception) {
                     System.exit(1);

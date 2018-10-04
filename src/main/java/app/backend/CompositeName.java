@@ -1,6 +1,7 @@
 package app.backend;
 
 import app.backend.filesystem.FSWrapper;
+import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class CompositeName extends NameEntry {
 
-    private List<NameEntry> _names;
+    private ObservableList<NameEntry> _names;
 
-    public CompositeName(List<NameEntry> names, String fullname) throws URISyntaxException {
+    public CompositeName(ObservableList<NameEntry> names, String fullname) throws URISyntaxException {
         super(fullname);
         _names = names;
         _fsMan = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
@@ -42,6 +43,7 @@ public class CompositeName extends NameEntry {
     }
 
     public void concateanteAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
+        //System.out.println(_names);
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {
             audioPaths.add(name.getAudioForVersion(name.getHighestRating()));
