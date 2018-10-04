@@ -52,7 +52,6 @@ public class ListViewController extends ParentController {
     @FXML
     private void onClick() {
         _selectedNames.setAll(_nameListView.getSelectionModel().getSelectedItems());
-        System.out.println(_selectedNames);
     }
 
     /**
