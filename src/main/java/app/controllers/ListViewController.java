@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URISyntaxException;
@@ -127,44 +128,38 @@ public class ListViewController extends ParentController {
         _searchBox.getEditor().setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                String comboText = _searchBox.getEditor().getText();
-//                System.out.println("update editor: [" + comboText + "]");
-                if(comboText.length() == 0) {
-                    _searchBox.setItems(FXCollections.observableArrayList(new ArrayList<>(0)));
-                    _searchBox.getSelectionModel().clearSelection();
-                    if(_searchBox.isShowing()) {
-                        _searchBox.hide();
+                    String comboText = _searchBox.getEditor().getText();
+                    //if the user deletes all the stuff, clear everything.
+                    if (comboText.length() == 0) {
+                        _searchBox.setItems(FXCollections.observableArrayList(new ArrayList<>(0)));
+                        _searchBox.getSelectionModel().clearSelection();
+                        if (_searchBox.isShowing()) {
+                            _searchBox.hide();
+                        }
+                        return;
                     }
-                    return;
-                }
+                    String[] words = comboText.split("[ -]");
+                    StringBuilder possibleFullName = new StringBuilder();
 
-                String[] words = comboText.split("[ -]");
-                StringBuilder possibleFullName = new StringBuilder();
-
-                if(words.length >= 2) {
-                    String[] wordsLessOne = Arrays.copyOf(words, words.length - 1);
-                    List<NameEntry> nameComponents = matchFullName(wordsLessOne);
-                    for(NameEntry nameComp: nameComponents) {
-                        possibleFullName.append(nameComp.getName() + " ");
+                    if (words.length >= 2) {
+                        String[] wordsLessOne = Arrays.copyOf(words, words.length - 1);
+                        List<NameEntry> nameComponents = matchFullName(wordsLessOne);
+                        for (NameEntry nameComp : nameComponents) {
+                            possibleFullName.append(nameComp.getName() + " ");
+                        }
                     }
-                }
 
-                ArrayList<String> matchingNames = new ArrayList<>();
-//                System.out.println("Fullname-1: " + possibleFullName.toString());
-                for(NameEntry name: _allNames) {
-                    if(name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
-                        matchingNames.add(possibleFullName.toString() + name.getName());
+                    ArrayList<String> matchingNames = new ArrayList<>();
+                    for (NameEntry name : _allNames) {
+                        if (name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
+                            matchingNames.add(possibleFullName.toString() + name.getName());
+                        }
                     }
-                }
-                _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+                    _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+                    if (!_searchBox.isShowing()) {
+                        _searchBox.show();
+                    }
 
-//                System.out.println("Number of names: " + matchingNames.size());
-//                for(String matchingName: matchingNames) {
-//                    System.out.println("\t\t" + matchingName);
-//                }
-                if(!_searchBox.isShowing()) {
-                    _searchBox.show();
-                }
             }
         });
     }
@@ -197,23 +192,36 @@ public class ListViewController extends ParentController {
 
     /**
      * After the user enters a full name to practice, search for its components and package them
+     * Press enter to submit the full name.
      */
     @FXML
-    private void doSearch(ActionEvent event) throws URISyntaxException {
-        if(_searchBox.getValue() == null) {
-            return;
+    private void doSearch(KeyEvent event) throws URISyntaxException {
+        boolean doesNotExist = true;
+        if (event.getCode() == KeyCode.ENTER) {
+            if(_searchBox.getValue() == null) {
+                return;
+            }
+            //Checks if the typed name already exists in the selected list.
+            for (NameEntry entry: _selectedNames) {
+                if (entry.compareTo(new NameEntry(_searchBox.getValue())) == 0) {
+                    doesNotExist = false;
+                    break;
+                }
+            }
+            if (doesNotExist) {
+                String[] words = _searchBox.getValue().split("[ -]");
+
+                ObservableList<NameEntry> nameComponents = matchFullName(words);
+                if(nameComponents.isEmpty()) {
+                    return;
+                }
+                CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+                _addedComposites.add(fullName);
+                updateSelectedList(_addedComposites);
+                _addedComposites.clear();
+            }
+            _searchBox.getItems().clear();
         }
-
-        String[] words = _searchBox.getValue().split("[ -]");
-
-        ObservableList<NameEntry> nameComponents = matchFullName(words);
-        if(nameComponents.isEmpty()) {
-            return;
-        }
-
-        CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
-        _addedComposites.add(fullName);
-        updateSelectedList(_addedComposites);
     }
 
     /**

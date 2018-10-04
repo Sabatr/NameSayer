@@ -18,7 +18,7 @@
         <ToggleButton fx:id="_sortedButton" layoutX="766.0" layoutY="507.0" onAction="#onSort" prefHeight="106.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Sort" />
       <Button layoutX="962.0" layoutY="678.0" mnemonicParsing="false" onAction="#goBack" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Back" />
       <Button layoutX="768.0" layoutY="678.0" mnemonicParsing="false" onAction="#importText" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Import" />
-      <ComboBox fx:id="_searchBox" editable="true" layoutX="170.0" layoutY="45.0" onAction="#doSearch" prefHeight="40.0" prefWidth="490.0" promptText="Combine names..." />
+      <ComboBox fx:id="_searchBox" editable="true" layoutX="170.0" layoutY="45.0" onKeyReleased="#doSearch" prefHeight="40.0" prefWidth="490.0" promptText="Combine names..." />
       <ListView fx:id="_selectListView" layoutX="396.0" layoutY="118.0" prefHeight="634.0" prefWidth="355.0" styleClass="_nameListView" stylesheets="@styles/ListView.css" />
    </children>
 </AnchorPane>
