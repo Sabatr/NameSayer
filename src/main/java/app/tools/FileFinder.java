@@ -53,11 +53,7 @@ public class FileFinder {
                 try {
                     Scanner scanner = new Scanner(_chosenFile);
                     while (scanner.hasNextLine()) {
-                       // for (String name : sc.nextLine().split("[ -]")) {
-                        //System.out.println(scanner.nextLine());
                             list.add(new NameEntry(scanner.nextLine()));
-                            System.out.println(list);
-                      //  }
                     }
                 } catch (IOException exception) {
                     System.exit(1);

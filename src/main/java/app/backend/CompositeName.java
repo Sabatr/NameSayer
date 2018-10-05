@@ -46,13 +46,10 @@ public class CompositeName extends NameEntry {
     }
 
     public void concatenateAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
-        System.out.println(_names);
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {
             audioPaths.add(name.getAudioForVersion(name.getHighestRating()));
         }
-//        System.out.println(_names);
-//        System.out.println(audioPaths);
         BashRunner br = new BashRunner(handler);
         br.runConcatCommands(audioPaths, _mainVersion._resource);
     }

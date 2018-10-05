@@ -141,11 +141,9 @@ public class PracticeController extends ParentController implements EventHandler
                 return;
             }
         }
-
         disableAll();
         _progressBar.setVisible(true);
         Path audioResource = _currentName.getAudioForVersion(_dateAndTime);
-        System.out.println(audioResource);
         playGenericAudio("PlayAudio", audioResource);
     }
 
