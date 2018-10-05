@@ -13,12 +13,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+import org.controlsfx.control.textfield.CustomTextField;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class controls the functionality of the list scene.
@@ -27,7 +29,8 @@ public class ListViewController extends ParentController {
     @FXML private ListView<NameEntry> _nameListView;
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
-    @FXML private ComboBox<String> _searchBox;
+    @FXML private CustomTextField _searchBox;
+    private AutoCompletionBinding _searchBoxItems;
 
     private ObservableList<NameEntry> _selectedNames;
     private List<CompositeName> _addedComposites;
@@ -38,8 +41,7 @@ public class ListViewController extends ParentController {
      */
     public void initialize() {
         _sortedButton.setDisable(true);
-        _searchBox.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
-        setupSearchBox();
+                //.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
         _addedComposites = FXCollections.observableArrayList();
 
             //CTRL+Click to select multiple
@@ -115,21 +117,21 @@ public class ListViewController extends ParentController {
     }
 
     private void setupSearchBox() {
-        _searchBox.getEditor().setOnKeyReleased(new EventHandler<KeyEvent>() {
+        System.out.println("Binding search box");
+
+        Callback<AutoCompletionBinding.ISuggestionRequest, Collection<NameEntry>> suggester =
+                new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<NameEntry>>() {
             @Override
-            public void handle(KeyEvent event) {
-                String comboText = _searchBox.getEditor().getText();
-//                System.out.println("update editor: [" + comboText + "]");
-                if(comboText.length() == 0) {
-                    _searchBox.setItems(FXCollections.observableArrayList(new ArrayList<>(0)));
-                    _searchBox.getSelectionModel().clearSelection();
-                    if(_searchBox.isShowing()) {
-                        _searchBox.hide();
-                    }
-                    return;
+            public Collection<NameEntry> call(AutoCompletionBinding.ISuggestionRequest param) {
+                System.out.println("Suggesting names: ");
+                ArrayList<NameEntry> nameEntries = new ArrayList<>();
+                String fieldText = param.getUserText();
+                System.out.println("User text: " + fieldText);
+                if(fieldText.length() == 0) {
+                    return nameEntries;
                 }
 
-                String[] words = comboText.split("[ -]");
+                String[] words = fieldText.split("[ -]");
                 StringBuilder possibleFullName = new StringBuilder();
 
                 if(words.length >= 2) {
@@ -140,27 +142,32 @@ public class ListViewController extends ParentController {
                     }
                 }
 
-                ArrayList<String> matchingNames = new ArrayList<>();
-//                System.out.println("Fullname-1: " + possibleFullName.toString());
+                ArrayList<NameEntry> matchingNames = new ArrayList<>();
+                System.out.println("Fullname-1: " + possibleFullName.toString());
                 for(NameEntry name: _allNames) {
                     if(name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
-                        matchingNames.add(possibleFullName.toString() + name.getName());
+                        matchingNames.add(new NameEntry(possibleFullName.toString() + name.getName()));
+                        System.out.println("\t\t" + possibleFullName.toString() + name.getName());
                     }
                 }
-                _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
-
-                int maxRows = matchingNames.size() > 10 ? 10 : matchingNames.size();
-                _searchBox.setVisibleRowCount(maxRows);
-
-//                System.out.println("Number of names: " + matchingNames.size());
-//                for(String matchingName: matchingNames) {
-//                    System.out.println("\t\t" + matchingName);
-//                }
-                if(!_searchBox.isShowing()) {
-                    _searchBox.show();
-                }
+                return matchingNames;
             }
-        });
+        };
+
+        StringConverter<NameEntry> converter = new StringConverter<NameEntry>() {
+
+            @Override
+            public String toString(NameEntry name) {
+                return name.toString();
+            }
+
+            @Override
+            public NameEntry fromString(String string) {
+                return new NameEntry(string);
+            }
+        };
+
+        _searchBoxItems = TextFields.<NameEntry>bindAutoCompletion(_searchBox, suggester, converter);
     }
 
     /**
@@ -194,11 +201,11 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void doSearch(ActionEvent event) throws URISyntaxException {
-        if(_searchBox.getValue() == null) {
+        if(_searchBox.getText() == null) {
             return;
         }
 
-        String[] words = _searchBox.getValue().split("[ -]");
+        String[] words = _searchBox.getText().split("[ -]");
         List<NameEntry> nameComponents = matchFullName(words);
         if(nameComponents.isEmpty()) {
             return;
@@ -294,6 +301,8 @@ public class ListViewController extends ParentController {
         super.setInformation(switcher, allNames, selectedNames);
         _nameListView.setItems(allNames);
         _selectedNames = selectedNames;
+
+        setupSearchBox();
     }
 
     @Override
