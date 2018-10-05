@@ -15,7 +15,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.media.AudioClip;
 
 import java.io.File;
 import java.io.IOException;
@@ -138,7 +137,7 @@ public class PracticeController extends ParentController implements EventHandler
         if(_currentName instanceof CompositeName) {
             CompositeName cName = (CompositeName) _currentName;
             if(!cName.hasConcat()) {
-                cName.concateanteAudio(this::handle);
+                cName.concatenateAudio(this::handle);
                 return;
             }
         }
@@ -146,6 +145,7 @@ public class PracticeController extends ParentController implements EventHandler
         disableAll();
         _progressBar.setVisible(true);
         Path audioResource = _currentName.getAudioForVersion(_dateAndTime);
+        System.out.println(audioResource);
         playGenericAudio("PlayAudio", audioResource);
     }
 

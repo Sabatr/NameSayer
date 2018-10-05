@@ -32,6 +32,9 @@ public class CompositeName extends NameEntry {
         _mainVersion = new Version("YOU", formattedDate + "_" + formattedTime, pathToAudio);
     }
 
+    public ObservableList<NameEntry> get() {
+        return _names;
+    }
     public static String fullName(List<NameEntry> nameComponents) {
         StringBuilder fullNameStr = new StringBuilder();
         int i;
@@ -42,13 +45,14 @@ public class CompositeName extends NameEntry {
         return fullNameStr.toString();
     }
 
-    public void concateanteAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
-        //System.out.println(_names);
+    public void concatenateAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
+        System.out.println(_names);
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {
             audioPaths.add(name.getAudioForVersion(name.getHighestRating()));
         }
-
+//        System.out.println(_names);
+//        System.out.println(audioPaths);
         BashRunner br = new BashRunner(handler);
         br.runConcatCommands(audioPaths, _mainVersion._resource);
     }

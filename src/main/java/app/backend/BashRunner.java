@@ -81,6 +81,7 @@ public class BashRunner {
      * @throws IOException If the creation of the temporary list file fails
      */
     public Task<String> runConcatCommands(List<Path> inputs, Path output) throws IOException {
+        System.out.println("gets called");
         Path audioList = Paths.get("./tmpList.txt").toAbsolutePath();
         Files.deleteIfExists(audioList);
         Files.createFile(audioList);

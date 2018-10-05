@@ -56,6 +56,7 @@ public class FileFinder {
                        // for (String name : sc.nextLine().split("[ -]")) {
                         //System.out.println(scanner.nextLine());
                             list.add(new NameEntry(scanner.nextLine()));
+                            System.out.println(list);
                       //  }
                     }
                 } catch (IOException exception) {

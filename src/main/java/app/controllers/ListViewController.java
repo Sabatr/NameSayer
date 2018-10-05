@@ -54,12 +54,22 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void onClick() {
-        for (NameEntry entry: _selectedNames) {
-            if (entry.compareTo(_nameListView.getSelectionModel().getSelectedItem()) == 0) {
-                return;
+        boolean exists = false;
+        ObservableList<NameEntry> tempSelectList = FXCollections.observableArrayList();
+        for (NameEntry selectedNames: _nameListView.getSelectionModel().getSelectedItems()) {
+            for (NameEntry entry : _selectedNames) {
+                if (entry.compareTo(selectedNames) == 0) {
+                    exists = true;
+                    break;
+                }
             }
+            if (!exists) {
+                tempSelectList.add(selectedNames);
+            }
+            exists = false;
         }
-        updateSelectedList(_nameListView.getSelectionModel().getSelectedItems());
+     //   updateSelectedList(_nameListView.getSelectionModel().getSelectedItems());
+        updateSelectedList(tempSelectList);
     }
 
     /**
@@ -91,12 +101,19 @@ public class ListViewController extends ParentController {
         _sortedButton.setDisable(false);
     }
 
+    /**
+     * Updates the selectedListView upon changes.
+     * @param toBeAdded
+     */
     private void updateSelectedList(ObservableList toBeAdded) {
         _selectedNames.addAll(toBeAdded);
         Collections.sort(_selectedNames);
         _selectListView.setItems(_selectedNames);
     }
 
+    /**
+     * Deselects names from the practiceList by clicking on them.
+     */
     @FXML
     private void clearSelected() {
         if (_selectListView.getSelectionModel().getSelectedItem() != null) {
@@ -104,6 +121,7 @@ public class ListViewController extends ParentController {
                 if (entry.compareTo(_selectListView.getSelectionModel().getSelectedItem()) == 0) {
                     _selectedNames.remove(entry);
                     _selectListView.setItems(_selectedNames);
+                    _nameListView.getSelectionModel().clearSelection();
                     return;
                 }
             }
@@ -142,6 +160,9 @@ public class ListViewController extends ParentController {
         alert.showAndWait();
     }
 
+    /**
+     * Set up the search box in such a way that there are some recommended options.
+     */
     private void setupSearchBox() {
         _searchBox.getEditor().setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
@@ -173,7 +194,12 @@ public class ListViewController extends ParentController {
                             matchingNames.add(possibleFullName.toString() + name.getName());
                         }
                     }
-                    _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+                    if (matchingNames.size() == 0) {
+                        _searchBox.setItems(FXCollections.observableArrayList("Could not find a matching name."));
+                    } else {
+                        _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
+                    }
+
                     if (!_searchBox.isShowing()) {
                         _searchBox.show();
                     }
@@ -256,7 +282,7 @@ public class ListViewController extends ParentController {
         if(names == null) {
             return;
         }
-        selectNames(names);
+       // selectNames(names);
     }
 
     /**
@@ -266,9 +292,9 @@ public class ListViewController extends ParentController {
      */
     private void selectNames(ObservableList<NameEntry> names) {
         Boolean exists = false;
-        ObservableList<NameEntry> foundItems = FXCollections.observableArrayList();
         int numberOfPartsInNames = 0;
         for (NameEntry entry : names) {
+            ObservableList<NameEntry> foundItems = FXCollections.observableArrayList();
             String[] splitNames = entry.toString().split("[ -]");
             //Checks if the name is in the database.
             for (String part: splitNames) {
@@ -287,9 +313,7 @@ public class ListViewController extends ParentController {
             if (exists) {
                 //Does not need to check if the name is selected if nothing is in the list
                 if (_selectedNames.size() == 0) {
-                    //_nameListView.getSelectionModel().select(position);
                     importHelper(splitNames,foundItems);
-//                    _nameListView.getSelectionModel().select(entry);
                 } else {
                     boolean notInSelected = true;
                     //Do not want to repeat selected names.
@@ -300,19 +324,23 @@ public class ListViewController extends ParentController {
                         }
                     }
                     if (notInSelected) {
-                       // _nameListView.getSelectionModel().select(position);
                         importHelper(splitNames,foundItems);
                     }
                 }
             }
             //Reset for each name
-            foundItems.clear();
             numberOfPartsInNames = 0;
             exists = false;
+
         }
-        //_nameListView.getSelectionModel().getSelectedItems().addAll(_selectedNames);
     }
 
+    /**
+     * This allows both single names and two or more names to be added.
+     * TODO: Show a message to notify the user that a certain name doesn't exist.
+     * @param splitNames
+     * @param foundItems
+     */
     private void importHelper(String[] splitNames,ObservableList foundItems) {
         if (splitNames.length > 1 ) {
             try {
