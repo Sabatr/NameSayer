@@ -199,7 +199,8 @@ public class ListViewController extends ParentController {
                     } else {
                         _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
                     }
-
+                    int maxRows = matchingNames.size() > 10 ? 10 : matchingNames.size();
+                    _searchBox.setVisibleRowCount(maxRows);
                     if (!_searchBox.isShowing()) {
                         _searchBox.show();
                     }
