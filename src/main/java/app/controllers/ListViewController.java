@@ -149,6 +149,9 @@ public class ListViewController extends ParentController {
                 }
                 _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
 
+                int maxRows = matchingNames.size() > 10 ? 10 : matchingNames.size();
+                _searchBox.setVisibleRowCount(maxRows);
+
 //                System.out.println("Number of names: " + matchingNames.size());
 //                for(String matchingName: matchingNames) {
 //                    System.out.println("\t\t" + matchingName);
@@ -201,8 +204,17 @@ public class ListViewController extends ParentController {
             return;
         }
 
+        boolean foundMatchingName = false;
         CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
-        _addedComposites.add(fullName);
+        for(CompositeName cName: _addedComposites) {
+            if(cName.getName().equals(fullName.getName())) {
+                foundMatchingName = true;
+                break;
+            }
+        }
+        if(!foundMatchingName) {
+            _addedComposites.add(fullName);
+        }
     }
 
     /**
