@@ -12,14 +12,14 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
+import org.controlsfx.control.textfield.CustomTextField;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class controls the functionality of the list scene.
@@ -28,8 +28,9 @@ public class ListViewController extends ParentController {
     @FXML private ListView<NameEntry> _nameListView;
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
-    @FXML private ComboBox<String> _searchBox;
     @FXML private ListView<NameEntry> _selectListView;
+    @FXML private CustomTextField _searchBox;
+    private AutoCompletionBinding _searchBoxItems;
 
     private ObservableList<NameEntry> _selectedNames;
     private ObservableList<CompositeName> _addedComposites;
@@ -41,8 +42,7 @@ public class ListViewController extends ParentController {
     public void initialize() {
         _selectedNames = FXCollections.observableArrayList();
         _sortedButton.setDisable(true);
-        _searchBox.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
-        setupSearchBox();
+                //.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
         _addedComposites = FXCollections.observableArrayList();
 
             //CTRL+Click to select multiple
@@ -78,7 +78,8 @@ public class ListViewController extends ParentController {
     @FXML
     private void clearSelection() {
         _addedComposites.clear();
-        _searchBox.setItems(FXCollections.observableArrayList());
+      //  _searchBox.setItems(FXCollections.observableArrayList());
+        _searchBox.clear();
         _selectedNames.clear();
         _nameListView.getSelectionModel().clearSelection();
     }
@@ -165,22 +166,22 @@ public class ListViewController extends ParentController {
      * Set up the search box in such a way that there are some recommended options.
      */
     private void setupSearchBox() {
-        _searchBox.getEditor().setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                    String comboText = _searchBox.getEditor().getText();
-                    //if the user deletes all the stuff, clear everything.
-                    if (comboText.length() == 0) {
-                        _searchBox.setItems(FXCollections.observableArrayList(new ArrayList<>(0)));
-                        _searchBox.getSelectionModel().clearSelection();
-                        if (_searchBox.isShowing()) {
-                            _searchBox.hide();
-                        }
-                        return;
-                    }
-                    String[] words = comboText.split("[ -]");
-                    StringBuilder possibleFullName = new StringBuilder();
+        System.out.println("Binding search box");
 
+        Callback<AutoCompletionBinding.ISuggestionRequest, Collection<NameEntry>> suggester =
+                new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<NameEntry>>() {
+            @Override
+            public Collection<NameEntry> call(AutoCompletionBinding.ISuggestionRequest param) {
+                System.out.println("Suggesting names: ");
+                ArrayList<NameEntry> nameEntries = new ArrayList<>();
+                String fieldText = param.getUserText();
+                System.out.println("User text: " + fieldText);
+                if(fieldText.length() == 0) {
+                    return nameEntries;
+                }
+
+                String[] words = fieldText.split("[ -]");
+                StringBuilder possibleFullName = new StringBuilder();
                     if (words.length >= 2) {
                         String[] wordsLessOne = Arrays.copyOf(words, words.length - 1);
                         List<NameEntry> nameComponents = matchFullName(wordsLessOne);
@@ -189,25 +190,31 @@ public class ListViewController extends ParentController {
                         }
                     }
 
-                    ArrayList<String> matchingNames = new ArrayList<>();
-                    for (NameEntry name : _allNames) {
-                        if (name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
-                            matchingNames.add(possibleFullName.toString() + name.getName());
-                        }
+                ArrayList<NameEntry> matchingNames = new ArrayList<>();
+                for(NameEntry name: _allNames) {
+                    if(name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
+                        matchingNames.add(new NameEntry(possibleFullName.toString() + name.getName()));
+                        System.out.println("\t\t" + possibleFullName.toString() + name.getName());
                     }
-                    if (matchingNames.size() == 0) {
-                        _searchBox.setItems(FXCollections.observableArrayList("Could not find a matching name."));
-                    } else {
-                        _searchBox.setItems(FXCollections.observableArrayList(matchingNames));
-                    }
-                    int maxRows = matchingNames.size() > 10 ? 10 : matchingNames.size();
-                    _searchBox.setVisibleRowCount(maxRows);
-                    if (!_searchBox.isShowing()) {
-                        _searchBox.show();
-                    }
-
+                }
+                return matchingNames;
             }
-        });
+        };
+
+        StringConverter<NameEntry> converter = new StringConverter<NameEntry>() {
+
+            @Override
+            public String toString(NameEntry name) {
+                return name.toString();
+            }
+
+            @Override
+            public NameEntry fromString(String string) {
+                return new NameEntry(string);
+            }
+        };
+
+        _searchBoxItems = TextFields.<NameEntry>bindAutoCompletion(_searchBox, suggester, converter);
     }
 
     /**
@@ -241,33 +248,32 @@ public class ListViewController extends ParentController {
      * Press enter to submit the full name.
      */
     @FXML
-    private void doSearch(KeyEvent event) throws URISyntaxException {
-        boolean doesNotExist = true;
-        if (event.getCode() == KeyCode.ENTER) {
-            if(_searchBox.getValue() == null) {
-                return;
-            }
-            //Checks if the typed name already exists in the selected list.
-            for (NameEntry entry: _selectedNames) {
-                if (entry.compareTo(new NameEntry(_searchBox.getValue())) == 0) {
-                    doesNotExist = false;
-                    break;
-                }
-            }
-            if (doesNotExist) {
-                String[] words = _searchBox.getValue().split("[ -]");
-
-                ObservableList<NameEntry> nameComponents = matchFullName(words);
-                if(nameComponents.isEmpty()) {
-                    return;
-                }
-                CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
-                _addedComposites.add(fullName);
-                updateSelectedList(_addedComposites);
-                _addedComposites.clear();
-            }
-            _searchBox.getItems().clear();
+    private void doSearch(ActionEvent event) throws URISyntaxException {
+            boolean doesNotExist = true;
+        if(_searchBox.getText() == null) {
+            return;
         }
+
+        String[] words = _searchBox.getText().split("[ -]");
+        ObservableList<NameEntry> nameComponents = matchFullName(words);
+        if(nameComponents.isEmpty()) {
+            return;
+        }
+
+        for (NameEntry entry: _selectedNames) {
+            if (entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
+                doesNotExist = false;
+                break;
+            }
+        }
+        if (doesNotExist) {
+            CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+            _addedComposites.add(fullName);
+            updateSelectedList(_addedComposites);
+            _addedComposites.clear();
+        }
+
+        _searchBox.clear();
     }
 
     /**
@@ -376,6 +382,8 @@ public class ListViewController extends ParentController {
         super.setInformation(switcher, allNames, selectedNames);
         _nameListView.setItems(allNames);
         _selectedNames = selectedNames;
+
+        setupSearchBox();
     }
 
     @Override
