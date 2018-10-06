@@ -22,6 +22,7 @@ import javafx.scene.media.AudioClip;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
@@ -146,7 +147,7 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio of the selected audio file.
      */
     @FXML
-    private void playAudio() throws IOException {
+    private void playAudio() throws IOException, URISyntaxException {
         if(_currentName instanceof CompositeName) {
             CompositeName cName = (CompositeName) _currentName;
             if(!cName.hasConcat()) {
@@ -186,10 +187,10 @@ public class PracticeController extends ParentController implements EventHandler
      * Allows the user to record audio.
      */
     @FXML
-    private void recordAudio() {
-        if(System.getProperty("os.name").contains("Windows")) {
-            System.out.println("on windows");
-        } else {
+    private void recordAudio() throws URISyntaxException {
+//        if(System.getProperty("os.name").contains("Windows")) {
+//            System.out.println("on windows");
+//        } else {
             _nextButton.setVisible(false);
             _prevButton.setVisible(false);
             disableAll();
@@ -202,7 +203,7 @@ public class PracticeController extends ParentController implements EventHandler
             _progressBar.setVisible(true);
             Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 3));
             thread.start();
-        }
+//        }
     }
 
     /**
@@ -238,7 +239,11 @@ public class PracticeController extends ParentController implements EventHandler
                     playAudio();
                 } catch (IOException e) {
                     e.printStackTrace();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
                 }
+            } else if(event.getSource().getTitle().equals((BashRunner.CommandType.RECORDAUDIO.toString()))) {
+                System.out.println("value returned: " + event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());

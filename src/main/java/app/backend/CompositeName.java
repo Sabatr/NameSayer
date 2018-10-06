@@ -41,7 +41,7 @@ public class CompositeName extends NameEntry {
         return fullNameStr.toString();
     }
 
-    public void concateanteAudio(EventHandler<WorkerStateEvent> handler) throws IOException {
+    public void concateanteAudio(EventHandler<WorkerStateEvent> handler) throws IOException, URISyntaxException {
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {
             audioPaths.add(name.getAudioForVersion(name.getVersions().get(0)));

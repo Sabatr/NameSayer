@@ -13,6 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 
 
@@ -49,20 +50,14 @@ public class OptionsController extends ParentController implements EventHandler<
      * Toggle the chain of BashRunner processes
      */
     @FXML
-    private void toggleMic() {
+    private void toggleMic() throws URISyntaxException {
         if(_micToggled) {
             _micToggled = false;
         } else {
             _micToggled = true;
-            if(System.getProperty("os.name").contains("Windows")) {
-                System.out.println("on windows");
-                return;
-            } else {
                 BashRunner runner = new BashRunner(this);
                 runner.runMonitorMicCommand();
-            }
         }
-
     }
 
     @FXML
@@ -131,7 +126,12 @@ public class OptionsController extends ParentController implements EventHandler<
                 //    System.out.println(output);
                 //}
 
-                BashRunner runner = new BashRunner(this);
+                BashRunner runner = null;
+                try {
+                    runner = new BashRunner(this);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 runner.runMonitorMicCommand();
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
@@ -143,7 +143,7 @@ public class OptionsController extends ParentController implements EventHandler<
     }
 
     @FXML
-    private void goBack() {
+    private void goBack() throws URISyntaxException {
         if(_micToggled) {
            toggleMic();
         }

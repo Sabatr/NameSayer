@@ -7,12 +7,10 @@ import app.views.SceneBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.KeyEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -175,7 +173,7 @@ public class ListViewController extends ParentController {
      * @param words An array of words to match as names in the database
      * @return A List of NameEntrys corresponding to the individual names in the full name
      */
-    public List<NameEntry> matchFullName(String... words) {
+    private List<NameEntry> matchFullName(String... words) {
         boolean aWordDoesntMatch = false;
         List<NameEntry> nameComponents = new ArrayList<>();
 
@@ -243,7 +241,7 @@ public class ListViewController extends ParentController {
      * @param names A list of dummy NameEntry objects (ones with only the name field set).
      */
     private void selectNames(ObservableList<NameEntry> names) {
-        Boolean exists = false;
+        boolean exists = false;
         int position = 0;
         for (NameEntry entry : names) {
             //Checks if the name is in the database.

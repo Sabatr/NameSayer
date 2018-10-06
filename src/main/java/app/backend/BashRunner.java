@@ -1,6 +1,7 @@
 package app.backend;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +22,9 @@ public class BashRunner {
         RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT
     }
 
+    private boolean onWindows = false;
+    private String ffmpegCommand = "ffmpeg";
+
     private EventHandler<WorkerStateEvent> _taskCompletionHandler;
     // private EventHandler<WorkerStateEvent> _externalHandler;
     private Task<?> _currentTask;
@@ -30,8 +34,13 @@ public class BashRunner {
      * @param handler The EventHandler that the UI provides so that it can be notified about the completion
      *                of BashRunner processes.
      */
-    public BashRunner(EventHandler<WorkerStateEvent> handler) {
+    public BashRunner(EventHandler<WorkerStateEvent> handler) throws URISyntaxException {
         _taskCompletionHandler = handler;
+        if(System.getProperty("os.name").contains("Windows")) {
+            Path workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+            onWindows = true;
+            ffmpegCommand = workingDir.resolve(Paths.get("ffmpeg-4.0.2-win32-static\\bin\\ffmpeg.exe")).toAbsolutePath().toString();
+        }
     }
 
     /**
@@ -41,9 +50,37 @@ public class BashRunner {
      */
     public Task<String> runRecordCommand(Path path) {
         // arecord -f cd -d 5 -q "%s/audio.wav"
-        String cmdString = String.format("ffmpeg -f alsa -i  hw:0 -t 3 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
-
-        String[] cmd = { "/bin/bash", "-c", cmdString };
+        String[] cmd;
+        String cmdString;
+        if(onWindows) {
+//            cmdString = String.format(ffmpegCommand + " -f dshow -i audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\" " +
+//                    "-t 3 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
+            cmd = new String[14];
+            cmd[0] = ffmpegCommand;
+            cmd[1] = "-f";
+            cmd[2] = "dshow";
+            cmd[3] = "-i";
+            cmd[4] = "audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\"";
+            cmd[5] = "-t";
+            cmd[6] = "3";
+            cmd[7] = "-acodec";
+            cmd[8] = "pcm_s16le";
+            cmd[9] = "-ar";
+            cmd[10] = "48000";
+            cmd[11] = "-ac";
+            cmd[12] = "1";
+            cmd[13] = path.toAbsolutePath().toString();
+        } else {
+            cmdString = String.format(ffmpegCommand + " -f alsa -i  hw:0 -t 3 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
+            cmd = new String[3];
+            cmd[0] = "/bin/bash";
+            cmd[1] = "-c";
+            cmd[2] = cmdString;
+        }
+//
+//        cmdString = ffmpegCommand;
+//        cmd = new String[1];
+//        cmd[0] = cmdString;
         return runCommand(CommandType.RECORDAUDIO.toString(), cmd);
     }
 
@@ -54,9 +91,34 @@ public class BashRunner {
      * @return The {@link Task} running the process on a background thread
      */
     public Task<String> runMonitorMicCommand() {
-
-        return runCommand(CommandType.TESTMIC.toString(), "/bin/bash", "-c", "ffmpeg -f alsa -i hw:0 -t 0.03 -filter_complex \"volumedetect\" " +
-                "-acodec pcm_s16le -ar 44000 -ac 1 -f null /dev/null");
+        if(onWindows) {
+            String[] cmd = {
+                    ffmpegCommand,
+                    "-f",
+                    "dshow",
+                    "-i",
+                    "audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\"",
+                    "-t",
+                    "0.01",
+                    "-filter_complex",
+                    "\"volumedetect\"",
+                    "-acodec",
+                    "pcm_s16le",
+                    "-ar",
+                    "44000",
+                    "-ac",
+                    "1",
+                    "-f",
+                    "null",
+                    "NUL"
+            };
+            return runCommand(CommandType.TESTMIC.toString(), cmd);
+//            return runCommand(CommandType.TESTMIC.toString(), ffmpegCommand + " -f dshow -i audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\" -t 0.03 -filter_complex \"volumedetect\" " +
+//                    "-acodec pcm_s16le -ar 44000 -ac 1 -f null /dev/null");
+        } else {
+            return runCommand(CommandType.TESTMIC.toString(), "/bin/bash", "-c", ffmpegCommand + " -f alsa -i hw:0 -t 0.03 -filter_complex \"volumedetect\" " +
+                    "-acodec pcm_s16le -ar 44000 -ac 1 -f null /dev/null");
+        }
     }
 
     /**
@@ -89,10 +151,27 @@ public class BashRunner {
                 writer.write("file '" + audioPath.toAbsolutePath().toString() + "'\n");
             }
         }
-
-        String cmdString = String.format("ffmpeg -f concat -safe 0 -i \"%s\" -c copy \"%s\"",
-                audioList.toAbsolutePath().toString(), output.toAbsolutePath().toString());
-        String[] cmd = { "/bin/bash", "-c", cmdString };
+        String[] cmd;
+        if(onWindows) {
+            cmd = new String[10];
+            cmd[0] = ffmpegCommand;
+            cmd[1] = "-f";
+            cmd[2] = "concat";
+            cmd[3] = "-safe";
+            cmd[4] = "0";
+            cmd[5] = "-i";
+            cmd[6] = audioList.toAbsolutePath().toString();
+            cmd[7] = "-c";
+            cmd[8] = "copy";
+            cmd[9] = output.toAbsolutePath().toString();
+        } else {
+            String cmdString = String.format(ffmpegCommand + " -f concat -safe 0 -i \"%s\" -c copy \"%s\"",
+                    audioList.toAbsolutePath().toString(), output.toAbsolutePath().toString());
+            cmd = new String[3];
+            cmd[0] = "/bin/bash";
+            cmd[1] = "-c";
+            cmd[2] = cmdString;
+        }
         return runCommand(CommandType.CONCAT.toString(), cmd);
     }
 
@@ -139,12 +218,12 @@ public class BashRunner {
             try {
                 ProcessBuilder test = new ProcessBuilder(cmd);
                 test.directory(null);
+                System.out.println("Testing command" + test.command());
                 p = test.start();
             } catch(IOException e) {
                 failure = true;
                 commandOutBuilder.append(e.getMessage());
             }
-
             if(!failure) {
                 try {
                     p.waitFor();
@@ -162,6 +241,7 @@ public class BashRunner {
                     if(p.exitValue() == 0) {
                         commandOutBuilder.append(concatOutput(p.getInputStream(), "\n"));
                         commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
+                        System.out.println("exit value 0");
                     } else {
                         failure = true;
                         commandOutBuilder.append(concatOutput(p.getInputStream(),"\n"));
