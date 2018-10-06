@@ -375,6 +375,7 @@ public class ListViewController extends ParentController {
         super.setInformation(switcher, allNames, selectedNames);
         _nameListView.setItems(allNames);
         _selectedNames = selectedNames;
+        System.out.println("hi");
     }
 
     @Override
