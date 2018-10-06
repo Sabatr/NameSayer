@@ -36,25 +36,8 @@ public class AchievementsManager {
         System.out.println("Ten practices!");
     }
 
-
-    public void updatePracticeProgress(ProgressBar progress, Label progressLabel,String achievement) {
-        switch (achievement) {
-            case "onePractice":
-                if (_practiceCounter>=1) {
-                    progress.setProgress(1);
-                    progressLabel.setText("COMPLETED");
-                }
-                break;
-            case "tenPractice":
-                if (_practiceCounter>=10) {
-                    progress.setProgress(1);
-                    progressLabel.setText("COMPLETED");
-                } else  {
-                    progress.setProgress((double)_practiceCounter/10);
-                    progressLabel.setText(_practiceCounter + "/10");
-                }
-                break;
-        }
+    public int getPracticeCounter() {
+        return _practiceCounter;
     }
 
 

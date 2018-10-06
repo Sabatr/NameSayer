@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 
 <ScrollPane prefHeight="516.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.AchievementController">
     <content>
@@ -21,18 +22,26 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Pane prefHeight="170.0" prefWidth="214.0" style="-fx-background-color: white;">
+                <Pane id="card" prefHeight="170.0" prefWidth="214.0" style="-fx-background-color: white;" stylesheets="@styles/Achievement.css">
                     <children>
                         <Label layoutX="119.0" layoutY="22.0" text="Practice one name" />
-                        <ProgressBar layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
-                        <Label fx:id="_practiceOneLabel" alignment="CENTER" layoutX="169.0" layoutY="116.0" text="0/1" />
+                        <ProgressBar fx:id="_practiceOneBar" layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
+                  <StackPane layoutX="80.0" layoutY="117.0" prefHeight="0.0" prefWidth="200.0" style="-fx-alignment: center;">
+                     <children>
+                              <Label id="label" fx:id="_practiceOneLabel" alignment="CENTER" contentDisplay="CENTER" stylesheets="@styles/Achievement.css" text="0/1" />
+                     </children>
+                  </StackPane>
                     </children>
                 </Pane>
                 <Pane prefHeight="170.0" prefWidth="214.0" style="-fx-background-color: white;" GridPane.columnIndex="1">
                     <children>
                         <Label layoutX="119.0" layoutY="22.0" text="Practice ten names" />
-                        <ProgressBar layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
-                        <Label layoutX="169.0" layoutY="116.0" text="0/10" />
+                        <ProgressBar fx:id="_practiceTenBar" layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
+                  <StackPane layoutX="80.0" layoutY="116.0" prefHeight="0.0" prefWidth="200.0" style="-fx-alignment: center;">
+                     <children>
+                              <Label fx:id="_practiceTenLabel" text="0/10" />
+                     </children>
+                  </StackPane>
                     </children>
                 </Pane>
             </children>

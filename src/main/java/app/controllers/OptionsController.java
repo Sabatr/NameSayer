@@ -31,7 +31,9 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML
     private Button _toggleButton;
     @FXML
-    private ScrollPane _achievementsList;
+    private ScrollPane _achievement;
+    @FXML
+    private AchievementController _achievementController;
     @FXML
     private Pane _micPane;
     @FXML
@@ -96,22 +98,22 @@ public class OptionsController extends ParentController implements EventHandler<
                 _micPane.setVisible(true);
                 _helpPane.setVisible(false);
                 _aboutPane.setVisible(false);
-                _achievementsList.setVisible(false);
+                _achievement.setVisible(false);
                 break;
             case HELP:
                 _helpPane.setVisible(true);
                 _micPane.setVisible(false);
                 _aboutPane.setVisible(false);
-                _achievementsList.setVisible(false);
+               _achievement.setVisible(false);
                 break;
             case ABOUT:
                 _aboutPane.setVisible(true);
                 _micPane.setVisible(false);
                 _helpPane.setVisible(false);
-                _achievementsList.setVisible(false);
+                _achievement.setVisible(false);
                 break;
             case ACHIEVEMENTS:
-                _achievementsList.setVisible(true);
+                _achievement.setVisible(true);
                 _aboutPane.setVisible(false);
                 _micPane.setVisible(false);
                 _helpPane.setVisible(false);
@@ -176,12 +178,6 @@ public class OptionsController extends ParentController implements EventHandler<
 
     @Override
     public void switchTo() {
-      //  updatePracticeProgress();
+      _achievementController.update();
     }
-//
-//    private void updatePracticeProgress() {
-//        //_practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
-//            AchievementsManager.getInstance().updatePracticeProgress(_practiceOneProgress,_practiceOneLabel,"onePractice");
-//            AchievementsManager.getInstance().updatePracticeProgress(_practiceTenBar,_practiceTenLabel,"tenPractice");
-//    }
 }

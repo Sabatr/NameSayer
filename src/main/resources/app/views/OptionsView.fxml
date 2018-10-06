@@ -39,6 +39,6 @@
             <Button fx:id="_toggleButton" layoutX="336.0" layoutY="279.0" mnemonicParsing="false" onAction="#toggleMic" prefHeight="51.0" prefWidth="121.0" styleClass="_buttons" stylesheets="@styles/Options.css" text="Test" />
          </children>
       </Pane>
-      <fx:include fx:id="_achievementsList" source="Achievements.fxml" layoutX="271.0" layoutY="139.0" prefHeight="516.0" prefWidth="761.0"/>
+      <fx:include fx:id="_achievement" source="Achievements.fxml" layoutX="271.0" layoutY="139.0" prefHeight="516.0" prefWidth="761.0"/>
    </children>
 </AnchorPane>
