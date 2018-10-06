@@ -272,7 +272,6 @@ public class ListViewController extends ParentController {
             updateSelectedList(_addedComposites);
             _addedComposites.clear();
         }
-
         _searchBox.clear();
     }
 
