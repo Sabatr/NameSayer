@@ -137,6 +137,7 @@ public class ListViewController extends ParentController {
             alertNothingSelected();
         } else {
             if (_sortedButton.isDisabled()) {
+
                 Collections.sort(_selectedNames);
             } else {
                 Collections.shuffle(_selectedNames);

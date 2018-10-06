@@ -14,8 +14,8 @@ public class AchievementsManager {
     }
     public static AchievementsManager getInstance() {
         return _achievementsManager;
-    }
 
+    }
 
     public void increasePracticeAttempts() {
         _practiceCounter++;
@@ -46,7 +46,6 @@ public class AchievementsManager {
                 }
                 break;
             case "tenPractice":
-
                 if (_practiceCounter>=10) {
                     progress.setProgress(1);
                     progressLabel.setText("COMPLETED");
@@ -56,6 +55,7 @@ public class AchievementsManager {
                 }
                 break;
         }
-
     }
+
+
 }

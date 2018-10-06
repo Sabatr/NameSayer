@@ -38,15 +38,6 @@ public class OptionsController extends ParentController implements EventHandler<
     private Pane _aboutPane;
     @FXML
     private Pane _helpPane;
-    @FXML
-    private ProgressBar _practiceOneProgress;
-    @FXML
-    private Label _practiceOneLabel;
-    @FXML
-    private ProgressBar _practiceTenBar;
-    @FXML
-    private Label _practiceTenLabel;
-
     private boolean _micToggled;
     private enum Options {TEST,HELP,ABOUT,ACHIEVEMENTS}
     private Options _optionPicked;
@@ -96,6 +87,7 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML private void achievements() {
         _optionPicked = Options.ACHIEVEMENTS;
         loadPanel();
+
     }
 
     private void loadPanel() {
@@ -184,13 +176,12 @@ public class OptionsController extends ParentController implements EventHandler<
 
     @Override
     public void switchTo() {
-        updatePracticeProgress();
-
+      //  updatePracticeProgress();
     }
-
-    private void updatePracticeProgress() {
-        //_practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
-            AchievementsManager.getInstance().updatePracticeProgress(_practiceOneProgress,_practiceOneLabel,"onePractice");
-            AchievementsManager.getInstance().updatePracticeProgress(_practiceTenBar,_practiceTenLabel,"tenPractice");
-    }
+//
+//    private void updatePracticeProgress() {
+//        //_practiceProgress.setText("Current progress: " + AchievementsManager.getInstance().getCounter());
+//            AchievementsManager.getInstance().updatePracticeProgress(_practiceOneProgress,_practiceOneLabel,"onePractice");
+//            AchievementsManager.getInstance().updatePracticeProgress(_practiceTenBar,_practiceTenLabel,"tenPractice");
+//    }
 }
