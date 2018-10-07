@@ -49,12 +49,9 @@ public class BashRunner {
      * @return The {@link Task} running the process on a background thread
      */
     public Task<String> runRecordCommand(Path path) {
-        // arecord -f cd -d 5 -q "%s/audio.wav"
         String[] cmd;
         String cmdString;
         if(onWindows) {
-//            cmdString = String.format(ffmpegCommand + " -f dshow -i audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\" " +
-//                    "-t 3 -acodec pcm_s16le -ar 48000 -ac 1 \"%s\"", path.toAbsolutePath().toString());
             cmd = new String[14];
             cmd[0] = ffmpegCommand;
             cmd[1] = "-f";
@@ -77,10 +74,6 @@ public class BashRunner {
             cmd[1] = "-c";
             cmd[2] = cmdString;
         }
-//
-//        cmdString = ffmpegCommand;
-//        cmd = new String[1];
-//        cmd[0] = cmdString;
         return runCommand(CommandType.RECORDAUDIO.toString(), cmd);
     }
 
@@ -113,8 +106,6 @@ public class BashRunner {
                     "NUL"
             };
             return runCommand(CommandType.TESTMIC.toString(), cmd);
-//            return runCommand(CommandType.TESTMIC.toString(), ffmpegCommand + " -f dshow -i audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\" -t 0.03 -filter_complex \"volumedetect\" " +
-//                    "-acodec pcm_s16le -ar 44000 -ac 1 -f null /dev/null");
         } else {
             return runCommand(CommandType.TESTMIC.toString(), "/bin/bash", "-c", ffmpegCommand + " -f alsa -i hw:0 -t 0.03 -filter_complex \"volumedetect\" " +
                     "-acodec pcm_s16le -ar 44000 -ac 1 -f null /dev/null");
