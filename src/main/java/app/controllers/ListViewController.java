@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.backend.CompositeName;
 import app.backend.NameEntry;
+import app.tools.AchievementsManager;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
 import javafx.collections.FXCollections;
@@ -67,7 +68,6 @@ public class ListViewController extends ParentController {
             }
             exists = false;
         }
-     //   updateSelectedList(_nameListView.getSelectionModel().getSelectedItems());
         updateSelectedList(tempSelectList);
     }
 
@@ -77,7 +77,6 @@ public class ListViewController extends ParentController {
     @FXML
     private void clearSelection() {
         _addedComposites.clear();
-      //  _searchBox.setItems(FXCollections.observableArrayList());
         _searchBox.clear();
         _selectedNames.clear();
         _nameListView.getSelectionModel().clearSelection();
@@ -136,6 +135,7 @@ public class ListViewController extends ParentController {
         if (_selectedNames.size() == 0) {
             alertNothingSelected();
         } else {
+            AchievementsManager.getInstance().getPracticeNames(_selectedNames);
             if (_sortedButton.isDisabled()) {
 
                 Collections.sort(_selectedNames);

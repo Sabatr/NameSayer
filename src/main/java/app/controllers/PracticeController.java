@@ -173,21 +173,17 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void recordAudio() throws URISyntaxException {
-//        if(System.getProperty("os.name").contains("Windows")) {
-//            System.out.println("on windows");
-//        } else {
-            _nextButton.setVisible(false);
-            _prevButton.setVisible(false);
-            disableAll();
-            Path pathToUse = _currentName.addVersion();
-            _currentRecording = pathToUse;
-            BashRunner runner = new BashRunner(this);
-            runner.runRecordCommand(pathToUse);
-
-            _progressBar.setVisible(true);
-            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 3));
-            thread.start();
-//        }
+        AchievementsManager.getInstance().increasePracticeAttempts();
+        _nextButton.setVisible(false);
+        _prevButton.setVisible(false);
+        disableAll();
+        Path pathToUse = _currentName.addVersion();
+        _currentRecording = pathToUse;
+        BashRunner runner = new BashRunner(this);
+        runner.runRecordCommand(pathToUse);
+        _progressBar.setVisible(true);
+        Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 3));
+        thread.start();
     }
 
     /**

@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.backend.NameEntry;
+import app.tools.AchievementsManager;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
 import javafx.collections.ObservableList;
@@ -50,7 +51,6 @@ public class MainMenuController extends ParentController {
 
     @FXML
     private void importData() throws URISyntaxException {
-      // new FileFinder("sound").choose(_switcher.getStage());
         FileFinder finder = new FileFinder("sound").choose(_switcher.getStage());
         ObservableList<NameEntry> names = finder.getContent();
 

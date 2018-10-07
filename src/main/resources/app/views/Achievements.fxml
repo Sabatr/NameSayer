@@ -35,7 +35,7 @@
             </Pane>
                 <Pane id="card" prefHeight="170.0" prefWidth="214.0" style="-fx-background-color: white;" styleClass="card" stylesheets="@styles/Achievement.css">
                     <children>
-                        <Label layoutX="116.0" layoutY="24.0" text="Practice One Name" />
+                        <Label layoutX="116.0" layoutY="24.0" text="Record one name" />
                         <ProgressBar fx:id="_practiceOneBar" layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
                   <StackPane layoutX="80.0" layoutY="117.0" prefHeight="0.0" prefWidth="200.0" style="-fx-alignment: center;">
                      <children>
@@ -46,7 +46,7 @@
                 </Pane>
                 <Pane prefHeight="170.0" prefWidth="214.0" style="-fx-background-color: white;" styleClass="card" GridPane.columnIndex="1">
                     <children>
-                        <Label layoutX="119.0" layoutY="22.0" text="Practice ten names" />
+                        <Label layoutX="119.0" layoutY="22.0" text="Record ten names" />
                         <ProgressBar fx:id="_practiceTenBar" layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
                   <StackPane layoutX="80.0" layoutY="116.0" prefHeight="0.0" prefWidth="200.0" style="-fx-alignment: center;">
                      <children>
@@ -55,6 +55,17 @@
                   </StackPane>
                     </children>
                 </Pane>
+            <Pane prefHeight="170.0" prefWidth="214.0" style="-fx-background-color: white;" styleClass="card" stylesheets="@styles/Achievement.css" GridPane.rowIndex="1">
+               <children>
+                  <Label layoutX="77.0" layoutY="26.0" text="Practice with ten unique names" />
+                  <ProgressBar fx:id="_differentNamesBar" layoutX="80.0" layoutY="74.0" prefWidth="200.0" progress="0.0" />
+                  <StackPane layoutX="80.0" layoutY="117.0" prefHeight="0.0" prefWidth="200.0" style="-fx-alignment: center;">
+                     <children>
+                        <Label id="label" fx:id="_differentNamesLabel" alignment="CENTER" contentDisplay="CENTER" stylesheets="@styles/Achievement.css" text="0/10" />
+                     </children>
+                  </StackPane>
+               </children>
+            </Pane>
             </children>
         </GridPane>
     </content>

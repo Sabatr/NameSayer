@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ToggleButton?>
@@ -18,7 +17,7 @@
         <ToggleButton fx:id="_randomButton" layoutX="921.0" layoutY="507.0" onAction="#onRandom" prefHeight="106.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Random" />
         <ToggleButton fx:id="_sortedButton" layoutX="766.0" layoutY="507.0" onAction="#onSort" prefHeight="106.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Sort" />
       <Button layoutX="962.0" layoutY="678.0" mnemonicParsing="false" onAction="#goBack" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Back" />
-      <Button layoutX="768.0" layoutY="678.0" mnemonicParsing="false" onAction="#importText" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Import" />
+      <Button layoutX="768.0" layoutY="678.0" mnemonicParsing="false" onAction="#importText" prefHeight="58.0" prefWidth="110.0" style="-fx-font-size: 15px;" styleClass="_backButton" text="Import" />
       <ListView fx:id="_selectListView" layoutX="396.0" layoutY="118.0" onMouseClicked="#clearSelected" prefHeight="634.0" prefWidth="355.0" styleClass="_nameListView" stylesheets="@styles/ListView.css" />
       <CustomTextField fx:id="_searchBox" editable="true" layoutX="170.0" layoutY="45.0" onAction="#doSearch" prefHeight="40.0" prefWidth="490.0" promptText="Combine names..." />
    </children>
