@@ -7,7 +7,6 @@ import app.views.SceneBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
@@ -298,7 +297,7 @@ public class ListViewController extends ParentController {
      * Sorry for ugly code :p
      */
     private void selectNames(ObservableList<NameEntry> names) {
-        Boolean exists = false;
+        boolean exists = false;
         int numberOfPartsInNames = 0;
         for (NameEntry entry : names) {
             ObservableList<NameEntry> foundItems = FXCollections.observableArrayList();
