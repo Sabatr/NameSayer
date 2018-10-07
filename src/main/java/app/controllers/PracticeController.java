@@ -71,7 +71,6 @@ public class PracticeController extends ParentController implements EventHandler
                         //Renables button when the position is somewhere in the middle.
                         _namePosition = Position.MIDDLE;
                     }
-                   // updateVersions();
                 } else {
                     _namePosition = Position.ONLY;
                 }
@@ -141,6 +140,7 @@ public class PracticeController extends ParentController implements EventHandler
                 return;
             }
         }
+        AchievementsManager.getInstance().increaseListenAttempts();
         disableAll();
         _progressBar.setVisible(true);
         Path audioResource = _currentName.getAudioForVersion(_dateAndTime);
