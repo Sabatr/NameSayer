@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
-import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -22,12 +21,17 @@ import java.io.IOException;
 public class AchievementsManager {
     private final int _firstPractice = 1;
     private final int _tenPractices = 10;
-    private final int _listenAttempts = 5;
+    private final int _listenFiveAttempts = 5;
+    private final int _listenTwentyAttempts = 20;
+    private final int _fiftyAchievement = 50;
     private static AchievementsManager _achievementsManager = new AchievementsManager();
     private int _practiceCounter;
     private int _listenCounter;
     private int _differentNameCounter;
-    private boolean _completed = false;
+    private boolean _tenSuccess = false;
+    private boolean _imported = false;
+    private boolean _isRandom = false;
+    private boolean _fiftySuccess = false;
     private ObservableList<NameEntry> _names;
 
     /**
@@ -58,6 +62,7 @@ public class AchievementsManager {
                 break;
             case _tenPractices:
                 showTenPracticeAchievement();
+                break;
         }
     }
 
@@ -66,8 +71,13 @@ public class AchievementsManager {
      */
     public void increaseListenAttempts() {
         _listenCounter++;
-        if (_listenCounter == _listenAttempts) {
-            showFiveListenAchievement();
+        switch (_listenCounter) {
+            case _listenFiveAttempts:
+                showFiveListenAchievement();
+                break;
+            case _listenTwentyAttempts:
+                showTwentyListenAchievement();
+                break;
         }
     }
 
@@ -78,9 +88,35 @@ public class AchievementsManager {
      */
     private void increaseDifferentNameAttempts(int value) {
         _differentNameCounter = value;
-        if (_differentNameCounter >= _tenPractices && !_completed) {
+        if (_differentNameCounter >= _tenPractices && !_tenSuccess) {
             showTenDifferentNamesAchievement();
-            _completed = true;
+            _tenSuccess = true;
+        }
+        if (_differentNameCounter >= _fiftyAchievement && !_fiftySuccess) {
+            showFiftyDifferentNamesAchievement();
+            _fiftySuccess = true;
+        }
+    }
+
+    /**
+     * Lets the system know that the user has imported.
+     * @param hasImport
+     */
+    public void hasImported(boolean hasImport) {
+        _imported = hasImport;
+        if (_imported) {
+            showImportAchievement();
+        }
+    }
+
+    /**
+     * Lets the system know if the list has been randomised before
+     * @param hasRandom
+     */
+    public void hasBeenRandomised(boolean hasRandom) {
+        _isRandom = hasRandom;
+        if (_isRandom) {
+            showRandomAchievement();
         }
     }
 
@@ -130,12 +166,18 @@ public class AchievementsManager {
         popUp("Five listens!");
     }
 
-    private void showTenDifferentNamesAchievement() {
-        popUp("Ten different names!");
-    }
+    private void showTwentyListenAchievement() {popUp("Twenty listens!");}
+
+    private void showTenDifferentNamesAchievement() { popUp("Ten different names!"); }
+
+    private void showFiftyDifferentNamesAchievement() {popUp("Fifty different names!");}
+
+    private void showImportAchievement() { popUp("Imported a text!");}
+
+    private void showRandomAchievement() { popUp("Randomised a list!");}
+
 
     /**
-     *
      * @return the number of times the user has recorded
      */
     public int getPracticeCounter() {
@@ -143,7 +185,6 @@ public class AchievementsManager {
     }
 
     /**
-     *
      * @return the number of times the user has listened
      */
     public int getListenCounter() {
@@ -151,12 +192,21 @@ public class AchievementsManager {
     }
 
     /**
-     *
      * @return the number of times the user has practiced with different names
      */
     public int getDifferentNameAttempts() {
         return _differentNameCounter;
     }
+
+    /**
+     * @return if the user has imported something
+     */
+    public boolean getImported() {return _imported; }
+
+    /**
+     * @return if the user has randomised their list
+     */
+    public boolean getRandom() {return _isRandom; }
 
     /**
      * A private class is used here to allow the achievement to be displayed in the background
@@ -184,13 +234,13 @@ public class AchievementsManager {
                         SceneBuilder.class.getResource("styles/Achievement.css").toExternalForm());
                 dialogPane.getStyleClass().add("achievementPopUp");
                 _alert.initOwner(SceneBuilder.inst(null,null).getStage());
+
                 _alert.setTitle( "Achievement Unlocked!" );
                 _alert.setHeaderText(null);
                 _alert.setContentText(_showText);
                 //Essentially allows the user to still click on the application when this is shown.
                 _alert.initModality( Modality.NONE );
                 _alert.getButtonTypes().setAll(button);
-                _alert.setY(20);
                 //Removes the top part of the dialog
                 _alert.initStyle(StageStyle.TRANSPARENT);
                 //Give it a cool icon
@@ -200,7 +250,8 @@ public class AchievementsManager {
                 //Hard coded because the application doesn't know the size of the alert until it is shown.
                 int widthOfAlert = 427;
                 //Centralizes the pop up for any screen.
-                _alert.setX((Toolkit.getDefaultToolkit().getScreenSize().getWidth()-widthOfAlert)/2);
+                _alert.setX(_alert.getOwner().getX()+(_alert.getOwner().getWidth()-widthOfAlert)/2);
+                _alert.setY(_alert.getOwner().getY()+35);
                 _alert.show();
             } catch (IOException exception) {
                 exception.printStackTrace();

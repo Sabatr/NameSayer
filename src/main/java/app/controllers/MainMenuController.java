@@ -39,8 +39,6 @@ public class MainMenuController extends ParentController {
         _switcher.switchScene(SceneBuilder.LISTVIEW);
     }
 
-    // TODO. Chances made: switching scenes is now a single call
-
     /**
      * Allows the scene to switch to the options menu.
      */

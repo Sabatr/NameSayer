@@ -77,6 +77,14 @@ public class PracticeController extends ParentController implements EventHandler
                 }
                 _dateAndTime = _currentName.getHighestRating();
                 updateChangeButtons();
+                //Dynamically updates font size
+                int fontSize = 100 - (_currentName.getName().length()+10/2)*2;
+                if (fontSize > 20) {
+                    _nameDisplayed.setStyle("-fx-font-size: "+fontSize+"px");
+                } else {
+                    _nameDisplayed.setStyle("-fx-font-size: 22px");
+                }
+
             }
         });
     }

@@ -137,9 +137,9 @@ public class ListViewController extends ParentController {
         } else {
             AchievementsManager.getInstance().getPracticeNames(_selectedNames);
             if (_sortedButton.isDisabled()) {
-
                 Collections.sort(_selectedNames);
             } else {
+                AchievementsManager.getInstance().hasBeenRandomised(true);
                 Collections.shuffle(_selectedNames);
             }
             _switcher.switchScene(SceneBuilder.PRACTICE);
@@ -165,16 +165,12 @@ public class ListViewController extends ParentController {
      * Set up the search box in such a way that there are some recommended options.
      */
     private void setupSearchBox() {
-        System.out.println("Binding search box");
-
         Callback<AutoCompletionBinding.ISuggestionRequest, Collection<NameEntry>> suggester =
                 new Callback<AutoCompletionBinding.ISuggestionRequest, Collection<NameEntry>>() {
             @Override
             public Collection<NameEntry> call(AutoCompletionBinding.ISuggestionRequest param) {
-                System.out.println("Suggesting names: ");
                 ArrayList<NameEntry> nameEntries = new ArrayList<>();
                 String fieldText = param.getUserText();
-                System.out.println("User text: " + fieldText);
                 if(fieldText.length() == 0) {
                     return nameEntries;
                 }
@@ -193,7 +189,6 @@ public class ListViewController extends ParentController {
                 for(NameEntry name: _allNames) {
                     if(name.getName().toLowerCase().startsWith(words[words.length - 1].toLowerCase())) {
                         matchingNames.add(new NameEntry(possibleFullName.toString() + name.getName()));
-                        System.out.println("\t\t" + possibleFullName.toString() + name.getName());
                     }
                 }
                 return matchingNames;
@@ -283,12 +278,12 @@ public class ListViewController extends ParentController {
         finder.choose(_switcher.getStage());
         ObservableList<NameEntry> names = finder.getContent();
         if (!names.isEmpty()) {
+            AchievementsManager.getInstance().hasImported(true);
             selectNames(names);
         }
         if(names == null) {
             return;
         }
-       // selectNames(names);
     }
 
     /**
