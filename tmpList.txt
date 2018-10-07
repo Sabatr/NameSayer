@@ -1,5 +1,2 @@
-file 'D:\Projects\206\Assignment3_206\names\MacDonald\versions\_23-8-2018_21-13-35_MacDonald.wav'
-file 'D:\Projects\206\Assignment3_206\names\MacDonald\versions\_23-8-2018_21-13-35_MacDonald.wav'
-file 'D:\Projects\206\Assignment3_206\names\MacDonald\versions\_23-8-2018_21-13-35_MacDonald.wav'
-file 'D:\Projects\206\Assignment3_206\names\MacDonald\versions\_23-8-2018_21-13-35_MacDonald.wav'
-file 'D:\Projects\206\Assignment3_206\names\MacDonald\versions\_23-8-2018_21-13-35_MacDonald.wav'
+file 'D:\Projects\206\Assignment3_206\names\Ahn\versions\_18-5-2018_12-13-0_Ahn.wav'
+file 'D:\Projects\206\Assignment3_206\names\Ahn\versions\_18-5-2018_12-13-0_Ahn.wav'

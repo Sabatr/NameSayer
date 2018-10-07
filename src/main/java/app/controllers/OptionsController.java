@@ -129,7 +129,6 @@ public class OptionsController extends ParentController implements EventHandler<
             return;
         }
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
-            //System.out.println("success");
             if(event.getSource().getTitle().equals(BashRunner.CommandType.TESTMIC.toString())) {
                 String output = (String) event.getSource().getValue();
                 int foreIndex = output.indexOf("mean_volume") + 13;
@@ -143,10 +142,7 @@ public class OptionsController extends ParentController implements EventHandler<
                     }
                     double progress = (100 + 1.3 * volume) / 100;
                     _levelIndicator.setProgress(progress);
-                } //else {
-                //    System.out.println(output);
-                //}
-
+                }
                 BashRunner runner = null;
                 try {
                     runner = new BashRunner(this);

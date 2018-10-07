@@ -173,7 +173,6 @@ public class PracticeController extends ParentController implements EventHandler
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
-      //  _currentName.getBestAudio(_currentName);
     }
 
     /**
@@ -210,7 +209,6 @@ public class PracticeController extends ParentController implements EventHandler
                 _recordHBox.setVisible(false);
                 _recordHBox.setDisable(true);
                 _listenButton.setDisable(false);
-               // _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals("PlayAudio")) {
                 _progressBar.progressProperty().unbind();
                 _progressBar.setProgress(0);
@@ -218,7 +216,6 @@ public class PracticeController extends ParentController implements EventHandler
                 _listenButton.setDisable(false);
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
-               // _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
                 System.out.println(event.getSource().getValue());
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
