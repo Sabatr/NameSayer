@@ -41,8 +41,7 @@ public class AudioPlayer extends Task<Void> {
      */
     public float getLength() {
         float durationInSeconds = 0;
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(_soundFile);
+        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(_soundFile)){
             AudioFormat format = audioInputStream.getFormat();
             long audioFileLength = _soundFile.length();
             int frameSize = format.getFrameSize();
