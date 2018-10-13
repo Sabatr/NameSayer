@@ -1,18 +1,16 @@
 package app.controllers;
 
 import app.backend.BashRunner;
+import app.tools.AchievementsManager;
+import app.backend.CompositeName;
 import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,6 +18,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
@@ -31,14 +30,14 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML private Button _listenButton;
     @FXML private Button _recordButton;
     @FXML private Button _backButton;
-    @FXML private ComboBox _dropdown;
+    //@FXML private ComboBox _dropdown;
     @FXML private HBox _rateBox;
     @FXML private Slider _ratingSlider;
-    @FXML private Label _warningLabel;
 
     private ObservableList<NameEntry> _practiceList;
     private int _currentPosition;
     private NameEntry _currentName;
+    private String _dateAndTime;
 
     /**
      * This handles the next name click.
@@ -73,14 +72,23 @@ public class PracticeController extends ParentController implements EventHandler
                         //Renables button when the position is somewhere in the middle.
                         _namePosition = Position.MIDDLE;
                     }
-                    updateVersions();
                 } else {
                     _namePosition = Position.ONLY;
                 }
+                _dateAndTime = _currentName.getHighestRating();
                 updateChangeButtons();
+                //Dynamically updates font size
+                int fontSize = 100 - (_currentName.getName().length()+10/2)*2;
+                if (fontSize > 20) {
+                    _nameDisplayed.setStyle("-fx-font-size: "+fontSize+"px");
+                } else {
+                    _nameDisplayed.setStyle("-fx-font-size: 22px");
+                }
+
             }
         });
     }
+
 
     /**
      * These are the arrow buttons, which changes the names.
@@ -110,17 +118,6 @@ public class PracticeController extends ParentController implements EventHandler
     }
 
     /**
-     * This updates the version dropdown lists.
-     */
-    private void updateVersions() {
-        _currentName =_practiceList.get(_currentPosition);
-        //Gets the versions of the current name
-        _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
-        //Automatically select the default value.
-        _dropdown.getSelectionModel().selectFirst();
-    }
-
-    /**
      * This handles the next name click.
      */
     @FXML
@@ -144,17 +141,38 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio of the selected audio file.
      */
     @FXML
-    private void playAudio() {
-
+    private void playAudio() throws IOException, URISyntaxException {
+        if(_currentName instanceof CompositeName) {
+            CompositeName cName = (CompositeName) _currentName;
+            if(!cName.hasConcat()) {
+                cName.concatenateAudio(this::handle);
+                return;
+            }
+        }
+        AchievementsManager.getInstance().increaseListenAttempts();
         disableAll();
-
         _progressBar.setVisible(true);
-        File audioResource = _currentName.getAudioForVersion((String) _dropdown.getSelectionModel().getSelectedItem()).toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, this, "PlayAudio");
-        Thread thread = new Thread(player);
-        thread.start();
+        Path audioResource = _currentName.getAudioForVersion(_dateAndTime);
+        playGenericAudio("PlayAudio", audioResource);
+    }
 
-        Timer timer = new Timer(_progressBar, this, "PlayAud", 2);
+    /**
+     * Plays the current name's audio.
+     * Used for playing both Database audio and audio the user has just recorded
+     * @param taskTitle The title to pass to the {@link javafx.concurrent.Task} for determining whether or not we were
+     *                  playing recorded audio or database audio
+     * @param audioFilePath The path to the audio file to play
+     */
+    private void playGenericAudio(String taskTitle, Path audioFilePath) throws URISyntaxException {
+        File audioResource = audioFilePath.toFile();
+        AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
+        BashRunner br = new BashRunner(this);
+        float timeInSeconds = player.getLength();
+//        Thread thread = new Thread();
+//        thread.start();
+        br.runPlayAudioCommand(audioFilePath, taskTitle);
+
+        Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
     }
@@ -163,23 +181,18 @@ public class PracticeController extends ParentController implements EventHandler
      * Allows the user to record audio.
      */
     @FXML
-    private void recordAudio() {
-        if(System.getProperty("os.name").contains("Windows")) {
-            System.out.println("on windows");
-        } else {
-            _nextButton.setVisible(false);
-            _prevButton.setVisible(false);
-            disableAll();
-
-            Path pathToUse = _currentName.addVersion();
-            _currentRecording = pathToUse;
-            BashRunner runner = new BashRunner(this);
-            runner.runRecordCommand(pathToUse);
-
-            _progressBar.setVisible(true);
-            Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 5));
-            thread.start();
-        }
+    private void recordAudio() throws URISyntaxException {
+        AchievementsManager.getInstance().increasePracticeAttempts();
+        _nextButton.setVisible(false);
+        _prevButton.setVisible(false);
+        disableAll();
+        Path pathToUse = _currentName.addVersion();
+        _currentRecording = pathToUse;
+        BashRunner runner = new BashRunner(this);
+        runner.runRecordCommand(pathToUse);
+        _progressBar.setVisible(true);
+        Thread thread = new Thread(new Timer(_progressBar, this, "RecordAudio", 3));
+        thread.start();
     }
 
     /**
@@ -198,7 +211,6 @@ public class PracticeController extends ParentController implements EventHandler
                 _recordHBox.setVisible(false);
                 _recordHBox.setDisable(true);
                 _listenButton.setDisable(false);
-                _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals("PlayAudio")) {
                 _progressBar.progressProperty().unbind();
                 _progressBar.setProgress(0);
@@ -206,9 +218,19 @@ public class PracticeController extends ParentController implements EventHandler
                 _listenButton.setDisable(false);
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
-                _dropdown.setDisable(false);
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
                 System.out.println(event.getSource().getValue());
+            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
+                System.out.println("playing concatted audio");
+                try {
+                    playAudio();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            } else if(event.getSource().getTitle().equals((BashRunner.CommandType.RECORDAUDIO.toString()))) {
+                System.out.println("value returned: " + event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());
@@ -217,7 +239,6 @@ public class PracticeController extends ParentController implements EventHandler
 
     private void disableAll() {
         _listenButton.setDisable(true);
-        _dropdown.setDisable(true);
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
     }
@@ -229,7 +250,6 @@ public class PracticeController extends ParentController implements EventHandler
     private void keepRecording() {
         //Does stuff to save the audio file.
         _currentName.finaliseLastVersion();
-        _dropdown.setItems(FXCollections.observableArrayList(_currentName.getVersions()));
         enableButtons();
     }
 
@@ -237,21 +257,16 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio back for the user.
      */
     @FXML
-    private void playBackAudioOfRecording() {
+    private void playBackAudioOfRecording() throws URISyntaxException {
         //Plays back audio
         //Disables buttons while this happens.
         //Renables after audio is played.
 
         disableAll();
         _progressBar.setVisible(true);
-        File audioResource = _currentRecording.toFile();
-        AudioPlayer player = new AudioPlayer(audioResource, this, "RAudio");
-        Thread thread = new Thread(player);
-        thread.start();
 
-        Timer timer = new Timer(_progressBar, this, "RecordAudio", 5);
-        Thread thread1 = new Thread(timer);
-        thread1.start();
+        Path audioResource = _currentRecording;
+        playGenericAudio("RecordAudio", audioResource);
     }
 
     /**
@@ -301,26 +316,15 @@ public class PracticeController extends ParentController implements EventHandler
         _ratingSlider.setSnapToTicks(true);
     }
     @FXML
-    private void getRating() {
-        _currentName.rateVersion((String) _dropdown.getSelectionModel().getSelectedItem(), (int) _ratingSlider.getValue());
-        dropMenuAction();
+    private void confirmRating() {
+        _currentName.rateVersion(_dateAndTime, (int) _ratingSlider.getValue());
         _rateBox.setVisible(false);
         _recordHBox.setDisable(false);
-        _dropdown.setDisable(false);
         _listenButton.setDisable(false);
+        _dateAndTime = _currentName.getHighestRating();
         updateChangeButtons();
     }
 
-    @FXML
-    private void dropMenuAction() {
-        String date = (String) _dropdown.getSelectionModel().getSelectedItem();
-        int rating = _currentName.getRating(date);
-        if (0 <= rating && rating < 5) {
-            _warningLabel.setVisible(true);
-        } else {
-            _warningLabel.setVisible(false);
-        }
-    }
 
     /**
      * Uses the parent hook method to get the information from the list view controller.
@@ -339,14 +343,17 @@ public class PracticeController extends ParentController implements EventHandler
     @Override
     public void switchTo() {
         _rateBox.setVisible(false);
-        _warningLabel.setVisible(false);
         _confirmationHBox.setVisible(false);
         _progressBar.setVisible(false);
         _currentPosition = 0;
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
-        updateVersions();
-        dropMenuAction();
+        if (_practiceList.size() > 1) {
+            _namePosition = Position.FIRST;
+            updateChangeButtons();
+        }
+        //Gets the best version for the currentName
+        _dateAndTime = _currentName.getHighestRating();
     }
 }

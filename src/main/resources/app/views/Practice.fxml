@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Slider?>
@@ -21,7 +20,6 @@
       </Label>
       <Button fx:id="_prevButton" layoutX="82.0" layoutY="177.0" mnemonicParsing="false" onAction="#prevName" prefHeight="26.0" prefWidth="110.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&lt;" />
       <Button fx:id="_nextButton" layoutX="909.0" layoutY="186.0" mnemonicParsing="false" onAction="#nextName" prefHeight="56.0" prefWidth="104.0" styleClass="_changeButton" stylesheets="@styles/Practice.css" text="&gt;" />
-      <ComboBox fx:id="_dropdown" layoutX="200.0" layoutY="407.0" onAction="#dropMenuAction" prefHeight="12.0" prefWidth="594.0" promptText="Versions" styleClass="_dropdown" stylesheets="@styles/Practice.css" />
       <Pane layoutX="166.0" layoutY="586.0" prefHeight="137.0" prefWidth="762.0" styleClass="_pane" />
       <HBox fx:id="_confirmationHBox" layoutX="200.0" layoutY="600.0" prefHeight="107.0" prefWidth="700.0">
          <children>
@@ -61,19 +59,18 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="_listenButton" layoutX="805.0" layoutY="407.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
+      <Button fx:id="_listenButton" layoutX="510.0" layoutY="407.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="62.0" prefWidth="104.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="Listen" />
       <ProgressBar fx:id="_progressBar" layoutX="197.0" layoutY="506.0" prefHeight="47.0" prefWidth="700.0" progress="0.0" />
       <Label layoutX="457.0" layoutY="14.0" styleClass="_title" text="PRACTICE" />
       <HBox fx:id="_rateBox" layoutX="167.0" layoutY="507.0" prefHeight="51.0" prefWidth="841.0">
          <children>
             <Slider fx:id="_ratingSlider" prefHeight="47.0" prefWidth="637.0" styleClass="_slider" />
-            <Button fx:id="_confirmButton" mnemonicParsing="false" onAction="#getRating" prefHeight="45.0" prefWidth="118.0" style="-fx-font-size: 15;" styleClass="_selectionButton" text="Confirm">
+            <Button fx:id="_confirmButton" mnemonicParsing="false" onAction="#confirmRating" prefHeight="45.0" prefWidth="118.0" style="-fx-font-size: 15;" styleClass="_selectionButton" text="Confirm">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <Label fx:id="_warningLabel" layoutX="200.0" layoutY="369.0" prefHeight="45.0" prefWidth="755.0" styleClass="_warningLabel" text="WARNING: The current sound file is rated poorly." />
    </children>
 </AnchorPane>

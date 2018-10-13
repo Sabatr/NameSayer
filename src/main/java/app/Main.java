@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +22,8 @@ public class Main extends Application {
     public void start(Stage stage) throws URISyntaxException, IOException {
         stage.setResizable(false);
         stage.setTitle("Name Sayer Practice");
-        ArrayList<NameEntry> names = NameEntry.populateNames();
+        NameEntry.populateNames();
+        ArrayList<NameEntry> names = NameEntry.getNames();
         SceneBuilder sceneMan = SceneBuilder.inst(FXCollections.observableArrayList(names), stage);
         sceneMan.switchScene(SceneBuilder.MENU);
     }

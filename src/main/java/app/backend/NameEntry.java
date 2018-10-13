@@ -19,15 +19,20 @@ import java.util.Map;
 public class NameEntry implements Comparable<NameEntry> {
 
     private String DEFAULT_AUTHOR = "You";
-    private FSWrapper _fsMan;
+    protected FSWrapper _fsMan;
     private String _name;
-    private Version _mainVersion;
-    private Path _ratingsFile;
-    private Version _temporaryVersion;
+    protected Version _mainVersion;
+    protected Path _ratingsFile;
+    protected Version _temporaryVersion;
     private List<Version> _versions = new ArrayList<>();
+
+    /**
+     * Construct a dummy NameEntry with only a name and no associated audio
+     */
     public NameEntry(String name) {
         _name = name;
     }
+
     /**
      * Adds a version with the default author
      * @see NameEntry#addVersion(String author)
@@ -104,19 +109,6 @@ public class NameEntry implements Comparable<NameEntry> {
         return _name;
     }
 
-    /**
-     * Return a list of versions based on their ID: (at the moment a version's ID is its date)
-     * @return List of version dates
-     */
-    public List<String> getVersions() {
-
-        List<String> dates = new ArrayList<String>();
-        dates.add(_mainVersion._dateTime);
-        for(Version ver: _versions) {
-            dates.add(ver._dateTime);
-        }
-        return dates;
-    }
 
     /**
      * Return the filepath of the audio for the version
@@ -158,6 +150,18 @@ public class NameEntry implements Comparable<NameEntry> {
                 saveRating(dateAndTime, rating);
             }
         }
+    }
+
+    public String getHighestRating() {
+        String dateAndTime = _mainVersion._dateTime;
+        int highestRating = _mainVersion.rating;
+        for (Version version : _versions) {
+            if (version.rating > highestRating) {
+                highestRating = version.rating;
+                dateAndTime = version._dateTime;
+            }
+        }
+        return dateAndTime;
     }
 
     /**
@@ -211,22 +215,14 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     public int getRating(String dateAndTime) {
         if(_mainVersion._dateTime.equals(dateAndTime)) {
-            if(_mainVersion.rating != -1) {
-                return _mainVersion.rating;
-            } else {
-                return getRatingFromFile(dateAndTime);
-            }
+            return _mainVersion.rating;
         }
         for(Version ver: _versions) {
             if(ver._dateTime.equals(dateAndTime)) {
-                if(ver.rating != -1) {
-                    return ver.rating;
-                } else {
-                    return getRatingFromFile(dateAndTime);
-                }
+                return ver.rating;
             }
         }
-        return -1;
+        return 10;
     }
 
     /**
@@ -251,29 +247,10 @@ public class NameEntry implements Comparable<NameEntry> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        //defaults to 10
+        return 10;
     }
 
-    public double averageRating() {
-        int sum = 0;
-        int n = 0;
-        if(_mainVersion.rating != 1) {
-            sum += _mainVersion.rating;
-            n++;
-        }
-        for(Version ver: _versions) {
-            int rating = getRating(ver._dateTime);
-            if(rating != 1) {
-                sum += rating;
-                n++;
-            }
-        }
-
-        if(n == 0) {
-            return -1;
-        }
-        return ((double) sum / (double) n);
-    }
 
     /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised
@@ -282,10 +259,11 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     @Override
     public int compareTo(NameEntry o) {
-        return this._name.compareTo(o._name);
+        //UPDATED by Brian, toLowerCase() was added because of case insensitive stuff.
+        return this._name.toLowerCase().compareTo(o._name.toLowerCase());
     }
 
-    private class Version {
+    protected class Version {
 
         Version(String auth, String date, Path resource) {
             _author = auth;
@@ -303,16 +281,30 @@ public class NameEntry implements Comparable<NameEntry> {
     // ********** Extracting names from the filesystem **********
 
     /**
-     * Extract names from a filesystem. I will epxlain why this is so complicated later on.
+     * Extract names from the default folder and copy them to the main filesystem
      */
-    public static ArrayList<NameEntry> populateNames() throws URISyntaxException {
-        FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI());
+    public static void populateNames() throws URISyntaxException {
+        populateNames(null);
+    }
+
+    /**
+     * Extract names from a folder and copy them to the main filesystem
+     */
+    public static void populateNames(Path soundfilesFolder) throws URISyntaxException {
+        FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
         FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
         try {
             fsWrapOne.copyTo(fsWrapTwo);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Having populated the names database, get all the names present
+     */
+    public static ArrayList<NameEntry> getNames() throws URISyntaxException {
+        FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
 
         ArrayList<NameEntry> names = new ArrayList<>();
         List<Pair<String, Path>> paths = fsWrapTwo.getAllContentOfType("nameEntry");
@@ -331,7 +323,7 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
-     * Extract a NameEntry from the filesystem. I will epxlain why this is so complicated later on.
+     * Extract a NameEntry from the filesystem
      */
     private NameEntry(FSWrapper fsManager, List<Pair<String, Path>> paths) {
         boolean firstVersion = true;

@@ -2,18 +2,21 @@ package app.controllers;
 
 import app.backend.BashRunner;
 import app.backend.NameEntry;
+import app.tools.AchievementsManager;
 import app.views.SceneBuilder;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
-import java.nio.file.Path;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -29,40 +32,139 @@ public class OptionsController extends ParentController implements EventHandler<
     @FXML
     private Button _toggleButton;
     @FXML
+    private ScrollPane _achievement;
+    @FXML
+    private AchievementController _achievementController;
+    @FXML
     private Pane _micPane;
     @FXML
     private Pane _aboutPane;
     @FXML
     private Pane _helpPane;
+    @FXML
+    private Pane _deviceSelectPane;
+    @FXML
+    private Button _deviceSelectButton;
+    @FXML
+    private ComboBox<String> _deviceBox;
+
     private boolean _micToggled;
-    private enum Options {TEST,HELP,ABOUT}
+
+    private enum Options {MICS,TEST,HELP,ABOUT,ACHIEVEMENTS}
     private Options _optionPicked;
+    private Map<String, String> _devices;
+
+    /**
+     * This is static so that it is observable from everywhere in the program. If we didn't make this static it
+     * would take a lot of effort to pass this state around. You'd have to have a getter for it, so that the SceneBuilder
+     * can pass it into each other controller. Then those other controllers would have to pass it into their
+     * BashRunners because that's where it would be used, in recording audio.
+     */
+    public static SimpleStringProperty selectedDevice;
 
     @FXML
     public void initialize() {
+        if(System.getProperty("os.name").toLowerCase().contains("nix")) {
+            _deviceSelectButton.setDisable(true);
+        }
+        selectedDevice = new SimpleStringProperty();
         _optionPicked = Options.TEST;
         loadPanel();
         _micToggled = false;
     }
 
     /**
+     * Toggles the microphone selection pane.
+     */
+    @FXML
+    private void enableChooseMic() {
+        _optionPicked = Options.MICS;
+        loadPanel();
+        try {
+            findMicDevices();
+        } catch (URISyntaxException e) {
+            _optionPicked = Options.TEST;
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setContentText("Error fetching input devices");
+            a.showAndWait();
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    /**
+     * If the device list hasn't already been populated, it attempts to scan the devices available to ffmpeg.
+     */
+    private void findMicDevices() throws URISyntaxException {
+        if(_devices != null) {
+            return;
+        }
+
+        _devices = new HashMap<>();
+        BashRunner br = new BashRunner(this);
+        br.runDeviceList();
+    }
+
+    /**
+     * Parses the list of devices from the output of ffmpeg, then sets the choice box to contain them
+     */
+    private void parseDevices(String ffmpegOut) {
+        if(!ffmpegOut.contains("DirectShow audio")) {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setContentText("No audio devices found");
+            a.showAndWait();
+
+            _optionPicked = Options.TEST;
+            loadPanel();
+            return;
+        }
+
+        boolean pastAudioHeader = false;
+        String[] lines = ffmpegOut.split("\n");
+        for(int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+            if(line.contains("DirectShow audio devices")) {
+                pastAudioHeader = true;
+                continue;
+            }
+
+            if(pastAudioHeader && line.contains("Alternative name")) {
+                String lineBefore = lines[i - 1];
+                int firstQuote = lineBefore.indexOf("\"");
+                int secondQuote = lineBefore.indexOf("\"", firstQuote + 1);
+                String name = lineBefore.substring(firstQuote + 1, secondQuote);
+
+                firstQuote = line.indexOf("\"");
+                secondQuote = line.indexOf("\"", firstQuote + 1);
+                String altName = line.substring(firstQuote + 1, secondQuote);
+
+                _devices.put(name, altName);
+            }
+        }
+
+        _deviceBox.setItems(FXCollections.observableArrayList(_devices.keySet()));
+    }
+
+    /**
+     * Selects a device as the mic to use
+     */
+    @FXML
+    private void onDeviceSelect() {
+        selectedDevice.set(_devices.get(_deviceBox.getValue()));
+    }
+
+    /**
      * Toggle the chain of BashRunner processes
      */
     @FXML
-    private void toggleMic() {
+    private void toggleMic() throws URISyntaxException {
         if(_micToggled) {
             _micToggled = false;
         } else {
             _micToggled = true;
-            if(System.getProperty("os.name").contains("Windows")) {
-                System.out.println("on windows");
-                return;
-            } else {
                 BashRunner runner = new BashRunner(this);
                 runner.runMonitorMicCommand();
-            }
         }
-
     }
 
     @FXML
@@ -71,34 +173,58 @@ public class OptionsController extends ParentController implements EventHandler<
         loadPanel();
     }
 
-    @FXML void help() {
+    @FXML private void help() {
         _optionPicked = Options.HELP;
         loadPanel();
     }
-    @FXML void about() {
+    @FXML private void about() {
         _optionPicked = Options.ABOUT;
         loadPanel();
     }
 
+    @FXML private void achievements() {
+        _optionPicked = Options.ACHIEVEMENTS;
+        loadPanel();
+
+    }
+
     private void loadPanel() {
         switch (_optionPicked) {
+            case MICS:
+                _deviceSelectPane.setVisible(true);
+                _micPane.setVisible(false);
+                _helpPane.setVisible(false);
+                _aboutPane.setVisible(false);
+                break;
             case TEST:
+                _deviceSelectPane.setVisible(false);
                 _micPane.setVisible(true);
                 _helpPane.setVisible(false);
                 _aboutPane.setVisible(false);
+                _achievement.setVisible(false);
                 break;
             case HELP:
+                _deviceSelectPane.setVisible(false);
                 _helpPane.setVisible(true);
                 _micPane.setVisible(false);
                 _aboutPane.setVisible(false);
+               _achievement.setVisible(false);
                 break;
             case ABOUT:
+                _deviceSelectPane.setVisible(false);
                 _aboutPane.setVisible(true);
                 _micPane.setVisible(false);
                 _helpPane.setVisible(false);
+                _achievement.setVisible(false);
                 break;
-        }
+            case ACHIEVEMENTS:
+                _deviceSelectPane.setVisible(false);
+                _achievement.setVisible(true);
+                _aboutPane.setVisible(false);
+                _micPane.setVisible(false);
+                _helpPane.setVisible(false);
 
+        }
     }
 
     /**
@@ -107,14 +233,14 @@ public class OptionsController extends ParentController implements EventHandler<
      */
     @Override
     public void handle(WorkerStateEvent event) {
-        if(!_micToggled) {
-             _levelIndicator.progressProperty().unbind();
-             _levelIndicator.progressProperty().setValue(0);
-            return;
-        }
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
-            //System.out.println("success");
             if(event.getSource().getTitle().equals(BashRunner.CommandType.TESTMIC.toString())) {
+                if(!_micToggled) {
+                    _levelIndicator.progressProperty().unbind();
+                    _levelIndicator.progressProperty().setValue(0);
+                    return;
+                }
+
                 String output = (String) event.getSource().getValue();
                 int foreIndex = output.indexOf("mean_volume") + 13;
                 int aftIndex = output.indexOf("dB", foreIndex);
@@ -127,12 +253,16 @@ public class OptionsController extends ParentController implements EventHandler<
                     }
                     double progress = (100 + 1.3 * volume) / 100;
                     _levelIndicator.setProgress(progress);
-                } //else {
-                //    System.out.println(output);
-                //}
-
-                BashRunner runner = new BashRunner(this);
+                }
+                BashRunner runner = null;
+                try {
+                    runner = new BashRunner(this);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 runner.runMonitorMicCommand();
+            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.LISTDEVICES.toString())) {
+                parseDevices((String) event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println("Failed");
@@ -143,7 +273,7 @@ public class OptionsController extends ParentController implements EventHandler<
     }
 
     @FXML
-    private void goBack() {
+    private void goBack() throws URISyntaxException {
         if(_micToggled) {
            toggleMic();
         }
@@ -156,5 +286,7 @@ public class OptionsController extends ParentController implements EventHandler<
     }
 
     @Override
-    public void switchTo() {}
+    public void switchTo() {
+      _achievementController.update();
+    }
 }

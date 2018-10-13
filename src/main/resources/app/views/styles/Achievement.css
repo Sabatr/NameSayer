@@ -1,0 +1,36 @@
+.label {
+    -fx-alignment: center;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-border-color: #6679b0;
+    -fx-border-radius: 2px;
+    -fx-border-width: 5px;
+    -fx-padding: 5px;
+}
+
+
+.achievementPopUp{
+    -fx-background-color: #6679b0;
+}
+.achievementPopUp > *.button-bar > *.container{
+    -fx-background-color: #6679b0;
+}
+
+.achievementPopUp > *.button-bar > *.container > *.button {
+    -fx-background-color: #6679b0;
+}
+.achievementPopUp > *.label.content{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.achievementPopUp .header-panel{
+    -fx-background-color: #6679b0;
+}
+.achievementPopUp .header-panel *.label{
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+    -fx-fill: #6679b0;
+}
+
