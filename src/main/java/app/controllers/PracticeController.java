@@ -163,12 +163,14 @@ public class PracticeController extends ParentController implements EventHandler
      *                  playing recorded audio or database audio
      * @param audioFilePath The path to the audio file to play
      */
-    private void playGenericAudio(String taskTitle, Path audioFilePath) {
+    private void playGenericAudio(String taskTitle, Path audioFilePath) throws URISyntaxException {
         File audioResource = audioFilePath.toFile();
         AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
+        BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
-        Thread thread = new Thread(player);
-        thread.start();
+//        Thread thread = new Thread();
+//        thread.start();
+        br.runPlayAudioCommand(audioFilePath, taskTitle);
 
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
@@ -255,7 +257,7 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio back for the user.
      */
     @FXML
-    private void playBackAudioOfRecording() {
+    private void playBackAudioOfRecording() throws URISyntaxException {
         //Plays back audio
         //Disables buttons while this happens.
         //Renables after audio is played.

@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import app.controllers.OptionsController;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -19,11 +20,12 @@ import javafx.event.EventHandler;
 public class BashRunner {
 
     public enum CommandType {
-        RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT
+        RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT, LISTDEVICES
     }
 
     private boolean onWindows = false;
     private String ffmpegCommand = "ffmpeg";
+    private String ffplayCommand = "ffplay";
 
     private EventHandler<WorkerStateEvent> _taskCompletionHandler;
     // private EventHandler<WorkerStateEvent> _externalHandler;
@@ -40,7 +42,33 @@ public class BashRunner {
             Path workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
             onWindows = true;
             ffmpegCommand = workingDir.resolve(Paths.get("ffmpeg-4.0.2-win32-static\\bin\\ffmpeg.exe")).toAbsolutePath().toString();
+            ffplayCommand = workingDir.resolve(Paths.get("ffmpeg-4.0.2-win32-static\\bin\\ffplay.exe")).toAbsolutePath().toString();
         }
+    }
+
+    /**
+     * Runs ffmpeg to list the devices available for recording
+     */
+    public Task<String> runDeviceList() {
+        String[] cmd;
+        String cmdString;
+        if(onWindows) {
+            cmd = new String[7];
+            cmd[0] = ffmpegCommand;
+            cmd[1] = "-list_devices";
+            cmd[2] = "true";
+            cmd[3] = "-f";
+            cmd[4] = "dshow";
+            cmd[5] = "-i";
+            cmd[6] = "dummy";
+        } else {
+            cmdString = String.format(ffmpegCommand + "-list_devices -f alsa -i dummy");
+            cmd = new String[3];
+            cmd[0] = "/bin/bash";
+            cmd[1] = "-c";
+            cmd[2] = cmdString;
+        }
+        return runCommand(CommandType.LISTDEVICES.toString(), cmd);
     }
 
     /**
@@ -57,7 +85,7 @@ public class BashRunner {
             cmd[1] = "-f";
             cmd[2] = "dshow";
             cmd[3] = "-i";
-            cmd[4] = "audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\"";
+            cmd[4] = "audio=\"" + OptionsController.selectedDevice.get() + "\"";
             cmd[5] = "-t";
             cmd[6] = "3";
             cmd[7] = "-acodec";
@@ -90,9 +118,9 @@ public class BashRunner {
                     "-f",
                     "dshow",
                     "-i",
-                    "audio=\"@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{434190F3-6C79-423F-8C98-4921DD6053B5}\"",
+                    "audio=\"" + OptionsController.selectedDevice.get() + "\"",
                     "-t",
-                    "0.01",
+                    "0.03",
                     "-filter_complex",
                     "\"volumedetect\"",
                     "-acodec",
@@ -113,17 +141,31 @@ public class BashRunner {
     }
 
     /**
-     * Runs ffplay to play audio. This doesn't work for some reason
+     * Runs ffplay to play audio.
      * @param path The filepath of the audio file to play
      * @return The Task running the process on a background thread
      */
-    @Deprecated
-    public Task<String> runPlayAudioCommand(Path path) {
+    public Task<String> runPlayAudioCommand(Path path, String taskTitle) {
         System.out.println("Playing audio " + path.toAbsolutePath().toString());
-        String cmdString = String.format("ffplay -autoexit \"$s\"", path.toAbsolutePath().toString()); // -loglevel quiet
+        String[] cmd;
+        if(onWindows) {
+            cmd = new String[6];
+            cmd[0] = ffplayCommand;
+            cmd[1] = "-autoexit";
+            cmd[2] = "-nodisp";
+            cmd[3] = "-loglevel";
+            cmd[4] = "quiet";
+            cmd[5] = path.toAbsolutePath().toString();
 
-        String[] cmd = { "/bin/bash", "-c", cmdString };
-        return runCommand(CommandType.PLAYAUDIO.toString(), cmd);
+        } else {
+            String cmdString = String.format("ffplay -autoexit -nodisp -loglevel quiet \"$s\"", path.toAbsolutePath().toString());
+            cmd = new String[3];
+            cmd[0] = "/bin/bash";
+            cmd[1] = "-c";
+            cmd[2] = cmdString;
+        }
+
+        return runCommand(taskTitle, cmd);
     }
 
     /**
@@ -210,7 +252,7 @@ public class BashRunner {
             try {
                 ProcessBuilder test = new ProcessBuilder(cmd);
                 test.directory(null);
-                System.out.println("Testing command" + test.command());
+//                System.out.println("Testing command" + test.command());
                 p = test.start();
             } catch(IOException e) {
                 failure = true;
@@ -222,12 +264,14 @@ public class BashRunner {
                 } catch(InterruptedException e) {
                     if (isCancelled()) {
                         updateMessage("Cancelled");
+                        e.printStackTrace();
                         failure = true;
                         commandOutBuilder.append(e.getMessage());
                     }
                 }
             }
 
+            System.out.println("Done waiting");
             if(!failure) {
                 try {
                     if(p.exitValue() == 0) {
@@ -238,6 +282,9 @@ public class BashRunner {
                         failure = true;
                         commandOutBuilder.append(concatOutput(p.getInputStream(),"\n"));
                         commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
+                        if(commandOutBuilder.toString().contains("DirectShow")) {
+                            failure = false;
+                        }
                     }
                 } catch(IOException e) {
                     failure = true;
@@ -253,7 +300,7 @@ public class BashRunner {
 
             updateProgress(20, 20);
             updateValue(commandOutBuilder.toString());
-            //System.out.println(commandOutBuilder.toString());
+            System.out.println(commandOutBuilder.toString());
             return commandOutBuilder.toString();
         }
 
