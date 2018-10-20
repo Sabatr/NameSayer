@@ -21,6 +21,7 @@ public class CompositeName extends NameEntry {
 
     boolean _isProcessing = false;
     private ObservableList<NameEntry> _names;
+    protected Version _mainVersion;
 
     public CompositeName(ObservableList<NameEntry> names, String fullname) throws URISyntaxException {
         super(fullname);
@@ -81,11 +82,11 @@ public class CompositeName extends NameEntry {
     }
 
     @Override
-    public Path addVersion(String author) {
+    public Path addUserVersion(String author) {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path resource = _fsMan.createFilePath("compositeName", formattedDate, formattedTime, getName());
+        Path resource = _fsMan.createFilePath("userCompositeName", formattedDate, formattedTime, getName());
 
         _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;

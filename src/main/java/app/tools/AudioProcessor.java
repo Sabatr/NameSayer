@@ -87,7 +87,6 @@ public class AudioProcessor implements EventHandler<WorkerStateEvent> {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("done processing");
                 _name.setDoneProcessing();
                 _finalHandler.handle(event);
             }

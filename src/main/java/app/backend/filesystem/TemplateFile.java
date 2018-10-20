@@ -196,8 +196,10 @@ public class TemplateFile {
 
         public TemplateFileBuilder parent(TemplateFolder parent) { _parent = parent; return this; }
 
-        public TemplateFolder buildFolder() {
-            return new TemplateFolder(_type, _nameFormat, _multiple, _isParameterised, _createNew, _parent);
+        public TemplateFolder buildFolder(boolean allChildren) {
+            TemplateFolder tFolder = new TemplateFolder(_type, _nameFormat, _multiple, _isParameterised, _createNew, _parent);
+            tFolder.setNeedsChildren(allChildren);
+            return tFolder;
         }
 
         public TemplateFile buildFile() {

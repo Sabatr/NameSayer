@@ -5,6 +5,7 @@
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="createNew" type="xs:boolean"/>
     <xs:attribute name="copy" type="xs:boolean"/>
+    <xs:attribute name="needAllChildren" type="xs:boolean"/>
 
     <xs:complexType name="fileType">
         <xs:attribute name="type" type="xs:ID"/>
@@ -27,6 +28,7 @@
         <xs:attribute name="type" type="xs:ID"/>
         <xs:attribute ref="nameFormat"/>
         <xs:attribute ref="name"/>
+        <xs:attribute name="needAllChildren" type="xs:boolean"/>
     </xs:complexType>
 
     <xs:element name="dir" type="folderType"/>

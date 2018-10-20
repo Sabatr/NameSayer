@@ -17,21 +17,19 @@ import java.util.Map;
 /**
  * Singleton class that manages scenes and switching between them.
  * Scenes are stored as a list.
- *
- * @author Brian Nguyen
  */
 public class SceneBuilder {      //could be renamed SceneSwitcher
     private Stage _stage;
 
-    // TODO.
     private ObservableList<NameEntry> _allNames;
     private ObservableList<NameEntry> _selectionList;
 
-    public static final String MENU = "MainMenu.fxml";              // TODO. Changes made: added symbolic constants
+    public static final String MENU = "MainMenu.fxml";
     public static final String OPTIONS = "OptionsView.fxml";
     public static final String LISTVIEW = "ListView.fxml";
     public static final String PRACTICE = "Practice.fxml";
-    private Map<String, Scene> _scenes;                             // TODO. Changes made: storing scenes in a map
+    public static final String USER_RECORDINGS = "UserRecords.fxml";
+    private Map<String, Scene> _scenes;
     private Map<String, ParentController> _controllers;
 
     private static SceneBuilder inst;
@@ -48,8 +46,6 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
         }
         return inst;
     }
-
-    // TODO. Changes made: singletonised class
 
     private SceneBuilder(ObservableList<NameEntry> allNames, Stage stage) throws IOException {
         _scenes = new HashMap<>();

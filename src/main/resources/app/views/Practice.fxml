@@ -13,6 +13,7 @@
 <AnchorPane maxHeight="800.0" maxWidth="1100.0" prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.PracticeController">
    <children>
       <Pane layoutX="61.0" layoutY="76.0" prefHeight="411.0" prefWidth="979.0" styleClass="_pane" />
+      <Button layoutX="200.0" layoutY="407.0" mnemonicParsing="false" onAction="#goToUserRecordings" prefHeight="62.0" prefWidth="195.0" styleClass="_audioButton" stylesheets="@styles/Practice.css" text="User Recordings" />
       <Label fx:id="_nameDisplayed" alignment="CENTER" layoutX="200.0" layoutY="94.0" prefHeight="272.0" prefWidth="700.0" styleClass="_nameDisplayed" stylesheets="@styles/Practice.css" text="Text goes here" textAlignment="CENTER">
          <font>
             <Font size="93.0" />

@@ -152,7 +152,7 @@ public class FSWrapper {
                 Files.deleteIfExists(fileInst.getPath());
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -359,7 +359,7 @@ public class FSWrapper {
 
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-                if((parentList.size() - depth) > 1) {
+                if((parentList.size() - depth) > 0) {
                     depth++;
                     return FileVisitResult.CONTINUE;
                 } else if(!attemptExtractContent(dir, tFile, filePaths)) {
@@ -429,7 +429,7 @@ public class FSWrapper {
                 }
                 // If a directory has a match for each of its expected children, we can safely assume it is usable as there is
                 // definitely all the required content in the directory.
-                if (foundElements != tFolder.numChildren()) {
+                if (foundElements != tFolder.numChildren() && tFolder.needsAllChildren()) {
                     return false;
                 }
                 params = extractParamsForUnit(file, tFile);

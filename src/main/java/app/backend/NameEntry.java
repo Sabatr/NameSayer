@@ -22,10 +22,12 @@ public class NameEntry implements Comparable<NameEntry> {
     private String DEFAULT_AUTHOR = "You";
     protected FSWrapper _fsMan;
     private String _name;
-    protected Version _mainVersion;
+
     protected Path _ratingsFile;
     protected Version _temporaryVersion;
     private List<Version> _versions = new ArrayList<>();
+    private List<Version> _userVersions = new ArrayList<>();
+
 
     /**
      * Construct a dummy NameEntry with only a name and no associated audio
@@ -36,11 +38,11 @@ public class NameEntry implements Comparable<NameEntry> {
 
     /**
      * Adds a version with the default author
-     * @see NameEntry#addVersion(String author)
+     * @see NameEntry#addUserVersion(String author)
      * @return The filePath to use for the recording
      */
-    public Path addVersion() {
-        return addVersion(DEFAULT_AUTHOR);
+    public Path addUserVersion() {
+        return addUserVersion(DEFAULT_AUTHOR);
     }
 
     /**
@@ -49,26 +51,26 @@ public class NameEntry implements Comparable<NameEntry> {
      * @param author The author of this version
      * @return The filePath to use for the recording
      */
-    public Path addVersion(String author) {
+    public Path addUserVersion(String author) {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path resource = _fsMan.createFilePath("soundFile", _name, formattedDate, formattedTime);
+        Path resource = _fsMan.createFilePath("userVersion", _name, formattedDate, formattedTime);
 
         _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;
     }
 
-    /**
-     * Get temporary version audio
-     */
+    public void addUserVersionWithAudio(String auth, String date, Path resource) {
+        _versions.add(new Version(auth, date, resource));
+    }
 
     /**
      * Confirm the adding of the version that was last created.
      */
     public void finaliseLastVersion() {
         if(_temporaryVersion != null) {
-            _versions.add(_temporaryVersion);
+            _userVersions.add(_temporaryVersion);
         }
         _temporaryVersion = null;
     }
@@ -88,7 +90,7 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
-     * Used to add verions already on the filesystem
+     * Used to add versions already on the filesystem
      */
     public void addVersionWithAudio(String auth, String date, Path resource) {
         _versions.add(new Version(auth, date, resource));
@@ -110,16 +112,12 @@ public class NameEntry implements Comparable<NameEntry> {
         return _name;
     }
 
-
     /**
      * Return the filepath of the audio for the version
      * @param dateAndTime the date and time that identify the version
      * @return
      */
     public Path getAudioForVersion(String dateAndTime) {
-        if(_mainVersion._dateTime.equals(dateAndTime)) {
-            return _mainVersion._resource;
-        }
         if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
             return _temporaryVersion._resource;
         }
@@ -137,10 +135,6 @@ public class NameEntry implements Comparable<NameEntry> {
      * @param rating the rating to give the version, out of 10
      */
     public void rateVersion(String dateAndTime, int rating) {
-        if(_mainVersion._dateTime.equals(dateAndTime)) {
-            _mainVersion.rating = rating;
-            saveRating(dateAndTime, rating);
-        }
         if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
             _temporaryVersion.rating = rating;
             saveRating(dateAndTime, rating);
@@ -154,8 +148,8 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     public String getHighestRating() {
-        String dateAndTime = _mainVersion._dateTime;
-        int highestRating = _mainVersion.rating;
+        String dateAndTime = _versions.get(0)._dateTime;
+        int highestRating = _versions.get(0).rating;
         for (Version version : _versions) {
             if (version.rating > highestRating) {
                 highestRating = version.rating;
@@ -215,9 +209,6 @@ public class NameEntry implements Comparable<NameEntry> {
      * @return an integer rating out of 10, or -1 if the version has never been rated
      */
     public int getRating(String dateAndTime) {
-        if(_mainVersion._dateTime.equals(dateAndTime)) {
-            return _mainVersion.rating;
-        }
         for(Version ver: _versions) {
             if(ver._dateTime.equals(dateAndTime)) {
                 return ver.rating;
@@ -318,9 +309,11 @@ public class NameEntry implements Comparable<NameEntry> {
         ArrayList<NameEntry> names = new ArrayList<>();
         List<FileInstance> files = fsWrapTwo.getAllContentOfType("nameEntry");
 
+        System.out.println("getting names");
         List<FileInstance> pathsForSingleEntry = new ArrayList<>();
         for(FileInstance file: files) {
             if(file.getTemplate().getType().equals("nameEntry")) {
+                System.out.println("file " + file.getPath());
                 pathsForSingleEntry.add(file);
                 names.add(new NameEntry(fsWrapTwo, pathsForSingleEntry));
                 pathsForSingleEntry.clear();
@@ -335,22 +328,19 @@ public class NameEntry implements Comparable<NameEntry> {
      * Extract a NameEntry from the filesystem
      */
     private NameEntry(FSWrapper fsManager, List<FileInstance> files) {
-        boolean firstVersion = true;
-        List<FileInstance> revList = files;
-        Collections.reverse(revList);
+        Collections.reverse(files);
         Map<Integer, String> parameters;
         for(FileInstance file: files) {
             switch (file.getTemplate().getType()) {
-                case "soundFile":
+                case "userVersion":
                     parameters = file.getParameters();
-                    if(firstVersion) {
-                        _mainVersion = new Version(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
+                    addUserVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
+                            file.getPath());
+                case "soundFile":
+                    System.out.println("Adding a soundFile");
+                    parameters = file.getParameters();
+                    addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
                                 file.getPath());
-                        firstVersion = false;
-                    } else {
-                        addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
-                                file.getPath());
-                    }
                     break;
                 case "nameEntry":
                     parameters = file.getParameters();

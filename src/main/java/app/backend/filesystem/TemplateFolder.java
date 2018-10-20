@@ -10,6 +10,7 @@ import java.util.List;
 public class TemplateFolder extends TemplateFile implements Iterable<TemplateFile> {
 
     private List<TemplateFile> _children;
+    private boolean _needsAllChildren = false;
 
     public TemplateFolder(String type, String format, boolean multi, boolean parameters, boolean createNew, TemplateFolder parent) {
         super(type, format, multi, parameters, createNew, parent);
@@ -19,6 +20,10 @@ public class TemplateFolder extends TemplateFile implements Iterable<TemplateFil
     @Override
     public boolean isParent() {
         return true;
+    }
+
+    public boolean needsAllChildren() {
+        return _needsAllChildren;
     }
 
     public List<TemplateFile> getChildren() {
@@ -56,4 +61,7 @@ public class TemplateFolder extends TemplateFile implements Iterable<TemplateFil
         return _children.iterator();
     }
 
+    public void setNeedsChildren(boolean allChildren) {
+        _needsAllChildren = allChildren;
+    }
 }

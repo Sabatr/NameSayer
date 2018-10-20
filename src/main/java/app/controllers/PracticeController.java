@@ -7,10 +7,12 @@ import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,9 +21,7 @@ import javafx.scene.layout.HBox;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
 
@@ -42,6 +42,11 @@ public class PracticeController extends ParentController implements EventHandler
     private NameEntry _currentName;
     private String _dateAndTime;
 
+    // globally visible volume for syncing between the Practice controller and the UserRecordings controller
+    public static final SimpleDoubleProperty _volume = new SimpleDoubleProperty();
+    // This is a late addition and I haven't got the time to set it up properly
+    public static NameEntry _selectedName;
+
     /**
      * This handles the next name click.
      */
@@ -60,7 +65,8 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     public void initialize() {
         setUpSlider();
-        _volumeSlider.setValue(_volumeSlider.getMax());
+        _volume.setValue(_volumeSlider.getMax());
+        _volumeSlider.valueProperty().bindBidirectional(_volume);
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -196,7 +202,7 @@ public class PracticeController extends ParentController implements EventHandler
         _nextButton.setVisible(false);
         _prevButton.setVisible(false);
         disableAll();
-        Path pathToUse = _currentName.addVersion();
+        Path pathToUse = _currentName.addUserVersion();
         _currentRecording = pathToUse;
         BashRunner runner = new BashRunner(this);
         runner.runRecordCommand(pathToUse);
@@ -288,6 +294,15 @@ public class PracticeController extends ParentController implements EventHandler
         _recordHBox.setVisible(true);
         _recordHBox.setDisable(false);
         updateChangeButtons();
+    }
+
+    /**
+     * Handles the button to go to the user recordings
+     */
+    @FXML
+    private void goToUserRecordings() {
+        _selectedName = _currentName;
+        _switcher.switchScene(SceneBuilder.USER_RECORDINGS);
     }
 
     /**

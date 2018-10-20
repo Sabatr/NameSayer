@@ -210,9 +210,14 @@ public class FSWrapperFactory {
                     builder.shouldCreateNew(false);
                 }
 
+                boolean allChildren = false;
+                if (e.hasAttribute("needAllChildren") && e.getAttribute("needAllChildren").equals("true")) {
+                    allChildren = true;
+                }
+
                 TemplateFile tFile;
                 if(isDir) {
-                    TemplateFolder tFolder = builder.parent(root).buildFolder();
+                    TemplateFolder tFolder = builder.parent(root).buildFolder(allChildren);
                     recursivelyExploreXML(tFolder, e);
                     tFile = tFolder;
                 } else {
