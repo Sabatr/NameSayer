@@ -8,6 +8,8 @@ import app.views.SceneBuilder;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.controls.JFXSlider;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -39,12 +41,17 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML private JFXButton _achievements;
     private JFXPopup _ratePopUp;
     private JFXPopup _playPopUp;
+    @FXML private JFXSlider _volumeSlider;
     private ObservableList<NameEntry> _practiceList;
     private int _currentPosition;
     private NameEntry _currentName;
     private String _dateAndTime;
     private PlayBackHandler _playBackHandler;
 
+    // globally visible volume for syncing between the Practice controller and the UserRecordings controller
+    public static final SimpleDoubleProperty _volume = new SimpleDoubleProperty();
+    // This is a late addition and I haven't got the time to set it up properly
+    public static NameEntry _selectedName;
 
     /**
      * This handles the previous name click.
@@ -60,6 +67,8 @@ public class PracticeController extends ParentController implements EventHandler
     public void initialize() {
         setUpRateButton();
         setUpPlayBack();
+        _volume.setValue(_volumeSlider.getMax());
+        _volumeSlider.valueProperty().bindBidirectional(_volume);
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -213,7 +222,9 @@ public class PracticeController extends ParentController implements EventHandler
     private void playAudio() throws IOException, URISyntaxException {
         if(_currentName instanceof CompositeName) {
             CompositeName cName = (CompositeName) _currentName;
-            if(!cName.hasConcat()) {
+            if(cName.isProcessing()) {
+                return;
+            } else if(!cName.hasConcat()) {
                 cName.concatenateAudio(this::handle);
                 return;
             }
@@ -237,7 +248,13 @@ public class PracticeController extends ParentController implements EventHandler
         AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
         BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
-        br.runPlayAudioCommand(audioFilePath, taskTitle);
+        double max = _volumeSlider.getMax();
+        System.out.println("without this, there's duplicate code");
+        double min = _volumeSlider.getMin();
+        double value = _volumeSlider.getValue();
+
+        double volume = ((value - min) / (max - min)) * 100;
+        br.runPlayAudioCommand(audioFilePath, taskTitle, volume);
 
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
@@ -257,7 +274,7 @@ public class PracticeController extends ParentController implements EventHandler
         _nextButton.setVisible(false);
         _prevButton.setVisible(false);
         disableAll();
-        Path pathToUse = _currentName.addVersion();
+        Path pathToUse = _currentName.addUserVersion();
         _currentRecording = pathToUse;
         BashRunner runner = new BashRunner(this);
         runner.runRecordCommand(pathToUse);
@@ -274,6 +291,7 @@ public class PracticeController extends ParentController implements EventHandler
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED))
         {
             if(event.getSource().getTitle().equals("RecordAudio")) {
+                System.out.println("does stuff here");
                 _progressBar.progressProperty().unbind();
                 _progressBar.setProgress(0);
                 _progressBar.setVisible(false);
@@ -282,6 +300,8 @@ public class PracticeController extends ParentController implements EventHandler
                 _recordHBox.setVisible(false);
                 _recordHBox.setDisable(true);
                 _listenButton.setDisable(false);
+                _backButton.setDisable(false);
+                _achievements.setDisable(false);
             } else if(event.getSource().getTitle().equals("PlayAudio")) {
                 _progressBar.progressProperty().unbind();
                 _progressBar.setProgress(0);
@@ -289,19 +309,15 @@ public class PracticeController extends ParentController implements EventHandler
                 _listenButton.setDisable(false);
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
-            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
-                System.out.println(event.getSource().getValue());
+                _backButton.setDisable(false);
+                _achievements.setDisable(false);
+
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
-                System.out.println("playing concatted audio");
                 try {
                     playAudio();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (URISyntaxException e) {
+                } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
-            } else if(event.getSource().getTitle().equals((BashRunner.CommandType.RECORDAUDIO.toString()))) {
-                System.out.println("value returned: " + event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());
@@ -309,11 +325,11 @@ public class PracticeController extends ParentController implements EventHandler
     }
 
     private void disableAll() {
-        _backButton.setDisable(true);
-        _listenButton.setDisable(true);
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
+        _backButton.setDisable(true);
         _achievements.setDisable(true);
+
     }
 
     /**
@@ -330,7 +346,6 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio back for the user.
      */
     private void playBackAudioOfRecording() throws URISyntaxException {
-        disableAll();
         _progressBar.setVisible(true);
         Path audioResource = _currentRecording;
         playGenericAudio("RecordAudio", audioResource);
@@ -338,11 +353,13 @@ public class PracticeController extends ParentController implements EventHandler
 
     @FXML
     private void playBack() throws IOException, URISyntaxException{
+        disableAll();
         switch (_playBackHandler.getCurrent()) {
             case DATABASE:
                 playAudio();
                 break;
             case USER:
+                System.out.println("goes here");
                 playBackAudioOfRecording();
                 break;
             case BOTH:
@@ -360,7 +377,6 @@ public class PracticeController extends ParentController implements EventHandler
         _currentName.throwAwayNew();
         enableButtons();
     }
-
     /**
      * Re-enables the disabled buttons, once recording has stopped.
      */
@@ -371,6 +387,15 @@ public class PracticeController extends ParentController implements EventHandler
         _backButton.setDisable(false);
         _achievements.setDisable(false);
         updateChangeButtons();
+    }
+
+    /**
+     * Handles the button to go to the user recordings
+     */
+    @FXML
+    private void goToUserRecordings() {
+        _selectedName = _currentName;
+        _switcher.switchScene(SceneBuilder.USER_RECORDINGS);
     }
 
     /**

@@ -1,17 +1,17 @@
 package app.backend;
 
 import app.backend.filesystem.FSWrapper;
-import javafx.util.Pair;
+import app.backend.filesystem.FSWrapperFactory;
+import app.backend.filesystem.FileInstance;
 
 import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Self-managed class representing a unique name entry
@@ -21,10 +21,12 @@ public class NameEntry implements Comparable<NameEntry> {
     private String DEFAULT_AUTHOR = "You";
     protected FSWrapper _fsMan;
     private String _name;
-    protected Version _mainVersion;
+
     protected Path _ratingsFile;
     protected Version _temporaryVersion;
-    private List<Version> _versions = new ArrayList<>();
+    protected List<Version> _versions = new ArrayList<>();
+    protected List<Version> _userVersions = new ArrayList<>();
+
 
     /**
      * Construct a dummy NameEntry with only a name and no associated audio
@@ -35,11 +37,11 @@ public class NameEntry implements Comparable<NameEntry> {
 
     /**
      * Adds a version with the default author
-     * @see NameEntry#addVersion(String author)
+     * @see NameEntry#addUserVersion(String author)
      * @return The filePath to use for the recording
      */
-    public Path addVersion() {
-        return addVersion(DEFAULT_AUTHOR);
+    public Path addUserVersion() {
+        return addUserVersion(DEFAULT_AUTHOR);
     }
 
     /**
@@ -48,15 +50,16 @@ public class NameEntry implements Comparable<NameEntry> {
      * @param author The author of this version
      * @return The filePath to use for the recording
      */
-    public Path addVersion(String author) {
+    public Path addUserVersion(String author) {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path resource = _fsMan.createFile("soundFile", _name, formattedDate, formattedTime);
+        Path resource = _fsMan.createFilePath("userVersion", _name, formattedDate, formattedTime);
 
         _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;
     }
+
 
 
     /**
@@ -64,7 +67,7 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     public void finaliseLastVersion() {
         if(_temporaryVersion != null) {
-            _versions.add(_temporaryVersion);
+            _userVersions.add(_temporaryVersion);
         }
         _temporaryVersion = null;
     }
@@ -89,9 +92,13 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
-     * Used to add verions already on the filesystem
+     * Used to add versions already on the filesystem
      */
     public void addVersionWithAudio(String auth, String date, Path resource) {
+        _versions.add(new Version(auth, date, resource));
+    }
+
+    public void addUserVersionWithAudio(String auth, String date, Path resource) {
         _versions.add(new Version(auth, date, resource));
     }
 
@@ -111,20 +118,21 @@ public class NameEntry implements Comparable<NameEntry> {
         return _name;
     }
 
-
     /**
      * Return the filepath of the audio for the version
      * @param dateAndTime the date and time that identify the version
      * @return
      */
     public Path getAudioForVersion(String dateAndTime) {
-        if(_mainVersion._dateTime.equals(dateAndTime)) {
-            return _mainVersion._resource;
-        }
         if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
             return _temporaryVersion._resource;
         }
         for(Version ver: _versions) {
+            if(ver._dateTime.equals(dateAndTime)) {
+                return ver._resource;
+            }
+        }
+        for(Version ver: _userVersions) {
             if(ver._dateTime.equals(dateAndTime)) {
                 return ver._resource;
             }
@@ -138,10 +146,6 @@ public class NameEntry implements Comparable<NameEntry> {
      * @param rating the rating to give the version, out of 10
      */
     public void rateVersion(String dateAndTime, int rating) {
-        if(_mainVersion._dateTime.equals(dateAndTime)) {
-            _mainVersion.rating = rating;
-            saveRating(dateAndTime, rating);
-        }
         if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
             _temporaryVersion.rating = rating;
             saveRating(dateAndTime, rating);
@@ -155,10 +159,10 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     public String getHighestRating() {
-        String dateAndTime = _mainVersion._dateTime;
-        int highestRating = _mainVersion.rating;
-
+        String dateAndTime = _versions.get(0)._dateTime;
+        int highestRating = _versions.get(0).rating;
         for (Version version : _versions) {
+            System.out.println(version.rating +"," +version._dateTime);
             if (version.rating > highestRating) {
                 highestRating = version.rating;
                 dateAndTime = version._dateTime;
@@ -237,6 +241,40 @@ public class NameEntry implements Comparable<NameEntry> {
         return 5;
     }
 
+    /**
+     * Retrieves the dates of all the user-recorded versions. (The dates can be used as identifiers).
+     * The output is sorted by date.
+     */
+    public List<String> getUserVersions() {
+        SimpleDateFormat format = new SimpleDateFormat("d-M-y_h-m-s");
+        List<Date> dates = new ArrayList<>();
+        List<String> versionDates = new ArrayList<>();
+        for(Version ver: _userVersions) {
+            try {
+                dates.add(format.parse(ver._dateTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Collections.sort(dates);
+        for(Date date: dates) {
+            versionDates.add(format.format(date));
+        }
+        return versionDates;
+    }
+
+    /**
+     * Deletes a user version
+     */
+    public void deleteUserVersion(String date) {
+        for(Version ver: _userVersions) {
+            if(ver._dateTime.equals(date)) {
+                String[] dateComponents = date.split("_");
+                _fsMan.deleteFiles("userVersion", _name, dateComponents[0], dateComponents[1], ver._author);
+            }
+        }
+    }
 
     /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised
@@ -269,40 +307,48 @@ public class NameEntry implements Comparable<NameEntry> {
     /**
      * Extract names from the default folder and copy them to the main filesystem
      */
-    public static void populateNames() throws URISyntaxException {
-        populateNames(null);
+    public static FSWrapper populateNames() throws URISyntaxException {
+        return populateNames(null);
     }
 
     /**
      * Extract names from a folder and copy them to the main filesystem
      */
-    public static void populateNames(Path soundfilesFolder) throws URISyntaxException {
-        FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
-        FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
+    public static FSWrapper populateNames(Path soundfilesFolder) throws URISyntaxException {
+        FSWrapperFactory factoryOne = new FSWrapperFactory(FSWrapperFactory.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
+        FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
+
+        FSWrapper fsWrapOne = factoryOne.buildFSWrapper();
+        FSWrapper fsWrapTwo = factoryTwo.buildFSWrapper();
+
+        fsWrapTwo.createDirectoryStruct("compRatings");
         try {
             fsWrapOne.copyTo(fsWrapTwo);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return fsWrapTwo;
     }
 
     /**
      * Having populated the names database, get all the names present
      */
     public static ArrayList<NameEntry> getNames() throws URISyntaxException {
-        FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
+        FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
+        FSWrapper fsWrapTwo = factoryTwo.buildFSWrapper();
 
         ArrayList<NameEntry> names = new ArrayList<>();
-        List<Pair<String, Path>> paths = fsWrapTwo.getAllContentOfType("nameEntry");
+        List<FileInstance> files = fsWrapTwo.getAllContentOfType("nameEntry");
 
-        List<Pair<String, Path>> pathsForSingleEntry = new ArrayList<>();
-        for(Pair<String, Path> pathPair: paths) {
-            if(pathPair.getKey().equals("nameEntry")) {
-                pathsForSingleEntry.add(pathPair);
+        List<FileInstance> pathsForSingleEntry = new ArrayList<>();
+        for(FileInstance file: files) {
+            if(file.getTemplate().getType().equals("nameEntry")) {
+                pathsForSingleEntry.add(file);
                 names.add(new NameEntry(fsWrapTwo, pathsForSingleEntry));
                 pathsForSingleEntry.clear();
             } else {
-                pathsForSingleEntry.add(pathPair);
+                pathsForSingleEntry.add(file);
             }
         }
         return names;
@@ -310,55 +356,55 @@ public class NameEntry implements Comparable<NameEntry> {
 
     /**
      * Extract a NameEntry from the filesystem
+     * TODO: Some of the files aren't present.
      */
-    private NameEntry(FSWrapper fsManager, List<Pair<String, Path>> paths) {
-        boolean firstVersion = true;
-        List<Pair<String, Path>> revList = paths;
-        Collections.reverse(revList);
+    private NameEntry(FSWrapper fsManager, List<FileInstance> files) {
+        Collections.reverse(files);
         Map<Integer, String> parameters;
-        for(Pair<String, Path> pathPair: paths) {
-            switch (pathPair.getKey()) {
+        for(FileInstance file: files) {
+            switch (file.getTemplate().getType()) {
+                case "userVersion":
+                    parameters = file.getParameters();
+                    addUserVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
+                            file.getPath());
                 case "soundFile":
-                    parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
-                    if(firstVersion) {
-                        _mainVersion = new Version(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
-                                pathPair.getValue());
-                        firstVersion = false;
-                    } else {
-                        addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
-                                pathPair.getValue());
-                    }
+                    parameters = file.getParameters();
+                    addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
+                                file.getPath());
                     break;
                 case "nameEntry":
-                    parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
-                    StringBuilder formattedName = new StringBuilder();
-                    String name = parameters.get(1);
-                    char[] chars = new char[name.length()];
-                    name.getChars(0, name.length(), chars, 0);
-                    boolean newWord = true;
-
-                    for(char ch: chars) {
-                        if(Character.isAlphabetic(ch)) {
-                            if(newWord) {
-                                formattedName.append(Character.toUpperCase(ch));
-                                newWord = false;
-                            } else {
-                                formattedName.append(ch);
-                            }
-                        } else if(Character.isWhitespace(ch)) {
-                            newWord = true;
-                            formattedName.append(ch);
-                        }
-                    }
-                    _name = formattedName.toString();
+                    parameters = file.getParameters();
+                    _name = capitaliseNames(parameters.get(1));
                     break;
                 case "rating":
-                    _ratingsFile = pathPair.getValue();
+                    _ratingsFile = file.getPath();
                 default:
                     break;
             }
         }
 
         _fsMan = fsManager;
+    }
+
+    private String capitaliseNames(String name) {
+        StringBuilder formattedName = new StringBuilder();
+        char[] chars = new char[name.length()];
+        name.getChars(0, name.length(), chars, 0);
+        boolean newWord = true;
+
+        for(char ch: chars) {
+            if(Character.isAlphabetic(ch)) {
+                if(newWord) {
+                    formattedName.append(Character.toUpperCase(ch));
+                    newWord = false;
+                } else {
+                    formattedName.append(ch);
+                }
+            } else if(Character.isWhitespace(ch)) {
+                newWord = true;
+                formattedName.append(ch);
+            }
+        }
+        return formattedName.toString();
     }
 }

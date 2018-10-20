@@ -116,3 +116,43 @@
 .upArrow {
     -fx-background-image: url('../images/up.png');
 }
+
+.slider > .track {
+    -fx-background-color: #f0f0f0;
+    -fx-pref-height: 20px;
+}
+
+.slider > .thumb {
+    -fx-background-color: #50116d;
+    -fx-pref-height: 20px;
+    -fx-pref-width: 35px;
+}
+
+.slider > .colored-track {
+    -fx-background-color: #4c7b5a;
+}
+
+.slider > .animated-thumb {
+    -fx-background-color: #50116d;
+}
+
+/* Styling the slider value text inside animated thumb */
+.slider .slider-value {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+
+.userButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #c5cb28;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-font-size: 22px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 280px;
+    -fx-font-family: "Franklin Gothic Heavy";
+}
+.userButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+}

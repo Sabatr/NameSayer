@@ -1,6 +1,10 @@
 package app.backend;
 
 import app.backend.filesystem.FSWrapper;
+import app.backend.filesystem.FSWrapperFactory;
+
+import app.backend.filesystem.FileInstance;
+import app.tools.AudioProcessor;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -15,20 +19,26 @@ import java.util.List;
 
 public class CompositeName extends NameEntry {
 
+    boolean _isProcessing = false;
     private ObservableList<NameEntry> _names;
+    protected Version _mainVersion;
 
     public CompositeName(ObservableList<NameEntry> names, String fullname) throws URISyntaxException {
         super(fullname);
         _names = names;
-        _fsMan = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
 
-        List<Path> ratingsFilePathElements = _fsMan.getFilesByParameter("compRatings");
-        _ratingsFile = ratingsFilePathElements.get(ratingsFilePathElements.size() - 1);
+        FSWrapperFactory factory = new FSWrapperFactory(FSWrapper.class.getResource("FileSystem.xml").toURI());
+        _fsMan = factory.buildFSWrapper();
+
+        List<FileInstance> ratingsFilePathElements = _fsMan.getFilesByParameter("compRatings");
+        FileInstance ratingsFileInstance = ratingsFilePathElements.get(ratingsFilePathElements.size() - 1);
+        _ratingsFile = ratingsFileInstance.getPath();
 
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path pathToAudio = _fsMan.createFile("compositeName", formattedDate, formattedTime, fullname);
+        Path pathToAudio = _fsMan.createFilePath("compositeName", formattedDate, formattedTime, fullname);
+        System.out.println(fullname + ","+pathToAudio);
         _mainVersion = new Version("YOU", formattedDate + "_" + formattedTime, pathToAudio);
     }
 
@@ -46,12 +56,22 @@ public class CompositeName extends NameEntry {
     }
 
     public void concatenateAudio(EventHandler<WorkerStateEvent> handler) throws IOException, URISyntaxException {
+        _isProcessing = true;
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {
             audioPaths.add(name.getAudioForVersion(name.getHighestRating()));
         }
-        BashRunner br = new BashRunner(handler);
-        br.runConcatCommands(audioPaths, _mainVersion._resource);
+
+        AudioProcessor processor = new AudioProcessor(handler, _fsMan);
+        processor.process(audioPaths, _mainVersion._resource, this);
+    }
+
+    public boolean isProcessing() {
+        return _isProcessing;
+    }
+
+    public void setDoneProcessing() {
+        _isProcessing = false;
     }
 
     public boolean hasConcat() {
@@ -63,11 +83,11 @@ public class CompositeName extends NameEntry {
     }
 
     @Override
-    public Path addVersion(String author) {
+    public Path addUserVersion(String author) {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path resource = _fsMan.createFile("compositeName", formattedDate, formattedTime, getName());
+        Path resource = _fsMan.createFilePath("userCompositeName", formattedDate, formattedTime, getName());
 
         _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;

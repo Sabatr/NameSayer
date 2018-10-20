@@ -2,11 +2,18 @@
 <rootDir type="root" name="names">
     <dir type="composites" name="composites">
         <file type="compRatings" name="ratingsOfComps.txt" createNew="true"/>
-        <fileSet type="compositeName" nameFormat="%1_%2_%3.wav"/>
+        <fileSet type="compositeName" nameFormat="%4_%2_%3_%1.wav"/>
+        <fileSet type="trimmedName" nameFormat="%1_trimmed.wav"/>
+    </dir>
+    <dir type="userComposites" name="userComposites">
+        <fileSet type="userCompositeName" nameFormat="%4_%2_%3_%1.wav"/>
     </dir>
     <dirSet type="nameEntry" nameFormat="%1">
-        <dir type="versions" name="versions">
+        <dir type="versions" name="versions" needAllChildren="true">
             <fileSet type="soundFile" nameFormat="%4_%2_%3_%1.wav" copy="true" />
+        </dir>
+        <dir type="userVersions" name="userVersions" needAllChildren="false">
+            <fileSet type="userVersion" nameFormat="%4_%2_%3_%1.wav" />
         </dir>
         <file type="rating" name="ratings.txt" createNew="true"/>
     </dirSet>
