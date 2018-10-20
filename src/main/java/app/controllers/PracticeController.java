@@ -19,7 +19,9 @@ import javafx.scene.layout.HBox;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
 
@@ -219,10 +221,11 @@ public class PracticeController extends ParentController implements EventHandler
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
-                System.out.println(event.getSource().getValue());
+//                System.out.println(event.getSource().getValue());
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
-                System.out.println("playing concatted audio");
+//                System.out.println("playing concatted audio");
                 try {
+                    Files.deleteIfExists(Paths.get("./tmpList.txt"));
                     playAudio();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -230,7 +233,7 @@ public class PracticeController extends ParentController implements EventHandler
                     e.printStackTrace();
                 }
             } else if(event.getSource().getTitle().equals((BashRunner.CommandType.RECORDAUDIO.toString()))) {
-                System.out.println("value returned: " + event.getSource().getValue());
+//                System.out.println("value returned: " + event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());

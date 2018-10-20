@@ -146,7 +146,7 @@ public class BashRunner {
      * @return The Task running the process on a background thread
      */
     public Task<String> runPlayAudioCommand(Path path, String taskTitle) {
-        System.out.println("Playing audio " + path.toAbsolutePath().toString());
+//        System.out.println("Playing audio " + path.toAbsolutePath().toString());
         String[] cmd;
         if(onWindows) {
             cmd = new String[6];
@@ -271,13 +271,13 @@ public class BashRunner {
                 }
             }
 
-            System.out.println("Done waiting");
+//            System.out.println("Done waiting");
             if(!failure) {
                 try {
                     if(p.exitValue() == 0) {
                         commandOutBuilder.append(concatOutput(p.getInputStream(), "\n"));
                         commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
-                        System.out.println("exit value 0");
+//                        System.out.println("exit value 0");
                     } else {
                         failure = true;
                         commandOutBuilder.append(concatOutput(p.getInputStream(),"\n"));
@@ -300,7 +300,7 @@ public class BashRunner {
 
             updateProgress(20, 20);
             updateValue(commandOutBuilder.toString());
-            System.out.println(commandOutBuilder.toString());
+//            System.out.println(commandOutBuilder.toString());
             return commandOutBuilder.toString();
         }
 
