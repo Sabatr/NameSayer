@@ -134,6 +134,7 @@ public class UserRecordingsController extends ParentController implements EventH
         _progressBar.setVisible(false);
         _name = PracticeController._selectedName;
         _nameDisplayed.setText(_name.getName());
+        setupDropdown();
     }
 
     @Override
