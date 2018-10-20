@@ -1,31 +1,15 @@
 package app.backend.filesystem;
 
-import javafx.util.Pair;
-import org.w3c.dom.*;
-import org.xml.sax.*;
-
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.*;
-import java.nio.file.spi.FileSystemProvider;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
-import java.util.List;
 
 /**
  * This class represents a scalable, reusable content File System manager.
  *
- * <p>It fetches a template directory structure from an XML document. It uses that structure to fetch the URIs
+ * <p>A template directory structure is fetched by the factory class from an XML document.
+ * This class uses that structure to fetch the URIs
  * of content files. You can, for instance, traverse a nested directory structure where there is a file to
  * retrieve from each folder. You could change your mind about the way the files should be nested, and all
  * that would be required is you would have to change the simple XML file and your calls to this class. </p>
@@ -47,166 +31,78 @@ import java.util.List;
  *      the parent's parameter for us to search for the file. If we provide the type and the parent's parameters, then
  *      there's enough information to get the file (unless it is part of a fileSet). This is the concept of units:
  *      files are attached to their parent directories and we search them through parameters.  </li>
- *      <li><b>workingDir</b>: This is the directory where the top-level content folder is contained</li>
- *      <li><b>rootContentDir</b>: This directory is always one below the workingDir. It is the top-level content
+ *      <li><b>_workingDir</b>: This is the directory where the top-level content folder is contained</li>
+ *      <li><b>_rootContentDir</b>: This directory is always one below the _workingDir. It is the top-level content
  *      directory.</li>
  *  </ul>
  *  <p>Not all content has to exist within a unit. For instance, when we started making our simple pronunciation
- *  practice application, sound files were stored independently in the rootContentDir. Content that <i>doesn't </i>
+ *  practice application, sound files were stored independently in the _rootContentDir. Content that <i>doesn't </i>
  *  exist within a unit must obviously have a unique name by which to identify it. Content that <i>does </i>
  *  exist within a unit can have the same fileName as the same type of content in other units. Going back to the
  *  creations example, we can have a creation.mp4 for each creation unit.</p>
  *
+ *  <p> see {@link FSWrapperFactory for a description of the XML scheme}</p>
+ *
  * @author Marc Burgess
  */
 public class FSWrapper {
-    protected Path workingDir;
-    protected Path rootContentDir;
-    private Document fsStructure;
-    private XPath xpath;
+    private Path _workingDir;
+    private Path _rootContentDir;
+    private TemplateFolder _templateRoot;
 
-    private final String DIR = "dir";
-    private final String DIRSET = "dirSet";
-    private final String FILE = "file";
-    private final String FILESET = "fileSet";
-    private final String[] ALLTAGS = {DIR, DIRSET, FILE, FILESET};
+    static final String DIR = "dir";
+    static final String DIRSET = "dirSet";
+    static final String FILE = "file";
+    static final String FILESET = "fileSet";
 
-    public FSWrapper(URI structure) {
-        this(structure, null);
-    }
-
-    /**
-     * Construct the FSWrapper.
-     */
-    public FSWrapper(URI structure, Path customContentDir) {
-        if(!structure.toString().contains("jar")) {
-            workingDir = Paths.get("").toAbsolutePath();
-        } else {
-            try {
-                workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-                workingDir = Paths.get("").toAbsolutePath();
-            }
-        }
-
-        extractFileStructure(structure);
-
-        Element rootElement = fsStructure.getDocumentElement();
-        if(customContentDir == null) {
-            if (!rootElement.getTagName().equals("rootDir")) {
-                throw new RuntimeException("No rootDir specified in FS config file");
-            }
-            if (!rootElement.hasAttribute("name")) {
-                throw new RuntimeException("No name attribute for root dir in FS config file");
-            }
-            rootContentDir = workingDir.resolve(rootElement.getAttribute("name"));
-        } else {
-            if(!Files.exists(customContentDir)) {
-                throw new RuntimeException("Contentdir doesn't exist");
-            }
-            rootContentDir = customContentDir;
-            workingDir = customContentDir.getParent();
-            fsStructure.getDocumentElement().setAttribute("name", customContentDir.getFileName().toString());
-        }
-        
-        xpath = XPathFactory.newInstance().newXPath();
-
-        if(!Files.exists(rootContentDir)) {
-            try {
-                Files.createDirectory(rootContentDir);
-            } catch(IOException e) {
-                throw new RuntimeException("Error creating root content directory", e);
-            }
-        }
-    }
-
-    /****************  Setting up the XML schema  *******************/
-
-    /**
-     * Fetch the content filesystem configuration and store it in memory as a Document.
-     * There will never be a large configuration because we are simply using this as a single template for file storage,
-     * not for storing the repeated data itself.
-     */
-    private void extractFileStructure(URI structureLocation) {
-        try {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-            try {
-                dbf.setSchema(SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).
-                        newSchema(this.getClass().getResource("FSScheme.xsd")));
-            } catch (FileSystemNotFoundException e) {
-                try {
-                    URI schemeLocation = this.getClass().getResource("FSScheme.xsd").toURI();
-                    if(schemeLocation.toString().contains("jar") && "jar".equals(schemeLocation.getScheme())){
-                        for (FileSystemProvider provider: FileSystemProvider.installedProviders()) {
-                            if (provider.getScheme().equalsIgnoreCase("jar")) {
-                                try {
-                                    provider.getFileSystem(schemeLocation);
-                                } catch (FileSystemNotFoundException e1) {
-                                    // in this case we need to initialize it first:
-                                    provider.newFileSystem(schemeLocation, Collections.emptyMap());
-                                }
-                            }
-                        }
-                    }
-                } catch (URISyntaxException e2) {
-                    e.printStackTrace();
-
-                }
-            }
-
-            DocumentBuilder builder = dbf.newDocumentBuilder();
-
-            if(structureLocation.toString().contains("jar") && "jar".equals(structureLocation.getScheme())){
-                for (FileSystemProvider provider: FileSystemProvider.installedProviders()) {
-                    if (provider.getScheme().equalsIgnoreCase("jar")) {
-                        try {
-                            provider.getFileSystem(structureLocation);
-                        } catch (FileSystemNotFoundException e) {
-                            // in this case we need to initialize it first:
-                            provider.newFileSystem(structureLocation, Collections.emptyMap());
-                        }
-                    }
-                }
-                //System.out.println(structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1));
-                fsStructure = builder.parse(this.getClass().getResourceAsStream(
-                        structureLocation.toString().substring(structureLocation.toString().lastIndexOf('/') + 1)));
-            } else {
-                fsStructure = builder.parse(Paths.get(structureLocation).toFile());
-            }
-
-        } catch (SAXException | ParserConfigurationException e) {
-            throw new RuntimeException("Error parsing FS config", e);
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading FS config", e);
-        }
+    FSWrapper(TemplateFolder templateRoot, Path workingDir, Path rootContentDir) {
+        _workingDir = workingDir;
+        _rootContentDir = rootContentDir;
+        _templateRoot = templateRoot;
     }
 
     /**
      * Copies content from one directory structure to another.
      */
     public void copyTo(FSWrapper targetFS) throws IOException {
+        System.out.println("Copying filesystem from " + this._rootContentDir);
+        System.out.println("to " + targetFS._rootContentDir);
         // Determine if the target has all the right types
-        List<Element> thisContent = new ArrayList<>();
-        getAllChildren(fsStructure.getDocumentElement(), thisContent);
+        List<TemplateFile> thisContent = new ArrayList<>();
+         _templateRoot.getChildrenRecursively(thisContent);
 
-        for(Element contentType: thisContent) {
-            if(targetFS.getElementOfType(contentType.getAttribute("type")) == null) {
+        for(TemplateFile templateFile: thisContent) {
+            System.out.println("-[" + templateFile.getTagName() + " type=" + templateFile.getType() +
+                    (templateFile.isParameterised() ? " naForma=" : " nam=") + templateFile.getNameFormat() +
+                    (templateFile.shouldCreateNew() ? "shouldCreateNew=true" : "") + "]-");
+            if(targetFS.getTemplateFileByType(templateFile.getType()) == null) {
+                throw new RuntimeException("Can't copy to target directory structure");
+            }
+        }
+
+        System.out.println("\n");
+        thisContent = new ArrayList<>();
+        targetFS._templateRoot.getChildrenRecursively(thisContent);
+        for(TemplateFile templateFile: thisContent) {
+            System.out.println("-[" + templateFile.getTagName() + " type=" + templateFile.getType() +
+                    (templateFile.isParameterised() ? " naForma=" : " nam=") + templateFile.getNameFormat() +
+                    (templateFile.shouldCreateNew() ? " shouldCreateNew=true" : "") + "]-");
+            if(targetFS.getTemplateFileByType(templateFile.getType()) == null) {
                 throw new RuntimeException("Can't copy to target directory structure");
             }
         }
 
         // Fetch all the content types at the top level - the content below them will be carried alongside
-        List<Element> topLevelContent = getChildElements(fsStructure.getDocumentElement());
-        List<Pair<String, Path>> allContent = new ArrayList<>();
-        for(Element contentType: topLevelContent) {
-            allContent.addAll(getAllContentOfType(contentType.getAttribute("type")));
+        List<TemplateFile> topLevelContent = _templateRoot.getChildren();
+        List<FileInstance> allContent = new ArrayList<>();
+        for(TemplateFile contentType: topLevelContent) {
+            allContent.addAll(getAllContentOfType(contentType.getType()));
         }
 
         // Extract the parameters for each content type then add the files to the target fs using the type and parameters
-        for(Pair<String, Path> pathPair: allContent) {
-            Map<Integer, String> parameters = extractParamsForUnit(pathPair.getValue(), getElementOfType(pathPair.getKey()));
+        for(FileInstance fileInst: allContent) {
+            System.out.println("a content piece of type " + fileInst.getTemplate().getType() + ": " + fileInst.getPath());
+            Map<Integer, String> parameters = extractParamsForUnit(fileInst.getPath(), fileInst.getTemplate());
             if(parameters == null) {
                 parameters = new HashMap<>();
             }
@@ -214,8 +110,8 @@ public class FSWrapper {
             for(int i = 0; i < parameterList.length; i++) {
                 parameterList[i] = parameters.getOrDefault(i + 1, "");
             }
-            targetFS.createDirectoryStruct(pathPair.getKey(), parameterList);
-            targetFS.copyFileTo(pathPair.getKey(), pathPair.getValue(), parameterList);
+            targetFS.createDirectoryStruct(fileInst.getTemplate().getType(), parameterList);
+            targetFS.copyFileTo(fileInst.getTemplate(), fileInst.getPath(), parameterList);
         }
     }
 
@@ -223,25 +119,40 @@ public class FSWrapper {
      * Copy a single file into the filesystem being managed by the FSWrapper that this method is
      * called on.
      */
-    private void copyFileTo(String type, Path from, String[] params) throws IOException {
-        List<Pair<String, Path>> pathList = new ArrayList<>();
-        Path path = workingDir;
+    private void copyFileTo(TemplateFile tFile, Path from, String[] params) throws IOException {
+        List<Path> pathList = new ArrayList<>();
+        Path path = _workingDir;
 
-        List<Element> parentList = getAccessPathOfType(type);
-        Collections.reverse(parentList);
-        for(Element parent: parentList) {
-            if(parent.hasAttribute("nameFormat")) {
-                String format = parent.getAttribute("nameFormat");
-                path = path.resolve(fillString(format, params));
-            } else if(parent.hasAttribute("name")) {
-                path = path.resolve(parent.getAttribute("name"));
-            }
-            pathList.add(new Pair<>(parent.getAttribute("type"), path));
+        TemplateFile tFileOnThisFS = getTemplateFileByType(tFile.getType());
+        if(tFileOnThisFS == null) {
+            return;
         }
 
-        Path toPath = pathList.get(pathList.size() - 1).getValue();
+        List<TemplateFile> parentList = tFileOnThisFS.accessPath();
+        int i = 0;
+        for(TemplateFile parent: parentList) {
+            String tabs = "";
+            for(int j = 0; j < i; j++) {
+                tabs = tabs + "\t";
+            }
+            System.out.println(tabs + "<" + parent.getTagName() + " type=" + parent.getType() +
+                    " nam\\Format" + ">");
+            if(parent.isParameterised()) {
+                System.out.println(tabs + " resolved as " + parent.fillFormat(params));
+                path = path.resolve(parent.fillFormat(params));
+            } else {
+                path = path.resolve(parent.getNameFormat());
+            }
+            i++;
+            pathList.add(path);
+        }
+
+        Path toPath = pathList.get(pathList.size() - 1);
+        System.out.println("\t\ttrying to copy from " + from + " to " + toPath + " as a " +
+                tFileOnThisFS.getType() + "(" + tFileOnThisFS.getTagName() + ")");
         if(Files.notExists(toPath)) {
-            Files.copy(from, pathList.get(pathList.size() - 1).getValue());
+            System.out.println("\t\tsucceeded");
+            Files.copy(from, pathList.get(pathList.size() - 1));
         }
     }
 
@@ -251,10 +162,18 @@ public class FSWrapper {
      * @param params The parameters of the unit
      */
     public void deleteFiles(String type, String... params) {
+        TemplateFile tFile = getTemplateFileByType(type);
+        if(tFile == null) {
+            return;
+        }
+
         try {
-            List<Pair<String, Path>> pathList = getContent(type, params);
-            for(Pair<String, Path> pathPair: pathList) {
-                Files.deleteIfExists(pathPair.getValue());
+            List<FileInstance> pathList = getContent(tFile, params);
+            if(pathList == null) {
+                return;
+            }
+            for(FileInstance fileInst: pathList) {
+                Files.deleteIfExists(fileInst.getPath());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -267,25 +186,24 @@ public class FSWrapper {
      * @param params The parameters of the unit
      */
     public void createDirectoryStruct(String type, String... params) {
-        List<Pair<String, Path>> pathList = createPaths(type, params);
-
-
+        List<FileInstance> pathList = createPaths(type, params);
         try {
-            for (Pair<String, Path> pathPair: pathList) {
-                Element typeElem = getElementOfType(pathPair.getKey());
-                switch (typeElem.getTagName()) {
+            for (FileInstance file: pathList) {
+                TemplateFile tFile = file.getTemplate();
+                Path filePath = file.getPath();
+                switch (tFile.getTagName()) {
                     case DIR:
                     case DIRSET:
-                        if (Files.notExists(pathPair.getValue())) {
-                            Files.createDirectory(pathPair.getValue());
+                        if (Files.notExists(filePath)) {
+                            System.out.println("creating " + filePath + " as a " + file.getTemplate().getType() + " (" + file.getTemplate().getTagName() + ")");
+                            Files.createDirectory(filePath);
                         }
                         break;
                     case FILE:
                     case FILESET:
-                        if (Files.notExists(pathPair.getValue()) &&
-                                typeElem.hasAttribute("createNew") &&
-                                typeElem.getAttribute("createNew").equals("true")) {
-                            Files.createFile(pathPair.getValue());
+                        if (Files.notExists(filePath) && tFile.shouldCreateNew()) {
+                            System.out.println("creating " + filePath + " as a " + file.getTemplate().getType() + " (" + file.getTemplate().getTagName() + ")");
+                            Files.createFile(filePath);
                         }
                         break;
                     default:
@@ -300,105 +218,93 @@ public class FSWrapper {
     /**
      * Safely create a file. This creates all the parents if they don't exist.
      */
-    public Path createFile(String type, String... params) {
-        Path path = workingDir;
-        List<Element> parentList = getAccessPathOfType(type);
-        Collections.reverse(parentList);
-        for(Element parent: parentList) {
-            if(parent.hasAttribute("nameFormat")) {
-                String format = parent.getAttribute("nameFormat");
-                path = path.resolve(fillString(format, params));
-            } else if(parent.hasAttribute("name")) {
-                path = path.resolve(parent.getAttribute("name"));
+    public Path createFilePath(String type, String... params) {
+        Path path = _workingDir;
+        TemplateFile tFile = getTemplateFileByType(type);
+        List<TemplateFile> parentList = tFile.accessPath();
+        for(TemplateFile parent: parentList) {
+            if(parent.isParameterised()) {
+                path = path.resolve(parent.fillFormat(params));
+            } else {
+                path = path.resolve(parent.getNameFormat());
             }
         }
         return path;
     }
 
     /**
-     * Form the filepaths for the given type. If the type is a folder, the filepaths for all children are
+     * Form the file paths for the given type. If the type is a folder, the file paths for all children are
      * generated. Each child path appears after its parent, upon which it is dependant.
      * @param type The content type
      * @param params The parameters of the unit
      * @return The filePaths of the new content, including content that does not yet exist.
      */
-    public List<Pair<String, Path>> createPaths(String type, String... params) {
-        List<Pair<String, Path>> pathList = new ArrayList<>();
+    public List<FileInstance> createPaths(String type, String... params) {
+        List<FileInstance> pathList = new ArrayList<>();
 
-        Path path = rootContentDir;
-        List<Element> parentList = getAccessPathOfType(type);
-        Collections.reverse(parentList);
-        Element element = parentList.get(1);
-        if(element.hasAttribute("nameFormat")) {
-            String format = element.getAttribute("nameFormat");
-            path = path.resolve(fillString(format, params));
-        } else if(element.hasAttribute("name")) {
-            path = path.resolve(element.getAttribute("name"));
+        Path path = _rootContentDir;
+        TemplateFile tFile = getTemplateFileByType(type);
+        List<TemplateFile> parentList = tFile.accessPath();
+        tFile = parentList.get(1);
+        if(tFile.isParameterised()) {
+            path = path.resolve(tFile.fillFormat(params));
+        } else {
+            path = path.resolve(tFile.getNameFormat());
         }
-        pathList.add(new Pair<>(element.getAttribute("type"), path));
 
-        Element currentElement = element;
-        boolean newElem = true;
+        pathList.add(new FileInstance(tFile, path, params));
+
+        TemplateFile currentType = tFile;
+        boolean newType = true;
         Deque<Integer> indices = new ArrayDeque<>();
         indices.push(0);
-        while(!currentElement.equals(element.getParentNode())) {
+
+        if(tFile.getParent() != null) {
+            System.out.println("getting parent");
+            tFile = tFile.getParent();
+        }
+        while(!currentType.equals(tFile)) {
             int i;
-            if(newElem) {
+            if(newType) {
                 i = 0;
             } else {
                 i = indices.pop();
-                currentElement = (Element) currentElement.getParentNode();
                 path = path.getParent();
             }
-            List<Element> children = getChildElements(currentElement);
-            newElem = false;
-            for(; i < children.size(); i++) {
-                if(children.get(i).hasAttribute("nameFormat")) {
-                    String format = children.get(i).getAttribute("nameFormat");
-                    path = path.resolve(fillString(format, params));
-                } else if(children.get(i).hasAttribute("name")) {
-                    path = path.resolve(children.get(i).getAttribute("name"));
+
+            if(currentType.isParent()) {
+                List<TemplateFile> children = ((TemplateFolder) currentType).getChildren();
+                newType = false;
+                for (; i < children.size(); i++) {
+                    TemplateFile currentChild = children.get(i);
+
+                    if (children.get(i).isParameterised()) {
+                        path = path.resolve(currentChild.fillFormat(params));
+                    } else {
+                        path = path.resolve(currentChild.getNameFormat());
+                    }
+                    pathList.add(new FileInstance(currentChild, path, params));
+                    switch(currentChild.getTagName()) {
+                        case DIR:
+                        case DIRSET:
+                            newType = true;
+                            indices.push(i + 1);
+                            currentType = children.get(i);
+                            break;
+                        case FILE:
+                        case FILESET:
+                            path = path.getParent();
+                    }
+                    if(newType) {
+                        break;
+                    }
                 }
-                pathList.add(new Pair(children.get(i).getAttribute("type"), path));
-                if(children.get(i).getTagName().equals(DIR) || children.get(i).getTagName().equals(DIRSET)) {
-                    newElem = true;
-                    indices.push(i + 1);
-                    currentElement = children.get(i);
-                    break;
-                } else if(children.get(i).getTagName().equals(FILE) || children.get(i).getTagName().equals(FILESET)) {
-                    path = path.getParent();
+                if(!newType) {
+                    currentType = currentType.getParent();
                 }
             }
         }
         return pathList;
-    }
-
-    /**
-     *
-     * @param format The format string to use to insert the parameters
-     * @param params The parameters to copy in, in order. If a higher-number parameter is present in the format string
-     *               but not lower numbers, empty strings are inserted in the place of the lower-number parameters.
-     * @return The filled string.
-     */
-    private String fillString(String format, String... params) {
-        StringBuilder filled = new StringBuilder();
-        char[] form = format.toCharArray();
-        for(int i = 0; i < form.length - 1; i++) {
-            if(form[i] == '%') {
-                int paraNum = Character.getNumericValue(form[++i]);
-                if(paraNum > 9 || paraNum >= params.length + 1 || paraNum < 0) {
-                    continue;
-                } else {
-                    filled.append((params[paraNum - 1]));
-                }
-            } else {
-                filled.append(form[i]);
-            }
-        }
-        if(form[form.length - 2] != '%') {
-            filled.append(form[form.length - 1]);
-        }
-        return filled.toString();
     }
 
     /**
@@ -410,82 +316,63 @@ public class FSWrapper {
      * @param params The parameters of the file
      * @return The filePaths of the found content.
      */
-    public List<Path> getFilesByParameter(String type, String... params) {
-        List<Path> pathList = new ArrayList<>();
+    public List<FileInstance> getFilesByParameter(String type, String... params) {
+        TemplateFile tFile = getTemplateFileByType(type);
 
-        List<Pair<String, Path>> paths = getContent(type, params);
-        List<Element> allParents = getAccessPathOfType(type);
-        if(allParents.isEmpty()) {
-            System.out.println("empty childrenlist");
-            return pathList;
+        if(tFile == null) {
+            return null;
+        } else {
+            return  getContent(tFile, params);
         }
-
-        for(Element e: allParents) {
-             for(Pair<String, Path> pathPair: paths) {
-                if(pathPair.getKey().equals(e.getAttribute("type"))) {
-                    pathList.add(pathPair.getValue());
-                }
-            }
-        }
-        return pathList;
     }
 
     /**
-     * This public method wraps the private parameter-extraction method, which takes an XML element.
-     * @return The parameters extracted from a file and its parents.
-     */
-    public Map<Integer, String> getParamsForFile(Path file, String type) {
-        Element element = getElementOfType(type);
-
-        return extractParamsForUnit(file, element);
-    }
-
-    /**
-     * Fetches a list of the filepaths of every content file of a particular type.
+     * Fetches a list of the file paths of every content file of a particular type.
      *      * This is a relatively expensive operation so it should only be performed at the start of an application.
      *      * @return A list of content files
      * @param type The content type to fetch, given by the type attribute in the XML
      * @return The filePaths of the found content
      */
-    public List<Pair<String, Path>> getAllContentOfType(String type) {
-        return getContent(type);
+    public List<FileInstance> getAllContentOfType(String type) {
+        TemplateFile tFile = getTemplateFileByType(type);
+        if(tFile == null) {
+            return null;
+        } else {
+            return getContent(tFile);
+        }
     }
 
     /**
-     * Reusable method to extract content from the filesystem based on parameters
+     * This method scans the file system, searching for the content that matches the given parameters.
+     *
+     * <p>Its role is to determine whether a file or a folder is a <i>potential</i> match for a type of content.
+     * It does this by looking at the name of the file and comparing it to the given parameters. If a file is determined
+     * to be a potential match, {@link FSWrapper#attemptExtractContent(Path, TemplateFile, List)} is called to
+     * actually add the file (and its children if it is a folder) to the list of FileInstances</p>
+     * <p>The reason this method is required in addition to {@link FSWrapper#attemptExtractContent(Path, TemplateFile, List)}
+     * is that we don't want to spend extra time searching the children of folders if we don't need to.</p>
      */
-    private List<Pair<String, Path>> getContent(String type, String... params) {
-        List<Element> parentList = getAccessPathOfType(type);
-        Path currentDir = rootContentDir;
+    private List<FileInstance> getContent(TemplateFile tFile, String... params) {
+        List<TemplateFile> parentList = tFile.accessPath();
+        Collections.reverse(parentList);
+        Path currentDir = _rootContentDir;
         Deque<Integer> indices = new ArrayDeque<>();
         indices.push(0);
         boolean newDir = true;
-        List<Pair<String, Path>> filePaths = new ArrayList<>();
+        List<FileInstance> filePaths = new ArrayList<>();
 
-        boolean atTop = false;
-        while(!atTop){
-            // If we're in a new directory, set the index to 0, otherwise get the previous one we pushed
-            int i;
-            if(newDir) {
-                i = 0;
-            } else {
-                i = indices.pop();
-                currentDir = currentDir.getParent();
-            }
-            List<Path> contentFiles = listFiles(currentDir);
-            newDir = false;
-            for (; i < contentFiles.size(); i++) {
-                Path file = contentFiles.get(i);
-                //if the depth of the stack isn't right for the depth of the filetype
-                if((parentList.size() - indices.size()) > 1) {
-                    if (Files.isDirectory(file)) {
-                        currentDir = file;
-                        indices.push(i + 1);
-                        newDir = true;
-                        break;
-                    }
-                } else if (parentList.get(0).getTagName().equals(FILE) || parentList.get(0).getTagName().equals(FILESET)) {
-                    if(params.length > 0) {
+
+        System.out.println("\n\n ======================== getContent ========================");
+        System.out.println("Getting content of " + tFile.getType());
+
+        SimpleFileVisitor<Path> traverser = new SimpleFileVisitor<Path>() {
+            int depth = 1;
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+
+                if(tFile.getTagName().equals(FILE) || tFile.getTagName().equals(FILESET)) {
+                    if (params.length > 0) {
                         boolean matchesParams = true;
                         Map<Integer, String> fileParams = extractParamsForUnit(file, parentList.get(parentList.size() - indices.size() - 1));
                         if (fileParams != null) {
@@ -495,67 +382,165 @@ public class FSWrapper {
                                     matchesParams = false;
                                 }
                             }
-                            if(matchesParams) {
-                                attemptExtractContent(file, type, filePaths);
+                            if (matchesParams) {
+                                attemptExtractContent(file, tFile, filePaths);
                             }
                         }
                     } else {
-                        attemptExtractContent(file, type, filePaths);
-                    }
-
-                } else if(parentList.get(0).getTagName().equals(DIR) || parentList.get(0).getTagName().equals(DIRSET)) {
-                    if(Files.isDirectory(file)) {
-                        if(!attemptExtractContent(file, type, filePaths)) {
-                            currentDir = file;
-                            indices.push(i + 1);
-                            newDir = true;
-                            break;
-                        }
+                        System.out.println("attempting without parameters");
+                        attemptExtractContent(file, tFile, filePaths);
                     }
                 }
+                return FileVisitResult.CONTINUE;
             }
-            try {
-                atTop = (Files.isSameFile(currentDir.getParent(), workingDir) && !newDir);
-            } catch (IOException e) {
-                e.printStackTrace();
-                atTop = true;
+
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
+                if(depthInFSTreeIsNotRight()) {
+                    return FileVisitResult.CONTINUE;
+                } else if(!attemptExtractContent(dir, tFile, filePaths)) {
+                    depth++;
+                    return FileVisitResult.CONTINUE;
+                } else {
+                    return FileVisitResult.SKIP_SUBTREE;
+                }
             }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException e) {
+                depth--;
+                return FileVisitResult.CONTINUE;
+            }
+
+            public boolean depthInFSTreeIsNotRight() {
+                if((parentList.size() - depth) > 1) {
+                    depth++;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
+
+        try {
+            Files.walkFileTree(_rootContentDir, traverser);
+        } catch (IOException e) {
+            throw new RuntimeException("Error trying to get content", e);
         }
+
+//        boolean atTop = false;
+//        while(!atTop){
+//            System.out.println("Depth is " + indices.size() + " at " + currentDir);
+//            // If we're in a new directory, set the index to 0, otherwise get the previous one we pushed
+//            int i;
+//            if(newDir) {
+//                i = 0;
+//            } else {
+//                i = indices.pop();
+//                currentDir = currentDir.getParent();
+//            }
+//            List<Path> contentFiles = listFiles(currentDir);
+//            newDir = false;
+//            for (; i < contentFiles.size(); i++) {
+//                Path file = contentFiles.get(i);
+//                System.out.println("inspecting " + file);
+//                //if the depth of the stack isn't right for the depth of the file type
+//                if((parentList.size() - indices.size()) > 1) {
+//                    if (Files.isDirectory(file)) {
+//                        currentDir = file;
+//                        indices.push(i + 1);
+//                        newDir = true;
+//                        break;
+//                    }
+//                }
+//                switch(parentList.get(0).getTagName()) {
+//                    case DIR:
+//                    case DIRSET:
+//                        System.out.println("trying to fit it as a dir");
+//                        if(Files.isDirectory(file)) {
+//                            if(!attemptExtractContent(file, tFile, filePaths)) {
+//                                currentDir = file;
+//                                indices.push(i + 1);
+//                                newDir = true;
+//                                break;
+//                            }
+//                        }
+//                        break;
+//                    case FILE:
+//                    case FILESET:
+//                        System.out.println("trying to fit it as a file");
+//                        if(params.length > 0) {
+//                            boolean matchesParams = true;
+//                            Map<Integer, String> fileParams = extractParamsForUnit(file, parentList.get(parentList.size() - indices.size() - 1));
+//                            if (fileParams != null) {
+//                                int length = fileParams.size() < params.length ? fileParams.size() : params.length;
+//                                for (int j = 0; j < length; j++) {
+//                                    if (!params[j].equals(fileParams.get(j + 1))) {
+//                                        matchesParams = false;
+//                                    }
+//                                }
+//                                if(matchesParams) {
+//                                    attemptExtractContent(file, tFile, filePaths);
+//                                }
+//                            }
+//                        } else {
+//                            System.out.println("attempting without parameters");
+//                            attemptExtractContent(file, tFile, filePaths);
+//                        }
+//                        break;
+//                    default:
+//                            return null;
+//                }
+//            }
+//            try {
+//                atTop = (Files.isSameFile(currentDir.getParent(), _workingDir) && !newDir);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                atTop = true;
+//            }
+//        }
+
+        System.out.println("\n\n =========================== end ===========================");
         return filePaths;
     }
 
-    /*
-     *   This method is responsible for scanning a file and determining if it matches the given type, and extracting the paths
-     *   of all the child files. The list of Strings is formatted to reflect the XML configuration.
+    /**
+     *   This method is responsible for scanning a file or folder and determining if it matches the given type, and extracting
+     *   the paths of all the child files (if it's a folder). The paths are formatted to the reflect the configuration.
      *   A file matches the type if it satisfies the following conditions:
-     *      - All of its children are the right types according to the XML file (if it's a directory)
-     *      - The path from the rootContentDir to the file is consistent with the structure in the XML file
+     *      - All of its children are the right types according to the XML file (if it's a folder)
+     *      - The path from the _rootContentDir to the file is consistent with the structure in the XML file
      *      - The names of all the parent directories, as well as the file's name itself, are correct according to the XML file.
+     *
+     *   <p> This method is different to {@link FSWrapper#getContent(TemplateFile, String...)} in that its role is
+     *   to investigate a single file or a single folder and its contents, as opposed to searching the directory structure.
+     *   It is trying to match a file to a particular element of the template structure. In the case of a folder it loops
+     *   through the children of that element and tries to find a match for each child. </p>
     */
-    private boolean attemptExtractContent(Path file, String type, List<Pair<String, Path>> filePaths) {
-        // If the given content type doesn't exist, return false.
-        Element typeElement = getElementOfType(type);
-
+    private boolean attemptExtractContent(Path file, TemplateFile tFile, List<FileInstance> filePaths) {
         // If the target file type is a directory
-        switch (typeElement.getTagName()) {
+        System.out.println("\t Attempting to match file " + file);
+        Map<Integer, String> params;
+        switch (tFile.getTagName()) {
             case DIR:
             case DIRSET:
                 if (!Files.isDirectory(file)) {
+                    System.out.println("\tFailing it because it's file and we're looking for a directory");
                     return false;
                 }
+                TemplateFolder tFolder = (TemplateFolder) tFile;
 
                 // For each expected child of the directory (as specified in the XML), we need to find a file or folder that matches it
                 // This is the core of the algorithm for matching a file to a content type. We recursively check all the children of
                 // directories.
                 List<Path> children = listFiles(file);
-                List<Element> childElements = getChildElements(typeElement);
-                boolean[] haveConvered = new boolean[children.size()];
+                boolean[] haveCovered = new boolean[children.size()];
                 int foundElements = 0;
-                for (Element childE : childElements) {
+                for (TemplateFile child: tFolder) {
                     boolean foundSomething = false;
                     for (Path childF : children) {
-                        if (!haveConvered[children.indexOf(childF)] && attemptExtractContent(childF, childE.getAttribute("type"), filePaths)) {
-                            haveConvered[children.indexOf(childF)] = true;
+                        if (!haveCovered[children.indexOf(childF)] && attemptExtractContent(childF, child, filePaths)) {
+                            haveCovered[children.indexOf(childF)] = true;
                             foundSomething = true;
                         }
                     }
@@ -565,14 +550,23 @@ public class FSWrapper {
                 }
                 // If a directory has a match for each of its expected children, we can safely assume it is usable as there is
                 // definitely all the required content in the directory.
-                if (foundElements != childElements.size()) {
+                if (foundElements != tFolder.numChildren()) {
+                    System.out.println("\tFailing it because it doesn't have enough children");
                     return false;
                 }
-                // This is the base case of our recursion - the file is not a directory.
+                params = extractParamsForUnit(file, tFile);
                 break;
+
+            // This is the base case of our recursion - the file is not a directory.
             case FILE:
             case FILESET:
-                if (Files.isDirectory(file) || extractParamsForUnit(file, typeElement) == null) {
+                params = extractParamsForUnit(file, tFile);
+                if (Files.isDirectory(file) /*|| params == null*/) {
+                    System.out.println("\tFailing it because it's a directory and we're looking for a file");
+                    return false;
+                }
+                if (params == null) {
+                    System.out.println("\tFailing it because its parameters didn't line-up");
                     return false;
                 }
                 break;
@@ -582,37 +576,36 @@ public class FSWrapper {
 
         // Having filtered out anything that doesn't match an element of the XML in terms of name and dir structure,
         // we can assume this file is usable
-        filePaths.add(new Pair<>(type, file));
+        System.out.println("\tadding it as a " + tFile.getType());
+        filePaths.add(new FileInstance(tFile, file, params));
         return true;
     }
 
-    /*
-        Ensure that a given file matches a given element in terms of name. This will check the parametrisation of all
-        the file's parents and ensure they are consistent (The same parameters must have the same values)
+    /**
+     * Ensure that a given file matches a given File Template in terms of name. This will check the parametrisation of all
+     *   the file's parents and ensure they are consistent (The same parameters must have the same values)
      */
-    private Map<Integer, String> extractParamsForUnit(Path file, Element element) {
-        if(file == null || element == null) {
+    private Map<Integer, String> extractParamsForUnit(Path file, TemplateFile tFile) {
+        if(file == null || tFile == null) {
             return null;
         }
         Path upFile = file;
         HashMap<Integer, String> nameParameters = new HashMap<>();
-        List<Element> parentList = getAccessPathOfType(element.getAttribute("type"));
-
+        List<TemplateFile> parentList = tFile.accessPath();
+        Collections.reverse(parentList);
         // the first "parent" is the file itself
-        for(Element parent: parentList) {
-            if(parent.hasAttribute("name")) {
-                if (! upFile.getFileName().toString().equals(parent.getAttribute("name"))) {
+        for(TemplateFile parent: parentList) {
+            if(!parent.isParameterised()) {
+                if (! upFile.getFileName().toString().equals(parent.getNameFormat())) {
+                    System.out.println("\t file does not match set name");
                     return null;
                 }
                 upFile = upFile.getParent();
                 continue;
-            } else if(!parent.hasAttribute("nameFormat")) {
-                // This should never happen
-                throw new RuntimeException("No name attribute for element " + element.getAttribute("type") + " in FS config XML");
             }
 
-            String nameFormat = parent.getAttribute("nameFormat");
-            HashMap<Integer, String> theseParams = extractParametersFromFilename(upFile, nameFormat);
+            System.out.println("\t about to extract the parameters");
+            HashMap<Integer, String> theseParams = parent.extractParametersFromFilename(upFile);
             if(theseParams == null) {
                 return null;
             }
@@ -631,125 +624,6 @@ public class FSWrapper {
         return nameParameters;
     }
 
-    /*
-        Extract the parameters from the name of a file, based on a format.
-     */
-    private HashMap<Integer, String> extractParametersFromFilename(Path file, String nameFormat) {
-        HashMap<Integer, String> result = new HashMap<>();
-        boolean doesNotMatch = false;
-        String fileName = file.getFileName().toString();
-        String[] separators = nameFormat.split("(%[0-9])");
-
-        // First we deal with a special case where we start with a parameter. We extract the first parameter and set the
-        // parIndex to the index of the next one. The rest of the method treats the name as starting with a separator
-        int parIndex = nameFormat.indexOf('%');
-        int startOfSeparator = 0, endOfSeparator;
-        if(parIndex == 0) {
-            if(separators.length == 0) {
-                startOfSeparator = fileName.length();
-            } else {
-                startOfSeparator = fileName.indexOf(separators[1]); // the first string split by regex will actually be empty
-            }
-
-            String parameter = fileName.substring(0, startOfSeparator);
-            result.put(Character.getNumericValue(nameFormat.charAt(parIndex + 1)), parameter);
-            parIndex = nameFormat.indexOf('%', parIndex + 1);
-        }
-
-        // Now we loop through the body of the fileName, parsing a parameter at a time using the surrounding separators
-        int i;
-        for(i = 0; i < separators.length - 1; i++) {
-            String separator = separators[i];
-            if(separator.equals("")) {
-                continue;
-            }
-            String nextSeparator = separators[i+1];
-
-            if(parIndex == -1) {
-                break;
-            }
-            if(!fileName.contains(separator)) {
-                doesNotMatch = true;    // we have detected a discrepancy and this name does not match the format
-                break;
-            }
-
-            endOfSeparator = startOfSeparator + separator.length(); // actually the character after the separator
-            String parameter = fileName.substring(endOfSeparator, fileName.indexOf(nextSeparator, endOfSeparator));
-
-            result.put(Character.getNumericValue(nameFormat.charAt(parIndex + 1)), parameter);
-            startOfSeparator = fileName.indexOf(nextSeparator, endOfSeparator);
-            parIndex = nameFormat.indexOf('%', parIndex+1);
-        }
-
-        // Now we deal with the case of ending with a parameter. At this point if the boolean doesNotMatch has not been
-        // set to true, then we must have looped through all the separators. So, we use the last one to get the start of
-        // the parameter and extract it
-        if(parIndex != -1 && !doesNotMatch) {
-            endOfSeparator = startOfSeparator + separators[separators.length - 1].length();
-
-            result.put(Integer.parseInt(nameFormat.substring(parIndex + 1)),
-                    fileName.substring(endOfSeparator));
-        }
-
-        return doesNotMatch ? null : result;
-    }
-
-    /**
-     * Retrieve the template filepath to get to a nested file.
-     * @param type the file type of the
-     * @return A list of XML elements representing the template directories leading to the type
-     */
-    private List<Element> getAccessPathOfType(String type) {
-        Node currentNode = getElementOfType(type);
-        if(currentNode == null) {
-            return null;
-        }
-        ArrayList<Element> parentList = new ArrayList<>();
-        do {
-            parentList.add((Element) currentNode);
-            currentNode = currentNode.getParentNode();
-        } while(currentNode.getNodeType() == Node.ELEMENT_NODE);
-
-        return parentList;
-    }
-
-    /**
-     * Retrieve the element reprsenting a type in the directory heirarchy
-     * @param type The file type to get
-     * @return The XML element representing the given template type
-     */
-    private Element getElementOfType(String type) {
-        try {
-            return (Element) xpath.compile("//*[@type='" + type + "']").evaluate(fsStructure, XPathConstants.NODE);
-        } catch (XPathExpressionException e) {
-            return null;
-        }
-    }
-
-    /**
-     * Get all children that lie under a template directory
-     * @param element The element for which to get the children
-     * @param allChildren A list that will be filled with the children elements (this is a recursive method)
-     */
-    private void getAllChildren(Element element, List<Element> allChildren) {
-        List<Element> elements = getChildElements(element);
-        for(Element e: elements) {
-            allChildren.add(e);
-            getAllChildren(e, allChildren);
-        }
-    }
-
-    private List<Element> getChildElements(Element element) {
-        List<Element> children = new ArrayList<>();
-        NodeList nodes = element.getChildNodes();
-        for(int i = 0; i < nodes.getLength(); i++) {
-            if(nodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                children.add((Element) nodes.item(i));
-            }
-        }
-        return children;
-    }
-
     private List<Path> listFiles(Path dir) {
         List<Path> fileNames = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dir)) {
@@ -760,5 +634,16 @@ public class FSWrapper {
             e.printStackTrace();
         }
         return fileNames;
+    }
+
+    private TemplateFile getTemplateFileByType(String type) {
+        List<TemplateFile> tFiles = new ArrayList<>();
+        _templateRoot.getChildrenRecursively(tFiles);
+        for(TemplateFile templateFile: tFiles) {
+            if(templateFile.getType().equals(type)) {
+                return templateFile;
+            }
+        }
+        return null;
     }
 }

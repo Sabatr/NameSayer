@@ -1,7 +1,8 @@
 package app.backend;
 
 import app.backend.filesystem.FSWrapper;
-import javafx.util.Pair;
+import app.backend.filesystem.FSWrapperFactory;
+import app.backend.filesystem.FileInstance;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -52,7 +53,7 @@ public class NameEntry implements Comparable<NameEntry> {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path resource = _fsMan.createFile("soundFile", _name, formattedDate, formattedTime);
+        Path resource = _fsMan.createFilePath("soundFile", _name, formattedDate, formattedTime);
 
         _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;
@@ -291,8 +292,13 @@ public class NameEntry implements Comparable<NameEntry> {
      * Extract names from a folder and copy them to the main filesystem
      */
     public static void populateNames(Path soundfilesFolder) throws URISyntaxException {
-        FSWrapper fsWrapOne = new FSWrapper(FSWrapper.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
-        FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
+        FSWrapperFactory factoryOne = new FSWrapperFactory(FSWrapperFactory.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
+        FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
+
+        FSWrapper fsWrapOne = factoryOne.buildFSWrapper();
+        FSWrapper fsWrapTwo = factoryTwo.buildFSWrapper();
+
+        fsWrapTwo.createDirectoryStruct("compRatings");
         try {
             fsWrapOne.copyTo(fsWrapTwo);
         } catch (IOException e) {
@@ -304,19 +310,23 @@ public class NameEntry implements Comparable<NameEntry> {
      * Having populated the names database, get all the names present
      */
     public static ArrayList<NameEntry> getNames() throws URISyntaxException {
-        FSWrapper fsWrapTwo = new FSWrapper(FSWrapper.class.getResource("FileSystem.xml").toURI());
+        FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
+        FSWrapper fsWrapTwo = factoryTwo.buildFSWrapper();
 
         ArrayList<NameEntry> names = new ArrayList<>();
-        List<Pair<String, Path>> paths = fsWrapTwo.getAllContentOfType("nameEntry");
+        List<FileInstance> files = fsWrapTwo.getAllContentOfType("nameEntry");
 
-        List<Pair<String, Path>> pathsForSingleEntry = new ArrayList<>();
-        for(Pair<String, Path> pathPair: paths) {
-            if(pathPair.getKey().equals("nameEntry")) {
-                pathsForSingleEntry.add(pathPair);
+        System.out.println("Getting all the content");
+
+        List<FileInstance> pathsForSingleEntry = new ArrayList<>();
+        for(FileInstance file: files) {
+            System.out.println("File of type " + file.getTemplate().getType() + "\t\t is: " + file.getPath().toString());
+            if(file.getTemplate().getType().equals("nameEntry")) {
+                pathsForSingleEntry.add(file);
                 names.add(new NameEntry(fsWrapTwo, pathsForSingleEntry));
                 pathsForSingleEntry.clear();
             } else {
-                pathsForSingleEntry.add(pathPair);
+                pathsForSingleEntry.add(file);
             }
         }
         return names;
@@ -325,54 +335,57 @@ public class NameEntry implements Comparable<NameEntry> {
     /**
      * Extract a NameEntry from the filesystem
      */
-    private NameEntry(FSWrapper fsManager, List<Pair<String, Path>> paths) {
+    private NameEntry(FSWrapper fsManager, List<FileInstance> files) {
         boolean firstVersion = true;
-        List<Pair<String, Path>> revList = paths;
+        List<FileInstance> revList = files;
         Collections.reverse(revList);
         Map<Integer, String> parameters;
-        for(Pair<String, Path> pathPair: paths) {
-            switch (pathPair.getKey()) {
+        for(FileInstance file: files) {
+            switch (file.getTemplate().getType()) {
                 case "soundFile":
-                    parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
+                    parameters = file.getParameters();
                     if(firstVersion) {
                         _mainVersion = new Version(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
-                                pathPair.getValue());
+                                file.getPath());
                         firstVersion = false;
                     } else {
                         addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
-                                pathPair.getValue());
+                                file.getPath());
                     }
                     break;
                 case "nameEntry":
-                    parameters = fsManager.getParamsForFile(pathPair.getValue(), pathPair.getKey());
-                    StringBuilder formattedName = new StringBuilder();
-                    String name = parameters.get(1);
-                    char[] chars = new char[name.length()];
-                    name.getChars(0, name.length(), chars, 0);
-                    boolean newWord = true;
-
-                    for(char ch: chars) {
-                        if(Character.isAlphabetic(ch)) {
-                            if(newWord) {
-                                formattedName.append(Character.toUpperCase(ch));
-                                newWord = false;
-                            } else {
-                                formattedName.append(ch);
-                            }
-                        } else if(Character.isWhitespace(ch)) {
-                            newWord = true;
-                            formattedName.append(ch);
-                        }
-                    }
-                    _name = formattedName.toString();
+                    parameters = file.getParameters();
+                    _name = capitaliseNames(parameters.get(1));
                     break;
                 case "rating":
-                    _ratingsFile = pathPair.getValue();
+                    _ratingsFile = file.getPath();
                 default:
                     break;
             }
         }
 
         _fsMan = fsManager;
+    }
+
+    private String capitaliseNames(String name) {
+        StringBuilder formattedName = new StringBuilder();
+        char[] chars = new char[name.length()];
+        name.getChars(0, name.length(), chars, 0);
+        boolean newWord = true;
+
+        for(char ch: chars) {
+            if(Character.isAlphabetic(ch)) {
+                if(newWord) {
+                    formattedName.append(Character.toUpperCase(ch));
+                    newWord = false;
+                } else {
+                    formattedName.append(ch);
+                }
+            } else if(Character.isWhitespace(ch)) {
+                newWord = true;
+                formattedName.append(ch);
+            }
+        }
+        return formattedName.toString();
     }
 }
