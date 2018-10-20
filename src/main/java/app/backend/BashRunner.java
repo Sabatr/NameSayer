@@ -145,20 +145,23 @@ public class BashRunner {
      * @param path The filepath of the audio file to play
      * @return The Task running the process on a background thread
      */
-    public Task<String> runPlayAudioCommand(Path path, String taskTitle) {
+    public Task<String> runPlayAudioCommand(Path path, String taskTitle, double volume) {
 //        System.out.println("Playing audio " + path.toAbsolutePath().toString());
         String[] cmd;
         if(onWindows) {
-            cmd = new String[6];
+            cmd = new String[8];
             cmd[0] = ffplayCommand;
             cmd[1] = "-autoexit";
             cmd[2] = "-nodisp";
             cmd[3] = "-loglevel";
             cmd[4] = "quiet";
-            cmd[5] = path.toAbsolutePath().toString();
+            cmd[5] = "-volume";
+            cmd[6] = Integer.toString((int) volume);
+            cmd[7] = path.toAbsolutePath().toString();
 
         } else {
-            String cmdString = String.format("ffplay -autoexit -nodisp -loglevel quiet \"$s\"", path.toAbsolutePath().toString());
+            String cmdString = String.format("ffplay -autoexit -nodisp -loglevel quiet -volume %s \"%s\"",
+                    Integer.toString((int) volume), path.toAbsolutePath().toString());
             cmd = new String[3];
             cmd[0] = "/bin/bash";
             cmd[1] = "-c";

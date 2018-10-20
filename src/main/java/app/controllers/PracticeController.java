@@ -35,6 +35,7 @@ public class PracticeController extends ParentController implements EventHandler
     //@FXML private ComboBox _dropdown;
     @FXML private HBox _rateBox;
     @FXML private Slider _ratingSlider;
+    @FXML private Slider _volumeSlider;
 
     private ObservableList<NameEntry> _practiceList;
     private int _currentPosition;
@@ -59,6 +60,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     public void initialize() {
         setUpSlider();
+        _volumeSlider.setValue(_volumeSlider.getMax());
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -172,9 +174,13 @@ public class PracticeController extends ParentController implements EventHandler
         AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
         BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
-//        Thread thread = new Thread();
-//        thread.start();
-        br.runPlayAudioCommand(audioFilePath, taskTitle);
+
+        double max = _volumeSlider.getMax();
+        double min = _volumeSlider.getMin();
+        double value = _volumeSlider.getValue();
+
+        double volume = ((value - min) / (max - min)) * 100;
+        br.runPlayAudioCommand(audioFilePath, taskTitle, volume);
 
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
@@ -222,16 +228,12 @@ public class PracticeController extends ParentController implements EventHandler
                 _listenButton.setDisable(false);
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
-            } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
-//                System.out.println(event.getSource().getValue());
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
                 try {
                     playAudio();
                 } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
-            } else if(event.getSource().getTitle().equals((BashRunner.CommandType.RECORDAUDIO.toString()))) {
-//                System.out.println("value returned: " + event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());

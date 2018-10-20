@@ -72,5 +72,7 @@
             </Button>
          </children>
       </HBox>
+      <Slider fx:id="_volumeSlider" layoutX="999.0" layoutY="572.0" orientation="VERTICAL" prefHeight="130.0" prefWidth="50.0" />
+      <Label layoutX="1004.0" layoutY="715.0" text="Volume" textFill="WHITE" />
    </children>
 </AnchorPane>
