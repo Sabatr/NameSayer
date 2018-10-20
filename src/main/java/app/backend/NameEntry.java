@@ -8,11 +8,10 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Self-managed class representing a unique name entry
@@ -122,6 +121,11 @@ public class NameEntry implements Comparable<NameEntry> {
             return _temporaryVersion._resource;
         }
         for(Version ver: _versions) {
+            if(ver._dateTime.equals(dateAndTime)) {
+                return ver._resource;
+            }
+        }
+        for(Version ver: _userVersions) {
             if(ver._dateTime.equals(dateAndTime)) {
                 return ver._resource;
             }
@@ -243,6 +247,40 @@ public class NameEntry implements Comparable<NameEntry> {
         return 10;
     }
 
+    /**
+     * Retrieves the dates of all the user-recorded versions. (The dates can be used as identifiers).
+     * The output is sorted by date.
+     */
+    public List<String> getUserVersions() {
+        SimpleDateFormat format = new SimpleDateFormat("d-M-y_h-m-s");
+        List<Date> dates = new ArrayList<>();
+        List<String> versionDates = new ArrayList<>();
+        for(Version ver: _userVersions) {
+            try {
+                dates.add(format.parse(ver._dateTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Collections.sort(dates);
+        for(Date date: dates) {
+            versionDates.add(format.format(date));
+        }
+        return versionDates;
+    }
+
+    /**
+     * Deletes a user version
+     */
+    public void deleteUserVersion(String date) {
+        for(Version ver: _userVersions) {
+            if(ver._dateTime.equals(date)) {
+                String[] dateComponents = date.split("_");
+                _fsMan.deleteFiles("userVersion", _name, dateComponents[0], dateComponents[1], ver._author);
+            }
+        }
+    }
 
     /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised

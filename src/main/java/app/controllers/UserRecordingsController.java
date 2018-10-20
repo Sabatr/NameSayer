@@ -5,6 +5,7 @@ import app.backend.NameEntry;
 import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.views.SceneBuilder;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.layout.HBox;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.List;
 
 public class UserRecordingsController extends ParentController implements EventHandler<WorkerStateEvent> {
 
@@ -27,7 +29,7 @@ public class UserRecordingsController extends ParentController implements EventH
     @FXML public Button _dbVersionButton;
     @FXML public ProgressBar _progressBar;
     @FXML public Slider _volumeSlider;
-    @FXML public ComboBox _dropdown;
+    @FXML public ComboBox<String> _dropdown;
     @FXML public Button _userVersionButton;
 
     private NameEntry _name;
@@ -104,6 +106,14 @@ public class UserRecordingsController extends ParentController implements EventH
         _buttonsHBox.setDisable(false);
         _dbVersionButton.setDisable(true);
         _userVersionButton.setDisable(true);
+    }
+
+    /*
+     * Set the items of the user recordings dropdown
+     */
+    private void setupDropdown() {
+        List<String> versions = _name.getUserVersions();
+        _dropdown.setItems(FXCollections.observableList(versions));
     }
 
     /**
