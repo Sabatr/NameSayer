@@ -45,15 +45,15 @@ public class TemplateFile {
     public String getTagName() {
         if(isMultiple()) {
             if(isParent()) {
-                return FSWrapperCopy.DIRSET;
+                return FSWrapper.DIRSET;
             } else {
-                return FSWrapperCopy.FILESET;
+                return FSWrapper.FILESET;
             }
         } else {
             if(isParent()) {
-                return FSWrapperCopy.DIR;
+                return FSWrapper.DIR;
             } else {
-                return FSWrapperCopy.FILE;
+                return FSWrapper.FILE;
             }
         }
     }

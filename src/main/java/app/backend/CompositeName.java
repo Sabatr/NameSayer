@@ -1,7 +1,6 @@
 package app.backend;
 
 import app.backend.filesystem.FSWrapper;
-import app.backend.filesystem.FSWrapperCopy;
 import app.backend.filesystem.FSWrapperFactory;
 
 import app.backend.filesystem.FileInstance;

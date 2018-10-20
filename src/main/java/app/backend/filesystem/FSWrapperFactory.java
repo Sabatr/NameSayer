@@ -146,9 +146,9 @@ public class FSWrapperFactory {
         }
     }
 
-    public FSWrapperCopy buildFSWrapper() {
+    public FSWrapper buildFSWrapper() {
         TemplateFolder rootDirTemplate = getTemplateDirectoryStructure();
-        return new FSWrapperCopy(rootDirTemplate, _workingDir, _rootContentDir);
+        return new FSWrapper(rootDirTemplate, _workingDir, _rootContentDir);
     }
 
     private TemplateFolder getTemplateDirectoryStructure() {
@@ -179,9 +179,9 @@ public class FSWrapperFactory {
 
                 String tag = e.getTagName();
                 switch (tag) {
-                    case FSWrapperCopy.DIR:
+                    case FSWrapper.DIR:
                         isDir = true;
-                    case FSWrapperCopy.FILE:
+                    case FSWrapper.FILE:
                         if(e.hasAttribute("name")) {
                             builder.nameFormat(e.getAttribute("name")).hasParameters(false);
                         } else if(e.hasAttribute("nameFormat")) {
@@ -190,9 +190,9 @@ public class FSWrapperFactory {
                             throw new RuntimeException("No name attribute in DIR or FILE element");
                         }
                         break;
-                    case FSWrapperCopy.DIRSET:
+                    case FSWrapper.DIRSET:
                         isDir = true;
-                    case FSWrapperCopy.FILESET:
+                    case FSWrapper.FILESET:
                         builder.canBeMultiple(true);
                         if(e.hasAttribute("nameFormat")) {
                             builder.nameFormat(e.getAttribute("nameFormat")).hasParameters(true);

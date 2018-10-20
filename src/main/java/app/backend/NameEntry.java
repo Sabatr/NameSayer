@@ -1,10 +1,8 @@
 package app.backend;
 
 import app.backend.filesystem.FSWrapper;
-import app.backend.filesystem.FSWrapperCopy;
 import app.backend.filesystem.FSWrapperFactory;
 import app.backend.filesystem.FileInstance;
-import javafx.util.Pair;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -22,7 +20,7 @@ import java.util.Map;
 public class NameEntry implements Comparable<NameEntry> {
 
     private String DEFAULT_AUTHOR = "You";
-    protected FSWrapperCopy _fsMan;
+    protected FSWrapper _fsMan;
     private String _name;
     protected Version _mainVersion;
     protected Path _ratingsFile;
@@ -325,8 +323,8 @@ public class NameEntry implements Comparable<NameEntry> {
         FSWrapperFactory factoryOne = new FSWrapperFactory(FSWrapperFactory.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
         FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
 
-        FSWrapperCopy fsWrapOne = factoryOne.buildFSWrapper();
-        FSWrapperCopy fsWrapTwo = factoryTwo.buildFSWrapper();
+        FSWrapper fsWrapOne = factoryOne.buildFSWrapper();
+        FSWrapper fsWrapTwo = factoryTwo.buildFSWrapper();
 
         fsWrapTwo.createDirectoryStruct("compRatings");
         try {
@@ -341,7 +339,7 @@ public class NameEntry implements Comparable<NameEntry> {
      */
     public static ArrayList<NameEntry> getNames() throws URISyntaxException {
         FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
-        FSWrapperCopy fsWrapTwo = factoryTwo.buildFSWrapper();
+        FSWrapper fsWrapTwo = factoryTwo.buildFSWrapper();
 
         ArrayList<NameEntry> names = new ArrayList<>();
         List<FileInstance> files = fsWrapTwo.getAllContentOfType("nameEntry");
@@ -365,7 +363,7 @@ public class NameEntry implements Comparable<NameEntry> {
     /**
      * Extract a NameEntry from the filesystem
      */
-    private NameEntry(FSWrapperCopy fsManager, List<FileInstance> files) {
+    private NameEntry(FSWrapper fsManager, List<FileInstance> files) {
         boolean firstVersion = true;
         List<FileInstance> revList = files;
         Collections.reverse(revList);
