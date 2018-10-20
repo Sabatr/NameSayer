@@ -284,14 +284,14 @@ public class NameEntry implements Comparable<NameEntry> {
     /**
      * Extract names from the default folder and copy them to the main filesystem
      */
-    public static void populateNames() throws URISyntaxException {
-        populateNames(null);
+    public static FSWrapper populateNames() throws URISyntaxException {
+        return populateNames(null);
     }
 
     /**
      * Extract names from a folder and copy them to the main filesystem
      */
-    public static void populateNames(Path soundfilesFolder) throws URISyntaxException {
+    public static FSWrapper populateNames(Path soundfilesFolder) throws URISyntaxException {
         FSWrapperFactory factoryOne = new FSWrapperFactory(FSWrapperFactory.class.getResource("StartFS.xml").toURI(), soundfilesFolder);
         FSWrapperFactory factoryTwo = new FSWrapperFactory(FSWrapperFactory.class.getResource("FileSystem.xml").toURI());
 
@@ -304,6 +304,8 @@ public class NameEntry implements Comparable<NameEntry> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return fsWrapTwo;
     }
 
     /**
@@ -315,8 +317,6 @@ public class NameEntry implements Comparable<NameEntry> {
 
         ArrayList<NameEntry> names = new ArrayList<>();
         List<FileInstance> files = fsWrapTwo.getAllContentOfType("nameEntry");
-
-        System.out.println("Getting all the content");
 
         List<FileInstance> pathsForSingleEntry = new ArrayList<>();
         for(FileInstance file: files) {

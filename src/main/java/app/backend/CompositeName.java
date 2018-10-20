@@ -4,6 +4,7 @@ import app.backend.filesystem.FSWrapper;
 import app.backend.filesystem.FSWrapperFactory;
 
 import app.backend.filesystem.FileInstance;
+import app.tools.AudioProcessor;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class CompositeName extends NameEntry {
 
+    boolean _isProcessing = false;
     private ObservableList<NameEntry> _names;
 
     public CompositeName(ObservableList<NameEntry> names, String fullname) throws URISyntaxException {
@@ -52,12 +54,22 @@ public class CompositeName extends NameEntry {
     }
 
     public void concatenateAudio(EventHandler<WorkerStateEvent> handler) throws IOException, URISyntaxException {
+        _isProcessing = true;
         List<Path> audioPaths = new ArrayList<>();
         for(NameEntry name: _names) {
             audioPaths.add(name.getAudioForVersion(name.getHighestRating()));
         }
-        BashRunner br = new BashRunner(handler);
-        br.runConcatCommands(audioPaths, _mainVersion._resource);
+
+        AudioProcessor processor = new AudioProcessor(handler, _fsMan);
+        processor.process(audioPaths, _mainVersion._resource, this);
+    }
+
+    public boolean isProcessing() {
+        return _isProcessing;
+    }
+
+    public void setDoneProcessing() {
+        _isProcessing = false;
     }
 
     public boolean hasConcat() {

@@ -1,10 +1,13 @@
 package app;
 
 import app.backend.NameEntry;
+import app.backend.filesystem.FSWrapper;
 import app.views.SceneBuilder;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -22,8 +25,16 @@ public class Main extends Application {
     public void start(Stage stage) throws URISyntaxException, IOException {
         stage.setResizable(false);
         stage.setTitle("Name Sayer Practice");
-        NameEntry.populateNames();
+        FSWrapper fsWrap = NameEntry.populateNames();
         ArrayList<NameEntry> names = NameEntry.getNames();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if(!event.isConsumed()) {
+                    fsWrap.deleteFiles("compositeName");
+                }
+            }
+        });
 
         SceneBuilder sceneMan = SceneBuilder.inst(FXCollections.observableArrayList(names), stage);
         sceneMan.switchScene(SceneBuilder.MENU);

@@ -20,7 +20,7 @@ import javafx.event.EventHandler;
 public class BashRunner {
 
     public enum CommandType {
-        RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT, LISTDEVICES
+        RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT, TRIM, LISTDEVICES
     }
 
     private boolean onWindows = false;
@@ -168,6 +168,29 @@ public class BashRunner {
         return runCommand(taskTitle, cmd);
     }
 
+    public Task<String> runTrimSilenceCommand(Path input, Path output) {
+        String[] cmd;
+        if(onWindows) {
+            cmd = new String[7];
+            cmd[0] = ffmpegCommand;
+            cmd[1] = "-hide_banner";
+            cmd[2] = "-i";
+            cmd[3] = input.toAbsolutePath().toString();
+            cmd[4] = "-af";
+            cmd[5] = "silenceremove=1:0:-35dB:1:5:-35dB:0:peak";
+            cmd[6] = output.toAbsolutePath().toString();
+
+        } else {
+            String cmdString = String.format(ffmpegCommand + " -hide_banner -i " + input.toAbsolutePath().toString() +
+                    " -af silenceremove=1:0:-35dB:1:5:-35dB:0:peak " + output.toAbsolutePath().toString());
+            cmd = new String[3];
+            cmd[0] = "/bin/bash";
+            cmd[1] = "-c";
+            cmd[2] = cmdString;
+        }
+        return runCommand(CommandType.TRIM.toString(), cmd);
+    }
+
     /**
      * Runs ffmpeg to concatenate several audio files and saves the result to the given output file.
      * @param inputs The list of input files to concatenate
@@ -176,7 +199,6 @@ public class BashRunner {
      * @throws IOException If the creation of the temporary list file fails
      */
     public Task<String> runConcatCommands(List<Path> inputs, Path output) throws IOException {
-        System.out.println("gets called");
         Path audioList = Paths.get("./tmpList.txt").toAbsolutePath();
         Files.deleteIfExists(audioList);
         Files.createFile(audioList);
@@ -252,7 +274,6 @@ public class BashRunner {
             try {
                 ProcessBuilder test = new ProcessBuilder(cmd);
                 test.directory(null);
-//                System.out.println("Testing command" + test.command());
                 p = test.start();
             } catch(IOException e) {
                 failure = true;
@@ -271,13 +292,11 @@ public class BashRunner {
                 }
             }
 
-//            System.out.println("Done waiting");
             if(!failure) {
                 try {
                     if(p.exitValue() == 0) {
                         commandOutBuilder.append(concatOutput(p.getInputStream(), "\n"));
                         commandOutBuilder.append(concatOutput(p.getErrorStream(), "\n"));
-//                        System.out.println("exit value 0");
                     } else {
                         failure = true;
                         commandOutBuilder.append(concatOutput(p.getInputStream(),"\n"));

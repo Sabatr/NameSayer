@@ -457,6 +457,18 @@ public class FSWrapper {
     }
 
     /**
+     * This method wraps an internal private method. It fetches the parameters for a file, attempting to match it to
+     * a File Template (type).
+     * @param file The file for which parameters should be retrieved
+     * @param type The type to try match the file to
+     * @return A map of parameter numbers to the corresponding parameters
+     */
+    public Map<Integer, String> getParametersForFile(Path file, String type) {
+        TemplateFile tFile = getTemplateFileByType(type);
+        return extractParamsForUnit(file, tFile);
+    }
+
+    /**
      * Ensure that a given file matches a given File Template in terms of name. This will check the parametrisation of all
      *   the file's parents and ensure they are consistent (The same parameters must have the same values)
      */

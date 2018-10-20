@@ -146,7 +146,9 @@ public class PracticeController extends ParentController implements EventHandler
     private void playAudio() throws IOException, URISyntaxException {
         if(_currentName instanceof CompositeName) {
             CompositeName cName = (CompositeName) _currentName;
-            if(!cName.hasConcat()) {
+            if(cName.isProcessing()) {
+                return;
+            } else if(!cName.hasConcat()) {
                 cName.concatenateAudio(this::handle);
                 return;
             }
@@ -223,13 +225,9 @@ public class PracticeController extends ParentController implements EventHandler
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.PLAYAUDIO.toString())) {
 //                System.out.println(event.getSource().getValue());
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.CONCAT.toString())) {
-//                System.out.println("playing concatted audio");
                 try {
-                    Files.deleteIfExists(Paths.get("./tmpList.txt"));
                     playAudio();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (URISyntaxException e) {
+                } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
             } else if(event.getSource().getTitle().equals((BashRunner.CommandType.RECORDAUDIO.toString()))) {
