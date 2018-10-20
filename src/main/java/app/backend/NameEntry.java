@@ -320,7 +320,6 @@ public class NameEntry implements Comparable<NameEntry> {
 
         List<FileInstance> pathsForSingleEntry = new ArrayList<>();
         for(FileInstance file: files) {
-            System.out.println("File of type " + file.getTemplate().getType() + "\t\t is: " + file.getPath().toString());
             if(file.getTemplate().getType().equals("nameEntry")) {
                 pathsForSingleEntry.add(file);
                 names.add(new NameEntry(fsWrapTwo, pathsForSingleEntry));
