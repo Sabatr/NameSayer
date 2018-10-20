@@ -31,6 +31,7 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
     public static final String OPTIONS = "OptionsView.fxml";
     public static final String LISTVIEW = "ListView.fxml";
     public static final String PRACTICE = "Practice.fxml";
+    public static final String ACHIEVEMENTS = "Achievements.fxml";
     private Map<String, Scene> _scenes;                             // TODO. Changes made: storing scenes in a map
     private Map<String, ParentController> _controllers;
 

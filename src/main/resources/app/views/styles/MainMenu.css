@@ -1,40 +1,94 @@
 ._background {
-    -fx-background-color: #252b6e;
+    -fx-background-color: #f6f4f5;
+    -fx-background-image: url('../images/main5.png');
+    -fx-background-size: 1115 815;
+    -fx-background-repeat: no-repeat;
 }
 
 ._title {
-    -fx-text-fill: #f0f0f0;
+    -fx-text-fill: #213451;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-font-size: 60px;
     -fx-font-weight: bold;
 }
 
 ._buttons {
-    -fx-background-color: #e2e2e2;
+    -jfx-button-type: RAISED;
+    -fx-background-color: BLACK;
     -fx-font-weight: bold;
-    -fx-text-fill: #252b6e;
+    -fx-text-fill: #c5cb28;
     -fx-font-size: 25px;
-    -fx-font-family: "Franklin Gothic Heavy";
-    -fx-border-color: #252b6e;
-    -fx-border-width: 3px;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 100px;
 }
 ._buttons:hover {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
-            #2c76af,
-            #2c76af,
-            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #777b1b;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
 }
 
 ._buttons:pressed {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
-            #225c88,
-            #266697,
-            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
 }
 
 ._buttonPane {
     -fx-background-color: #f0f0f0;
     -fx-opacity: 40%;
+}
+
+._options {
+    -jfx-button-type: FLAT;
+    -fx-pref-width: 50;
+    -fx-pref-height: 50;
+    -fx-background-image: url('../images/options.png');
+    -fx-background-size: 50 50;
+    -fx-background-repeat: no-repeat;
+}
+
+._options:hover {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #511774;
+    -fx-background-image: url('../images/optionshover.png');
+}
+
+.help {
+    -jfx-button-type: RAISED;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 5 12;
+    -fx-background-size: 50 50;
+    -fx-background-image: url('../images/help.png');
+}
+
+.help:hover {
+    -fx-background-color: #2d2d2d;
+}
+
+.microphone {
+    -jfx-button-type: RAISED;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 5 5;
+    -fx-background-size: 50 50;
+    -fx-background-image: url('../images/microphone.png');
+}
+
+.microphone:hover {
+    -fx-background-color: #2d2d2d;
+}
+
+.achievements {
+    -jfx-button-type: RAISED;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 5 10;
+    -fx-background-size: 50 40;
+    -fx-background-image: url('../images/trophy.png');
+}
+
+.achievements:hover {
+    -fx-background-color: #2d2d2d;
 }

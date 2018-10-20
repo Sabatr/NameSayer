@@ -1,12 +1,13 @@
 package app.controllers;
 
 import app.backend.BashRunner;
-import app.tools.AchievementsManager;
+import app.tools.*;
 import app.backend.CompositeName;
-import app.tools.AudioPlayer;
-import app.tools.Timer;
 import app.backend.NameEntry;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPopup;
+import com.jfoenix.controls.JFXProgressBar;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -24,25 +25,26 @@ import java.nio.file.Path;
 public class PracticeController extends ParentController implements EventHandler<WorkerStateEvent> {
 
     @FXML private Label _nameDisplayed;
-    @FXML private Button _prevButton;
-    @FXML private Button _nextButton;
-    @FXML private Button _rateButton;
+    @FXML private JFXButton _prevButton;
+    @FXML private JFXButton _nextButton;
+    @FXML private JFXButton _rateButton;
     @FXML private Button _listenButton;
-    @FXML private Button _recordButton;
-    @FXML private Button _backButton;
-    //@FXML private ComboBox _dropdown;
-    @FXML private HBox _rateBox;
-    @FXML private Slider _ratingSlider;
-
+    @FXML private JFXButton _recordButton;
+    @FXML private JFXButton _backButton;
+    @FXML private Label _namePos;
+    @FXML private JFXProgressBar _progressBar;
+    @FXML private Label _upArrow;
+    @FXML private JFXButton _helpButton;
+    @FXML private JFXButton _micButton;
+    @FXML private JFXButton _achievements;
+    private JFXPopup _ratePopUp;
+    private JFXPopup _playPopUp;
     private ObservableList<NameEntry> _practiceList;
     private int _currentPosition;
     private NameEntry _currentName;
     private String _dateAndTime;
+    private PlayBackHandler _playBackHandler;
 
-    /**
-     * This handles the next name click.
-     */
-    @FXML private ProgressBar _progressBar;
 
     /**
      * This handles the previous name click.
@@ -56,7 +58,8 @@ public class PracticeController extends ParentController implements EventHandler
     private Position _namePosition;
     @FXML
     public void initialize() {
-        setUpSlider();
+        setUpRateButton();
+        setUpPlayBack();
         //This listener is used to check whether the list is at the end. Buttons are disabled accordingly.
         _nameDisplayed.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -89,6 +92,70 @@ public class PracticeController extends ParentController implements EventHandler
         });
     }
 
+    /**
+     *
+     */
+    private void setUpPlayBack() {
+        _playBackHandler = new PlayBackHandler();
+        _playPopUp = _playBackHandler.create();
+    }
+
+    @FXML
+    private void showReplayPopUp() {
+        if (!_playPopUp.isShowing()) {
+            _playPopUp.show(_upArrow,JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT,0,-120);
+        }
+    }
+    /**
+     * Sets up a rating system of values from one to five inclusive.
+     */
+    private void setUpRateButton() {
+        ButtonBar bar = new ButtonBar();
+        bar.getStylesheets().add(
+                SceneBuilder.class.getResource("styles/Rating.css").toExternalForm()
+        );
+        bar.getStyleClass().add("buttonBar");
+        bar.setPrefSize(250,30);
+        for (int i=1;i<=5;i++) {
+            bar.getButtons().add(create(i));
+        }
+        _ratePopUp = new JFXPopup(bar);
+    }
+
+    /**
+     * Creates the rate buttons.
+     * @param value
+     * @return
+     */
+    private JFXButton create(int value) {
+        JFXButton button = new JFXButton(value +"");
+        button.getStylesheets().add(
+                SceneBuilder.class.getResource("styles/Rating.css").toExternalForm()
+        );
+        button.getStyleClass().add("button");
+        button.setOnMouseClicked((e)-> {
+            _currentName.rateVersion(_dateAndTime,value);
+            _ratePopUp.hide();
+            _dateAndTime = _currentName.getHighestRating();
+        });
+        return button;
+    }
+
+    @FXML
+    private void hideRating() {
+        if (_ratePopUp.isShowing()) {
+            _ratePopUp.hide();
+        }
+    }
+    /**
+     * Displays the button bar when the rate button is hovered over.
+     */
+    @FXML
+    private void showRating() {
+        if (!_ratePopUp.isShowing()) {
+            _ratePopUp.show(_rateButton,JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT,-120,-60);
+        }
+    }
 
     /**
      * These are the arrow buttons, which changes the names.
@@ -125,6 +192,7 @@ public class PracticeController extends ParentController implements EventHandler
         _currentPosition++;
         _currentName =_practiceList.get(_currentPosition);
         _nameDisplayed.setText(_currentName.getName());
+        _namePos.setText(_currentPosition+1+"/"+_practiceList.size());
     }
 
     /**
@@ -135,6 +203,7 @@ public class PracticeController extends ParentController implements EventHandler
         _currentPosition--;
         _currentName = _practiceList.get(_currentPosition);
         _nameDisplayed.setText(_currentName.getName());
+        _namePos.setText(_currentPosition+1+"/"+_practiceList.size());
     }
 
     /**
@@ -168,8 +237,6 @@ public class PracticeController extends ParentController implements EventHandler
         AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
         BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
-//        Thread thread = new Thread();
-//        thread.start();
         br.runPlayAudioCommand(audioFilePath, taskTitle);
 
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
@@ -182,6 +249,10 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void recordAudio() throws URISyntaxException {
+        if (MicPaneHandler.getHandler().getSelectedDevice().getValue() == null) {
+            System.out.println("No mic");
+            return;
+        }
         AchievementsManager.getInstance().increasePracticeAttempts();
         _nextButton.setVisible(false);
         _prevButton.setVisible(false);
@@ -238,9 +309,11 @@ public class PracticeController extends ParentController implements EventHandler
     }
 
     private void disableAll() {
+        _backButton.setDisable(true);
         _listenButton.setDisable(true);
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
+        _achievements.setDisable(true);
     }
 
     /**
@@ -256,17 +329,25 @@ public class PracticeController extends ParentController implements EventHandler
     /**
      * Plays the audio back for the user.
      */
-    @FXML
     private void playBackAudioOfRecording() throws URISyntaxException {
-        //Plays back audio
-        //Disables buttons while this happens.
-        //Renables after audio is played.
-
         disableAll();
         _progressBar.setVisible(true);
-
         Path audioResource = _currentRecording;
         playGenericAudio("RecordAudio", audioResource);
+    }
+
+    @FXML
+    private void playBack() throws IOException, URISyntaxException{
+        switch (_playBackHandler.getCurrent()) {
+            case DATABASE:
+                playAudio();
+                break;
+            case USER:
+                playBackAudioOfRecording();
+                break;
+            case BOTH:
+                break;
+        }
     }
 
     /**
@@ -280,10 +361,15 @@ public class PracticeController extends ParentController implements EventHandler
         enableButtons();
     }
 
+    /**
+     * Re-enables the disabled buttons, once recording has stopped.
+     */
     private void enableButtons() {
         _confirmationHBox.setVisible(false);
         _recordHBox.setVisible(true);
         _recordHBox.setDisable(false);
+        _backButton.setDisable(false);
+        _achievements.setDisable(false);
         updateChangeButtons();
     }
 
@@ -294,37 +380,6 @@ public class PracticeController extends ParentController implements EventHandler
     private void goBack() {
         _switcher.switchScene(SceneBuilder.LISTVIEW);
     }
-
-    /**
-     * Handles the poor audio button.
-     */
-    @FXML
-    private void rate() {
-        _rateBox.setVisible(true);
-        _nextButton.setVisible(false);
-        _prevButton.setVisible(false);
-        disableAll();
-    }
-    private void setUpSlider() {
-        _ratingSlider.setMin(0);
-        _ratingSlider.setMax(10);
-        _ratingSlider.setBlockIncrement(1);
-        _ratingSlider.setShowTickLabels(true);
-        _ratingSlider.setShowTickMarks(true);
-        _ratingSlider.setMajorTickUnit(5);
-        _ratingSlider.setMinorTickCount(4);
-        _ratingSlider.setSnapToTicks(true);
-    }
-    @FXML
-    private void confirmRating() {
-        _currentName.rateVersion(_dateAndTime, (int) _ratingSlider.getValue());
-        _rateBox.setVisible(false);
-        _recordHBox.setDisable(false);
-        _listenButton.setDisable(false);
-        _dateAndTime = _currentName.getHighestRating();
-        updateChangeButtons();
-    }
-
 
     /**
      * Uses the parent hook method to get the information from the list view controller.
@@ -342,18 +397,33 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @Override
     public void switchTo() {
-        _rateBox.setVisible(false);
         _confirmationHBox.setVisible(false);
         _progressBar.setVisible(false);
         _currentPosition = 0;
         _currentName = _practiceList.get(_currentPosition);
         //on loading the text is initially set to whatever is on top of the list.
         _nameDisplayed.setText(_currentName.getName());
+        _namePos.setText("1/"+_practiceList.size());
         if (_practiceList.size() > 1) {
             _namePosition = Position.FIRST;
             updateChangeButtons();
         }
         //Gets the best version for the currentName
         _dateAndTime = _currentName.getHighestRating();
+    }
+    @FXML
+    private void help() {
+        new HelpHandler(_helpButton,"practice");
+    }
+
+    @FXML
+    private void getMic() {
+        MicPaneHandler.getHandler().show(_micButton);
+    }
+
+    @FXML
+    private void goToAchievements() {
+        AchievementsManager.getInstance().setMenu(SceneBuilder.PRACTICE);
+        _switcher.switchScene(SceneBuilder.ACHIEVEMENTS);
     }
 }

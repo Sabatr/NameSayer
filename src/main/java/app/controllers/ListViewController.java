@@ -5,6 +5,7 @@ import app.backend.NameEntry;
 import app.tools.AchievementsManager;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ import java.util.*;
  * This class controls the functionality of the list scene.
  */
 public class ListViewController extends ParentController {
-    @FXML private ListView<NameEntry> _nameListView;
+    @FXML private JFXListView<NameEntry> _nameListView;
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
     @FXML private ListView<NameEntry> _selectListView;
@@ -42,7 +43,6 @@ public class ListViewController extends ParentController {
     public void initialize() {
         _selectedNames = FXCollections.observableArrayList();
         _sortedButton.setDisable(true);
-                //.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
         _addedComposites = FXCollections.observableArrayList();
 
             //CTRL+Click to select multiple
@@ -375,7 +375,6 @@ public class ListViewController extends ParentController {
         super.setInformation(switcher, allNames, selectedNames);
         _nameListView.setItems(allNames);
         _selectedNames = selectedNames;
-
         setupSearchBox();
     }
 

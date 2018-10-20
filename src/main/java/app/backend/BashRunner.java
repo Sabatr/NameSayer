@@ -6,8 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
-import app.controllers.OptionsController;
+import app.tools.MicPaneHandler;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -80,12 +79,13 @@ public class BashRunner {
         String[] cmd;
         String cmdString;
         if(onWindows) {
+            System.out.println(MicPaneHandler.getHandler().getSelectedDevice().get());
             cmd = new String[14];
             cmd[0] = ffmpegCommand;
             cmd[1] = "-f";
             cmd[2] = "dshow";
             cmd[3] = "-i";
-            cmd[4] = "audio=\"" + OptionsController.selectedDevice.get() + "\"";
+            cmd[4] = "audio=\"" + MicPaneHandler.getHandler().getSelectedDevice().get() + "\"";
             cmd[5] = "-t";
             cmd[6] = "3";
             cmd[7] = "-acodec";
@@ -118,7 +118,7 @@ public class BashRunner {
                     "-f",
                     "dshow",
                     "-i",
-                    "audio=\"" + OptionsController.selectedDevice.get() + "\"",
+                    "audio=\"" + MicPaneHandler.getHandler().getSelectedDevice().get() + "\"",
                     "-t",
                     "0.03",
                     "-filter_complex",
@@ -271,7 +271,6 @@ public class BashRunner {
                 }
             }
 
-            System.out.println("Done waiting");
             if(!failure) {
                 try {
                     if(p.exitValue() == 0) {
@@ -300,7 +299,6 @@ public class BashRunner {
 
             updateProgress(20, 20);
             updateValue(commandOutBuilder.toString());
-            System.out.println(commandOutBuilder.toString());
             return commandOutBuilder.toString();
         }
 

@@ -58,9 +58,6 @@ public class NameEntry implements Comparable<NameEntry> {
         return resource;
     }
 
-    /**
-     * Get temporary version audio
-     */
 
     /**
      * Confirm the adding of the version that was last created.
@@ -78,6 +75,11 @@ public class NameEntry implements Comparable<NameEntry> {
     public void throwAwayNew() {
         if(_temporaryVersion != null) {
             try {
+                /*
+                TODO: An exception is thrown "The process cannot access the file because it is being used by another process",
+                TODO: Probably need to kill the process somewhere you call a new thread.
+                To replicate: Record on windows, play it back, cancel.
+                 */
                 Files.deleteIfExists(_temporaryVersion._resource);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -155,6 +157,7 @@ public class NameEntry implements Comparable<NameEntry> {
     public String getHighestRating() {
         String dateAndTime = _mainVersion._dateTime;
         int highestRating = _mainVersion.rating;
+
         for (Version version : _versions) {
             if (version.rating > highestRating) {
                 highestRating = version.rating;
@@ -210,26 +213,9 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
-     * Fetch the rating for a particular version
-     * @return an integer rating out of 10, or -1 if the version has never been rated
-     */
-    public int getRating(String dateAndTime) {
-        if(_mainVersion._dateTime.equals(dateAndTime)) {
-            return _mainVersion.rating;
-        }
-        for(Version ver: _versions) {
-            if(ver._dateTime.equals(dateAndTime)) {
-                return ver.rating;
-            }
-        }
-        return 10;
-    }
-
-    /**
      * Get rating from file
      */
     private int getRatingFromFile(String dateAndTime) {
-
         try(BufferedReader reader = new BufferedReader(new FileReader(_ratingsFile.toFile()))) {
             String line;
             while((line = reader.readLine()) != null) {
@@ -247,8 +233,8 @@ public class NameEntry implements Comparable<NameEntry> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //defaults to 10
-        return 10;
+        //defaults to 5
+        return 5;
     }
 
 
