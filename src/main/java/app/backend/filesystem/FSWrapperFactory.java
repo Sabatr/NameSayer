@@ -155,15 +155,15 @@ public class FSWrapperFactory {
         // We already ensured that the root XML element has the correct tag and attributes in the constructor
         //      so we can go ahead and meake the
 
-        TemplateFolder rootDirTemplate = new TemplateFolder("rootDir", _rootElement.getAttribute("type"),
+        TemplateFolder rootDirTemplate = new TemplateFolder("rootDir", _rootElement.getAttribute("name"),
                 false, false, false, null);
-        recursivelyExploreXML(rootDirTemplate);
+        recursivelyExploreXML(rootDirTemplate, _rootElement);
         return rootDirTemplate;
     }
 
-    private void recursivelyExploreXML(TemplateFolder root) {
+    private void recursivelyExploreXML(TemplateFolder root, Element rootElement) {
         TemplateFile.TemplateFileBuilder builder = new TemplateFile.TemplateFileBuilder();
-        NodeList nodes = _rootElement.getChildNodes();
+        NodeList nodes = rootElement.getChildNodes();
         for(int i = 0; i < nodes.getLength(); i++) {
             if(nodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element e = ((Element) nodes.item(i));
@@ -175,29 +175,27 @@ public class FSWrapperFactory {
                 }
 
                 boolean isDir = false;
+                builder.canBeMultiple(false);
 
                 String tag = e.getTagName();
                 switch (tag) {
                     case FSWrapperCopy.DIR:
-                        builder.canBeMultiple(false).isDir(true);
                         isDir = true;
                     case FSWrapperCopy.FILE:
-                        builder.canBeMultiple(false).isDir(false);
                         if(e.hasAttribute("name")) {
-                            builder.nameFormat(e.getAttribute("name"));
+                            builder.nameFormat(e.getAttribute("name")).hasParameters(false);
                         } else if(e.hasAttribute("nameFormat")) {
-                            builder.nameFormat(e.getAttribute("nameFormat"));
+                            builder.nameFormat(e.getAttribute("nameFormat")).hasParameters(true);
                         } else {
                             throw new RuntimeException("No name attribute in DIR or FILE element");
                         }
                         break;
                     case FSWrapperCopy.DIRSET:
-                        builder.canBeMultiple(true).isDir(true);
                         isDir = true;
                     case FSWrapperCopy.FILESET:
-                        builder.canBeMultiple(true).isDir(false);
+                        builder.canBeMultiple(true);
                         if(e.hasAttribute("nameFormat")) {
-                            builder.nameFormat(e.getAttribute("nameFormat"));
+                            builder.nameFormat(e.getAttribute("nameFormat")).hasParameters(true);
                         } else {
                             throw new RuntimeException("No name attribute in *SET element");
                         }
@@ -207,13 +205,15 @@ public class FSWrapperFactory {
                 }
 
                 if (e.hasAttribute("createNew") && e.getAttribute("createNew").equals("true")) {
-                    builder.createNew(true);
+                    builder.shouldCreateNew(true);
+                } else {
+                    builder.shouldCreateNew(false);
                 }
 
                 TemplateFile tFile;
                 if(isDir) {
                     TemplateFolder tFolder = builder.parent(root).buildFolder();
-                    recursivelyExploreXML(tFolder);
+                    recursivelyExploreXML(tFolder, e);
                     tFile = tFolder;
                 } else {
                     tFile = builder.parent(root).buildFile();

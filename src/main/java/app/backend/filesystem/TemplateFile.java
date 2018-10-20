@@ -62,6 +62,10 @@ public class TemplateFile {
         return _nameFormat;
     }
 
+    public TemplateFolder getParent() {
+        return _parent;
+    }
+
     public List<TemplateFile> accessPath() {
         if(_parent == null) {
             List<TemplateFile> list = new ArrayList<TemplateFile>();
@@ -93,6 +97,9 @@ public class TemplateFile {
             } else {
                 startOfSeparator = fileName.indexOf(separators[1]); // the first string split by regex will actually be empty
             }
+            if(startOfSeparator == -1) {
+                return null;
+            }
 
             String parameter = fileName.substring(0, startOfSeparator);
             result.put(Character.getNumericValue(_nameFormat.charAt(parIndex + 1)), parameter);
@@ -117,8 +124,13 @@ public class TemplateFile {
             }
 
             endOfSeparator = startOfSeparator + separator.length(); // actually the character after the separator
-            String parameter = fileName.substring(endOfSeparator, fileName.indexOf(nextSeparator, endOfSeparator));
-
+            String parameter;
+            try {
+                parameter = fileName.substring(endOfSeparator, fileName.indexOf(nextSeparator, endOfSeparator));
+            } catch (StringIndexOutOfBoundsException e) {
+                e.printStackTrace();
+                return null;
+            }
             result.put(Character.getNumericValue(_nameFormat.charAt(parIndex + 1)), parameter);
             startOfSeparator = fileName.indexOf(nextSeparator, endOfSeparator);
             parIndex = _nameFormat.indexOf('%', parIndex+1);
@@ -168,7 +180,7 @@ public class TemplateFile {
         private String _type;
         private String _nameFormat;
         private boolean _multiple;
-        private boolean _dir;
+        private boolean _isParameterised;
         private boolean _createNew;
         private TemplateFolder _parent;
 
@@ -178,18 +190,18 @@ public class TemplateFile {
 
         public TemplateFileBuilder canBeMultiple(boolean multi) { _multiple = multi; return this; }
 
-        public TemplateFileBuilder isDir(boolean isdir) { _dir = isdir; return this; }
+        public TemplateFileBuilder hasParameters(boolean isParameterised) { _isParameterised = isParameterised; return this; }
 
-        public TemplateFileBuilder createNew(boolean createNew) { _createNew = createNew; return  this; }
+        public TemplateFileBuilder shouldCreateNew(boolean createNew) { _createNew = createNew; return  this; }
 
         public TemplateFileBuilder parent(TemplateFolder parent) { _parent = parent; return this; }
 
         public TemplateFolder buildFolder() {
-            return new TemplateFolder(_type, _nameFormat, _multiple, _dir, _createNew, _parent);
+            return new TemplateFolder(_type, _nameFormat, _multiple, _isParameterised, _createNew, _parent);
         }
 
         public TemplateFile buildFile() {
-            return new TemplateFile(_type, _nameFormat, _multiple, _dir, _createNew, _parent);
+            return new TemplateFile(_type, _nameFormat, _multiple, _isParameterised, _createNew, _parent);
         }
     }
 }

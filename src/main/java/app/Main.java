@@ -24,6 +24,7 @@ public class Main extends Application {
         stage.setTitle("Name Sayer Practice");
         NameEntry.populateNames();
         ArrayList<NameEntry> names = NameEntry.getNames();
+
         SceneBuilder sceneMan = SceneBuilder.inst(FXCollections.observableArrayList(names), stage);
         sceneMan.switchScene(SceneBuilder.MENU);
     }

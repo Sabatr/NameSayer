@@ -283,8 +283,8 @@ public class FSWrapper {
                     case FILE:
                     case FILESET:
                         if (Files.notExists(pathPair.getValue()) &&
-                                typeElem.hasAttribute("createNew") &&
-                                typeElem.getAttribute("createNew").equals("true")) {
+                                typeElem.hasAttribute("shouldCreateNew") &&
+                                typeElem.getAttribute("shouldCreateNew").equals("true")) {
                             Files.createFile(pathPair.getValue());
                         }
                         break;
