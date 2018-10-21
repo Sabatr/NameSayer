@@ -152,7 +152,7 @@ public class FSWrapper {
                 Files.deleteIfExists(fileInst.getPath());
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 
@@ -466,9 +466,6 @@ public class FSWrapper {
 
         // Having filtered out anything that doesn't match an element of the XML in terms of name and dir structure,
         // we can assume this file is usable
-        if(tFile.getType().equals("nameEntry") && file.toString().contains("composite")) {
-            System.out.print("");
-        }
         filePaths.add(new FileInstance(tFile, file, params));
         return true;
     }
