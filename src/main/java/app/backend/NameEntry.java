@@ -158,11 +158,13 @@ public class NameEntry implements Comparable<NameEntry> {
         }
     }
 
+    /**
+     * @return the highest rating sound file from the database
+     */
     public String getHighestRating() {
         String dateAndTime = _versions.get(0)._dateTime;
         int highestRating = _versions.get(0).rating;
         for (Version version : _versions) {
-            System.out.println(version.rating +"," +version._dateTime);
             if (version.rating > highestRating) {
                 highestRating = version.rating;
                 dateAndTime = version._dateTime;

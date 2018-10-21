@@ -2,9 +2,9 @@ package app.controllers;
 
 import app.backend.CompositeName;
 import app.backend.NameEntry;
-import app.tools.AchievementsManager;
-import app.tools.FileFinder;
+import app.tools.*;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -30,6 +31,9 @@ public class ListViewController extends ParentController {
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
     @FXML private ListView<NameEntry> _selectListView;
+    @FXML private ImageView _randomImage;
+    @FXML private JFXButton _helpButton;
+    @FXML private JFXButton _micButton;
     @FXML private CustomTextField _searchBox;
     private AutoCompletionBinding _searchBoxItems;
 
@@ -41,10 +45,10 @@ public class ListViewController extends ParentController {
      * Also, this selects the files needed to be displayed on the list.
      */
     public void initialize() {
+        _randomImage.setImage(new Image(SceneBuilder.class.getResource("images/shuffle.png").toExternalForm()));
         _selectedNames = FXCollections.observableArrayList();
         _sortedButton.setDisable(true);
         _addedComposites = FXCollections.observableArrayList();
-
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
@@ -150,15 +154,7 @@ public class ListViewController extends ParentController {
      * When nothing is selected, the user is warned through an alert.
      */
     private void alertNothingSelected() {
-        Alert alert = new Alert(AlertType.ERROR);
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(
-                SceneBuilder.class.getResource("styles/NoneSelected.css").toExternalForm());
-        dialogPane.getStyleClass().add("noSelectDialogue");
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Error: No names selected.");
-        alert.showAndWait();
+        new NothingNotification("NoNames");
     }
 
     /**
@@ -381,5 +377,30 @@ public class ListViewController extends ParentController {
     @Override
     public void switchTo() {
         Collections.sort(_nameListView.getItems());
+    }
+
+    /**
+     * Calls the help handler to show the pop up
+     */
+    @FXML
+    private void help() {
+        new HelpHandler(_helpButton,"list");
+    }
+
+    /**
+     * Calls the mic pane handler to show the pop up
+     */
+    @FXML
+    private void getMic() {
+        MicPaneHandler.getHandler().show(_micButton);
+    }
+
+    /**
+     * Switches to the achievements scene
+     */
+    @FXML
+    private void goToAchievements() {
+        AchievementsManager.getInstance().setMenu(SceneBuilder.LISTVIEW);
+        _switcher.switchScene(SceneBuilder.ACHIEVEMENTS);
     }
 }

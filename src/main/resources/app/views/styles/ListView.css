@@ -1,23 +1,30 @@
 ._nameData {
-    -fx-font-size: 30px;
+    -fx-text-fill: #c5cb28;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 50px;
     -fx-font-weight: bold;
-    -fx-background-style: transparent;
-    -fx-text-fill: #f0f0f0;
-    -fx-font-family: "Century Gothic";
 }
 
 ._nameListView .scroll-bar {
     -fx-pref-width: 20px;
 }
 ._nameListView .scroll-bar .thumb {
-    -fx-background-color: #5687ff;
+    -fx-background-color: #7812a1;
 }
 ._nameListView .scroll-bar .thumb:hover {
-    -fx-background-color: #4063be
+    -fx-background-color: #4e116b
+}
+
+._nameListView .scroll-bar .thumb:pressed {
+    -fx-background-color: #4e116b
 }
 
 ._nameListView .cell.indexed-cell.list-cell:hover{
     -fx-background-color: #608bd8;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+    -fx-translate-x: 10px;
+
 }
 
 ._nameListView .cell.indexed-cell.list-cell {
@@ -25,124 +32,94 @@
     -fx-pref-height: 40px;
     -fx-font-family: "Franklin Gothic Heavy";
     -fx-font-size: 20px;
-    -fx-text-fill: #252b6e;
+    -fx-text-fill: #4e116b;
 }
 
 ._nameListView  {
-    -fx-border-color: grey;
+    -fx-border-color: #f0f0f0;
 }
 
 ._nameListView .cell.indexed-cell.list-cell:selected {
-    -fx-background-color: #417bc1;
+    -fx-background-color: #669bc1;
 }
 
 ._background {
-    -fx-background-color: #252b6e;
+    -fx-background-color: #7a1aa7;
 }
 
 
 ._button {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-background-color: #f0f0f0;
-    -fx-effect: dropshadow( gaussian , rgb(0, 0, 0), 4,0,0,1 );
+    -jfx-button-type: RAISED;
+    -fx-background-color: #c5cb28;
     -fx-font-weight: bold;
+    -fx-text-fill: black;
     -fx-font-size: 30px;
+    -fx-pref-height: 70px;
+    -fx-pref-width: 280px;
     -fx-font-family: "Franklin Gothic Heavy";
-    -fx-text-fill: #252b6e;
-    -fx-border-color: #252b6e;
-    -fx-border-width: 3px;
 }
 
 ._button:hover {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
-            #2c76af,
-            #2c76af,
-            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
 }
-
-
-._button:pressed {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
-            #225c88,
-            #266697,
-            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
-}
-
 
 ._sortingButton {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-effect: dropshadow( gaussian , rgb(0, 0, 0), 4,0,0,1 );
+    -jfx-button-type: RAISED;
+    -fx-background-color: black;
     -fx-font-weight: bold;
-    -fx-font-size: 20px;
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 25px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 260px;
     -fx-font-family: "Franklin Gothic Heavy";
-    -fx-text-fill: #252b6e;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #656565 0%, #656565 100%),
-                #656565,
-                black, #f0f0f0;
-    -fx-border-color: #252b6e;
-    -fx-border-width: 3px;
 }
 
 ._sortingButton:hover {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
-            #2c76af,
-            #2c76af,
-            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
 }
 
 ._sortingButton:pressed {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
-            #225c88,
-            #266697,
-            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
 }
 
 ._sortingButton:disabled {
-    -fx-background-color: #339ee6;
-    -fx-text-fill: white;
-}
-
-._pane {
-    -fx-background-color: #f0f0f0 ;
-    -fx-opacity: 40%;
+    -fx-background-color: #50575f;
+    -fx-text-fill: #d6d6d6;
 }
 
 ._backButton {
-    -fx-padding: 8 15 15 15;
-    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
-    -fx-effect: dropshadow( gaussian , rgb(0, 0, 0), 4,0,0,1 );
+    -jfx-button-type: RAISED;
+    -fx-background-color: black;
     -fx-font-weight: bold;
-    -fx-font-size: 20px;
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 25px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 200px;
     -fx-font-family: "Franklin Gothic Heavy";
-    -fx-text-fill: #252b6e;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #656565 0%, #656565 100%),
-    #656565,
-    black, #f0f0f0;
-    -fx-border-color: #252b6e;
-    -fx-border-width: 3px;
 }
 
 ._backButton:hover {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3b44cd 0%, #30389d 100%),
-            #2c76af,
-            #2c76af,
-            radial-gradient(center 50% 50%, radius 100%, #37a3f1, #4954d8);
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
 }
 
-._backButton:pressed {
-    -fx-background-color:
-            linear-gradient(from 0% 93% to 0% 100%, #3138aa 0%, #272e81 100%),
-            #225c88,
-            #266697,
-            radial-gradient(center 50% 50%, radius 100%, #2671a8, #3a43ad);
+.icon {
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
 }
+.backImage {
+    -fx-background-image: url('../images/exit.png');
+}
+
 
 
 

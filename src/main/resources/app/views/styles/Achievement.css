@@ -40,6 +40,7 @@
     -fx-font-size: 25px;
     -fx-translate-x: 120px;
     -fx-translate-y: 10px;
+    -fx-font-weight: bold;
 }
 
 .progress > .bar {
@@ -57,7 +58,7 @@
 }
 
 .backButton {
-    -jfx-bbutton-type: RAISED;
+    -jfx-button-type: RAISED;
     -fx-background-color: black;
     -fx-font-weight: bold;
     -fx-text-fill: #c5cb28;
@@ -71,6 +72,8 @@
     -fx-pref-height: 45;
     -fx-background-image: url('../images/exit.png');
     -fx-background-size: 45 45;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
     -fx-background-repeat: no-repeat;
 }
 .backButton:hover {
@@ -80,11 +83,24 @@
 
 .progressLabel{
     -fx-pref-width: 300px;
+    -fx-font-weight: bold;
 }
 
 .stack {
     -fx-pref-width: 300px;
     -fx-translate-x: 155px;
+}
+
+.scroll .thumb{
+    -fx-background-color: #7812a1;
+}
+
+.scroll .thumb:hover {
+    -fx-background-color: #4e116b;
+}
+
+.scroll .thumb:pressed {
+    -fx-background-color: #4e116b;
 }
 
 .first {

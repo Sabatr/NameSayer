@@ -102,19 +102,23 @@ public class PracticeController extends ParentController implements EventHandler
     }
 
     /**
-     *
+     * Sets up the list view of the versions before hand
      */
     private void setUpPlayBack() {
         _playBackHandler = new PlayBackHandler();
         _playPopUp = _playBackHandler.create();
     }
 
+    /**
+     * Upon hover, show the different options the user has.
+     */
     @FXML
     private void showReplayPopUp() {
         if (!_playPopUp.isShowing()) {
             _playPopUp.show(_upArrow,JFXPopup.PopupVPosition.TOP, JFXPopup.PopupHPosition.LEFT,0,-120);
         }
     }
+
     /**
      * Sets up a rating system of values from one to five inclusive.
      */
@@ -150,6 +154,9 @@ public class PracticeController extends ParentController implements EventHandler
         return button;
     }
 
+    /**
+     * Automatically hides the rating bar when other buttons are hovered over.
+     */
     @FXML
     private void hideRating() {
         if (_ratePopUp.isShowing()) {
@@ -267,7 +274,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     private void recordAudio() throws URISyntaxException {
         if (MicPaneHandler.getHandler().getSelectedDevice().getValue() == null) {
-            System.out.println("No mic");
+            new NothingNotification("NoMic");
             return;
         }
         AchievementsManager.getInstance().increasePracticeAttempts();
@@ -291,7 +298,6 @@ public class PracticeController extends ParentController implements EventHandler
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED))
         {
             if(event.getSource().getTitle().equals("RecordAudio")) {
-                System.out.println("does stuff here");
                 _progressBar.progressProperty().unbind();
                 _progressBar.setProgress(0);
                 _progressBar.setVisible(false);
@@ -351,6 +357,11 @@ public class PracticeController extends ParentController implements EventHandler
         playGenericAudio("RecordAudio", audioResource);
     }
 
+    /**
+     * Upon selection the state of the play back changes.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     @FXML
     private void playBack() throws IOException, URISyntaxException{
         disableAll();
@@ -359,7 +370,6 @@ public class PracticeController extends ParentController implements EventHandler
                 playAudio();
                 break;
             case USER:
-                System.out.println("goes here");
                 playBackAudioOfRecording();
                 break;
             case BOTH:
@@ -373,7 +383,6 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     private void cancelAudioRecording() {
         //Deletes the current recorded audio.
-        //Switches back to the recording hbox.
         _currentName.throwAwayNew();
         enableButtons();
     }
@@ -436,16 +445,26 @@ public class PracticeController extends ParentController implements EventHandler
         //Gets the best version for the currentName
         _dateAndTime = _currentName.getHighestRating();
     }
+
+    /**
+     * Calls the help handler to show the pop up
+     */
     @FXML
     private void help() {
         new HelpHandler(_helpButton,"practice");
     }
 
+    /**
+     * Calls the mic pane handler to show the pop up
+     */
     @FXML
     private void getMic() {
         MicPaneHandler.getHandler().show(_micButton);
     }
 
+    /**
+     * Switches to the achievements scene
+     */
     @FXML
     private void goToAchievements() {
         AchievementsManager.getInstance().setMenu(SceneBuilder.PRACTICE);
