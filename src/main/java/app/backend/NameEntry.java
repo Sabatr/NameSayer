@@ -87,7 +87,7 @@ public class NameEntry implements Comparable<NameEntry> {
                  */
                 Files.deleteIfExists(_temporaryVersion._resource);
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             _temporaryVersion = null;
         }
