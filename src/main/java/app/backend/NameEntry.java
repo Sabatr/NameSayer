@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class NameEntry implements Comparable<NameEntry> {
 
-    private String DEFAULT_AUTHOR = "You";
+    protected String DEFAULT_AUTHOR = "You";
     protected FSWrapper _fsMan;
     private String _name;
 
@@ -27,6 +27,7 @@ public class NameEntry implements Comparable<NameEntry> {
     private List<Version> _versions = new ArrayList<>();
     private List<Version> _userVersions = new ArrayList<>();
 
+    protected String USER_VERSION_STR = "userVersion";
 
     /**
      * Construct a dummy NameEntry with only a name and no associated audio
@@ -55,14 +56,14 @@ public class NameEntry implements Comparable<NameEntry> {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path resource = _fsMan.createFilePath("userVersion", _name, formattedDate, formattedTime);
+        Path resource = _fsMan.createFilePath(USER_VERSION_STR, _name, formattedDate, formattedTime, author);
 
         _temporaryVersion = new Version(author, formattedDate + "_" + formattedTime, resource);
         return resource;
     }
 
     public void addUserVersionWithAudio(String auth, String date, Path resource) {
-        _versions.add(new Version(auth, date, resource));
+        _userVersions.add(new Version(auth, date, resource));
     }
 
     /**
@@ -254,7 +255,7 @@ public class NameEntry implements Comparable<NameEntry> {
      * The output is sorted by date.
      */
     public List<String> getUserVersions() {
-        SimpleDateFormat format = new SimpleDateFormat("d-M-y_h-m-s");
+        SimpleDateFormat format = new SimpleDateFormat("d-M-y_H-m-s");
         List<Date> dates = new ArrayList<>();
         List<String> versionDates = new ArrayList<>();
         for(Version ver: _userVersions) {
@@ -280,7 +281,7 @@ public class NameEntry implements Comparable<NameEntry> {
         for(Version ver: _userVersions) {
             if(ver._dateTime.equals(date)) {
                 String[] dateComponents = date.split("_");
-                _fsMan.deleteFiles("userVersion", _name, dateComponents[0], dateComponents[1], ver._author);
+                _fsMan.deleteFiles(USER_VERSION_STR, _name, dateComponents[0], dateComponents[1], ver._author);
                 toDelete = ver;
             }
         }
@@ -341,6 +342,8 @@ public class NameEntry implements Comparable<NameEntry> {
             e.printStackTrace();
         }
 
+        fsWrapTwo.createDirectoryStruct("userComposites");
+
         return fsWrapTwo;
     }
 
@@ -379,6 +382,7 @@ public class NameEntry implements Comparable<NameEntry> {
                     parameters = file.getParameters();
                     addUserVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
                             file.getPath());
+                    break;
                 case "soundFile":
                     parameters = file.getParameters();
                     addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),

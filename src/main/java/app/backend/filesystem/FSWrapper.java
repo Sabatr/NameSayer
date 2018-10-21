@@ -339,7 +339,12 @@ public class FSWrapper {
                 if(tFile.getTagName().equals(FILE) || tFile.getTagName().equals(FILESET)) {
                     if (params.length > 0) {
                         boolean matchesParams = true;
-                        Map<Integer, String> fileParams = extractParamsForUnit(file, parentList.get(parentList.size() - depth - 1));
+                        Map<Integer, String> fileParams;
+                        try {
+                            fileParams = extractParamsForUnit(file, parentList.get(parentList.size() - depth));
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            fileParams = extractParamsForUnit(file, tFile);
+                        }
                         if (fileParams != null) {
                             int length = fileParams.size() < params.length ? fileParams.size() : params.length;
                             for (int j = 0; j < length; j++) {

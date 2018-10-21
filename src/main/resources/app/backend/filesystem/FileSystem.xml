@@ -5,7 +5,7 @@
         <fileSet type="compositeName" nameFormat="%4_%2_%3_%1.wav"/>
         <fileSet type="trimmedName" nameFormat="%1_trimmed.wav"/>
     </dir>
-    <dir type="userComposites" name="userComposites">
+    <dir type="userComposites" name="userComposites" needAllChildren="false">
         <fileSet type="userCompositeName" nameFormat="%4_%2_%3_%1.wav"/>
     </dir>
     <dirSet type="nameEntry" nameFormat="%1" needAllChildren="true">

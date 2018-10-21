@@ -201,7 +201,9 @@ public class PracticeController extends ParentController implements EventHandler
     private void recordAudio() throws URISyntaxException {
         Path pathToUse = _currentName.addUserVersion();
         _currentRecording = pathToUse;
+        System.out.println("tyring to pay " + pathToUse);
         BashRunner runner = new BashRunner(this);
+
         try {
             runner.runRecordCommand(pathToUse);
         } catch(NullPointerException e) {

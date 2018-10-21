@@ -353,7 +353,6 @@ public class ListViewController extends ParentController {
 
     /**
      * This allows both single names and two or more names to be added.
-     * TODO: Show a message to notify the user that a certain name doesn't exist.
      * @param splitNames
      * @param foundItems
      */

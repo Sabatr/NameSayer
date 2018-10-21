@@ -51,7 +51,9 @@ public class AudioPlayer extends Task<Void> {
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (RIFFInvalidDataException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Got an exception trying to get filesize");
+            System.out.println(e.getMessage());
             return 3;
         } catch (IOException e) {
             e.printStackTrace();
