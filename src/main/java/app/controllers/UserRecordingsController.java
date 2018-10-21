@@ -18,6 +18,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRecordingsController extends ParentController implements EventHandler<WorkerStateEvent> {
 
@@ -41,7 +42,17 @@ public class UserRecordingsController extends ParentController implements EventH
 
     @FXML
     public void deleteUserRecording() {
+        String versionToRemove = _dropdown.getSelectionModel().getSelectedItem();
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        a.setContentText("Delete user recording");
+        a.setContentText("Really delete recording " + versionToRemove + " of " + _name.getName() + "?");
+        Optional<ButtonType> option = a.showAndWait();
 
+        if(option.isPresent()) {
+            if(option.get() == ButtonType.YES) {
+                _name.deleteUserVersion(versionToRemove);
+            }
+        }
     }
 
     @FXML

@@ -329,6 +329,7 @@ public class FSWrapper {
         List<TemplateFile> parentList = tFile.accessPath();
         Collections.reverse(parentList);
         List<FileInstance> filePaths = new ArrayList<>();
+        List<FileInstance> tmpFilePaths = new ArrayList<>();
 
         SimpleFileVisitor<Path> traverser = new SimpleFileVisitor<Path>() {
             int depth = 1;
@@ -347,11 +348,17 @@ public class FSWrapper {
                                 }
                             }
                             if (matchesParams) {
-                                attemptExtractContent(file, tFile, filePaths);
+                                if(attemptExtractContent(file, tFile, filePaths)) {
+                                    filePaths.addAll(tmpFilePaths);
+                                    tmpFilePaths.clear();
+                                }
                             }
                         }
                     } else {
-                        attemptExtractContent(file, tFile, filePaths);
+                        if(attemptExtractContent(file, tFile, filePaths)) {
+                            filePaths.addAll(tmpFilePaths);
+                            tmpFilePaths.clear();
+                        }
                     }
                 }
                 return FileVisitResult.CONTINUE;
@@ -366,6 +373,8 @@ public class FSWrapper {
                     depth++;
                     return FileVisitResult.CONTINUE;
                 } else {
+                    filePaths.addAll(tmpFilePaths);
+                    tmpFilePaths.clear();
                     return FileVisitResult.SKIP_SUBTREE;
                 }
             }
@@ -452,6 +461,9 @@ public class FSWrapper {
 
         // Having filtered out anything that doesn't match an element of the XML in terms of name and dir structure,
         // we can assume this file is usable
+        if(tFile.getType().equals("nameEntry") && file.toString().contains("composite")) {
+            System.out.print("");
+        }
         filePaths.add(new FileInstance(tFile, file, params));
         return true;
     }

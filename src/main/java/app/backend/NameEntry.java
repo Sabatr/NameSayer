@@ -276,11 +276,16 @@ public class NameEntry implements Comparable<NameEntry> {
      * Deletes a user version
      */
     public void deleteUserVersion(String date) {
+        Version toDelete = null;
         for(Version ver: _userVersions) {
             if(ver._dateTime.equals(date)) {
                 String[] dateComponents = date.split("_");
                 _fsMan.deleteFiles("userVersion", _name, dateComponents[0], dateComponents[1], ver._author);
+                toDelete = ver;
             }
+        }
+        if(toDelete != null) {
+            _userVersions.remove(toDelete);
         }
     }
 
@@ -349,11 +354,9 @@ public class NameEntry implements Comparable<NameEntry> {
         ArrayList<NameEntry> names = new ArrayList<>();
         List<FileInstance> files = fsWrapTwo.getAllContentOfType("nameEntry");
 
-        System.out.println("getting names");
         List<FileInstance> pathsForSingleEntry = new ArrayList<>();
         for(FileInstance file: files) {
             if(file.getTemplate().getType().equals("nameEntry")) {
-                System.out.println("file " + file.getPath());
                 pathsForSingleEntry.add(file);
                 names.add(new NameEntry(fsWrapTwo, pathsForSingleEntry));
                 pathsForSingleEntry.clear();
@@ -377,7 +380,6 @@ public class NameEntry implements Comparable<NameEntry> {
                     addUserVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
                             file.getPath());
                 case "soundFile":
-                    System.out.println("Adding a soundFile");
                     parameters = file.getParameters();
                     addVersionWithAudio(parameters.get(4), parameters.get(2) + "_" + parameters.get(3),
                                 file.getPath());
