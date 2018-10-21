@@ -1,0 +1,29 @@
+.background {
+    -fx-background-color: #b793db;
+}
+.box {
+}
+
+.button {
+    -jfx-button-type: RAISED;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 150px;
+}
+.button:hover {
+    -fx-background-color: #6d6d6d;
+}
+
+.level {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 50px;
+    -fx-border-radius: 5%;
+}
+
+.level .track {
+    -fx-background-color: #d7c1df;
+}
+
+.level > .bar {
+}

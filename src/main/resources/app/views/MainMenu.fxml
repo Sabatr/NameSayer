@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/MainMenu.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.MainMenuController">
    <children>
-      <AnchorPane layoutX="305.0" layoutY="302.0" prefHeight="411.0" prefWidth="482.0" styleClass="_buttonPane" />
-      <Button fx:id="_databaseButton" layoutX="409.0" layoutY="332.0" mnemonicParsing="false" onAction="#goToList" prefHeight="93.0" prefWidth="274.0" styleClass="_buttons" text="View Names" />
-      <Label alignment="CENTER" layoutX="7.0" layoutY="57.0" prefHeight="165.0" prefWidth="1083.0" styleClass="_title" stylesheets="@styles/MainMenu.css" text="WELCOME TO NAMESAYER" textAlignment="CENTER" />
-      <Button layoutX="409.0" layoutY="551.0" mnemonicParsing="false" onAction="#options" prefHeight="93.0" prefWidth="274.0" styleClass="_buttons" text="Options" />
-      <Button fx:id="_databaseButton1" layoutX="409.0" layoutY="440.0" mnemonicParsing="false" onAction="#importData" prefHeight="93.0" prefWidth="274.0" styleClass="_buttons" text="Import Names" />
+      <JFXButton layoutX="771.0" layoutY="400.0" onAction="#goToList" styleClass="_buttons" text="VIEW NAMES" />
+      <JFXButton layoutX="771.0" layoutY="532.0" onAction="#importData" styleClass="_buttons" text="IMPORT NAMES" />
+      <JFXButton fx:id="_helpButton" layoutX="95.0" layoutY="725.0" onMouseClicked="#help" prefHeight="43.0" styleClass="help" />
+      <JFXButton fx:id="_micButton" layoutX="160.0" layoutY="725.0" onAction="#getMic" styleClass="microphone" />
+      <JFXButton layoutX="30.0" layoutY="725.0" onAction="#goToAchievements" styleClass="achievements" />
    </children>
 </AnchorPane>

@@ -1,4 +1,4 @@
 <?xml version = "1.0"?>
 <rootDir type="root" name="soundfiles">
-    <fileSet type="soundFile" nameFormat="se206_%2_%3_%1.wav" />
+    <fileSet type="soundFile" nameFormat="%4_%2_%3_%1.wav" />
 </rootDir>

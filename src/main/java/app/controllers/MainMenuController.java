@@ -3,12 +3,22 @@ package app.controllers;
 import app.backend.NameEntry;
 import app.tools.AchievementsManager;
 import app.tools.FileFinder;
+import app.tools.HelpHandler;
+import app.tools.MicPaneHandler;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXPopup;
+import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.skins.JFXProgressBarSkin;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -17,7 +27,8 @@ import java.net.URISyntaxException;
  * This class holds the functionality of the main menu.
  */
 public class MainMenuController extends ParentController {
-    @FXML private Button _databaseButton;
+    @FXML private JFXButton _helpButton;
+    @FXML private JFXButton _micButton;
 
     /**
      * The main menu does not need to know anything about the app state, so there's no implementation here
@@ -27,7 +38,6 @@ public class MainMenuController extends ParentController {
         super.setInformation(switcher, allNames, selectedNames);
     }
 
-    // No implementation is needed.
     @Override
     public void switchTo() {}
 
@@ -37,14 +47,6 @@ public class MainMenuController extends ParentController {
     @FXML
     private void goToList() {
         _switcher.switchScene(SceneBuilder.LISTVIEW);
-    }
-
-    /**
-     * Allows the scene to switch to the options menu.
-     */
-    @FXML
-    private void options() {
-        _switcher.switchScene(SceneBuilder.OPTIONS);
     }
 
     @FXML
@@ -63,5 +65,21 @@ public class MainMenuController extends ParentController {
                 _allNames.add(name);
             }
         }
+    }
+
+    @FXML
+    private void help() {
+        new HelpHandler(_helpButton,"main");
+    }
+
+    @FXML
+    private void getMic() {
+        MicPaneHandler.getHandler().show(_micButton);
+    }
+
+    @FXML
+    private void goToAchievements() {
+        AchievementsManager.getInstance().setMenu(SceneBuilder.MENU);
+        _switcher.switchScene(SceneBuilder.ACHIEVEMENTS);
     }
 }

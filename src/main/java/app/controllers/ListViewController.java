@@ -5,6 +5,7 @@ import app.backend.NameEntry;
 import app.tools.AchievementsManager;
 import app.tools.FileFinder;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ import java.util.*;
  * This class controls the functionality of the list scene.
  */
 public class ListViewController extends ParentController {
-    @FXML private ListView<NameEntry> _nameListView;
+    @FXML private JFXListView<NameEntry> _nameListView;
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
     @FXML private ListView<NameEntry> _selectListView;
@@ -34,6 +35,7 @@ public class ListViewController extends ParentController {
 
     private ObservableList<NameEntry> _selectedNames;
     private ObservableList<CompositeName> _addedComposites;
+    private ObservableList<CompositeName> _allComposites;
 
     /**
      * Initially, the sorted button is selected by default.
@@ -42,7 +44,6 @@ public class ListViewController extends ParentController {
     public void initialize() {
         _selectedNames = FXCollections.observableArrayList();
         _sortedButton.setDisable(true);
-                //.setItems(FXCollections.observableArrayList("weird one", "two yeah"));
         _addedComposites = FXCollections.observableArrayList();
 
             //CTRL+Click to select multiple
@@ -242,8 +243,7 @@ public class ListViewController extends ParentController {
      * Press enter to submit the full name.
      */
     @FXML
-    private void doSearch(ActionEvent event) throws URISyntaxException {
-            boolean doesNotExist = true;
+    private void doSearch() throws URISyntaxException {
         if(_searchBox.getText() == null) {
             return;
         }
@@ -254,14 +254,29 @@ public class ListViewController extends ParentController {
             return;
         }
 
-        for (NameEntry entry: _selectedNames) {
-            if (entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
-                doesNotExist = false;
+        boolean notAlreadySelected = true;
+        for(NameEntry entry: _selectedNames) {
+            if(entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
+                notAlreadySelected = false;
                 break;
             }
         }
-        if (doesNotExist) {
-            CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+        if(notAlreadySelected) {
+            CompositeName fullName = null;
+
+            boolean notAlreadyExists = true;
+            for(CompositeName entry: _addedComposites) {
+                if(entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
+                    notAlreadyExists = false;
+                    fullName = entry;
+                    break;
+                }
+            }
+
+            if(notAlreadyExists) {
+                fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+            }
+
             _addedComposites.add(fullName);
             updateSelectedList(_addedComposites);
             _addedComposites.clear();
@@ -338,7 +353,6 @@ public class ListViewController extends ParentController {
 
     /**
      * This allows both single names and two or more names to be added.
-     * TODO: Show a message to notify the user that a certain name doesn't exist.
      * @param splitNames
      * @param foundItems
      */
@@ -375,7 +389,6 @@ public class ListViewController extends ParentController {
         super.setInformation(switcher, allNames, selectedNames);
         _nameListView.setItems(allNames);
         _selectedNames = selectedNames;
-
         setupSearchBox();
     }
 
