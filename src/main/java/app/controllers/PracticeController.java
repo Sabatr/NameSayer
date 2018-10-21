@@ -41,6 +41,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML private JFXButton _helpButton;
     @FXML private JFXButton _micButton;
     @FXML private JFXButton _achievements;
+    @FXML private JFXButton _userRecordingsButton;
     private JFXPopup _ratePopUp;
     private JFXPopup _playPopUp;
     @FXML private JFXSlider _volumeSlider;
@@ -265,10 +266,9 @@ public class PracticeController extends ParentController implements EventHandler
         BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
         double max = _volumeSlider.getMax();
-        System.out.println("without this, there's duplicate code");
         double min = _volumeSlider.getMin();
         double value = _volumeSlider.getValue();
-
+        _progressBar.setVisible(true);
         double volume = ((value - min) / (max - min)) * 100;
         br.runPlayAudioCommand(audioFilePath, taskTitle, volume);
 
@@ -301,7 +301,8 @@ public class PracticeController extends ParentController implements EventHandler
     }
 
     /**
-     * Handle a change in the state of a Task that has been set to notify this Controller
+     * Handle a change in the state of a Task that has been set to notify this Controller.
+     * A specific combination of disables are done for specific tasks.
      */
     @Override
     public void handle(WorkerStateEvent event) {
@@ -315,6 +316,7 @@ public class PracticeController extends ParentController implements EventHandler
                 _recordHBox.setVisible(false);
                 _recordHBox.setDisable(true);
                 _listenButton.setDisable(false);
+                _userRecordingsButton.setDisable(false);
 
             } else if(event.getSource().getTitle().equals("PlayAudio")) {
                 _progressBar.progressProperty().unbind();
@@ -323,6 +325,7 @@ public class PracticeController extends ParentController implements EventHandler
                 _listenButton.setDisable(false);
                 _recordHBox.setDisable(false);
                 _confirmationHBox.setDisable(false);
+                _userRecordingsButton.setDisable(false);
                 if (!_playBack) {
                     _backButton.setDisable(false);
                     _achievements.setDisable(false);
@@ -334,17 +337,29 @@ public class PracticeController extends ParentController implements EventHandler
                 } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
+            } else if (event.getSource().getTitle().equals("CompareAudio")) {
+                try {
+                    _playBack = true;
+                    playAudio();
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());
         }
     }
 
+    /**
+     * Disables all the buttons while recording/audio is playing.
+     * This is done to prevent the user from doing anything silly.
+     */
     private void disableAll() {
         _recordHBox.setDisable(true);
         _confirmationHBox.setDisable(true);
         _backButton.setDisable(true);
         _achievements.setDisable(true);
+        _userRecordingsButton.setDisable(true);
 
     }
 
@@ -384,6 +399,8 @@ public class PracticeController extends ParentController implements EventHandler
                 playBackAudioOfRecording();
                 break;
             case BOTH:
+                System.out.println(_currentRecording);
+                playGenericAudio("CompareAudio",_currentRecording);
                 break;
         }
     }
@@ -418,6 +435,7 @@ public class PracticeController extends ParentController implements EventHandler
         if(_confirmationHBox.isVisible()) {
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setTitle("Keep recording?");
+            a.setHeaderText(null);
             a.setContentText("You have an unsaved recording. Should we save it before seeing the User Recordings?");
             ButtonType[] buttons = {ButtonType.YES, ButtonType.NO, ButtonType.CANCEL};
             a.getButtonTypes().setAll(buttons);

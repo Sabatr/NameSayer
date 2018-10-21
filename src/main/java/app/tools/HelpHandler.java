@@ -73,6 +73,8 @@ public class HelpHandler {
                 +" You can also order your list or randomise them."
                 ));
                 break;
+            case "userRecording":
+                break;
         }
 
         pane.getTabs().add(helpTab);

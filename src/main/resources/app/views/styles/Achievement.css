@@ -13,7 +13,7 @@
     -fx-pref-width: 1000px;
     -fx-border-width: 2px;
     -fx-padding: 10px;
-    -fx-border-color: black;
+    -fx-border-color: #231f20;
     -fx-effect: innershadow(one-pass-box,rgba(0,0,0,0.2),10,0.2,5,-5);
 }
 
@@ -59,7 +59,7 @@
 
 .backButton {
     -jfx-button-type: RAISED;
-    -fx-background-color: black;
+    -fx-background-color: #231f20;
     -fx-font-weight: bold;
     -fx-text-fill: #c5cb28;
     -fx-font-size: 20px;

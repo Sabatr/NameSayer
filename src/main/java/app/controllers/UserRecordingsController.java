@@ -2,11 +2,10 @@ package app.controllers;
 
 import app.backend.BashRunner;
 import app.backend.NameEntry;
-import app.tools.AudioPlayer;
-import app.tools.Timer;
+import app.tools.*;
 import app.views.SceneBuilder;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXProgressBar;
+import com.jfoenix.animation.alert.JFXAlertAnimation;
+import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
@@ -15,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -24,50 +24,94 @@ import java.util.Optional;
 
 public class UserRecordingsController extends ParentController implements EventHandler<WorkerStateEvent> {
 
-    @FXML public Label _nameDisplayed;
-    @FXML public HBox _buttonsHBox;
-    @FXML public JFXButton _deleteButton;
-    @FXML public JFXButton _compareButton;
-    @FXML public Button _backButton;
-    @FXML public Button _dbVersionButton;
-    @FXML public JFXProgressBar _progressBar;
-    @FXML public Slider _volumeSlider;
-    @FXML public ComboBox<String> _dropdown;
-    @FXML public Button _userVersionButton;
+    @FXML private Label _nameDisplayed;
+    @FXML private HBox _buttonsHBox;
+    @FXML private JFXButton _deleteButton;
+    @FXML private JFXButton _compareButton;
+    @FXML private JFXButton _backButton;
+    @FXML private JFXButton _dbVersionButton;
+    @FXML private JFXProgressBar _progressBar;
+    @FXML private JFXSlider _volumeSlider;
+    @FXML private JFXComboBox<String> _dropdown;
+    @FXML private JFXButton _userVersionButton;
+    @FXML private JFXButton _helpButton;
+    @FXML private JFXButton _micButton;
+    @FXML private JFXButton _achievements;
+    @FXML private StackPane _stack;
 
     private NameEntry _name;
+    private final String AUDIO_TASK_MESSAGE = "PlayAudio";
+    private final String COMPARISON_MESSAGE = "CompareAudio";
 
     @FXML
     public void initialize() {
         _volumeSlider.valueProperty().bindBidirectional(PracticeController._volume);
     }
 
+    /**
+     * Disables buttons when no user versions.
+     */
     @FXML
-    public void deleteUserRecording() {
-        String versionToRemove = _dropdown.getSelectionModel().getSelectedItem();
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
-        a.setContentText("Delete user recording");
-        a.setContentText("Really delete recording " + versionToRemove + " of " + _name.getName() + "?");
-        Optional<ButtonType> option = a.showAndWait();
-
-        if(option.isPresent()) {
-            if(option.get() == ButtonType.YES) {
-                _name.deleteUserVersion(versionToRemove);
-            }
+    private void checkIfSelected(){
+        if (_dropdown.getItems().isEmpty()) {
+            disableButtons();
         }
     }
 
+    /**
+     * Delete the version selected by the user. Provides a confirmation warning first.
+     */
     @FXML
-    public void compare() {
+    public void deleteUserRecording() {
+        String versionToRemove = _dropdown.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText(null);
+        alert.setContentText("Really delete recording " + versionToRemove + " of " + _name.getName() + "?");
+        Optional<ButtonType> option = alert.showAndWait();
+        System.out.println(option);
+        if(option.isPresent()) {
+            if(option.get() == ButtonType.OK) {
+                _name.deleteUserVersion(versionToRemove);
+            }
+        }
+        setupDropdown();
     }
 
+    /**
+     * Play the highest ranking database version, then play the selected user version
+     */
     @FXML
-    public void playDatabaseRecording() {
+    public void compare() throws URISyntaxException {
+        disableButtons();
+        disableToolBarButtons();
+        String databaseVersion = _name.getHighestRating();
+        playGenericAudio(COMPARISON_MESSAGE, _name.getAudioForVersion(databaseVersion));
     }
 
+    /**
+     * Play the highest ranking database version
+     */
     @FXML
-    public void playUserRecording() {
+    public void playDatabaseRecording() throws URISyntaxException {
+        disableButtons();
+        disableToolBarButtons();
+        String databaseVersion = _name.getHighestRating();
+        playGenericAudio(AUDIO_TASK_MESSAGE, _name.getAudioForVersion(databaseVersion));
+    }
 
+    /**
+     * Play the user version of the Name, as selected in the dropdown
+     */
+    @FXML
+    public void playUserRecording() throws URISyntaxException {
+        disableButtons();
+        disableToolBarButtons();
+        String userVersion = _dropdown.getSelectionModel().getSelectedItem();
+        if(userVersion == null || userVersion.isEmpty()) {
+            return;
+        }
+        playGenericAudio(AUDIO_TASK_MESSAGE, _name.getAudioForVersion(userVersion));
     }
 
     /**
@@ -90,6 +134,7 @@ public class UserRecordingsController extends ParentController implements EventH
         double volume = ((value - min) / (max - min)) * 100;
         br.runPlayAudioCommand(audioFilePath, taskTitle, volume);
 
+        _progressBar.setVisible(true);
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
@@ -110,6 +155,7 @@ public class UserRecordingsController extends ParentController implements EventH
         _buttonsHBox.setDisable(true);
         _dbVersionButton.setDisable(true);
         _userVersionButton.setDisable(true);
+
     }
 
     /*
@@ -117,9 +163,49 @@ public class UserRecordingsController extends ParentController implements EventH
      */
     private void enableButtons() {
         _buttonsHBox.setDisable(false);
-        _dbVersionButton.setDisable(true);
-        _userVersionButton.setDisable(true);
+        _dbVersionButton.setDisable(false);
+        _userVersionButton.setDisable(false);
     }
+
+    /**
+     * Disables buttons on the tool bar(Bottom). This is separate as there are
+     * instances where we want to not disable these buttons.
+     */
+    private void disableToolBarButtons() {
+        _achievements.setDisable(true);
+        _backButton.setDisable(true);
+    }
+
+    /**
+     * Enables buttons on the tool bar.
+     */
+    private void enableToolBarButtons() {
+        _achievements.setDisable(false);
+        _backButton.setDisable(false);
+    }
+
+    /**
+     * Handle responses from the BashRunner
+     */
+    @Override
+    public void handle(WorkerStateEvent event) {
+        if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
+            String title = event.getSource().getTitle();
+            if(title.equals(AUDIO_TASK_MESSAGE)) {
+                enableToolBarButtons();
+                enableButtons();
+                _progressBar.setVisible(false);
+            } else if(title.equals(COMPARISON_MESSAGE)) {
+                try {
+                    playUserRecording();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /* ------------ Methods for setting up the scene -------- */
 
     /*
      * Set the items of the user recordings dropdown
@@ -127,6 +213,9 @@ public class UserRecordingsController extends ParentController implements EventH
     private void setupDropdown() {
         List<String> versions = _name.getUserVersions();
         _dropdown.setItems(FXCollections.observableList(versions));
+        if(versions.size() > 0) {
+            _dropdown.getSelectionModel().selectFirst();
+        }
     }
 
     /**
@@ -144,14 +233,40 @@ public class UserRecordingsController extends ParentController implements EventH
      */
     @Override
     public void switchTo() {
+        System.out.println("gets called");
         _progressBar.setVisible(false);
         _name = PracticeController._selectedName;
         _nameDisplayed.setText(_name.getName());
         setupDropdown();
+        if (_dropdown.getItems().isEmpty()) {
+            disableButtons();
+        } else {
+            enableButtons();
+        }
     }
 
-    @Override
-    public void handle(WorkerStateEvent event) {
+    /**
+     * Calls the help handler to show the pop up
+     */
+    @FXML
+    private void help() {
+        new HelpHandler(_helpButton,"userRecording");
+    }
 
+    /**
+     * Calls the mic pane handler to show the pop up
+     */
+    @FXML
+    private void getMic() {
+        MicPaneHandler.getHandler().show(_micButton);
+    }
+
+    /**
+     * Switches to the achievements scene
+     */
+    @FXML
+    private void goToAchievements() {
+        AchievementsManager.getInstance().setMenu(SceneBuilder.USER_RECORDINGS);
+        _switcher.switchScene(SceneBuilder.ACHIEVEMENTS);
     }
 }

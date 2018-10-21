@@ -52,8 +52,8 @@
     -jfx-button-type: RAISED;
     -fx-background-color: #c5cb28;
     -fx-font-weight: bold;
-    -fx-text-fill: black;
-    -fx-font-size: 30px;
+    -fx-text-fill: #231f20;
+    -fx-font-size: 20px;
     -fx-pref-height: 70px;
     -fx-pref-width: 280px;
     -fx-font-family: "Franklin Gothic Heavy";
@@ -68,11 +68,11 @@
 
 ._sortingButton {
     -jfx-button-type: RAISED;
-    -fx-background-color: black;
+    -fx-background-color: #231f20;
     -fx-font-weight: bold;
     -fx-text-fill: #c5cb28;
-    -fx-font-size: 25px;
-    -fx-pref-height: 45px;
+    -fx-font-size: 15px;
+    -fx-pref-height: 50px;
     -fx-pref-width: 260px;
     -fx-font-family: "Franklin Gothic Heavy";
 }
@@ -94,10 +94,10 @@
 
 ._backButton {
     -jfx-button-type: RAISED;
-    -fx-background-color: black;
+    -fx-background-color: #231f20;
     -fx-font-weight: bold;
     -fx-text-fill: #c5cb28;
-    -fx-font-size: 25px;
+    -fx-font-size: 20px;
     -fx-pref-height: 45px;
     -fx-pref-width: 200px;
     -fx-font-family: "Franklin Gothic Heavy";
