@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.sound.sampled.*;
 
+import com.sun.media.sound.RIFFInvalidDataException;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -49,6 +50,11 @@ public class AudioPlayer extends Task<Void> {
             durationInSeconds = (audioFileLength / (frameSize * frameRate));
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
+        } catch (RIFFInvalidDataException e) {
+//            e.printStackTrace();
+            System.out.println("Got an exception trying to get filesize");
+            System.out.println(e.getMessage());
+            return 3;
         } catch (IOException e) {
             e.printStackTrace();
         }

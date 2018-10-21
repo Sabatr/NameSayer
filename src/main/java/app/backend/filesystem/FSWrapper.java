@@ -329,6 +329,7 @@ public class FSWrapper {
         List<TemplateFile> parentList = tFile.accessPath();
         Collections.reverse(parentList);
         List<FileInstance> filePaths = new ArrayList<>();
+        List<FileInstance> tmpFilePaths = new ArrayList<>();
 
         SimpleFileVisitor<Path> traverser = new SimpleFileVisitor<Path>() {
             int depth = 1;
@@ -338,7 +339,12 @@ public class FSWrapper {
                 if(tFile.getTagName().equals(FILE) || tFile.getTagName().equals(FILESET)) {
                     if (params.length > 0) {
                         boolean matchesParams = true;
-                        Map<Integer, String> fileParams = extractParamsForUnit(file, parentList.get(parentList.size() - depth - 1));
+                        Map<Integer, String> fileParams;
+                        try {
+                            fileParams = extractParamsForUnit(file, parentList.get(parentList.size() - depth));
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            fileParams = extractParamsForUnit(file, tFile);
+                        }
                         if (fileParams != null) {
                             int length = fileParams.size() < params.length ? fileParams.size() : params.length;
                             for (int j = 0; j < length; j++) {
@@ -347,11 +353,17 @@ public class FSWrapper {
                                 }
                             }
                             if (matchesParams) {
-                                attemptExtractContent(file, tFile, filePaths);
+                                if(attemptExtractContent(file, tFile, filePaths)) {
+                                    filePaths.addAll(tmpFilePaths);
+                                    tmpFilePaths.clear();
+                                }
                             }
                         }
                     } else {
-                        attemptExtractContent(file, tFile, filePaths);
+                        if(attemptExtractContent(file, tFile, filePaths)) {
+                            filePaths.addAll(tmpFilePaths);
+                            tmpFilePaths.clear();
+                        }
                     }
                 }
                 return FileVisitResult.CONTINUE;
@@ -366,6 +378,8 @@ public class FSWrapper {
                     depth++;
                     return FileVisitResult.CONTINUE;
                 } else {
+                    filePaths.addAll(tmpFilePaths);
+                    tmpFilePaths.clear();
                     return FileVisitResult.SKIP_SUBTREE;
                 }
             }
@@ -452,6 +466,9 @@ public class FSWrapper {
 
         // Having filtered out anything that doesn't match an element of the XML in terms of name and dir structure,
         // we can assume this file is usable
+        if(tFile.getType().equals("nameEntry") && file.toString().contains("composite")) {
+            System.out.print("");
+        }
         filePaths.add(new FileInstance(tFile, file, params));
         return true;
     }
@@ -497,7 +514,7 @@ public class FSWrapper {
             Set<Integer> keys = theseParams.keySet();
             for(Integer key: keys) {
                 if(nameParameters.containsKey(key)) {
-                    if(! nameParameters.get(key).equals(theseParams.get(key))) {
+                    if(! nameParameters.get(key).equalsIgnoreCase(theseParams.get(key))) {
                         return null;   // We have found a discrepancy!
                     }
                 } else {

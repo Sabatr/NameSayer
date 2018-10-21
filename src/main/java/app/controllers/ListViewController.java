@@ -35,6 +35,7 @@ public class ListViewController extends ParentController {
 
     private ObservableList<NameEntry> _selectedNames;
     private ObservableList<CompositeName> _addedComposites;
+    private ObservableList<CompositeName> _allComposites;
 
     /**
      * Initially, the sorted button is selected by default.
@@ -242,8 +243,7 @@ public class ListViewController extends ParentController {
      * Press enter to submit the full name.
      */
     @FXML
-    private void doSearch(ActionEvent event) throws URISyntaxException {
-            boolean doesNotExist = true;
+    private void doSearch() throws URISyntaxException {
         if(_searchBox.getText() == null) {
             return;
         }
@@ -254,14 +254,29 @@ public class ListViewController extends ParentController {
             return;
         }
 
-        for (NameEntry entry: _selectedNames) {
-            if (entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
-                doesNotExist = false;
+        boolean notAlreadySelected = true;
+        for(NameEntry entry: _selectedNames) {
+            if(entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
+                notAlreadySelected = false;
                 break;
             }
         }
-        if (doesNotExist) {
-            CompositeName fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+        if(notAlreadySelected) {
+            CompositeName fullName = null;
+
+            boolean notAlreadyExists = true;
+            for(CompositeName entry: _addedComposites) {
+                if(entry.compareTo(new NameEntry(_searchBox.getText())) == 0) {
+                    notAlreadyExists = false;
+                    fullName = entry;
+                    break;
+                }
+            }
+
+            if(notAlreadyExists) {
+                fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+            }
+
             _addedComposites.add(fullName);
             updateSelectedList(_addedComposites);
             _addedComposites.clear();
@@ -338,7 +353,6 @@ public class ListViewController extends ParentController {
 
     /**
      * This allows both single names and two or more names to be added.
-     * TODO: Show a message to notify the user that a certain name doesn't exist.
      * @param splitNames
      * @param foundItems
      */
