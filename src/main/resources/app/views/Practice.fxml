@@ -76,7 +76,7 @@
                   </Label>
                </graphic>
             </JFXButton>
-            <Button fx:id="_listenButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#playAudio" onMouseEntered="#hideRating" prefHeight="62.0" prefWidth="104.0" styleClass="_selectionButton" stylesheets="@styles/Practice.css" text="LISTEN">
+            <Button fx:id="_listenButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#listenDatabase" onMouseEntered="#hideRating" prefHeight="62.0" prefWidth="104.0" styleClass="_selectionButton" stylesheets="@styles/Practice.css" text="LISTEN">
                <graphic>
                   <Label contentDisplay="RIGHT">
                      <styleClass>

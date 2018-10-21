@@ -37,7 +37,7 @@ public class CompositeName extends NameEntry {
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
-        Path pathToAudio = _fsMan.createFilePath("compositeName", formattedDate, formattedTime, fullname);
+        Path pathToAudio = _fsMan.createFilePath("compositeName", formattedDate, formattedTime, fullname, "YOU");
         _mainVersion = new Version("YOU", formattedDate + "_" + formattedTime, pathToAudio);
     }
 
@@ -52,6 +52,11 @@ public class CompositeName extends NameEntry {
         }
         fullNameStr.append(nameComponents.get(i));
         return fullNameStr.toString();
+    }
+
+    @Override
+    public String getHighestRating() {
+        return _mainVersion._dateTime;
     }
 
     public void concatenateAudio(EventHandler<WorkerStateEvent> handler) throws IOException, URISyntaxException {

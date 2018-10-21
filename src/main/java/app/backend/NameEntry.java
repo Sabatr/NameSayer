@@ -51,6 +51,7 @@ public class NameEntry implements Comparable<NameEntry> {
      * @return The filePath to use for the recording
      */
     public Path addUserVersion(String author) {
+        System.out.println("adding a new temp version");
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
@@ -66,6 +67,7 @@ public class NameEntry implements Comparable<NameEntry> {
      * Confirm the adding of the version that was last created.
      */
     public void finaliseLastVersion() {
+        System.out.println("finalising user version");
         if(_temporaryVersion != null) {
             _userVersions.add(_temporaryVersion);
         }
@@ -99,7 +101,7 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     public void addUserVersionWithAudio(String auth, String date, Path resource) {
-        _versions.add(new Version(auth, date, resource));
+        _userVersions.add(new Version(auth, date, resource));
     }
 
     /**
@@ -270,11 +272,16 @@ public class NameEntry implements Comparable<NameEntry> {
      * Deletes a user version
      */
     public void deleteUserVersion(String date) {
+        Version toDelete = null;
         for(Version ver: _userVersions) {
             if(ver._dateTime.equals(date)) {
                 String[] dateComponents = date.split("_");
                 _fsMan.deleteFiles("userVersion", _name, dateComponents[0], dateComponents[1], ver._author);
+                toDelete = ver;
             }
+        }
+        if(toDelete != null) {
+            _userVersions.remove(toDelete);
         }
     }
 

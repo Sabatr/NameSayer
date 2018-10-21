@@ -8,7 +8,7 @@
     <dir type="userComposites" name="userComposites">
         <fileSet type="userCompositeName" nameFormat="%4_%2_%3_%1.wav"/>
     </dir>
-    <dirSet type="nameEntry" nameFormat="%1">
+    <dirSet type="nameEntry" nameFormat="%1" needAllChildren="true">
         <dir type="versions" name="versions" needAllChildren="true">
             <fileSet type="soundFile" nameFormat="%4_%2_%3_%1.wav" copy="true" />
         </dir>
