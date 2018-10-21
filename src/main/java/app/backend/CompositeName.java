@@ -54,6 +54,11 @@ public class CompositeName extends NameEntry {
         return fullNameStr.toString();
     }
 
+    @Override
+    public String getHighestRating() {
+        return _mainVersion._dateTime;
+    }
+
     public void concatenateAudio(EventHandler<WorkerStateEvent> handler) throws IOException, URISyntaxException {
         _isProcessing = true;
         List<Path> audioPaths = new ArrayList<>();

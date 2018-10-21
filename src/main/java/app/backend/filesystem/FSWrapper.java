@@ -509,7 +509,7 @@ public class FSWrapper {
             Set<Integer> keys = theseParams.keySet();
             for(Integer key: keys) {
                 if(nameParameters.containsKey(key)) {
-                    if(! nameParameters.get(key).equals(theseParams.get(key))) {
+                    if(! nameParameters.get(key).equalsIgnoreCase(theseParams.get(key))) {
                         return null;   // We have found a discrepancy!
                     }
                 } else {
