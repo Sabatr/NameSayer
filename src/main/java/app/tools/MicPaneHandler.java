@@ -157,6 +157,10 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
         popup.show(_node,JFXPopup.PopupVPosition.TOP,JFXPopup.PopupHPosition.LEFT,0,-500);
     }
 
+    /**
+     * This updates the progress bar based on the level of the microphone
+     * @param event
+     */
     @Override
     public void handle(WorkerStateEvent event) {
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
@@ -197,6 +201,10 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
         }
     }
 
+    /**
+     * Sets the input devices to the combobox.
+     * @param ffmpegOut
+     */
     private void parseDevices(String ffmpegOut) {
         if(!ffmpegOut.contains("DirectShow audio")) {
             Alert a = new Alert(Alert.AlertType.INFORMATION);

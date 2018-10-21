@@ -5,6 +5,8 @@ import app.backend.NameEntry;
 import app.tools.AudioPlayer;
 import app.tools.Timer;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXProgressBar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
@@ -23,11 +25,11 @@ public class UserRecordingsController extends ParentController implements EventH
 
     @FXML public Label _nameDisplayed;
     @FXML public HBox _buttonsHBox;
-    @FXML public Button _deleteButton;
-    @FXML public Button _compareButton;
+    @FXML public JFXButton _deleteButton;
+    @FXML public JFXButton _compareButton;
     @FXML public Button _backButton;
     @FXML public Button _dbVersionButton;
-    @FXML public ProgressBar _progressBar;
+    @FXML public JFXProgressBar _progressBar;
     @FXML public Slider _volumeSlider;
     @FXML public ComboBox<String> _dropdown;
     @FXML public Button _userVersionButton;
