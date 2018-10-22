@@ -391,7 +391,7 @@ public class NameEntry implements Comparable<NameEntry> {
         _fsMan = fsManager;
     }
 
-    private String capitaliseNames(String name) {
+    public static String capitaliseNames(String name) {
         StringBuilder formattedName = new StringBuilder();
         char[] chars = new char[name.length()];
         name.getChars(0, name.length(), chars, 0);
@@ -405,7 +405,7 @@ public class NameEntry implements Comparable<NameEntry> {
                 } else {
                     formattedName.append(ch);
                 }
-            } else if(Character.isWhitespace(ch)) {
+            } else {
                 newWord = true;
                 formattedName.append(ch);
             }
