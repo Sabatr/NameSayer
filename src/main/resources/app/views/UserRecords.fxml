@@ -57,7 +57,7 @@
             <String fx:value="icon" />
          </styleClass>
       </Label>
-      <JFXButton fx:id="_backButton" contentDisplay="RIGHT" layoutX="920.0" layoutY="725.0" onAction="#goBack" prefHeight="76.0" prefWidth="208.0" style="-fx-pref-width: 150;" styleClass="_selectionButton" text="BACK">
+      <JFXButton fx:id="_backButton" contentDisplay="RIGHT" layoutX="920.0" layoutY="725.0" onAction="#goBack" prefHeight="76.0" prefWidth="208.0" style="-fx-pref-width: 150; -fx-font-size: 20;" styleClass="_selectionButton" text="BACK">
          <graphic>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="40.0" textAlignment="CENTER">
                <styleClass>
