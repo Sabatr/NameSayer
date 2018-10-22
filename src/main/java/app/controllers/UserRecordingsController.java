@@ -233,7 +233,6 @@ public class UserRecordingsController extends ParentController implements EventH
      */
     @Override
     public void switchTo() {
-        System.out.println("gets called");
         _progressBar.setVisible(false);
         _name = PracticeController._selectedName;
         _nameDisplayed.setText(_name.getName());
