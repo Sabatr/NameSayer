@@ -27,15 +27,15 @@ public class Main extends Application {
         stage.setTitle("Name Sayer Practice");
         FSWrapper fsWrap = NameEntry.populateNames();
         ArrayList<NameEntry> names = NameEntry.getNames();
-//        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            @Override
-//            public void handle(WindowEvent event) {
-//                if(!event.isConsumed()) {
-//                        fsWrap.deleteFiles("compositeName");
-//
-//                }
-//            }
-//        });
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if(!event.isConsumed()) {
+                        fsWrap.deleteFiles("compositeName");
+
+                }
+            }
+        });
 
         SceneBuilder sceneMan = SceneBuilder.inst(FXCollections.observableArrayList(names), stage);
         sceneMan.switchScene(SceneBuilder.MENU);

@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXProgressBar?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import java.lang.String?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -76,7 +75,7 @@
                   </Label>
                </graphic>
             </JFXButton>
-            <Button fx:id="_listenButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#listenDatabase" onMouseEntered="#hideRating" prefHeight="62.0" prefWidth="104.0" styleClass="_selectionButton" stylesheets="@styles/Practice.css" text="LISTEN">
+            <JFXButton fx:id="_listenButton" contentDisplay="RIGHT" graphicTextGap="15.0" onAction="#listenDatabase" styleClass="_selectionButton" text="LISTEN">
                <graphic>
                   <Label contentDisplay="RIGHT">
                      <styleClass>
@@ -85,7 +84,7 @@
                      </styleClass>
                   </Label>
                </graphic>
-            </Button>
+            </JFXButton>
          </children>
       </HBox>
       <Label alignment="CENTER" prefHeight="77.0" prefWidth="1100.0" styleClass="_title" text="PRACTICE" />

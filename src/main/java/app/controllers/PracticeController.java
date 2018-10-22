@@ -18,8 +18,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-
-import javax.print.URIException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -32,7 +30,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML private JFXButton _prevButton;
     @FXML private JFXButton _nextButton;
     @FXML private JFXButton _rateButton;
-    @FXML private Button _listenButton;
+    @FXML private JFXButton _listenButton;
     @FXML private JFXButton _recordButton;
     @FXML private JFXButton _backButton;
     @FXML private Label _namePos;
