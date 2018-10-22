@@ -33,6 +33,7 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
     private JFXPopup _popup;
     private static MicPaneHandler _handler = new MicPaneHandler();
     private SimpleStringProperty _selectedDevice;
+    private boolean onWindows = false;
 
     /**
      * A private constructor prevents further instantiation.
@@ -40,16 +41,23 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
     private MicPaneHandler() {
         _selectedDevice = new SimpleStringProperty();
         setUpTestButton();
-        setUpDeviceBox();
+
+        if(System.getProperty("os.name").toLowerCase().contains("windows")) {
+            setUpDeviceBox();
+            onWindows = true;
+        }
         setUpLevelIndicator();
-        try {
-            findMicDevices();
-        } catch (URISyntaxException e) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Error fetching input devices");
-            a.showAndWait();
-            e.printStackTrace();
-            return;
+
+        if(onWindows) {
+            try {
+                findMicDevices();
+            } catch (URISyntaxException e) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Error fetching input devices");
+                a.showAndWait();
+                e.printStackTrace();
+                return;
+            }
         }
     }
 
@@ -89,7 +97,7 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
             }
         });
         _testButton.setOnMouseClicked((e) -> {
-            if (_deviceBox.getSelectionModel().getSelectedItem() == null) {
+            if (onWindows && _deviceBox.getSelectionModel().getSelectedItem() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText(null);
                 alert.setContentText("No Mic Detected");
@@ -163,7 +171,11 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
         Pane pane = new Pane();
         pane.setPrefHeight(500);
         pane.setPrefWidth(500);
-        pane.getChildren().addAll(_hbox,_deviceBox,_levelIndicator);
+        if(onWindows) {
+            pane.getChildren().addAll(_hbox, _deviceBox, _levelIndicator);
+        } else {
+            pane.getChildren().addAll(_hbox, _levelIndicator);
+        }
         pane.getStylesheets().add(
                 SceneBuilder.class.getResource("styles/MicView.css").toExternalForm()
         );

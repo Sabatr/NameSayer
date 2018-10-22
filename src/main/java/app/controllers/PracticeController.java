@@ -280,7 +280,8 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void recordAudio() throws URISyntaxException {
-        if (MicPaneHandler.getHandler().getSelectedDevice().getValue() == null) {
+        boolean onWindows = System.getProperty("os.name").toLowerCase().contains("windows");
+        if (onWindows && MicPaneHandler.getHandler().getSelectedDevice().getValue() == null) {
             new NothingNotification("NoMic");
             return;
         }
