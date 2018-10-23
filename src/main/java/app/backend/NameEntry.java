@@ -57,7 +57,6 @@ public class NameEntry implements Comparable<NameEntry> {
      * @return The filePath to use for the recording
      */
     public Path addUserVersion(String author) {
-        System.out.println("adding a new temp version");
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();
@@ -67,12 +66,10 @@ public class NameEntry implements Comparable<NameEntry> {
         return resource;
     }
 
-
     /**
      * Confirm the adding of the version that was last created.
      */
     public void finaliseLastVersion() {
-        System.out.println("finalising user version");
         if(_temporaryVersion != null) {
             _userVersions.add(_temporaryVersion);
         }
@@ -428,7 +425,6 @@ public class NameEntry implements Comparable<NameEntry> {
 
     /**
      * Extract a NameEntry from the filesystem
-     * TODO: Some of the files aren't present.
      */
     private NameEntry(FSWrapper fsManager, List<FileInstance> files) {
         Collections.reverse(files);

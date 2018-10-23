@@ -46,7 +46,6 @@ public class CompositeName extends NameEntry {
             }
         }
 
-
         LocalDateTime ldt = LocalDateTime.now();
         String formattedDate = ldt.getDayOfMonth() + "-" + ldt.getMonthValue() + "-" + ldt.getYear();
         String formattedTime = ldt.getHour() + "-" + ldt.getMinute() + "-" + ldt.getSecond();

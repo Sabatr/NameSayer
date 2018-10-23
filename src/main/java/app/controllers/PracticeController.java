@@ -438,7 +438,6 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     private void playBack() throws IOException, URISyntaxException{
         disableAll();
-        System.out.println("About to play some audio");
         switch (_playBackHandler.getCurrent()) {
             case DATABASE:
                 _playBack = true;
