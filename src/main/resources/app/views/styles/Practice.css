@@ -63,7 +63,7 @@
 
 .backButton {
     -jfx-button-type: FLAT;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 100 100;
     -fx-pref-width: 100;

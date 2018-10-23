@@ -19,7 +19,7 @@
       <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="14.0" prefHeight="64.0" prefWidth="383.0" styleClass="_nameData" stylesheets="@styles/ListView.css" text="NAMES" textAlignment="CENTER" />
       <JFXListView fx:id="_nameListView" layoutX="30.0" layoutY="144.0" onMouseClicked="#onClick" prefHeight="570.0" prefWidth="350.0" styleClass="_nameListView" />
       <JFXListView fx:id="_selectListView" layoutX="403.0" layoutY="144.0" onMouseClicked="#clearSelected" prefHeight="570.0" prefWidth="350.0" styleClass="_nameListView" />
-      <VBox layoutX="790.0" layoutY="229.0" prefHeight="381.0" prefWidth="260.0" spacing="50.0">
+      <VBox layoutX="810.0" layoutY="230.0" prefHeight="381.0" prefWidth="260.0" spacing="50.0">
          <children>
             <JFXButton contentDisplay="RIGHT" graphicTextGap="75.0" onAction="#clearSelection" prefHeight="56.0" styleClass="_button" text="CLEAR">
                <graphic>
@@ -66,7 +66,7 @@
             </VBox>
          </children>
       </VBox>
-      <JFXButton contentDisplay="RIGHT" layoutX="910.0" layoutY="725.0" onAction="#goBack" prefHeight="76.0" prefWidth="208.0" style="-fx-pref-width: 150;" styleClass="_backButton" text="BACK">
+      <JFXButton contentDisplay="RIGHT" layoutX="920.0" layoutY="725.0" onAction="#goBack" prefHeight="76.0" prefWidth="208.0" style="-fx-pref-width: 150;" styleClass="_backButton" text="BACK">
          <graphic>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="40.0" textAlignment="CENTER">
                <styleClass>
@@ -80,7 +80,7 @@
       <JFXButton fx:id="_micButton" layoutX="160.0" layoutY="725.0" onAction="#getMic" styleClass="microphone" stylesheets="@styles/MainMenu.css" />
       <JFXButton layoutX="30.0" layoutY="725.0" onAction="#goToAchievements" styleClass="achievements" stylesheets="@styles/MainMenu.css" />
       <CustomTextField fx:id="_searchBox" editable="true" layoutX="34.0" layoutY="83.0" onAction="#doSearch" prefHeight="40.0" prefWidth="490.0" promptText="Combine names..." />
-      <JFXButton fx:id="_practiceButton" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="40.0" layoutX="790.0" layoutY="144.0" onAction="#practiceButton" prefHeight="84.0" prefWidth="260.0" style="-fx-pref-height: 50; -fx-pref-width: 260;" styleClass="_button" text="PRACTICE">
+      <JFXButton fx:id="_practiceButton" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="40.0" layoutX="810.0" layoutY="144.0" onAction="#practiceButton" prefHeight="84.0" prefWidth="260.0" style="-fx-pref-height: 50; -fx-pref-width: 260;" styleClass="_button" text="PRACTICE">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>

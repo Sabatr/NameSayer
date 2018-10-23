@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.Main;
 import app.backend.BashRunner;
 import app.backend.NameEntry;
 import app.tools.*;
@@ -17,7 +18,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +45,7 @@ public class UserRecordingsController extends ParentController implements EventH
     private NameEntry _name;
     private final String AUDIO_TASK_MESSAGE = "PlayAudio";
     private final String COMPARISON_MESSAGE = "CompareAudio";
+    private Path _lastVolRecording;
 
     @FXML
     public void initialize() {
@@ -83,10 +87,7 @@ public class UserRecordingsController extends ParentController implements EventH
      */
     @FXML
     public void compare() throws URISyntaxException {
-        disableButtons();
-        disableToolBarButtons();
-        String databaseVersion = _name.getHighestRating();
-        playGenericAudio(COMPARISON_MESSAGE, _name.getAudioForVersion(databaseVersion));
+        playDBOrBoth(true);
     }
 
     /**
@@ -94,10 +95,36 @@ public class UserRecordingsController extends ParentController implements EventH
      */
     @FXML
     public void playDatabaseRecording() throws URISyntaxException {
+        playDBOrBoth(false);
+    }
+
+    /**
+     * Reusable method for playing either the database recording, or both recordings
+     */
+    public void playDBOrBoth(boolean doingBoth) throws URISyntaxException {
         disableButtons();
         disableToolBarButtons();
         String databaseVersion = _name.getHighestRating();
-        playGenericAudio(AUDIO_TASK_MESSAGE, _name.getAudioForVersion(databaseVersion));
+
+        Path audioResource;
+        Path defaultResource = _name.getAudioForVersion(databaseVersion);
+        if(!Main.onWindows()) {
+            // initiates an FFMPEG process to copy the audio file with a lower volume
+            audioResource = _name.createDifferentVolume(databaseVersion, getVolume(), this);
+            if(audioResource == null) {
+                audioResource = defaultResource;
+            }
+            _lastVolRecording = audioResource;
+        } else {
+            audioResource = defaultResource;
+        }
+
+        if(audioResource.equals(defaultResource)) {
+            _lastVolRecording = null;
+        }
+
+        String message = doingBoth ? COMPARISON_MESSAGE : AUDIO_TASK_MESSAGE;
+        playGenericAudio(message, audioResource);
     }
 
     /**
@@ -111,7 +138,24 @@ public class UserRecordingsController extends ParentController implements EventH
         if(userVersion == null || userVersion.isEmpty()) {
             return;
         }
-        playGenericAudio(AUDIO_TASK_MESSAGE, _name.getAudioForVersion(userVersion));
+
+        Path audioResource;
+        Path defaultResource = _name.getAudioForVersion(userVersion);
+        if(!Main.onWindows()) {
+            // initiates an FFMPEG process to copy the audio file with a lower volume
+            audioResource = _name.createDifferentVolume(userVersion, getVolume(), this);
+            if(audioResource == null) {
+                audioResource = defaultResource;
+            }
+            _lastVolRecording = audioResource;
+        } else {
+            audioResource = defaultResource;
+        }
+
+        if(audioResource.equals(defaultResource)) {
+            _lastVolRecording = null;
+        }
+        playGenericAudio(AUDIO_TASK_MESSAGE, audioResource);
     }
 
     /**
@@ -207,6 +251,13 @@ public class UserRecordingsController extends ParentController implements EventH
                 }
             }
         }
+        if(_lastVolRecording != null) {
+            try {
+                Files.deleteIfExists(_lastVolRecording);
+            } catch (IOException e) {
+                System.out.println("could not delete last volume recording");
+            }
+        }
     }
 
     /* ------------ Methods for setting up the scene -------- */
@@ -237,7 +288,6 @@ public class UserRecordingsController extends ParentController implements EventH
      */
     @Override
     public void switchTo() {
-        System.out.println("gets called");
         _progressBar.setVisible(false);
         _name = PracticeController._selectedName;
         _nameDisplayed.setText(_name.getName());
