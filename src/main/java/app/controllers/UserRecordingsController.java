@@ -73,7 +73,6 @@ public class UserRecordingsController extends ParentController implements EventH
         alert.setHeaderText(null);
         alert.setContentText("Really delete recording " + versionToRemove + " of " + _name.getName() + "?");
         Optional<ButtonType> option = alert.showAndWait();
-        System.out.println(option);
         if(option.isPresent()) {
             if(option.get() == ButtonType.OK) {
                 _name.deleteUserVersion(versionToRemove);

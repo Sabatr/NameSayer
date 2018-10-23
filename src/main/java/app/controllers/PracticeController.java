@@ -447,7 +447,6 @@ public class PracticeController extends ParentController implements EventHandler
                 playBackAudioOfRecording();
                 break;
             case BOTH:
-                System.out.println(_currentRecording);
                 playGenericAudio("CompareAudio",_currentRecording);
                 break;
         }

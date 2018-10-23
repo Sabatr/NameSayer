@@ -81,7 +81,6 @@ public class BashRunner {
         String[] cmd;
         String cmdString;
         if(onWindows) {
-            System.out.println(MicPaneHandler.getHandler().getSelectedDevice().get());
             cmd = new String[14];
             cmd[0] = ffmpegCommand;
             cmd[1] = "-f";
@@ -186,7 +185,7 @@ public class BashRunner {
 
         } else {
             String cmdString = String.format(ffmpegCommand + " " + /*-hide_banner*/ "-i " + input.toAbsolutePath().toString() +
-                    " -af silenceremove=1:0:-35dB:1:5:-35dB:0 " + output.toAbsolutePath().toString());
+                    " -af silenceremove=1:0:-38dB:1:5:-38dB:0 " + output.toAbsolutePath().toString());
             cmd = new String[3];
             cmd[0] = "/bin/bash";
             cmd[1] = "-c";
@@ -251,10 +250,7 @@ public class BashRunner {
             cmd[1] = "-c";
             cmd[2] = cmdString;
         }
-
-        System.out.println("About to run the volume change command");
-
-        boolean failure = false;
+       boolean failure = false;
         Process p = null;
         try {
             ProcessBuilder test = new ProcessBuilder(cmd);
@@ -280,7 +276,6 @@ public class BashRunner {
             e.printStackTrace();
         }
 
-        System.out.println(commandOut);
         if(p.exitValue() != 0) {
             failure = true;
         }
