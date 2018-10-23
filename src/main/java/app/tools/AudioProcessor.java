@@ -67,14 +67,14 @@ public class AudioProcessor implements EventHandler<WorkerStateEvent> {
                     try {
                         concatenate();
                     } catch (URISyntaxException | IOException e) {
-                        e.printStackTrace();
+                        //e.printStackTrace();
                         _finalHandler.handle(event);
                     }
                 } else {
                     try {
                         trimAFile();
                     } catch (URISyntaxException e) {
-                        e.printStackTrace();
+                        //e.printStackTrace();
                         _finalHandler.handle(event);
                     }
                 }
@@ -85,7 +85,7 @@ public class AudioProcessor implements EventHandler<WorkerStateEvent> {
                     }
                     Files.deleteIfExists(Paths.get("./tmpList.txt"));
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
                 _name.setDoneProcessing();
                 _finalHandler.handle(event);

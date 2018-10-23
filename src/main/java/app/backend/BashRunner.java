@@ -264,7 +264,7 @@ public class BashRunner {
             try {
                 p.waitFor();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -273,7 +273,7 @@ public class BashRunner {
             commandOut = concatOutput(p.getInputStream(), "\n");
             commandOut = commandOut + concatOutput(p.getErrorStream(), "\n");
         } catch (IOException e) {
-            e.printStackTrace();
+           //e.printStackTrace();
         }
 
         if(p.exitValue() != 0) {
@@ -281,7 +281,7 @@ public class BashRunner {
         }
 
         if(failure) {
-            System.out.println("Failed getting volume:\n" + commandOut);
+            //System.out.println("Failed getting volume:\n" + commandOut);
             return false;
         } else {
             return true;
@@ -343,7 +343,7 @@ public class BashRunner {
                 } catch(InterruptedException e) {
                     if (isCancelled()) {
                         updateMessage("Cancelled");
-                        e.printStackTrace();
+                        //e.printStackTrace();
                         failure = true;
                         commandOutBuilder.append(e.getMessage());
                     }

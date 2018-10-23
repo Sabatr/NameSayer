@@ -194,7 +194,7 @@ public class NameEntry implements Comparable<NameEntry> {
                 throw new RuntimeException("Error trying to create file for ratings", e1);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         if(found) {
@@ -210,7 +210,7 @@ public class NameEntry implements Comparable<NameEntry> {
         } catch (FileNotFoundException e) {
             return;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -233,7 +233,7 @@ public class NameEntry implements Comparable<NameEntry> {
                 throw new RuntimeException("Error trying to create file for ratings", e1);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         //defaults to 5
         return 5;
@@ -251,7 +251,7 @@ public class NameEntry implements Comparable<NameEntry> {
             try {
                 dates.add(format.parse(ver._dateTime));
             } catch (ParseException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -284,10 +284,10 @@ public class NameEntry implements Comparable<NameEntry> {
      * UG4 computers.
      */
     public Path createDifferentVolume(String dateAndTime, double volume, EventHandler<WorkerStateEvent> handler) throws URISyntaxException {
-        System.out.println("Getting lowered-volume");
+        //System.out.println("Getting lowered-volume");
         Version theVersion = searchForVersion(dateAndTime);
         if(theVersion == null) {
-            System.out.println("version is null");
+            //System.out.println("version is null");
             return null;
         }
         Path input = theVersion._resource;
@@ -297,7 +297,7 @@ public class NameEntry implements Comparable<NameEntry> {
         String author = theVersion._author;
         Path output = _fsMan.createFilePath(VOLUME_AUDIO, _name, date, time, author);
         if(Files.exists(output)) {
-            System.out.println("already exists");
+            //System.out.println("already exists");
             return output;
         }
 
@@ -392,7 +392,7 @@ public class NameEntry implements Comparable<NameEntry> {
         try {
             fsWrapOne.copyTo(fsWrapTwo);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         fsWrapTwo.createDirectoryStruct("userComposites");

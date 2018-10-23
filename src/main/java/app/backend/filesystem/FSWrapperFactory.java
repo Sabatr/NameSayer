@@ -47,7 +47,7 @@ public class FSWrapperFactory {
             try {
                 _workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
             } catch (URISyntaxException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 _workingDir = Paths.get("").toAbsolutePath();
             }
         }
@@ -115,7 +115,7 @@ public class FSWrapperFactory {
                         }
                     }
                 } catch (URISyntaxException e2) {
-                    e.printStackTrace();
+                    //.printStackTrace();
                 }
             }
 

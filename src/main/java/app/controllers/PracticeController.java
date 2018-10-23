@@ -359,26 +359,26 @@ public class PracticeController extends ParentController implements EventHandler
                 try {
                     playAudio();
                 } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
+                    /e.printStackTrace();
                 }
             } else if (event.getSource().getTitle().equals("CompareAudio")) {
                 try {
                     _playBack = true;
                     playAudio();
                 } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
+                    /e.printStackTrace();
                 }
             }
             if(_lastVolRecording != null) {
                 try {
                     Files.deleteIfExists(_lastVolRecording);
                 } catch (IOException e) {
-                    System.out.println("could not delete last volume recording");
+                    //System.out.println("could not delete last volume recording");
                 }
             }
 
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
-            System.out.println(event.getSource().getValue());
+            //System.out.println(event.getSource().getValue());
         }
     }
 

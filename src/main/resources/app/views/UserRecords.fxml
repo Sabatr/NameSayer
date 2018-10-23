@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1100.0" prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserRecordingsController">
+<AnchorPane maxHeight="800.0" maxWidth="1100.0" prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserRecordingsController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#231f20" height="340.0" layoutX="-8.0" layoutY="77.0" stroke="#ffffff00" strokeType="INSIDE" width="1108.0" />
       <HBox fx:id="_buttonsHBox" alignment="CENTER" layoutX="329.0" layoutY="618.0" prefHeight="107.0" prefWidth="432.0" spacing="10.0">

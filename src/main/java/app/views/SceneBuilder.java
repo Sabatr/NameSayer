@@ -70,7 +70,7 @@ public class SceneBuilder {      //could be renamed SceneSwitcher
                 initScene(scene);
                 _controllers.get(scene).switchTo();
             } catch(IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 // don't switch the scene because the one passed in wasn't valid.
             }
         }

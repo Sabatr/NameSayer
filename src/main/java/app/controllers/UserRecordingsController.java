@@ -246,7 +246,7 @@ public class UserRecordingsController extends ParentController implements EventH
                 try {
                     playUserRecording();
                 } catch (URISyntaxException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }
@@ -254,7 +254,7 @@ public class UserRecordingsController extends ParentController implements EventH
             try {
                 Files.deleteIfExists(_lastVolRecording);
             } catch (IOException e) {
-                System.out.println("could not delete last volume recording");
+                //System.out.println("could not delete last volume recording");
             }
         }
     }

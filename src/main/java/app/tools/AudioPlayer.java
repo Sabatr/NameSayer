@@ -49,14 +49,14 @@ public class AudioPlayer extends Task<Void> {
             float frameRate = format.getFrameRate();
             durationInSeconds = (audioFileLength / (frameSize * frameRate));
         } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (RIFFInvalidDataException e) {
 //            e.printStackTrace();
-            System.out.println("Got an exception trying to get filesize");
-            System.out.println(e.getMessage());
+            //System.out.println("Got an exception trying to get filesize");
+            //System.out.println(e.getMessage());
             return 3;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return durationInSeconds;
     }
@@ -72,7 +72,7 @@ public class AudioPlayer extends Task<Void> {
         try {
             _audioStream = AudioSystem.getAudioInputStream(_soundFile);
         } catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         _audioFormat = _audioStream.getFormat();
@@ -82,9 +82,9 @@ public class AudioPlayer extends Task<Void> {
             _sourceLine = (SourceDataLine) AudioSystem.getLine(info);
             _sourceLine.open(_audioFormat);
         } catch (LineUnavailableException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         _sourceLine.start();
@@ -96,7 +96,7 @@ public class AudioPlayer extends Task<Void> {
             try {
                 bytesRead = _audioStream.read(data, 0, data.length);
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             if (bytesRead >= 0) {
                 @SuppressWarnings("unused")

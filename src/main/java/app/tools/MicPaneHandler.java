@@ -55,7 +55,7 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setContentText("Error fetching input devices");
                 a.showAndWait();
-                e.printStackTrace();
+                //e.printStackTrace();
                 return;
             }
         }
@@ -113,7 +113,7 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
                 try {
                     runner = new BashRunner(this);
                 } catch (URISyntaxException e1) {
-                    e1.printStackTrace();
+                    //e1.printStackTrace();
                 }
                 runner.runMonitorMicCommand();
             }
@@ -217,14 +217,14 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
                 try {
                     runner = new BashRunner(this);
                 } catch (URISyntaxException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
                 runner.runMonitorMicCommand();
             } else if(event.getSource().getTitle().equals(BashRunner.CommandType.LISTDEVICES.toString())) {
                 parseDevices((String) event.getSource().getValue());
             }
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
-            System.out.println("Failed");
+            //System.out.println("Failed");
             _levelIndicator.progressProperty().unbind();
             _levelIndicator.progressProperty().setValue(0);
             _micToggled = false;

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1100.0" prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.PracticeController">
+<AnchorPane maxHeight="800.0" maxWidth="1100.0" prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.PracticeController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#231f20" height="340.0" layoutY="77.0" stroke="#231f20" strokeType="INSIDE" width="1100.0" />
       <Label fx:id="_nameDisplayed" alignment="CENTER" layoutX="200.0" layoutY="94.0" prefHeight="272.0" prefWidth="700.0" styleClass="_nameDisplayed" stylesheets="@styles/Practice.css" text="Text goes here" textAlignment="CENTER">

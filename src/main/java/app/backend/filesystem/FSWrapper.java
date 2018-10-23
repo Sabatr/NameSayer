@@ -530,7 +530,7 @@ public class FSWrapper {
                 fileNames.add(path);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return fileNames;
     }
