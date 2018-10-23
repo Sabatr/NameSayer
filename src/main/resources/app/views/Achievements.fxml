@@ -11,11 +11,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-
 <Pane prefHeight="800.0" prefWidth="1100.0" styleClass="background" stylesheets="@styles/Achievement.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.AchievementController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="231.0" layoutX="-9.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="1110.0" />
-      <ScrollPane layoutX="30.0" layoutY="78.0" prefHeight="618.0" prefWidth="1021.0" stylesheets="@styles/Achievement.css">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#231f20" height="231.0" layoutX="-9.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="1110.0" />
+      <ScrollPane layoutX="30.0" layoutY="78.0" prefHeight="618.0" prefWidth="1021.0" styleClass="scroll" stylesheets="@styles/Achievement.css">
           <content>
             <VBox spacing="3.0" styleClass="achievementBackground">
                <children>
@@ -109,12 +108,12 @@
                               <String fx:value="bulb" />
                            </styleClass>
                         </Label>
-                        <Label styleClass="title" text="Know-it-all" />
+                        <Label styleClass="title" text="Know It All" />
                      </children>
                   </Pane>
                   <Pane prefHeight="170.0" prefWidth="214.0" styleClass="card" stylesheets="@styles/Achievement.css">
                      <children>
-                        <Label styleClass="title" text="Linguist" />
+                        <Label styleClass="title" text="Mr WorldWide" />
                         <Label styleClass="description" text="Practice with fifty unique names" />
                         <ProgressBar fx:id="_differentFiftyNamesBar" layoutX="520.0" layoutY="26.0" prefWidth="200.0" progress="0.0" styleClass="progress" />
                         <StackPane layoutX="520.0" layoutY="27.0" prefHeight="0.0" prefWidth="200.0" style="-fx-alignment: center;" styleClass="stack">

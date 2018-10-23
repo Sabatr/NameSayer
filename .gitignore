@@ -3,6 +3,7 @@ soundfiles/
 .settings/
 bin/
 .metadata/
+dist/
 
 # Created by https://www.gitignore.io/api/gradle,intellij
 

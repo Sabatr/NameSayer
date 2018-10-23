@@ -3,6 +3,10 @@ package app.backend;
 import app.backend.filesystem.FSWrapper;
 import app.backend.filesystem.FSWrapperFactory;
 import app.backend.filesystem.FileInstance;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -28,6 +32,7 @@ public class NameEntry implements Comparable<NameEntry> {
     protected List<Version> _userVersions = new ArrayList<>();
 
     protected String USER_VERSION_STR = "userVersion";
+    protected String VOLUME_AUDIO = "volumeAudio";
 
     /**
      * Construct a dummy NameEntry with only a name and no associated audio
@@ -123,20 +128,12 @@ public class NameEntry implements Comparable<NameEntry> {
      * @return
      */
     public Path getAudioForVersion(String dateAndTime) {
-        if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
-            return _temporaryVersion._resource;
+        Version theVersion = searchForVersion(dateAndTime);
+        if(theVersion == null) {
+            return null;
+        } else {
+            return theVersion._resource;
         }
-        for(Version ver: _versions) {
-            if(ver._dateTime.equals(dateAndTime)) {
-                return ver._resource;
-            }
-        }
-        for(Version ver: _userVersions) {
-            if(ver._dateTime.equals(dateAndTime)) {
-                return ver._resource;
-            }
-        }
-        return null;
     }
 
     /**
@@ -157,6 +154,9 @@ public class NameEntry implements Comparable<NameEntry> {
         }
     }
 
+    /**
+     * @return the highest rating sound file from the database
+     */
     public String getHighestRating() {
         String dateAndTime = _versions.get(0)._dateTime;
         int highestRating = _versions.get(0).rating;
@@ -280,6 +280,70 @@ public class NameEntry implements Comparable<NameEntry> {
     }
 
     /**
+     * This method had to be created to bypass the lack of a volume option on ffplay on the version of FFMPEG on the
+     * UG4 computers.
+     */
+    public Path createDifferentVolume(String dateAndTime, double volume, EventHandler<WorkerStateEvent> handler) throws URISyntaxException {
+        System.out.println("Getting lowered-volume");
+        Version theVersion = searchForVersion(dateAndTime);
+        if(theVersion == null) {
+            System.out.println("version is null");
+            return null;
+        }
+        Path input = theVersion._resource;
+        String[] components = theVersion._dateTime.split("_");
+        String date = components[0];
+        String time = components[1];
+        String author = theVersion._author;
+        Path output = _fsMan.createFilePath(VOLUME_AUDIO, _name, date, time, author);
+        if(Files.exists(output)) {
+            System.out.println("already exists");
+            return output;
+        }
+
+        BashRunner br = new BashRunner(handler);
+        volume = volume / 100;
+        boolean result = br.runVolumeCopyCommand(input, output, volume);
+
+        if(result && Files.exists(output)) {
+            return output;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * This performs the same functionality but for the temporary version
+     */
+    public Path createDifferentVolForTemp(double volume, EventHandler<WorkerStateEvent> handler) throws URISyntaxException {
+        if(_temporaryVersion == null) {
+            return null;
+        }
+        return createDifferentVolume(_temporaryVersion._dateTime, volume, handler);
+    }
+
+
+    /**
+     * Search for a version and return it if it's found
+     */
+    protected Version searchForVersion(String dateAndTime) {
+        if(_temporaryVersion != null && _temporaryVersion._dateTime.equals(dateAndTime)) {
+            return _temporaryVersion;
+        }
+        for(Version ver: _versions) {
+            if(ver._dateTime.equals(dateAndTime)) {
+                return ver;
+            }
+        }
+        for(Version ver: _userVersions) {
+            if(ver._dateTime.equals(dateAndTime)) {
+                return ver;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Compare this NameEntry to another in terms of order. This is so that names can be alphabetised
      * @param o The name entry to compare with
      * @return The result of comparing the names of the NameEntry
@@ -391,7 +455,7 @@ public class NameEntry implements Comparable<NameEntry> {
         _fsMan = fsManager;
     }
 
-    private String capitaliseNames(String name) {
+    public static String capitaliseNames(String name) {
         StringBuilder formattedName = new StringBuilder();
         char[] chars = new char[name.length()];
         name.getChars(0, name.length(), chars, 0);
@@ -405,7 +469,7 @@ public class NameEntry implements Comparable<NameEntry> {
                 } else {
                     formattedName.append(ch);
                 }
-            } else if(Character.isWhitespace(ch)) {
+            } else {
                 newWord = true;
                 formattedName.append(ch);
             }

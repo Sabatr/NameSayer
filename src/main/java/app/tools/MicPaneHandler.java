@@ -9,6 +9,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.net.URISyntaxException;
@@ -27,8 +28,12 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
     private JFXComboBox<String> _deviceBox;
     private JFXProgressBar _levelIndicator;
     private JFXButton _testButton;
+    private JFXButton _confirmButton;
+    private HBox _hbox;
+    private JFXPopup _popup;
     private static MicPaneHandler _handler = new MicPaneHandler();
     private SimpleStringProperty _selectedDevice;
+    private boolean onWindows = false;
 
     /**
      * A private constructor prevents further instantiation.
@@ -36,16 +41,23 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
     private MicPaneHandler() {
         _selectedDevice = new SimpleStringProperty();
         setUpTestButton();
-        setUpDeviceBox();
+
+        if(System.getProperty("os.name").toLowerCase().contains("windows")) {
+            setUpDeviceBox();
+            onWindows = true;
+        }
         setUpLevelIndicator();
-        try {
-            findMicDevices();
-        } catch (URISyntaxException e) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Error fetching input devices");
-            a.showAndWait();
-            e.printStackTrace();
-            return;
+
+        if(onWindows) {
+            try {
+                findMicDevices();
+            } catch (URISyntaxException e) {
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("Error fetching input devices");
+                a.showAndWait();
+                e.printStackTrace();
+                return;
+            }
         }
     }
 
@@ -77,16 +89,23 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
      * Sets up the button for testing the level of the microphone.
      */
     private void setUpTestButton() {
+        _confirmButton = new JFXButton("CONFIRM");
         _testButton = new JFXButton("TEST MIC");
-        _testButton.setLayoutX(250-75);
-        _testButton.setLayoutY(400);
+        _confirmButton.setOnMouseClicked((e) -> {
+            if (_popup != null) {
+                _popup.hide();
+            }
+        });
         _testButton.setOnMouseClicked((e) -> {
-            if (_deviceBox.getSelectionModel().getSelectedItem() == null) {
-                //TODO: Change to an alert? Or possibly a label next to it.
-                System.out.println("no mic detected");
+            if (onWindows && _deviceBox.getSelectionModel().getSelectedItem() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setContentText("No Mic Detected");
+                alert.setTitle("No Microphone");
+                alert.showAndWait();
                 return;
             }
-            if(_micToggled) {
+            if (_micToggled) {
                 _micToggled = false;
             } else {
                 _micToggled = true;
@@ -103,6 +122,13 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
                 SceneBuilder.class.getResource("styles/MicView.css").toExternalForm()
         );
         _testButton.getStyleClass().add("button");
+        _confirmButton.getStylesheets().add(
+                SceneBuilder.class.getResource("styles/MicView.css").toExternalForm()
+        );
+        _confirmButton.getStyleClass().add("button");
+        _hbox = new HBox(_testButton, _confirmButton);
+        _hbox.setLayoutX(105);
+        _hbox.setLayoutY(400);
     }
 
     /**
@@ -145,18 +171,26 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
         Pane pane = new Pane();
         pane.setPrefHeight(500);
         pane.setPrefWidth(500);
-        pane.getChildren().addAll(_testButton,_deviceBox,_levelIndicator);
+        if(onWindows) {
+            pane.getChildren().addAll(_hbox, _deviceBox, _levelIndicator);
+        } else {
+            pane.getChildren().addAll(_hbox, _levelIndicator);
+        }
         pane.getStylesheets().add(
                 SceneBuilder.class.getResource("styles/MicView.css").toExternalForm()
         );
         pane.getStyleClass().add("background");
-        JFXPopup popup = new JFXPopup(pane);
-        popup.setOnHidden((e)->{
+        _popup = new JFXPopup(pane);
+        _popup.setOnHidden((e)->{
                 _micToggled = false;
         });
-        popup.show(_node,JFXPopup.PopupVPosition.TOP,JFXPopup.PopupHPosition.LEFT,0,-500);
+        _popup.show(_node,JFXPopup.PopupVPosition.TOP,JFXPopup.PopupHPosition.LEFT,0,-500);
     }
 
+    /**
+     * This updates the progress bar based on the level of the microphone
+     * @param event
+     */
     @Override
     public void handle(WorkerStateEvent event) {
         if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_SUCCEEDED)) {
@@ -197,14 +231,11 @@ public class MicPaneHandler implements EventHandler<WorkerStateEvent> {
         }
     }
 
+    /**
+     * Sets the input devices to the combobox.
+     * @param ffmpegOut
+     */
     private void parseDevices(String ffmpegOut) {
-        if(!ffmpegOut.contains("DirectShow audio")) {
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setContentText("No audio devices found");
-            a.showAndWait();
-            return;
-        }
-
         boolean pastAudioHeader = false;
         String[] lines = ffmpegOut.split("\n");
         for(int i = 0; i < lines.length; i++) {

@@ -61,10 +61,9 @@ public class AchievementsManager {
         _listenCounter = 0;
     }
 
-    public Map<Achievements,Boolean> getCompleted() {
-        return _checkIfComplete;
-    }
-
+    /**
+     * Stores the state of completion
+     */
     private void setUp(){
         _checkIfComplete = new HashMap<>();
         _checkIfComplete.put(Achievements.PRACTICE_ONE,false);
@@ -77,10 +76,18 @@ public class AchievementsManager {
         _checkIfComplete.put(Achievements.DIFFERENT_FIFTY,false);
     }
 
+    /**
+     * Setter to determine the previous menu
+     * @param menu
+     */
     public void setMenu(String menu) {
         _statePressed = menu;
     }
 
+    /**
+     * Getter to get the previous menu
+     * @return
+     */
     public String getMenu() {
         return _statePressed;
     }
@@ -205,7 +212,7 @@ public class AchievementsManager {
 
     /**
      * Creates the pop up of the achievement.
-     * @param text
+     * @param Achievements
      */
     private void popUp(Achievements achievement) {
         new AchievementNotification(achievement);

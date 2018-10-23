@@ -2,9 +2,9 @@ package app.controllers;
 
 import app.backend.CompositeName;
 import app.backend.NameEntry;
-import app.tools.AchievementsManager;
-import app.tools.FileFinder;
+import app.tools.*;
 import app.views.SceneBuilder;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -30,6 +32,9 @@ public class ListViewController extends ParentController {
     @FXML private ToggleButton _sortedButton;
     @FXML private ToggleButton _randomButton;
     @FXML private ListView<NameEntry> _selectListView;
+    @FXML private ImageView _randomImage;
+    @FXML private JFXButton _helpButton;
+    @FXML private JFXButton _micButton;
     @FXML private CustomTextField _searchBox;
     private AutoCompletionBinding _searchBoxItems;
 
@@ -42,10 +47,10 @@ public class ListViewController extends ParentController {
      * Also, this selects the files needed to be displayed on the list.
      */
     public void initialize() {
+        _randomImage.setImage(new Image(SceneBuilder.class.getResource("images/shuffle.png").toExternalForm()));
         _selectedNames = FXCollections.observableArrayList();
         _sortedButton.setDisable(true);
         _addedComposites = FXCollections.observableArrayList();
-
             //CTRL+Click to select multiple
         _nameListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
@@ -151,15 +156,7 @@ public class ListViewController extends ParentController {
      * When nothing is selected, the user is warned through an alert.
      */
     private void alertNothingSelected() {
-        Alert alert = new Alert(AlertType.ERROR);
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(
-                SceneBuilder.class.getResource("styles/NoneSelected.css").toExternalForm());
-        dialogPane.getStyleClass().add("noSelectDialogue");
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Error: No names selected.");
-        alert.showAndWait();
+        new NothingNotification("NoNames");
     }
 
     /**
@@ -177,14 +174,19 @@ public class ListViewController extends ParentController {
                 }
 
                 String[] words = fieldText.split("[ -]");
+                String[] separators = fieldText.split("([^ -])\\w+|([^ -])");
+                int i = 1;
                 StringBuilder possibleFullName = new StringBuilder();
-                    if (words.length >= 2) {
-                        String[] wordsLessOne = Arrays.copyOf(words, words.length - 1);
-                        List<NameEntry> nameComponents = matchFullName(wordsLessOne);
-                        for (NameEntry nameComp : nameComponents) {
-                            possibleFullName.append(nameComp.getName() + " ");
-                        }
+                if (words.length >= 2) {
+                    String[] wordsLessOne = Arrays.copyOf(words, words.length - 1);
+                    List<NameEntry> nameComponents = matchFullName(wordsLessOne);
+                    if(nameComponents.size() > 0 && nameComponents.get(0).compareTo(new NameEntry("##FAILED##")) == 0) {
+                        nameComponents = FXCollections.observableArrayList();
                     }
+                    for (NameEntry nameComp : nameComponents) {
+                        possibleFullName.append(nameComp.getName() + separators[i++]);
+                    }
+                }
 
                 ArrayList<NameEntry> matchingNames = new ArrayList<>();
                 for(NameEntry name: _allNames) {
@@ -223,16 +225,25 @@ public class ListViewController extends ParentController {
 
         int i = words[0].isEmpty() ? 1 : 0;
         for(; i < words.length; i++) {
-            aWordDoesntMatch = true;
+            boolean thisWordDoesntMatch = true;
             for(NameEntry name: _allNames) {
                 if(name.getName().equalsIgnoreCase(words[i])) {
-                    aWordDoesntMatch = false;
-                    nameComponents.add(name);
+                    if(!aWordDoesntMatch) {
+                        nameComponents.add(name);
+                    }
+                    thisWordDoesntMatch = false;
                     break;
                 }
             }
-            if(aWordDoesntMatch) {
-                return FXCollections.observableArrayList();
+
+            // if this word doesn't match a name and we've seen a non-matching name before
+            if(thisWordDoesntMatch && aWordDoesntMatch) {
+                nameComponents.add(new NameEntry(words[i]));
+
+            // if this word doesn't match and we haven't
+            } else if(thisWordDoesntMatch && !aWordDoesntMatch) {
+                aWordDoesntMatch = true;
+                nameComponents = FXCollections.observableArrayList(new NameEntry("##FAILED##"), new NameEntry(words[i]));
             }
         }
         return nameComponents;
@@ -244,13 +255,26 @@ public class ListViewController extends ParentController {
      */
     @FXML
     private void doSearch() throws URISyntaxException {
-        if(_searchBox.getText() == null) {
+        if(_searchBox.getText() == null || _searchBox.getText().isEmpty()) {
             return;
         }
 
-        String[] words = _searchBox.getText().split("[ -]");
+        String fullNameStr = _searchBox.getText();
+        String[] words = fullNameStr.split("[ -]");
         ObservableList<NameEntry> nameComponents = matchFullName(words);
-        if(nameComponents.isEmpty()) {
+        if(nameComponents.get(0).compareTo(new NameEntry("##FAILED##")) == 0) {
+            StringBuilder nameList = new StringBuilder();
+            int i;
+            for(i = 1; i < nameComponents.size() - 1; i++) {
+                NameEntry dummyEntry = nameComponents.get(i);
+                nameList.append(dummyEntry.getName()).append(", ");
+            }
+            nameList.append(nameComponents.get(i).getName()).append(".");
+
+            Alert a = new Alert(AlertType.INFORMATION);
+            a.setTitle("Name(s) not found");
+            a.setContentText("The following names were not matched:\n" + nameList.toString());
+            a.showAndWait();
             return;
         }
 
@@ -274,7 +298,7 @@ public class ListViewController extends ParentController {
             }
 
             if(notAlreadyExists) {
-                fullName = new CompositeName(nameComponents, CompositeName.fullName(nameComponents));
+                fullName = new CompositeName(nameComponents, NameEntry.capitaliseNames(fullNameStr));
             }
 
             _addedComposites.add(fullName);
@@ -395,5 +419,30 @@ public class ListViewController extends ParentController {
     @Override
     public void switchTo() {
         Collections.sort(_nameListView.getItems());
+    }
+
+    /**
+     * Calls the help handler to show the pop up
+     */
+    @FXML
+    private void help() {
+        new HelpHandler(_helpButton,"list");
+    }
+
+    /**
+     * Calls the mic pane handler to show the pop up
+     */
+    @FXML
+    private void getMic() {
+        MicPaneHandler.getHandler().show(_micButton);
+    }
+
+    /**
+     * Switches to the achievements scene
+     */
+    @FXML
+    private void goToAchievements() {
+        AchievementsManager.getInstance().setMenu(SceneBuilder.LISTVIEW);
+        _switcher.switchScene(SceneBuilder.ACHIEVEMENTS);
     }
 }

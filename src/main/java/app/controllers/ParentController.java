@@ -1,9 +1,14 @@
 package app.controllers;
 
 import app.backend.NameEntry;
+import app.tools.AchievementsManager;
+import app.tools.HelpHandler;
+import app.tools.MicPaneHandler;
 import app.views.SceneBuilder;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.stage.Stage;
 
 /**
@@ -30,4 +35,5 @@ public abstract class ParentController {
      * be passed each time.
      */
     public abstract void switchTo();
+
 }

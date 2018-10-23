@@ -14,7 +14,7 @@
 
 ._buttons {
     -jfx-button-type: RAISED;
-    -fx-background-color: BLACK;
+    -fx-background-color: #231f20;
     -fx-font-weight: bold;
     -fx-text-fill: #c5cb28;
     -fx-font-size: 25px;

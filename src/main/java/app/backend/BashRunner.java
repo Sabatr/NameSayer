@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import app.Main;
 import app.tools.MicPaneHandler;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -19,7 +21,7 @@ import javafx.event.EventHandler;
 public class BashRunner {
 
     public enum CommandType {
-        RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT, TRIM, LISTDEVICES
+        RECORDAUDIO, PLAYAUDIO, TESTMIC, CONCAT, TRIM, LISTDEVICES, VOLUME
     }
 
     private boolean onWindows = false;
@@ -37,7 +39,7 @@ public class BashRunner {
      */
     public BashRunner(EventHandler<WorkerStateEvent> handler) throws URISyntaxException {
         _taskCompletionHandler = handler;
-        if(System.getProperty("os.name").contains("Windows")) {
+        if(Main.onWindows()) {
             Path workingDir = Paths.get(getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
             onWindows = true;
             ffmpegCommand = workingDir.resolve(Paths.get("ffmpeg-4.0.2-win32-static\\bin\\ffmpeg.exe")).toAbsolutePath().toString();
@@ -79,7 +81,6 @@ public class BashRunner {
         String[] cmd;
         String cmdString;
         if(onWindows) {
-            System.out.println(MicPaneHandler.getHandler().getSelectedDevice().get());
             cmd = new String[14];
             cmd[0] = ffmpegCommand;
             cmd[1] = "-f";
@@ -160,8 +161,7 @@ public class BashRunner {
             cmd[7] = path.toAbsolutePath().toString();
 
         } else {
-            String cmdString = String.format("ffplay -autoexit -nodisp -loglevel quiet -volume %s \"%s\"",
-                    Integer.toString((int) volume), path.toAbsolutePath().toString());
+            String cmdString = String.format("ffplay -autoexit -nodisp -loglevel quiet \"%s\"", path.toAbsolutePath().toString());
             cmd = new String[3];
             cmd[0] = "/bin/bash";
             cmd[1] = "-c";
@@ -184,8 +184,8 @@ public class BashRunner {
             cmd[6] = output.toAbsolutePath().toString();
 
         } else {
-            String cmdString = String.format(ffmpegCommand + " -hide_banner -i " + input.toAbsolutePath().toString() +
-                    " -af silenceremove=1:0:-35dB:1:5:-35dB:0:peak " + output.toAbsolutePath().toString());
+            String cmdString = String.format(ffmpegCommand + " " + /*-hide_banner*/ "-i " + input.toAbsolutePath().toString() +
+                    " -af silenceremove=1:0:-38dB:1:5:-38dB:0 " + output.toAbsolutePath().toString());
             cmd = new String[3];
             cmd[0] = "/bin/bash";
             cmd[1] = "-c";
@@ -232,6 +232,60 @@ public class BashRunner {
             cmd[2] = cmdString;
         }
         return runCommand(CommandType.CONCAT.toString(), cmd);
+    }
+
+    /**
+     * This commands makes a copy of the audio with a lowered volume. This is run synchronously
+     */
+    public boolean runVolumeCopyCommand(Path input, Path output, double volume) {
+        String[] cmd;
+        if(onWindows) {
+            // don't need to do anything because we will never run this command on windows
+            return true;
+        } else {
+            String cmdString = String.format(ffmpegCommand + " -i \"%s\" -filter:a \"volume=%.1f\" \"%s\"", input.toAbsolutePath().toString(),
+                    volume, output.toAbsolutePath().toString());
+            cmd = new String[3];
+            cmd[0] = "/bin/bash";
+            cmd[1] = "-c";
+            cmd[2] = cmdString;
+        }
+       boolean failure = false;
+        Process p = null;
+        try {
+            ProcessBuilder test = new ProcessBuilder(cmd);
+            test.directory(null);
+            p = test.start();
+        } catch(IOException e) {
+            failure = true;
+        }
+
+        if(!failure) {
+            try {
+                p.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String commandOut = "";
+        try {
+            commandOut = concatOutput(p.getInputStream(), "\n");
+            commandOut = commandOut + concatOutput(p.getErrorStream(), "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(p.exitValue() != 0) {
+            failure = true;
+        }
+
+        if(failure) {
+            System.out.println("Failed getting volume:\n" + commandOut);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -282,6 +336,7 @@ public class BashRunner {
                 failure = true;
                 commandOutBuilder.append(e.getMessage());
             }
+
             if(!failure) {
                 try {
                     p.waitFor();
@@ -325,22 +380,21 @@ public class BashRunner {
             return commandOutBuilder.toString();
         }
 
-        private String concatOutput(InputStream stream, String delimiter) throws IOException {
-            StringBuilder commandOutBuilder = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
-                String str;
-                while( (str = reader.readLine()) != null ) {
-                    //System.out.println("output: " + str);
-                    commandOutBuilder.append(str + delimiter);
-                }
-            } catch (IOException e) {
-                throw e;
-            }
-            return commandOutBuilder.toString();
-        }
-
         public void setTitle(String title) {
             this.updateTitle(title);
         }
     };
+
+    private String concatOutput(InputStream stream, String delimiter) throws IOException {
+        StringBuilder commandOutBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+            String str;
+            while( (str = reader.readLine()) != null ) {
+                commandOutBuilder.append(str + delimiter);
+            }
+        } catch (IOException e) {
+            throw e;
+        }
+        return commandOutBuilder.toString();
+    }
 }

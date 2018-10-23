@@ -2,34 +2,92 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
-<?import javafx.scene.control.Button?>
+<?import java.lang.String?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.shape.Rectangle?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/ListView.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ListViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/ListView.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ListViewController">
    <children>
-      <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="45.0" prefHeight="58.0" prefWidth="383.0" styleClass="_nameData" stylesheets="@styles/ListView.css" text="NAMES" textAlignment="CENTER" />
-      <JFXListView fx:id="_nameListView" layoutX="34.0" layoutY="144.0" onMouseClicked="#onClick" prefHeight="603.0" prefWidth="310.0" styleClass="_nameListView" />
-      <JFXListView fx:id="_selectListView" layoutX="356.0" layoutY="144.0" onMouseClicked="#clearSelected" prefHeight="603.0" prefWidth="371.0" styleClass="_nameListView" />
-      <VBox layoutX="769.0" layoutY="142.0" prefHeight="392.0" prefWidth="261.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#231f20" height="334.0" layoutX="-11.0" layoutY="-10.0" stroke="BLACK" strokeType="INSIDE" width="1112.0" />
+      <Label alignment="TOP_LEFT" layoutX="34.0" layoutY="14.0" prefHeight="64.0" prefWidth="383.0" styleClass="_nameData" stylesheets="@styles/ListView.css" text="NAMES" textAlignment="CENTER" />
+      <JFXListView fx:id="_nameListView" layoutX="30.0" layoutY="144.0" onMouseClicked="#onClick" prefHeight="570.0" prefWidth="350.0" styleClass="_nameListView" />
+      <JFXListView fx:id="_selectListView" layoutX="403.0" layoutY="144.0" onMouseClicked="#clearSelected" prefHeight="570.0" prefWidth="350.0" styleClass="_nameListView" />
+      <VBox layoutX="810.0" layoutY="230.0" prefHeight="381.0" prefWidth="260.0" spacing="50.0">
          <children>
-            <JFXButton fx:id="_practiceButton" buttonType="RAISED" onAction="#practiceButton" prefHeight="84.0" prefWidth="268.0" styleClass="_button" text="PRACTICE" />
-            <Button mnemonicParsing="false" onAction="#clearSelection" prefHeight="84.0" prefWidth="268.0" styleClass="_button" stylesheets="@styles/ListView.css" text="CLEAR" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <JFXButton contentDisplay="RIGHT" graphicTextGap="75.0" onAction="#clearSelection" prefHeight="56.0" styleClass="_button" text="CLEAR">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@images/trash.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="RIGHT" graphicTextGap="65.0" onAction="#importText" style="-fx-pref-width: 280px; -fx-pref-height: 70px; -fx-font-size: 20;" styleClass="_backButton" text="IMPORT">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/import.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0">
                <children>
-                    <ToggleButton fx:id="_randomButton" onAction="#onRandom" prefHeight="84.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Random" />
-                    <ToggleButton fx:id="_sortedButton" onAction="#onSort" prefHeight="84.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="Sort" />
+                    <ToggleButton fx:id="_sortedButton" alignment="CENTER_LEFT" contentDisplay="RIGHT" graphicTextGap="130.0" onAction="#onSort" prefHeight="84.0" prefWidth="155.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="SORT">
+                     <graphic>
+                        <ImageView fitHeight="48.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/sort.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
+                    <ToggleButton fx:id="_randomButton" alignment="CENTER_LEFT" contentDisplay="RIGHT" graphicTextGap="80.0" onAction="#onRandom" prefHeight="47.0" prefWidth="178.0" styleClass="_sortingButton" stylesheets="@styles/ListView.css" text="RANDOM">
+                     <graphic>
+                        <ImageView fx:id="_randomImage" fitHeight="48.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" translateX="20.0">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                           <image>
+                              <Image url="@images/shuffle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </ToggleButton>
                </children>
-            </HBox>
-            <Button mnemonicParsing="false" onAction="#importText" prefHeight="58.0" prefWidth="110.0" style="-fx-font-size: 15px;" styleClass="_backButton" text="Import" />
+            </VBox>
          </children>
       </VBox>
-      <Button layoutX="933.0" layoutY="684.0" mnemonicParsing="false" onAction="#goBack" prefHeight="58.0" prefWidth="110.0" styleClass="_backButton" text="Back" />
+      <JFXButton contentDisplay="RIGHT" layoutX="920.0" layoutY="725.0" onAction="#goBack" prefHeight="76.0" prefWidth="208.0" style="-fx-pref-width: 150;" styleClass="_backButton" text="BACK">
+         <graphic>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="40.0" textAlignment="CENTER">
+               <styleClass>
+                  <String fx:value="backImage" />
+                  <String fx:value="icon" />
+               </styleClass>
+            </Label>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="_helpButton" layoutX="95.0" layoutY="725.0" onMouseClicked="#help" prefHeight="43.0" styleClass="help" stylesheets="@styles/MainMenu.css" />
+      <JFXButton fx:id="_micButton" layoutX="160.0" layoutY="725.0" onAction="#getMic" styleClass="microphone" stylesheets="@styles/MainMenu.css" />
+      <JFXButton layoutX="30.0" layoutY="725.0" onAction="#goToAchievements" styleClass="achievements" stylesheets="@styles/MainMenu.css" />
       <CustomTextField fx:id="_searchBox" editable="true" layoutX="34.0" layoutY="83.0" onAction="#doSearch" prefHeight="40.0" prefWidth="490.0" promptText="Combine names..." />
+      <JFXButton fx:id="_practiceButton" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="40.0" layoutX="810.0" layoutY="144.0" onAction="#practiceButton" prefHeight="84.0" prefWidth="260.0" style="-fx-pref-height: 50; -fx-pref-width: 260;" styleClass="_button" text="PRACTICE">
+         <graphic>
+            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/practice.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>
