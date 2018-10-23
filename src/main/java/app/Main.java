@@ -21,6 +21,8 @@ import java.util.ArrayList;
  */
 public class Main extends Application {
 
+    private static boolean _onWindows;
+
     @Override
     public void start(Stage stage) throws URISyntaxException, IOException {
         stage.setResizable(false);
@@ -32,13 +34,17 @@ public class Main extends Application {
             public void handle(WindowEvent event) {
                 if(!event.isConsumed()) {
                         fsWrap.deleteFiles("compositeName");
-
+                        fsWrap.deleteFiles("volumeAudio");
                 }
             }
         });
 
         SceneBuilder sceneMan = SceneBuilder.inst(FXCollections.observableArrayList(names), stage);
         sceneMan.switchScene(SceneBuilder.MENU);
+    }
+
+    public static boolean onWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
     }
 
     public static void main(String[] args) {

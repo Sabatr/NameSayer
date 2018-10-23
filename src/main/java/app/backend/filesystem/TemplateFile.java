@@ -128,7 +128,7 @@ public class TemplateFile {
             try {
                 parameter = fileName.substring(endOfSeparator, fileName.indexOf(nextSeparator, endOfSeparator));
             } catch (StringIndexOutOfBoundsException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 return null;
             }
             result.put(Character.getNumericValue(_nameFormat.charAt(parIndex + 1)), parameter);

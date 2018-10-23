@@ -127,17 +127,21 @@ public class UserRecordingsController extends ParentController implements EventH
         BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
 
-        double max = _volumeSlider.getMax();
-        double min = _volumeSlider.getMin();
-        double value = _volumeSlider.getValue();
-
-        double volume = ((value - min) / (max - min)) * 100;
+        double volume = getVolume();
         br.runPlayAudioCommand(audioFilePath, taskTitle, volume);
 
         _progressBar.setVisible(true);
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
         Thread thread1 = new Thread(timer);
         thread1.start();
+    }
+
+    private double getVolume() {
+        double max = _volumeSlider.getMax();
+        double min = _volumeSlider.getMin();
+        double value = _volumeSlider.getValue();
+        double volume = ((value - min) / (max - min)) * 100;
+        return volume;
     }
 
     /**

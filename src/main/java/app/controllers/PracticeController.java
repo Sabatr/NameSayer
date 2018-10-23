@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.Main;
 import app.backend.BashRunner;
 import app.tools.*;
 import app.backend.CompositeName;
@@ -20,7 +21,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -62,6 +65,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML private HBox _recordHBox;
 
     private Path _currentRecording;
+    private Path _lastVolRecording;
 
     private enum Position {FIRST,MIDDLE,LAST,ONLY;}
     private Position _namePosition;
@@ -228,7 +232,6 @@ public class PracticeController extends ParentController implements EventHandler
      * Plays the audio of the selected audio file.
      */
     private void playAudio() throws IOException, URISyntaxException {
-
         if(_currentName instanceof CompositeName) {
             CompositeName cName = (CompositeName) _currentName;
             if(cName.isProcessing()) {
@@ -241,8 +244,33 @@ public class PracticeController extends ParentController implements EventHandler
         AchievementsManager.getInstance().increaseListenAttempts();
         disableAll();
         _progressBar.setVisible(true);
-        Path audioResource = _currentName.getAudioForVersion(_dateAndTime);
+
+        Path audioResource;
+        Path defaultResource = _currentName.getAudioForVersion(_dateAndTime);
+        if(!Main.onWindows()) {
+            // initiates an FFMPEG process to copy the audio file with a lower volume
+            audioResource = _currentName.createDifferentVolume(_dateAndTime, getVolume(), this);
+            if(audioResource == null) {
+                audioResource = defaultResource;
+            }
+            _lastVolRecording = audioResource;
+        } else {
+            audioResource = defaultResource;
+        }
+
+        if(audioResource.equals(defaultResource)) {
+            _lastVolRecording = null;
+        }
         playGenericAudio("PlayAudio", audioResource);
+    }
+
+
+    private double getVolume() {
+        double max = _volumeSlider.getMax();
+        double min = _volumeSlider.getMin();
+        double value = _volumeSlider.getValue();
+        double volume = ((value - min) / (max - min)) * 100;
+        return volume;
     }
 
     @FXML
@@ -263,11 +291,9 @@ public class PracticeController extends ParentController implements EventHandler
         AudioPlayer player = new AudioPlayer(audioResource, this, taskTitle);
         BashRunner br = new BashRunner(this);
         float timeInSeconds = player.getLength();
-        double max = _volumeSlider.getMax();
-        double min = _volumeSlider.getMin();
-        double value = _volumeSlider.getValue();
+        double volume = getVolume();
         _progressBar.setVisible(true);
-        double volume = ((value - min) / (max - min)) * 100;
+
         br.runPlayAudioCommand(audioFilePath, taskTitle, volume);
 
         Timer timer = new Timer(_progressBar, this, "SomethingElse", timeInSeconds);
@@ -280,8 +306,7 @@ public class PracticeController extends ParentController implements EventHandler
      */
     @FXML
     private void recordAudio() throws URISyntaxException {
-        boolean onWindows = System.getProperty("os.name").toLowerCase().contains("windows");
-        if (onWindows && MicPaneHandler.getHandler().getSelectedDevice().getValue() == null) {
+        if (Main.onWindows() && MicPaneHandler.getHandler().getSelectedDevice().getValue() == null) {
             new NothingNotification("NoMic");
             return;
         }
@@ -344,6 +369,14 @@ public class PracticeController extends ParentController implements EventHandler
                     e.printStackTrace();
                 }
             }
+            if(_lastVolRecording != null) {
+                try {
+                    Files.deleteIfExists(_lastVolRecording);
+                } catch (IOException e) {
+                    System.out.println("could not delete last volume recording");
+                }
+            }
+
         } else if(event.getEventType().equals(WorkerStateEvent.WORKER_STATE_FAILED)) {
             System.out.println(event.getSource().getValue());
         }
@@ -377,7 +410,23 @@ public class PracticeController extends ParentController implements EventHandler
      */
     private void playBackAudioOfRecording() throws URISyntaxException {
         _progressBar.setVisible(true);
-        Path audioResource = _currentRecording;
+
+        Path audioResource;
+        Path defaultResource = _currentRecording;
+        if(!Main.onWindows()) {
+            // initiates an FFMPEG process to copy the audio file with a lower volume
+            audioResource = _currentName.createDifferentVolForTemp(getVolume(), this);
+            if(audioResource == null) {
+                audioResource = defaultResource;
+            }
+            _lastVolRecording = audioResource;
+        } else {
+            audioResource = defaultResource;
+        }
+
+        if(audioResource.equals(defaultResource)) {
+            _lastVolRecording = null;
+        }
         playGenericAudio("RecordAudio", audioResource);
     }
 
@@ -389,6 +438,7 @@ public class PracticeController extends ParentController implements EventHandler
     @FXML
     private void playBack() throws IOException, URISyntaxException{
         disableAll();
+        System.out.println("About to play some audio");
         switch (_playBackHandler.getCurrent()) {
             case DATABASE:
                 _playBack = true;

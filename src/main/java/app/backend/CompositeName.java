@@ -28,6 +28,7 @@ public class CompositeName extends NameEntry {
         super(fullname);
         _names = names;
         USER_VERSION_STR = "userCompositeName";
+        VOLUME_AUDIO = "compVolAudio";
 
         FSWrapperFactory factory = new FSWrapperFactory(FSWrapper.class.getResource("FileSystem.xml").toURI());
         _fsMan = factory.buildFSWrapper();
@@ -116,6 +117,15 @@ public class CompositeName extends NameEntry {
             return _mainVersion._resource;
         } else {
             return audio;
+        }
+    }
+
+    @Override
+    protected Version searchForVersion(String dateAndTime) {
+        if(_mainVersion._dateTime.equals(dateAndTime)) {
+            return _mainVersion;
+        } else {
+            return super.searchForVersion(dateAndTime);
         }
     }
 }
