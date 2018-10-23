@@ -359,14 +359,14 @@ public class PracticeController extends ParentController implements EventHandler
                 try {
                     playAudio();
                 } catch (IOException | URISyntaxException e) {
-                    /e.printStackTrace();
+                    //e.printStackTrace();
                 }
             } else if (event.getSource().getTitle().equals("CompareAudio")) {
                 try {
                     _playBack = true;
                     playAudio();
                 } catch (IOException | URISyntaxException e) {
-                    /e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
             if(_lastVolRecording != null) {
