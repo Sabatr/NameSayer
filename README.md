@@ -3,7 +3,7 @@
 <p>The main goal of this project was to allow users to listen to provided audio files and then practice saying it themselves. This project was primarily created using JavaFX. The backend code was written with Java while the styling was created with CSS.</p>
 <h4>How to run it </h4>
 <p> <em> On Linux </em> <br>
-===========================================================================
+=========================================================================== <br>
 Double-click the script, namesayer.sh, in the NameSayer directory <br>
 If that doesn't work, open a terminal, navigate to the directory and type <br></p>
  
@@ -12,9 +12,9 @@ If that doesn't work, open a terminal, navigate to the directory and type <br></
  ```
  
  <p>
-===========================================================================
+=========================================================================== <br>
 <em> On Windows</em>
-===========================================================================
+=========================================================================== <br>
 Double-click the jar file (NameSayer.jar) <br>
 If that doesn't work, open the command prompt, navigate to the directory and type <br>
 
