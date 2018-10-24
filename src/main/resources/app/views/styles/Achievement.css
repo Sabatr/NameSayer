@@ -1,0 +1,139 @@
+.background {
+    -fx-background-color: #7a1aa7;
+}
+
+.label {
+    -fx-alignment: center;
+}
+
+.card {
+    -fx-background-color: #f1f6e8;
+    -fx-border-radius: 2px;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 1000px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-border-color: #231f20;
+    -fx-effect: innershadow(one-pass-box,rgba(0,0,0,0.2),10,0.2,5,-5);
+}
+
+.recordImage {
+    -fx-background-color: #5a157a;
+    -fx-pref-height: 75px;
+    -fx-pref-width: 75px;
+    -fx-background-size: 75 80;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0 -5;
+
+    -fx-border-radius: 40%;
+    -fx-translate-x: 20px;
+    -fx-translate-y: 10px;
+}
+
+.description {
+    -fx-font-size: 15px;
+    -fx-translate-x: 120px;
+    -fx-translate-y: 40px;
+}
+
+.title {
+    -fx-font-size: 25px;
+    -fx-translate-x: 120px;
+    -fx-translate-y: 10px;
+    -fx-font-weight: bold;
+}
+
+.progress > .bar {
+    -fx-background-color: #43a74f;
+}
+
+.progress {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 30px;
+    -fx-translate-x: 150px;
+}
+
+.progress .track {
+    -fx-background-color: #a379a7;
+}
+
+.backButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #231f20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 20px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 150px;
+}
+
+.backPicture {
+    -fx-pref-width: 45;
+    -fx-pref-height: 45;
+    -fx-background-image: url('../images/exit.png');
+    -fx-background-size: 45 45;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-background-repeat: no-repeat;
+}
+.backButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+}
+
+.progressLabel{
+    -fx-pref-width: 300px;
+    -fx-font-weight: bold;
+}
+
+.stack {
+    -fx-pref-width: 300px;
+    -fx-translate-x: 155px;
+}
+
+.scroll .thumb{
+    -fx-background-color: #7812a1;
+}
+
+.scroll .thumb:hover {
+    -fx-background-color: #4e116b;
+}
+
+.scroll .thumb:pressed {
+    -fx-background-color: #4e116b;
+}
+
+.first {
+    -fx-background-image: url('../images/first.png');
+}
+
+.second {
+    -fx-background-image: url('../images/second.png');
+}
+
+.listen1 {
+    -fx-background-image: url('../images/listen1.png');
+}
+
+.dumbo {
+    -fx-background-size: 65 70;
+    -fx-background-position: 4 2;
+    -fx-background-image: url('../images/dumbo.png');
+}
+
+.bulb {
+    -fx-background-position: 0 -2;
+    -fx-background-image: url('../images/bulb.png');
+}
+
+.globe {
+    -fx-background-image: url('../images/globe.png');
+}
+
+.new {
+    -fx-background-image: url('../images/new.png');
+}
+
+.dice {
+    -fx-background-image: url('../images/dice.png');
+}

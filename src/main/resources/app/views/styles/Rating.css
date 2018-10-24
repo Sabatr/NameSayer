@@ -1,0 +1,13 @@
+.buttonBar {
+    -fx-background-color: BLACK;
+}
+
+.button {
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #f0f0f0;
+}

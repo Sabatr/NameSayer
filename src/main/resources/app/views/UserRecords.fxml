@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1100.0" prefHeight="800.0" prefWidth="1100.0" styleClass="_background" stylesheets="@styles/Practice.css" xmlns="http://javafx.com/javafx/8.0.161" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserRecordingsController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#231f20" height="340.0" layoutX="-8.0" layoutY="77.0" stroke="#ffffff00" strokeType="INSIDE" width="1108.0" />
+      <HBox fx:id="_buttonsHBox" alignment="CENTER" layoutX="329.0" layoutY="618.0" prefHeight="107.0" prefWidth="432.0" spacing="10.0">
+         <children>
+            <JFXButton fx:id="_compareButton" contentDisplay="RIGHT" graphicTextGap="10.0" onAction="#compare" style="-fx-font-size: 20;" styleClass="_selectionButton" text="COMPARE">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/compare.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="_deleteButton" contentDisplay="RIGHT" onAction="#deleteUserRecording" style="-fx-font-size: 20;" styleClass="_selectionButton" text="DELETE">
+               <graphic>
+                  <Label>
+                     <styleClass>
+                        <String fx:value="crossIcon" />
+                        <String fx:value="icon" />
+                     </styleClass>
+                  </Label>
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXProgressBar fx:id="_progressBar" layoutX="195.0" layoutY="550.0" prefHeight="47.0" prefWidth="700.0" />
+      <JFXComboBox fx:id="_dropdown" layoutX="419.0" layoutY="467.0" onAction="#checkIfSelected" prefHeight="54.0" prefWidth="253.0" promptText="No user recordings" styleClass="dropdown" />
+      <JFXButton fx:id="_dbVersionButton" contentDisplay="RIGHT" layoutX="695.0" layoutY="469.0" onAction="#playDatabaseRecording" style="-fx-font-size: 20;" styleClass="_selectionButton" text="DATABASE">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/database.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXSlider fx:id="_volumeSlider" layoutX="925.0" layoutY="662.0" />
+      <Label layoutX="895.0" layoutY="652.0" textFill="WHITE">
+         <styleClass>
+            <String fx:value="soundIcon" />
+            <String fx:value="icon" />
+         </styleClass>
+      </Label>
+      <JFXButton fx:id="_backButton" contentDisplay="RIGHT" layoutX="920.0" layoutY="725.0" onAction="#goBack" prefHeight="76.0" prefWidth="208.0" style="-fx-pref-width: 150; -fx-font-size: 20;" styleClass="_selectionButton" text="BACK">
+         <graphic>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="40.0" textAlignment="CENTER">
+               <styleClass>
+                  <String fx:value="backImage" />
+                  <String fx:value="icon" />
+               </styleClass>
+            </Label>
+         </graphic>
+      </JFXButton>
+      <Label alignment="CENTER" prefHeight="84.0" prefWidth="1100.0" styleClass="_title" text="USER RECORDINGS" />
+      <JFXButton fx:id="_helpButton" layoutX="95.0" layoutY="725.0" onMouseClicked="#help" prefHeight="43.0" styleClass="help" stylesheets="@styles/MainMenu.css" />
+      <JFXButton fx:id="_micButton" layoutX="160.0" layoutY="725.0" onAction="#getMic" styleClass="microphone" stylesheets="@styles/MainMenu.css" />
+      <JFXButton fx:id="_achievements" layoutX="30.0" layoutY="725.0" onAction="#goToAchievements" styleClass="achievements" stylesheets="@styles/MainMenu.css" />
+      <JFXButton fx:id="_userVersionButton" contentDisplay="RIGHT" graphicTextGap="20.0" layoutX="195.0" layoutY="469.0" onAction="#playUserRecording" style="-fx-font-size: 20;" styleClass="_selectionButton" text="USER">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/person.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <StackPane fx:id="_stack" layoutX="26.0" layoutY="60.0" prefHeight="340.0" prefWidth="1041.0">
+         <children>
+            <Label fx:id="_nameDisplayed" alignment="CENTER" prefHeight="272.0" prefWidth="825.0" styleClass="_nameDisplayed" stylesheets="@styles/Practice.css" text="Text goes here" textAlignment="CENTER">
+               <font>
+                  <Font size="93.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

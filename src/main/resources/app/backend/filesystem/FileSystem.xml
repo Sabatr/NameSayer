@@ -1,0 +1,22 @@
+<?xml version = "1.0"?>
+<rootDir type="root" name="names">
+    <dir type="composites" name="composites">
+        <file type="compRatings" name="ratingsOfComps.txt" createNew="true"/>
+        <fileSet type="compositeName" nameFormat="%4_%2_%3_%1.wav"/>
+        <fileSet type="trimmedName" nameFormat="%1_trimmed.wav"/>
+        <fileSet type="compVolAudio" nameFormat="VOLUME%4_%2_%3_%1.wav" />
+    </dir>
+    <dir type="userComposites" name="userComposites" needAllChildren="false">
+        <fileSet type="userCompositeName" nameFormat="%4_%2_%3_%1.wav"/>
+    </dir>
+    <dirSet type="nameEntry" nameFormat="%1" needAllChildren="true">
+        <dir type="versions" name="versions" needAllChildren="true">
+            <fileSet type="soundFile" nameFormat="%4_%2_%3_%1.wav" copy="true" />
+        </dir>
+        <dir type="userVersions" name="userVersions" needAllChildren="false">
+            <fileSet type="userVersion" nameFormat="%4_%2_%3_%1.wav" />
+            <fileSet type="volumeAudio" nameFormat="VOLUME%4_%2_%3_%1.wav" />
+        </dir>
+        <file type="rating" name="ratings.txt" createNew="true"/>
+    </dirSet>
+</rootDir>

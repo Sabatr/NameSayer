@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:attribute name="nameFormat" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="createNew" type="xs:boolean"/>
+    <xs:attribute name="copy" type="xs:boolean"/>
+    <xs:attribute name="needAllChildren" type="xs:boolean"/>
+
+    <xs:complexType name="fileType">
+        <xs:attribute name="type" type="xs:ID"/>
+        <xs:attribute ref="nameFormat"/>
+        <xs:attribute ref="name"/>
+        <xs:attribute name="createNew" type="xs:boolean"/>
+        <xs:attribute name="copy" type="xs:boolean"/>
+    </xs:complexType>
+
+    <xs:element name="file" type="fileType"/>
+    <xs:element name="fileSet" type="fileType"/>
+
+    <xs:complexType name="folderType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dir" type="folderType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            <xs:element name="dirSet" type="folderType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            <xs:element name="file" type="fileType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="fileSet" type="fileType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:ID"/>
+        <xs:attribute ref="nameFormat"/>
+        <xs:attribute ref="name"/>
+        <xs:attribute name="needAllChildren" type="xs:boolean"/>
+    </xs:complexType>
+
+    <xs:element name="dir" type="folderType"/>
+    <xs:element name="dirSet" type="folderType"/>
+
+    <xs:element name="rootDir">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="dir" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="dirSet" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="file" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="fileSet" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="type" type="xs:ID"/>
+            <xs:attribute ref="name"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

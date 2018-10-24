@@ -1,0 +1,163 @@
+._nameDisplayed {
+    -fx-alignment: center;
+    -fx-text-fill: #c5cb28;
+    -fx-font-family: "Arial Black";
+}
+
+._selectionButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #231f20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 18px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 200px;
+    -fx-font-family: "Franklin Gothic Heavy";
+}
+._selectionButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+}
+
+._selectionButton:pressed {
+}
+
+._background {
+    -fx-background-color: #7a1aa7;
+}
+
+.list .cell.indexed-cell.list-cell:hover{
+    -fx-background-color: #608bd8;
+}
+.list .cell.indexed-cell.list-cell {
+    -fx-background-color: #f0f0f0;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Franklin Gothic Heavy";
+    -fx-font-size: 20px;
+    -fx-text-fill: #231f20;
+}
+
+._title {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-background-color: #231f20;
+    -fx-text-fill: #c5cb28;
+    -fx-font-family: "Century Gothic";
+}
+
+.icon {
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}
+.backImage {
+    -fx-background-image: url('../images/exit.png');
+}
+
+.rateImage {
+    -fx-background-size: 30 30;
+    -fx-pref-height: 34px;
+    -fx-background-image: url('../images/thumb.png');
+}
+
+.backButton {
+    -jfx-button-type: FLAT;
+    -fx-font-size: 14px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100 100;
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-background-image: url('../images/back.png');
+}
+
+.backButton:hover {
+    -jfx-button-type: RAISED;
+    -fx-background-image: url('../images/backhover.png');
+}
+
+.backButton:pressed {
+    -fx-translate-x: -2px;
+}
+
+.forwardButton {
+    -jfx-button-type: FLAT;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100 100;
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-background-image: url('../images/forward.png');
+}
+
+.forwardButton:hover {
+    -jfx-button-type: RAISED;
+    -fx-background-image: url('../images/forwardhover.png');
+}
+
+.forwardButton:pressed  {
+    -fx-translate-x: 2px;
+}
+
+.recordIcon {
+    -fx-background-image: url('../images/record.png');
+}
+
+.soundIcon {
+    -fx-background-image: url('../images/sound.png');
+}
+
+.checkIcon {
+    -fx-background-image: url('../images/check.png');
+}
+
+.crossIcon {
+    -fx-background-image: url('../images/cross.png');
+}
+
+.upArrow {
+    -fx-background-image: url('../images/up.png');
+}
+
+.slider > .track {
+    -fx-background-color: #f0f0f0;
+    -fx-pref-height: 20px;
+}
+
+.slider > .thumb {
+    -fx-background-color: #50116d;
+    -fx-pref-height: 20px;
+    -fx-pref-width: 35px;
+}
+
+.slider > .colored-track {
+    -fx-background-color: #4c7b5a;
+}
+
+.slider > .animated-thumb {
+    -fx-background-color: #50116d;
+}
+
+/* Styling the slider value text inside animated thumb */
+.slider .slider-value {
+    -fx-fill: white;
+    -fx-stroke: white;
+}
+
+.userButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #c5cb28;
+    -fx-font-weight: bold;
+    -fx-text-fill: #231f20;
+    -fx-font-size: 22px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 280px;
+    -fx-font-family: "Franklin Gothic Heavy";
+}
+.userButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+}
+
+.dropdown {
+    -fx-background-color: #f0f0f0;
+}

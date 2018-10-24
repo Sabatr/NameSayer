@@ -1,0 +1,127 @@
+._nameData {
+    -fx-text-fill: #c5cb28;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+}
+
+._nameListView .scroll-bar {
+    -fx-pref-width: 20px;
+}
+._nameListView .scroll-bar .thumb {
+    -fx-background-color: #7812a1;
+}
+._nameListView .scroll-bar .thumb:hover {
+    -fx-background-color: #4e116b
+}
+
+._nameListView .scroll-bar .thumb:pressed {
+    -fx-background-color: #4e116b
+}
+
+._nameListView .cell.indexed-cell.list-cell:hover{
+    -fx-background-color: #608bd8;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+    -fx-translate-x: 10px;
+
+}
+
+._nameListView .cell.indexed-cell.list-cell {
+    -fx-background-color: #f0f0f0;
+    -fx-pref-height: 40px;
+    -fx-font-family: "Franklin Gothic Heavy";
+    -fx-font-size: 20px;
+    -fx-text-fill: #4e116b;
+}
+
+._nameListView  {
+    -fx-border-color: #f0f0f0;
+}
+
+._nameListView .cell.indexed-cell.list-cell:selected {
+    -fx-background-color: #669bc1;
+}
+
+._background {
+    -fx-background-color: #7a1aa7;
+}
+
+
+._button {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #c5cb28;
+    -fx-font-weight: bold;
+    -fx-text-fill: #231f20;
+    -fx-font-size: 20px;
+    -fx-pref-height: 70px;
+    -fx-pref-width: 280px;
+    -fx-font-family: "Franklin Gothic Heavy";
+}
+
+._button:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+}
+
+._sortingButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #231f20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 15px;
+    -fx-pref-height: 50px;
+    -fx-pref-width: 260px;
+    -fx-font-family: "Franklin Gothic Heavy";
+}
+
+._sortingButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+}
+
+._sortingButton:pressed {
+}
+
+._sortingButton:disabled {
+    -fx-background-color: #50575f;
+    -fx-text-fill: #d6d6d6;
+}
+
+._backButton {
+    -jfx-button-type: RAISED;
+    -fx-background-color: #231f20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #c5cb28;
+    -fx-font-size: 20px;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 200px;
+    -fx-font-family: "Franklin Gothic Heavy";
+}
+
+._backButton:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #783e10;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+}
+
+.icon {
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 40 40;
+    -fx-pref-width: 40;
+    -fx-pref-height: 40;
+}
+.backImage {
+    -fx-background-image: url('../images/exit.png');
+}
+
+
+
+
+
+
