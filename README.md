@@ -1,7 +1,13 @@
 <h1> NameSayer</h1>
 <p> This is university project made by <a href="https://github.com/margeobur">@Margeobur</a> and <a href="https://github.com/Sabatr">@Sabatr</a> on Github. </p>
 <p>The main goal of this project was to allow users to listen to provided audio files and then practice saying it themselves. This project was primarily created using JavaFX. The backend code was written with Java while the styling was created with CSS.</p>
-<h4>How to run it </h4>
+<h2>Libraries Used </h2>
+<a href="http://www.jfoenix.com/"> JFoenix </a> <br>
+<a href="http://fxexperience.com/controlsfx/"> Controlsfx </a> <br>
+<a href= "https://ffmpeg.zeranoe.com/builds/">FFmpeg </a> <br>
+
+
+<h2>How to run it </h2>
 =========================================================================== <br>
 <p> <em> On Linux </em> <br>
 =========================================================================== <br>
