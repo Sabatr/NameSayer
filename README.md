@@ -39,7 +39,7 @@ More help may be found in the Manual</p>
 <img src="https://i.imgur.com/h03i0QS.png" alt="Achievements" />
 <p> Dynamically achievements system based on certain tasks the user does. </p>
 <br>
-<h3>Selectitng names </h3>
+<h3>Selecting names </h3>
 <img src="https://thumbs.gfycat.com/FearfulUglyArrowcrab-size_restricted.gif" />
 
 <h3> Rating system </h3>
